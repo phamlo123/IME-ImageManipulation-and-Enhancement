@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.List;
+
 public abstract class ImageImpl<T> implements Images<T> {
 
 
