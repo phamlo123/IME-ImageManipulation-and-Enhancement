@@ -2,7 +2,7 @@ package model.ImageRepresentation;
 
 import model.ImageImpl;
 
-public class ImageImplPPM extends ImageImpl {
+public class ImageImplPPM<PPM> extends ImageImpl<PPM> {
 
 
 }

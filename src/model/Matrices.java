@@ -10,6 +10,7 @@ public enum Matrices {
   MATRIX_FOR_SEPIA(sth.LIST_D);
 
   private List<List<Double>> matrix;
+
   Matrices(List<List<Double>> matrix) {
     this.matrix = matrix;
   }
@@ -22,25 +23,25 @@ public enum Matrices {
     private static List<List<Double>> LIST_D;
 
     sth() {
-      this.LIST_A = initialize((double) 1/16);
-      this.LIST_B = initialize2();
+      this.LIST_A = initialize1((double) 1 / 16);
+      this.LIST_B = initialize2((double) -1 / 8);
       this.LIST_C = initialize3();
       this.LIST_D = initialize4();
     }
 
-    static private List<List<Double>> initialize(Double d) {
+    static private List<List<Double>> initialize1(Double d) {
       List<List<Double>> temp = new ArrayList<>();
-      for (int i = 0; i < 3; i = i + 2) {
+      for (int i = 0; i < 3; i++) {
         temp.add(new ArrayList<>());
-        for (int j = 0; j < 3; j = j + 2) {
-          if(i == 1) {
+        for (int j = 0; j < 3; j++) {
+          if (i == 1) {
             if (j == 1) {
-              temp.get(i).add(d * 4);
+              temp.get(i).add(j, d * 4);
             } else {
-              temp.get(i).add( d * 2);
+              temp.get(i).add(j, d * 2);
             }
           } else {
-            temp.get(i).add(d);
+            temp.get(i).add(j, d);
           }
         }
       }
@@ -48,16 +49,55 @@ public enum Matrices {
     }
 
 
-    static private List<List<Double>> initialize2() {
-      return null;
+    static private List<List<Double>> initialize2(Double d) {
+      List<List<Double>> temp = new ArrayList<>();
+      for (int i = 0; i < 5; i++) {
+        temp.add(new ArrayList<>());
+        for (int j = 0; j < 5; j++) {
+          if (j == 2 && i == 2) {
+            temp.get(i).add(j, d * (-8));
+          } else if (i != 0 && i != 4 && j != 0 && j != 4) {
+            temp.get(i).add(j, d * (-2));
+          } else {
+            temp.get(i).add(j, d);
+          }
+        }
+      }
+      return temp;
     }
 
     static private List<List<Double>> initialize3() {
-      return null;
+      List<List<Double>> temp = new ArrayList<>();
+      for (int i = 0; i < 3; i++) {
+        temp.add(new ArrayList<>());
+      }
+      for (int j = 0; j < 3; j++) {
+        temp.get(j).add(.2126);
+        temp.get(j).add(.7152);
+        temp.get(j).add(.0722);
+      }
+      return temp;
     }
 
     static private List<List<Double>> initialize4() {
-      return null;
+      List<List<Double>> temp = new ArrayList<>();
+      for (int i = 0; i < 3; i++) {
+        temp.add(new ArrayList<>());
+      }
+      temp.get(0).add(0.393);
+      temp.get(0).add(0.769);
+      temp.get(0).add(0.189);
+      temp.get(1).add(0.349);
+      temp.get(1).add(0.686);
+      temp.get(1).add(0.168);
+      temp.get(2).add(0.272);
+      temp.get(2).add(0.534);
+      temp.get(2).add(0.131);
+      return temp;
     }
+  }
+
+  public List<List<Double>> getMatrix() {
+    return this.matrix;
   }
 }
