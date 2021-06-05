@@ -10,8 +10,7 @@ public abstract class ImageImpl<T> implements Images<T> {
 
 
   @Override
-  public T displayImage(Images images) {
-    return null;
+  public void displayImage(Images images) {
   }
 
   @Override
@@ -35,6 +34,7 @@ public abstract class ImageImpl<T> implements Images<T> {
   @Override
   public T createSepia() {
     List<List<Double>> a =  Matrices.MATRIX_FOR_SEPIA.getMatrix();
+
     return null;
   }
 

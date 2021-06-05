@@ -11,7 +11,7 @@ public interface Images<T> {
    *
    * @return
    */
-  T displayImage(Images images);
+  void displayImage(Images images);
 
 
   /**
