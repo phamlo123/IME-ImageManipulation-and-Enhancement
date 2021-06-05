@@ -1,8 +1,11 @@
 package model;
 
-
 import java.util.List;
 
+/**
+ *
+ * @param <T>
+ */
 public abstract class ImageImpl<T> implements Images<T> {
 
 

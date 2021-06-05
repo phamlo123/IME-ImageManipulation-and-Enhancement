@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Enum that contains all predefined matrices for image modification in the form of List of Lists.
+ */
 public enum Matrices {
   MATRIX_FOR_BLURRING(sth.LIST_A),
   MATRIX_FOR_SHARPENING(sth.LIST_B),
