@@ -1,8 +1,10 @@
 package model.ImageRepresentation;
-import java.awt.Color;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import model.ImageImpl;
+import java.util.GregorianCalendar;
 
 /**
  * this class contains information about an image that is programmable.
@@ -10,9 +12,9 @@ import model.ImageImpl;
 public class ProgramImage {
   Image image;
 
-  public static class imageCreator {
+  public static class ImageCreator {
     ProgramImage programImage;
-    imageCreator() {
+    ImageCreator() {
       this.programImage = create();
     }
 
@@ -26,6 +28,16 @@ public class ProgramImage {
   }
 
   public ProgramImage makeAnImage() {
-    return imageCreator.create();
+    return ImageCreator.create();
   }
+
+
+
+
+
+
+  public Image getImage() {
+    return this.image;
+  }
+
 }

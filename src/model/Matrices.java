@@ -20,17 +20,11 @@ public enum Matrices {
 
   static class sth {
 
-    private static List<List<Double>> LIST_A;
-    private static List<List<Double>> LIST_B;
-    private static List<List<Double>> LIST_C;
-    private static List<List<Double>> LIST_D;
+    private static List<List<Double>> LIST_A = initialize1((double) 1 / 16);
+    private static List<List<Double>> LIST_B = initialize2((double) -1 / 8);
+    private static List<List<Double>> LIST_C = initialize3();
+    private static List<List<Double>> LIST_D = initialize4();
 
-    sth() {
-      this.LIST_A = initialize1((double) 1 / 16);
-      this.LIST_B = initialize2((double) -1 / 8);
-      this.LIST_C = initialize3();
-      this.LIST_D = initialize4();
-    }
 
     static private List<List<Double>> initialize1(Double d) {
       List<List<Double>> temp = new ArrayList<>();
@@ -48,6 +42,8 @@ public enum Matrices {
           }
         }
       }
+      temp.get(0).set(1, d*2);
+      temp.get(2).set(1, d*2);
       return temp;
     }
 
@@ -102,5 +98,10 @@ public enum Matrices {
 
   public List<List<Double>> getMatrix() {
     return this.matrix;
+  }
+
+  public static void main(String[] arg) {
+
+    System.out.println(MATRIX_FOR_GRAY_SCALING.getMatrix());
   }
 }
