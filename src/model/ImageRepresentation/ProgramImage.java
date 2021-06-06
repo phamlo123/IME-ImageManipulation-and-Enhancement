@@ -34,8 +34,6 @@ public class ProgramImage {
 
 
 
-
-
   public Image getImage() {
     return this.image;
   }
