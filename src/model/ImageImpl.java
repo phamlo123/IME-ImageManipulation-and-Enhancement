@@ -11,6 +11,7 @@ public abstract class ImageImpl<T> implements Images<T> {
 
   @Override
   public void displayImage(Images images) {
+
   }
 
   @Override

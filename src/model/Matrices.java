@@ -20,10 +20,10 @@ public enum Matrices {
 
   static class sth {
 
-    private static List<List<Double>> LIST_A = initialize1((double) 1 / 16);
-    private static List<List<Double>> LIST_B = initialize2((double) -1 / 8);
-    private static List<List<Double>> LIST_C = initialize3();
-    private static List<List<Double>> LIST_D = initialize4();
+    private static final List<List<Double>> LIST_A = initialize1((double) 1 / 16);
+    private static final List<List<Double>> LIST_B = initialize2((double) -1 / 8);
+    private static final List<List<Double>> LIST_C = initialize3();
+    private static final List<List<Double>> LIST_D = initialize4();
 
 
     static private List<List<Double>> initialize1(Double d) {
