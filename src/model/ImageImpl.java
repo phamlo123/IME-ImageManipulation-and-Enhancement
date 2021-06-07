@@ -13,10 +13,10 @@ public abstract class ImageImpl<T> implements Images<T> {
     this.image = image;
   }
   @Override
-  public abstract void blurringImage();
+  public abstract T blurringImage();
 
   @Override
-  public abstract void sharpeningImage();
+  public abstract T sharpeningImage();
 
   @Override
   public abstract void createMonochrome();

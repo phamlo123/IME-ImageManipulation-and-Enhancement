@@ -14,21 +14,22 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
   @Override
-  public void blurringImage() {
+  public PPM blurringImage() {
 
     List<List<Double>> matrix = Matrices.MATRIX_FOR_BLURRING.getMatrix();
-    this.image = new PPM(helperForFiltering(this.image, matrix));
+    return new PPM(helperForFiltering(this.image, matrix));
   }
 
   @Override
-  public void sharpeningImage() {
+  public PPM sharpeningImage() {
     List<List<Double>> matrix = Matrices.MATRIX_FOR_SHARPENING.getMatrix();
-    this.image = new PPM(helperForFiltering(this.image, matrix));
+    return new PPM(helperForFiltering(this.image, matrix));
   }
 
   @Override
   public void createMonochrome() {
     List<List<Double>> a = Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix();
+
   }
 
   @Override
@@ -125,7 +126,11 @@ public class ImageImplPPM extends ImageImpl<PPM> {
       }
     }
 
-    System.out.print(helperForMultiplying(a, Matrices.MATRIX_FOR_BLURRING.getMatrix()));
+    PPM ppm =  PPM.importImageFile("Koala.ppm");
+    PPM ppm2 = new PPM(PPM.createListOfColor());
+    ImageImplPPM n = new ImageImplPPM(ppm2);
+    PPM k = n.blurringImage();
+    System.out.println(k.getImage());
 
   }
 }
