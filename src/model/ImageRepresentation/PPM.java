@@ -1,18 +1,12 @@
 package model.ImageRepresentation;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.datatransfer.StringSelection;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * this class contains information about image that is a PPM.
@@ -22,9 +16,64 @@ public class PPM {
   private List<List<Color>> image;
 
 
+  public static class ImageUtil {
+    /**
+     * Read an image file in the PPM format and print the colors.
+     *
+     * @param filename the path of the file.
+     */
+    public static List<List<Color>> readPPM(String filename) {
+      Scanner sc;
+      try {
+        sc = new Scanner(new FileInputStream(filename));
+      } catch (FileNotFoundException e) {
+        System.out.println("File " + filename + " not found!");
+        return null;
+      }
+      StringBuilder builder = new StringBuilder();
+      //read the file line by line, and populate a string. This will throw away any comment lines
+      while (sc.hasNextLine()) {
+        String s = sc.nextLine();
+        if (s.charAt(0) != '#') {
+          builder.append(s + System.lineSeparator());
+        }
+      }
+
+      //now set up the scanner to read from the string we just built
+      sc = new Scanner(builder.toString());
+
+      String token;
+
+      token = sc.next();
+      if (!token.equals("P3")) {
+        System.out.println("Invalid PPM file: plain RAW file should begin with P3");
+      }
+      int width = sc.nextInt();
+      int height = sc.nextInt();
+      int maxValue = sc.nextInt();
+
+      List<List<Color>> image = new ArrayList<>();
+      for (int i = 0; i < height; i++) {
+        image.add(new ArrayList<>());
+        for (int j = 0; j < width; j++) {
+          int r = sc.nextInt();
+          int g = sc.nextInt();
+          int b = sc.nextInt();
+          image.get(i).add(new Color(r, b, g));
+        }
+      }
+      return image;
+    }
+
+  }
+
 
   public PPM(List<List<Color>> image) {
     this.image = image;
+  }
+
+  public PPM() {
+    this.image = new ArrayList<>();
   }
 
   public static List<List<Color>> createListOfColor() {
@@ -67,12 +116,30 @@ public class PPM {
     return stringBuilder.toString();
   }
 
-  public void importFile (String fileName) {
+  public void importImageFile (String fileName) {
+    this.image = PPM.ImageUtil.readPPM(fileName);
   }
+
+  public List<List<Color>> getImage() {
+    List<List<Color>> temp = new ArrayList<>();
+    for(int i = 0; i<image.size(); i++) {
+      temp.add(new ArrayList<>());
+      for (int j = 0; j< image.get(i).size(); j++) {
+        temp.get(i).add(image.get(i).get(j));
+      }
+    }
+    return temp;
+  }
+
+
   public static void main(String[] arg) {
     PPM ppm = new PPM(PPM.createListOfColor());
     String a = ppm.exportPPM();
 
-    System.out.println(a);
+    PPM ppm2 = new PPM();
+    ppm2.importImageFile("koala.ppm");
+    System.out.println(ppm2.getImage().toString());
   }
+
+
 }
