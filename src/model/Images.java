@@ -7,14 +7,6 @@ public interface Images<T> {
 
 
   /**
-   * Display the given image
-   *
-   * @return
-   */
-  void displayImage(Images images);
-
-
-  /**
    * Blur this image
    */
   T blurringImage();

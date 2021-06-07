@@ -132,6 +132,20 @@ public class PPM {
   }
 
 
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (!(o instanceof PPM)) {
+      return false;
+    } else {
+      PPM temp = (PPM) o;
+      return temp.getImage().equals(this.getImage());
+    }
+  }
+
+
+
   public static void main(String[] arg) {
     PPM ppm = new PPM(PPM.createListOfColor());
     String a = ppm.exportPPM();

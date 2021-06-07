@@ -7,10 +7,10 @@ import java.util.List;
  * Enum that contains all predefined matrices for image modification in the form of List of Lists.
  */
 public enum Matrices {
-  MATRIX_FOR_BLURRING(sth.LIST_A),
-  MATRIX_FOR_SHARPENING(sth.LIST_B),
-  MATRIX_FOR_GRAY_SCALING(sth.LIST_C),
-  MATRIX_FOR_SEPIA(sth.LIST_D);
+  MATRIX_FOR_BLURRING(Factory.LIST_A),
+  MATRIX_FOR_SHARPENING(Factory.LIST_B),
+  MATRIX_FOR_GRAY_SCALING(Factory.LIST_C),
+  MATRIX_FOR_SEPIA(Factory.LIST_D);
 
   private List<List<Double>> matrix;
 
@@ -18,7 +18,7 @@ public enum Matrices {
     this.matrix = matrix;
   }
 
-  static class sth {
+  static class Factory {
 
     private static final List<List<Double>> LIST_A = initialize1((double) 1 / 16);
     private static final List<List<Double>> LIST_B = initialize2((double) -1 / 8);
