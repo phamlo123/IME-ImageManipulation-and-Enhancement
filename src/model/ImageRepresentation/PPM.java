@@ -81,9 +81,9 @@ public class PPM {
 
   public PPM() {
     this.image = createListOfColor();
-    this.redChannel = new PPM().getColorChannel(Coloring.RED);
-    this.greenChannel = new PPM().getColorChannel(Coloring.GREEEN);
-    this.blueChannel = new PPM().getColorChannel(Coloring.BLUE);
+    this.greenChannel = setColoring(image, Coloring.GREEEN);
+    this.redChannel = setColoring(image, Coloring.RED);
+    this.blueChannel = setColoring(image, Coloring.BLUE);
   }
 
   public static List<List<Color>> createListOfColor() {
@@ -163,6 +163,7 @@ public class PPM {
   private List<List<Integer>> setColoring(List<List<Color>> image, Coloring color) {
     List<List<Integer>> temp = new ArrayList<>();
     for(int row = 0; row < image.size(); row++) {
+      temp.add(new ArrayList<>());
       for (int column = 0; column < image.get(row).size();column++) {
         switch (color) {
           case RED:
@@ -199,11 +200,10 @@ public class PPM {
 
   public static void main(String[] arg) {
     PPM ppm = new PPM(PPM.createListOfColor());
-    String a = ppm.exportPPM();
 
     PPM ppm2 = new PPM();
     ppm2.importImageFile("koala.ppm");
-    System.out.println(a);
+    System.out.println(ppm.getColorChannel(Coloring.BLUE));
   }
 
 
