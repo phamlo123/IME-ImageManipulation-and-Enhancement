@@ -1,6 +1,7 @@
 package model.ImageRepresentation;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
@@ -14,16 +15,16 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
   @Override
-  public PPM blurringImage() {
+  public void blurringImage() {
 
     List<List<Double>> matrix = Matrices.MATRIX_FOR_BLURRING.getMatrix();
-    return new PPM(helperForFiltering(this.image, matrix));
+    this.image = new PPM (helperForFiltering(this.image, matrix));
   }
 
   @Override
-  public PPM sharpeningImage() {
+  public void sharpeningImage() {
     List<List<Double>> matrix = Matrices.MATRIX_FOR_SHARPENING.getMatrix();
-    return new PPM(helperForFiltering(this.image, matrix));
+    this.image = new PPM (helperForFiltering(this.image, matrix));
   }
 
   @Override
@@ -48,11 +49,13 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     List<List<Integer>> green = helperForMultiplying(greenChannel, matrix);
 
     List<List<Color>> temp = new ArrayList<>();
-    for (int row = 0; row < ppm.getImage().size(); row++) {
+    int rowSize = ppm.getImage().size();
+    int columnSize = ppm.getImage().get(0).size();
+    for (int row = 0; row < rowSize; row++) {
       temp.add(new ArrayList<>());
-      for (int column = 0; column < ppm.getImage().get(row).size(); column++) {
-        temp.get(row).add(new Color(red.get(row).get(column), blue.get(row).get(column),
-            green.get(row).get(column)));
+      for (int column = 0; column < columnSize; column++) {
+        temp.get(row).add(new Color(red.get(row).get(column), green.get(row).get(column),
+            blue.get(row).get(column)));
       }
     }
     return temp;
@@ -109,7 +112,13 @@ public class ImageImplPPM extends ImageImpl<PPM> {
           temp9=0;
         }
         double sum = temp1+temp2+temp3+temp4+temp5+temp6+temp7+temp8+temp9;
-        int a = (int) (Math.min(sum, 255));
+
+        int a;
+        if(sum > 0) {
+           a = (int) (Math.min(sum, 255));
+        } else {
+           a = (int) (Math.max(sum, -256));
+        }
         channel.get(row).set(column, a);
       }
     }
@@ -117,20 +126,14 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
 
-  public static void main(String[] args) {
-    List<List<Integer>> a = new ArrayList<>();
-    for(int i=0; i < 10; i++) {
-      a.add(new ArrayList<>());
-      for(int j=0;j<5;j++) {
-        a.get(i).add(i+j);
-      }
-    }
+
+
+  public static void main(String[] args) throws IOException {
 
     PPM ppm =  PPM.importImageFile("Koala.ppm");
-    PPM ppm2 = new PPM(PPM.createListOfColor());
-    ImageImplPPM n = new ImageImplPPM(ppm2);
-    PPM k = n.blurringImage();
-    System.out.println(k.getImage());
+    ImageImplPPM t = new ImageImplPPM(ppm);
+    t.blurringImage();
+    ppm.exportPPM();
 
   }
 }

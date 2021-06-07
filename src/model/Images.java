@@ -9,12 +9,12 @@ public interface Images<T> {
   /**
    * Blur this image
    */
-  T blurringImage();
+  void blurringImage();
 
   /**
    * sharpen this image
    */
-  T sharpeningImage();
+  void sharpeningImage();
 
   /**
    * create a greyscale version of this image

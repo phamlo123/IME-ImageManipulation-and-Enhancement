@@ -2,8 +2,11 @@ package model.ImageRepresentation;
 
 import java.awt.Color;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +23,7 @@ public class PPM {
   private List<List<Integer>> blueChannel;
 
   public static class ImageUtil {
+
     /**
      * Read an image file in the PPM format and print the colors.
      *
@@ -27,6 +31,7 @@ public class PPM {
      */
     public static List<List<Color>> readPPM(String filename) {
       Scanner sc;
+
       try {
         sc = new Scanner(new FileInputStream(filename));
       } catch (FileNotFoundException e) {
@@ -52,8 +57,11 @@ public class PPM {
         System.out.println("Invalid PPM file: plain RAW file should begin with P3");
       }
       int width = sc.nextInt();
+      System.out.println("Width of image: " + width);
       int height = sc.nextInt();
+      System.out.println("Height of image: " + height);
       int maxValue = sc.nextInt();
+      System.out.println("Maximum value of a color in this file (usually 256): " + maxValue);
 
       List<List<Color>> image = new ArrayList<>();
       for (int i = 0; i < height; i++) {
@@ -67,11 +75,11 @@ public class PPM {
       }
       return image;
     }
-
   }
 
 
-  public PPM(List<List<Color>> image) {
+
+    public PPM(List<List<Color>> image) {
     this.image = image;
     this.greenChannel = setColoring(image, Coloring.GREEEN);
     this.redChannel = setColoring(image, Coloring.RED);
@@ -106,12 +114,20 @@ public class PPM {
   }
 
 
-
-  public String exportPPM() {
+  public String exportPPM() throws IOException {
     StringBuilder stringBuilder = new StringBuilder();
+    StringBuilder stringBuilder1 = new StringBuilder();
 
-    for (int i = 0; i < this.image.size(); i++) {
-      for (int j = 0; j < this.image.get(i).size(); j++) {
+
+
+    int height = this.image.size();
+    int width = this.image.get(0).size();
+
+    System.out.println(width);
+
+
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
         stringBuilder.append(String.format("(%d, %d) ", i, j));
         stringBuilder.append("(");
         stringBuilder.append(this.image.get(i).get(j).getRed());
@@ -123,19 +139,38 @@ public class PPM {
         stringBuilder.append("\n");
       }
     }
+
+
+    stringBuilder1.append("P3\n");
+    stringBuilder1.append(width + " " + height + "\n");
+    stringBuilder1.append("255\n");
+
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        stringBuilder1.append(this.image.get(i).get(j).getRed());
+        stringBuilder1.append("\n");
+        stringBuilder1.append(this.image.get(i).get(j).getGreen());
+        stringBuilder1.append("\n");
+        stringBuilder1.append(this.image.get(i).get(j).getBlue());
+        stringBuilder1.append("\n");
+      }
+    }
+    FileWriter obj = new FileWriter("s.ppm");
+    obj.write(stringBuilder1.toString());
+    obj.close();
     return stringBuilder.toString();
   }
 
-  public static PPM importImageFile (String fileName) {
-    PPM ppm = new PPM(PPM.ImageUtil.readPPM(fileName));
-    return ppm;
+
+  public static PPM importImageFile(String fileName) {
+    return new PPM(ImageUtil.readPPM(fileName));
   }
 
   public List<List<Color>> getImage() {
     List<List<Color>> temp = new ArrayList<>();
-    for(int i = 0; i<image.size(); i++) {
+    for (int i = 0; i < image.size(); i++) {
       temp.add(new ArrayList<>());
-      for (int j = 0; j< image.get(i).size(); j++) {
+      for (int j = 0; j < image.get(i).size(); j++) {
         temp.get(i).add(image.get(i).get(j));
       }
     }
@@ -163,13 +198,14 @@ public class PPM {
 
   private List<List<Integer>> setColoring(List<List<Color>> image, Coloring color) {
     List<List<Integer>> temp = new ArrayList<>();
-    for(int row = 0; row < image.size(); row++) {
+    int rowSize = image.size();
+    for (int row = 0; row < rowSize; row++) {
       temp.add(new ArrayList<>());
-      for (int column = 0; column < image.get(row).size();column++) {
+      for (int column = 0; column < image.get(row).size(); column++) {
         switch (color) {
           case RED:
-          temp.get(row).add(image.get(row).get(column).getRed());
-          break;
+            temp.get(row).add(image.get(row).get(column).getRed());
+            break;
           case BLUE:
             temp.get(row).add(image.get(row).get(column).getBlue());
             break;
@@ -197,13 +233,9 @@ public class PPM {
   }
 
 
-
-
-  public static void main(String[] arg) {
-    PPM ppm = new PPM(PPM.createListOfColor());
-    PPM ppm2 = new PPM();
-    PPM ppm3 = importImageFile("koala.ppm");
-    System.out.println(ppm2.getColorChannel(Coloring.BLUE).get(1).size());
+  public static void main(String[] arg) throws IOException {
+    PPM ppm3 = importImageFile("Koala.ppm");
+    ppm3.exportPPM();
   }
 
 
