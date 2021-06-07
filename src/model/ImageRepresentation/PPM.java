@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import model.Coloring;
 
 /**
  * this class contains information about image that is a PPM.
@@ -14,7 +15,9 @@ import java.util.Scanner;
 public class PPM {
 
   private List<List<Color>> image;
-
+  private List<List<Integer>> redChannel;
+  private List<List<Integer>> greenChannel;
+  private List<List<Integer>> blueChannel;
 
   public static class ImageUtil {
     /**
@@ -59,7 +62,7 @@ public class PPM {
           int r = sc.nextInt();
           int g = sc.nextInt();
           int b = sc.nextInt();
-          image.get(i).add(new Color(r, b, g));
+          image.get(i).add(new Color(r, g, b));
         }
       }
       return image;
@@ -70,10 +73,17 @@ public class PPM {
 
   public PPM(List<List<Color>> image) {
     this.image = image;
+    this.greenChannel = setColoring(image, Coloring.GREEEN);
+    this.redChannel = setColoring(image, Coloring.RED);
+    this.blueChannel = setColoring(image, Coloring.BLUE);
+
   }
 
   public PPM() {
-    this.image = new ArrayList<>();
+    this.image = createListOfColor();
+    this.redChannel = new PPM().getColorChannel(Coloring.RED);
+    this.greenChannel = new PPM().getColorChannel(Coloring.GREEEN);
+    this.blueChannel = new PPM().getColorChannel(Coloring.BLUE);
   }
 
   public static List<List<Color>> createListOfColor() {
@@ -132,6 +142,7 @@ public class PPM {
   }
 
 
+  @Override
   public boolean equals(Object o) {
     if (o == this) {
       return true;
@@ -144,6 +155,46 @@ public class PPM {
     }
   }
 
+  @Override
+  public int hashCode() {
+    return 0;
+  }
+
+  private List<List<Integer>> setColoring(List<List<Color>> image, Coloring color) {
+    List<List<Integer>> temp = new ArrayList<>();
+    for(int row = 0; row < image.size(); row++) {
+      for (int column = 0; column < image.get(row).size();column++) {
+        switch (color) {
+          case RED:
+          temp.get(row).add(image.get(row).get(column).getRed());
+          break;
+          case BLUE:
+            temp.get(row).add(image.get(row).get(column).getBlue());
+            break;
+          case GREEEN:
+            temp.get(row).add(image.get(row).get(column).getGreen());
+            break;
+        }
+      }
+    }
+    return temp;
+  }
+
+
+  public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalStateException {
+    switch (coloring) {
+      case BLUE:
+        return this.blueChannel;
+      case RED:
+        return this.redChannel;
+      case GREEEN:
+        return this.greenChannel;
+      default:
+        throw new IllegalArgumentException();
+    }
+  }
+
+
 
 
   public static void main(String[] arg) {
@@ -152,7 +203,7 @@ public class PPM {
 
     PPM ppm2 = new PPM();
     ppm2.importImageFile("koala.ppm");
-    System.out.println(ppm2.getImage().toString());
+    System.out.println(a);
   }
 
 
