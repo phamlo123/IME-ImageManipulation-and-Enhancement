@@ -126,8 +126,9 @@ public class PPM {
     return stringBuilder.toString();
   }
 
-  public void importImageFile (String fileName) {
-    this.image = PPM.ImageUtil.readPPM(fileName);
+  public static PPM importImageFile (String fileName) {
+    PPM ppm = new PPM(PPM.ImageUtil.readPPM(fileName));
+    return ppm;
   }
 
   public List<List<Color>> getImage() {
@@ -191,7 +192,7 @@ public class PPM {
       case GREEEN:
         return this.greenChannel;
       default:
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Illegal Coloring");
     }
   }
 
@@ -200,10 +201,9 @@ public class PPM {
 
   public static void main(String[] arg) {
     PPM ppm = new PPM(PPM.createListOfColor());
-
     PPM ppm2 = new PPM();
-    ppm2.importImageFile("koala.ppm");
-    System.out.println(ppm.getColorChannel(Coloring.BLUE));
+    PPM ppm3 = importImageFile("koala.ppm");
+    System.out.println(ppm2.getColorChannel(Coloring.BLUE).get(1).size());
   }
 
 

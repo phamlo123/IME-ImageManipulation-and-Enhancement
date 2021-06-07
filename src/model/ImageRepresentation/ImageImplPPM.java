@@ -59,8 +59,8 @@ public class ImageImplPPM extends ImageImpl<PPM> {
 
   private static List<List<Integer>> helperForMultiplying(List<List<Integer>> channel,
       List<List<Double>> matrix) {
-    for (int row = 1; row < channel.size() - 1; row++) {
-      for (int column = 1; column < channel.get(row).size() - 1; column++) {
+    for (int row = 0; row < channel.size(); row++) {
+      for (int column = 0; column < channel.get(row).size(); column++) {
         double temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9;
         try {
           temp1 = channel.get(row - 1).get(column - 1) * matrix.get(0).get(0);
@@ -108,7 +108,7 @@ public class ImageImplPPM extends ImageImpl<PPM> {
           temp9=0;
         }
         double sum = temp1+temp2+temp3+temp4+temp5+temp6+temp7+temp8+temp9;
-        int a = (int) Math.round(Math.min(sum, 255));
+        int a = (int) (Math.min(sum, 255));
         channel.get(row).set(column, a);
       }
     }
@@ -117,6 +117,15 @@ public class ImageImplPPM extends ImageImpl<PPM> {
 
 
   public static void main(String[] args) {
+    List<List<Integer>> a = new ArrayList<>();
+    for(int i=0; i < 10; i++) {
+      a.add(new ArrayList<>());
+      for(int j=0;j<5;j++) {
+        a.get(i).add(i+j);
+      }
+    }
+
+    System.out.print(helperForMultiplying(a, Matrices.MATRIX_FOR_BLURRING.getMatrix()));
 
   }
 }
