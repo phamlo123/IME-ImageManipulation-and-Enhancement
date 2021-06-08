@@ -154,9 +154,7 @@ public class PPM {
       }
     }
     try {
-      File file = new File("/Users/terencepham/Desktop/CS3500/real/hwork5/s.ppm");
-      file.getParentFile().mkdirs();
-      FileWriter fileWriter = new FileWriter(file);
+      FileWriter fileWriter = new FileWriter("s.ppm");
       fileWriter.write(stringBuilder1.toString());
       fileWriter.close();
     } catch (IOException e) {
