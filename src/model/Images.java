@@ -26,6 +26,7 @@ public interface Images<T> {
    */
   void createSepia();
 
+  T getImage();
 
 }
 

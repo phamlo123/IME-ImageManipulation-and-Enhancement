@@ -1,8 +1,6 @@
 package model.ImageRepresentation;
 
-import com.sun.jdi.connect.ListeningConnector;
 import java.awt.Color;
-import java.io.CharArrayReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,12 +174,15 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
 
+
+
   public static void main(String[] args) throws IOException {
 
     PPM ppm = PPM.importImageFile("Koala.ppm");
+    PPM ppm2 = new PPM();
     ImageImplPPM t = new ImageImplPPM(ppm);
 
-    t.createSepia();
+    t.createMonochrome();
 
     t.image.exportPPM();
   }

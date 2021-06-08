@@ -9,8 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import model.Coloring;
+import model.Images;
 
 /**
  * this class contains information about image that is a PPM.
@@ -57,11 +59,8 @@ public class PPM {
         System.out.println("Invalid PPM file: plain RAW file should begin with P3");
       }
       int width = sc.nextInt();
-      System.out.println("Width of image: " + width);
       int height = sc.nextInt();
-      System.out.println("Height of image: " + height);
       int maxValue = sc.nextInt();
-      System.out.println("Maximum value of a color in this file (usually 256): " + maxValue);
 
       List<List<Color>> image = new ArrayList<>();
       for (int i = 0; i < height; i++) {
@@ -94,6 +93,10 @@ public class PPM {
     this.blueChannel = setColoring(image, Coloring.BLUE);
   }
 
+  public PPM(int height, int width) {
+
+  }
+
   public static List<List<Color>> createListOfColor() {
     boolean isWhite = true;
     List<List<Color>> temp = new ArrayList<>();
@@ -116,15 +119,9 @@ public class PPM {
 
   public String exportPPM() throws IOException {
     StringBuilder stringBuilder = new StringBuilder();
-    StringBuilder stringBuilder1 = new StringBuilder();
-
-
 
     int height = this.image.size();
     int width = this.image.get(0).size();
-
-    System.out.println(width);
-
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
@@ -140,6 +137,7 @@ public class PPM {
       }
     }
 
+    StringBuilder stringBuilder1 = new StringBuilder();
 
     stringBuilder1.append("P3\n");
     stringBuilder1.append(width + " " + height + "\n");
@@ -155,9 +153,15 @@ public class PPM {
         stringBuilder1.append("\n");
       }
     }
-    FileWriter obj = new FileWriter("s.ppm");
-    obj.write(stringBuilder1.toString());
-    obj.close();
+    try {
+      File file = new File("/Users/terencepham/Desktop/CS3500/real/hwork5/s.ppm");
+      file.getParentFile().mkdirs();
+      FileWriter fileWriter = new FileWriter(file);
+      fileWriter.write(stringBuilder1.toString());
+      fileWriter.close();
+    } catch (IOException e) {
+      System.out.print(e.getMessage());
+    }
     return stringBuilder.toString();
   }
 
@@ -177,23 +181,24 @@ public class PPM {
     return temp;
   }
 
-
   @Override
   public boolean equals(Object o) {
-    if (o == this) {
+    if (this == o) {
       return true;
     }
-    if (!(o instanceof PPM)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
-    } else {
-      PPM temp = (PPM) o;
-      return temp.getImage().equals(this.getImage());
     }
+    PPM ppm = (PPM) o;
+    return Objects.equals(image, ppm.image) && Objects
+        .equals(redChannel, ppm.redChannel) && Objects
+        .equals(greenChannel, ppm.greenChannel) && Objects
+        .equals(blueChannel, ppm.blueChannel);
   }
 
   @Override
   public int hashCode() {
-    return 0;
+    return Objects.hash(image, redChannel, greenChannel, blueChannel);
   }
 
   private List<List<Integer>> setColoring(List<List<Color>> image, Coloring color) {
@@ -236,6 +241,11 @@ public class PPM {
   public static void main(String[] arg) throws IOException {
     PPM ppm3 = importImageFile("Koala.ppm");
     ppm3.exportPPM();
+    PPM ppm4 = importImageFile("s.ppm");
+    Images t = new ImageImplPPM(ppm4);
+    t.blurringImage();
+
+    System.out.println(ppm3.equals(t.getImage()));
   }
 
 
