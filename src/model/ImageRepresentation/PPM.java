@@ -221,7 +221,12 @@ public class PPM {
     return temp;
   }
 
-
+  /**
+   *
+   * @param coloring
+   * @return
+   * @throws IllegalStateException
+   */
   public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalStateException {
     switch (coloring) {
       case BLUE:
@@ -235,6 +240,11 @@ public class PPM {
     }
   }
 
+  /**
+   *
+   * @param arg
+   * @throws IOException
+   */
 
   public static void main(String[] arg) throws IOException {
     PPM ppm3 = importImageFile("Koala.ppm");

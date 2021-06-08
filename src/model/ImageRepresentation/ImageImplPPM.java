@@ -44,7 +44,7 @@ public class ImageImplPPM extends ImageImpl<PPM> {
 
 
 
-  private static List<List<Integer>> helperForMultiplying2(List<List<Integer>> channel,
+  private List<List<Integer>> helperForMultiplying2(List<List<Integer>> channel,
       List<List<Double>> matrix) {
     int height = channel.size();
     int offset = (matrix.size() - 1) / 2;
@@ -62,12 +62,7 @@ public class ImageImplPPM extends ImageImpl<PPM> {
             }
           }
         }
-        int a;
-        if (sum > 0) {
-          a = (int) (Math.min(sum, 255));
-        } else {
-          a = (int) (Math.max(sum, 0));
-        }
+        int a = verifySum(sum);
         channel.get(row).set(column, a);
       }
     }
@@ -126,12 +121,7 @@ public class ImageImplPPM extends ImageImpl<PPM> {
             double sum = matrix.get(0).get(0) * redChannel.get(i).get(j)
                 + matrix.get(0).get(1) * greenChannel.get(i).get(j)
                 + matrix.get(0).get(2) * blueChannel.get(i).get(j);
-            int a;
-            if (sum > 0) {
-              a = (int) Math.min(sum, 255);
-            } else {
-              a = (int) Math.max(sum, 0);
-            }
+            int a = verifySum(sum);
             redChannel.get(i).set(j, a);
           }
         }
@@ -142,12 +132,7 @@ public class ImageImplPPM extends ImageImpl<PPM> {
             double sum = matrix.get(1).get(0) * redChannel.get(i).get(j)
                 + matrix.get(1).get(1) * greenChannel.get(i).get(j)
                 + matrix.get(1).get(2) * blueChannel.get(i).get(j);
-            int a;
-            if (sum > 0) {
-              a = (int) Math.min(sum, 255);
-            } else {
-              a = (int) Math.max(sum, 0);
-            }
+            int a = verifySum(sum);
             greenChannel.get(i).set(j, a);
           }
         }
@@ -158,12 +143,7 @@ public class ImageImplPPM extends ImageImpl<PPM> {
             double sum = matrix.get(2).get(0) * redChannel.get(i).get(j)
                 + matrix.get(2).get(1) * greenChannel.get(i).get(j)
                 + matrix.get(2).get(2) * blueChannel.get(i).get(j);
-            int a;
-            if (sum > 0) {
-              a = (int) Math.min(sum, 255);
-            } else {
-              a = (int) Math.max(sum, 0);
-            }
+            int a = verifySum(sum);
             blueChannel.get(i).set(j, a);
           }
         }
@@ -173,6 +153,16 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     }
   }
 
+
+  private int verifySum(Double sum) {
+    int a;
+    if (sum > 0) {
+      a = (int) Math.min(sum, 255);
+    } else {
+      a = (int) Math.max(sum, 0);
+    }
+    return a;
+  }
 
 
 
