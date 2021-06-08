@@ -19,10 +19,10 @@ import model.Images;
  */
 public class PPM {
 
-  private List<List<Color>> image;
-  private List<List<Integer>> redChannel;
-  private List<List<Integer>> greenChannel;
-  private List<List<Integer>> blueChannel;
+  private final List<List<Color>> image;
+  private final List<List<Integer>> redChannel;
+  private final List<List<Integer>> greenChannel;
+  private final List<List<Integer>> blueChannel;
 
 
   public PPM(List<List<Color>> image) {
@@ -34,22 +34,31 @@ public class PPM {
   }
 
   public PPM() {
-    this.image = createListOfColor();
+    this.image = createListOfColor(1024, 768);
     this.greenChannel = setColoring(image, Coloring.GREEEN);
     this.redChannel = setColoring(image, Coloring.RED);
     this.blueChannel = setColoring(image, Coloring.BLUE);
   }
 
   public PPM(int height, int width) {
-
+    this.image = createListOfColor(height, width);
+    this.greenChannel = setColoring(image, Coloring.GREEEN);
+    this.redChannel = setColoring(image, Coloring.RED);
+    this.blueChannel = setColoring(image, Coloring.BLUE);
   }
 
-  public static List<List<Color>> createListOfColor() {
+  /**
+   *
+   * @param height
+   * @param width
+   * @return
+   */
+  public static List<List<Color>> createListOfColor(int height, int width) {
     boolean isWhite = true;
     List<List<Color>> temp = new ArrayList<>();
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < height; i++) {
       temp.add(new ArrayList<>());
-      for (int j = 0; j < 10; j++) {
+      for (int j = 0; j < width; j++) {
         if (isWhite) {
           temp.get(i).add(Color.WHITE);
           isWhite = false;
@@ -113,7 +122,11 @@ public class PPM {
     return stringBuilder.toString();
   }
 
-
+  /**
+   *
+   * @param fileName
+   * @return
+   */
   public static PPM importImageFile(String fileName) {
     return new PPM(ImageUtil.readPPM(fileName));
   }
@@ -149,6 +162,12 @@ public class PPM {
     return Objects.hash(image, redChannel, greenChannel, blueChannel);
   }
 
+  /**
+   *
+   * @param image
+   * @param color
+   * @return
+   */
   private List<List<Integer>> setColoring(List<List<Color>> image, Coloring color) {
     List<List<Integer>> temp = new ArrayList<>();
     int rowSize = image.size();
@@ -189,10 +208,6 @@ public class PPM {
     }
   }
 
-  /**
-   * @param arg
-   * @throws IOException
-   */
 
   public static void main(String[] arg) throws IOException {
     PPM ppm3 = importImageFile("Koala.ppm");

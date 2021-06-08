@@ -203,11 +203,9 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   public static void main(String[] args) throws IOException {
 
     PPM ppm = PPM.importImageFile("Koala.ppm");
-    PPM ppm2 = new PPM();
     ImageImplPPM t = new ImageImplPPM(ppm);
 
-    t.createMonochrome();
-
-    t.image.exportPPM();
+    t.createSepia();
+    t.getImage().exportPPM();
   }
 }
