@@ -9,6 +9,9 @@ import model.ImageImpl;
 import model.ImageOps;
 import model.Matrices;
 
+/**
+ *
+ */
 public class ImageImplPPM extends ImageImpl<PPM> {
 
   public ImageImplPPM(PPM ppm) {
@@ -41,8 +44,12 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
 
-
-
+  /**
+   *
+   * @param channel
+   * @param matrix
+   * @return
+   */
 
   private List<List<Integer>> helperForMultiplying2(List<List<Integer>> channel,
       List<List<Double>> matrix) {
@@ -70,6 +77,13 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     return channel;
   }
 
+  /**
+   *
+   * @param imageOps
+   * @param ppm
+   * @param matrix
+   * @return
+   */
   private List<List<Color>> helperForColoringAndFiltering(ImageOps imageOps, PPM ppm,
       List<List<Double>> matrix) {
     List<List<Integer>> redChannel = ppm.getColorChannel(Coloring.RED);
@@ -93,7 +107,13 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     return getLists(red, green, blue);
   }
 
-
+  /**
+   *
+   * @param red
+   * @param green
+   * @param blue
+   * @return
+   */
   private List<List<Color>> getLists(List<List<Integer>> red, List<List<Integer>> green,
       List<List<Integer>> blue) {
     List<List<Color>> temp = new ArrayList<>();
@@ -111,6 +131,16 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     return temp;
   }
 
+  /**
+   *
+   * @param coloring
+   * @param redChannel
+   * @param greenChannel
+   * @param blueChannel
+   * @param matrix
+   * @return
+   * @throws IllegalArgumentException
+   */
   private List<List<Integer>> anotherHelper(Coloring coloring, List<List<Integer>> redChannel,
       List<List<Integer>> greenChannel, List<List<Integer>> blueChannel,
       List<List<Double>> matrix) throws IllegalArgumentException {
@@ -153,7 +183,11 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     }
   }
 
-
+  /**
+   *
+   * @param sum
+   * @return
+   */
   private int verifySum(Double sum) {
     int a;
     if (sum > 0) {
