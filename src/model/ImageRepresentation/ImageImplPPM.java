@@ -198,14 +198,14 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     return a;
   }
 
-
-
   public static void main(String[] args) throws IOException {
 
     PPM ppm = PPM.importImageFile("Koala.ppm");
     ImageImplPPM t = new ImageImplPPM(ppm);
 
-    t.createSepia();
+    t.blurringImage();
+    t.blurringImage();
+    t.blurringImage();
     t.getImage().exportPPM();
   }
 }

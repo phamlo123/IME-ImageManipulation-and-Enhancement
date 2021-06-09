@@ -94,7 +94,7 @@ public class PPM {
     StringBuilder stringBuilder1 = new StringBuilder();
 
     stringBuilder1.append("P3\n");
-    stringBuilder1.append(width + " " + height + "\n");
+    stringBuilder1.append(width).append(" ").append(height).append("\n");
     stringBuilder1.append("255\n");
 
     for (int i = 0; i < height; i++) {
@@ -208,11 +208,9 @@ public class PPM {
     PPM ppm3 = importImageFile("Koala.ppm");
     ppm3.exportPPM();
     PPM ppm4 = importImageFile("s.ppm");
-    Images t = new ImageImplPPM(ppm4);
+    Images<PPM> t = new ImageImplPPM(ppm4);
     t.blurringImage();
 
     System.out.println(ppm3.equals(t.getImage()));
   }
-
-
 }
