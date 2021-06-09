@@ -22,6 +22,9 @@ public class PPM {
 
 
   public PPM(List<List<Color>> image) {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
     this.image = image;
     this.greenChannel = setColoring(image, Coloring.GREEEN);
     this.redChannel = setColoring(image, Coloring.RED);
