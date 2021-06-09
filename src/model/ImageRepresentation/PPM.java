@@ -2,15 +2,11 @@ package model.ImageRepresentation;
 
 import java.awt.Color;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 import model.Coloring;
 import model.Images;
 
@@ -53,7 +49,7 @@ public class PPM {
    * @param width
    * @return
    */
-  public static List<List<Color>> createListOfColor(int height, int width) {
+  private static List<List<Color>> createListOfColor(int height, int width) {
     boolean isWhite = true;
     List<List<Color>> temp = new ArrayList<>();
     for (int i = 0; i < height; i++) {
@@ -69,7 +65,6 @@ public class PPM {
       }
     }
     return temp;
-
   }
 
   /**
