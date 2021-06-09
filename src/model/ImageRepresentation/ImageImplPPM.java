@@ -61,14 +61,17 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     List<List<Integer>> red, blue, green;
     switch (imageOps) {
       case COLORING:
-        red = Arithmetic.helperForMultiplyingEigen(Coloring.RED, redChannel, greenChannel, blueChannel, matrix);
-        green = Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, redChannel, greenChannel, blueChannel, matrix);
-        blue = Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, redChannel, greenChannel, blueChannel, matrix);
+        red = Arithmetic.helperForMultiplyingEigen(Coloring.RED, redChannel,
+            greenChannel, blueChannel, matrix);
+        green = Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, redChannel,
+            greenChannel, blueChannel, matrix);
+        blue = Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, redChannel,
+            greenChannel, blueChannel, matrix);
         break;
       case FILTERING:
-        red = Arithmetic.helperForMultiplying2(redChannel, matrix);
-        green = Arithmetic.helperForMultiplying2(greenChannel, matrix);
-        blue = Arithmetic.helperForMultiplying2(blueChannel, matrix);
+        red = Arithmetic.helperForMultiplying(redChannel, matrix);
+        green = Arithmetic.helperForMultiplying(greenChannel, matrix);
+        blue = Arithmetic.helperForMultiplying(blueChannel, matrix);
         break;
       default:
         throw new IllegalArgumentException();

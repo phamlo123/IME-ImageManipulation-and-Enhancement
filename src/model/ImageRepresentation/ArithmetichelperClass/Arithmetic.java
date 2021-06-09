@@ -13,7 +13,7 @@ public class Arithmetic {
    * @return
    */
 
-  public static List<List<Integer>> helperForMultiplying2(List<List<Integer>> channel,
+  public static List<List<Integer>> helperForMultiplying(List<List<Integer>> channel,
       List<List<Double>> matrix) {
     int height = channel.size();
     int offset = (matrix.size() - 1) / 2;
@@ -31,7 +31,7 @@ public class Arithmetic {
             }
           }
         }
-        int a = verifySum(sum);
+        int a = verifySum(sum, 255, 0);
         channel.get(row).set(column, a);
       }
     }
@@ -61,7 +61,7 @@ public class Arithmetic {
             double sum = matrix.get(0).get(0) * redChannel.get(i).get(j)
                 + matrix.get(0).get(1) * greenChannel.get(i).get(j)
                 + matrix.get(0).get(2) * blueChannel.get(i).get(j);
-            int a = Arithmetic.verifySum(sum);
+            int a = Arithmetic.verifySum(sum, 255, 0);
             redChannel.get(i).set(j, a);
           }
         }
@@ -72,7 +72,7 @@ public class Arithmetic {
             double sum = matrix.get(1).get(0) * redChannel.get(i).get(j)
                 + matrix.get(1).get(1) * greenChannel.get(i).get(j)
                 + matrix.get(1).get(2) * blueChannel.get(i).get(j);
-            int a = Arithmetic.verifySum(sum);
+            int a = Arithmetic.verifySum(sum, 255, 0);
             greenChannel.get(i).set(j, a);
           }
         }
@@ -83,7 +83,7 @@ public class Arithmetic {
             double sum = matrix.get(2).get(0) * redChannel.get(i).get(j)
                 + matrix.get(2).get(1) * greenChannel.get(i).get(j)
                 + matrix.get(2).get(2) * blueChannel.get(i).get(j);
-            int a = Arithmetic.verifySum(sum);
+            int a = Arithmetic.verifySum(sum, 255, 0);
             blueChannel.get(i).set(j, a);
           }
         }
@@ -98,12 +98,12 @@ public class Arithmetic {
    * @param sum
    * @return
    */
-  public static int verifySum(Double sum) {
+  public static int verifySum(Double sum, int upperLimit, int lowerLimit) {
     int a;
-    if (sum > 0) {
-      a = (int) Math.min(sum, 255);
+    if (sum > lowerLimit) {
+      a = (int) Math.min(sum, upperLimit);
     } else {
-      a = (int) Math.max(sum, 0);
+      a = (int) Math.max(sum, lowerLimit);
     }
     return a;
   }
