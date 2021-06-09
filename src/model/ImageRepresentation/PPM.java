@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import model.Coloring;
+import model.ImageRepresentation.ArithmetichelperClass.ImageUtil;
 import model.Images;
 
 /**

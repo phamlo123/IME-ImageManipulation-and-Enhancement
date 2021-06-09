@@ -1,4 +1,4 @@
-package model.ImageRepresentation;
+package model.ImageRepresentation.ArithmetichelperClass;
 
 
 import java.awt.Color;
@@ -44,7 +44,6 @@ public class ImageUtil {
     }
     int width = sc.nextInt();
     int height = sc.nextInt();
-    int maxValue = sc.nextInt();
 
     List<List<Color>> image = new ArrayList<>();
     for (int i = 0; i < height; i++) {
