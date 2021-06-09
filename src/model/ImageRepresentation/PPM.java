@@ -26,7 +26,7 @@ public class PPM {
       throw new IllegalArgumentException("Image cannot be null");
     }
     this.image = image;
-    this.greenChannel = setColoring(image, Coloring.GREEEN);
+    this.greenChannel = setColoring(image, Coloring.GREEN);
     this.redChannel = setColoring(image, Coloring.RED);
     this.blueChannel = setColoring(image, Coloring.BLUE);
 
@@ -34,14 +34,14 @@ public class PPM {
 
   public PPM() {
     this.image = createListOfColor(1024, 768);
-    this.greenChannel = setColoring(image, Coloring.GREEEN);
+    this.greenChannel = setColoring(image, Coloring.GREEN);
     this.redChannel = setColoring(image, Coloring.RED);
     this.blueChannel = setColoring(image, Coloring.BLUE);
   }
 
   public PPM(int height, int width) {
     this.image = createListOfColor(height, width);
-    this.greenChannel = setColoring(image, Coloring.GREEEN);
+    this.greenChannel = setColoring(image, Coloring.GREEN);
     this.redChannel = setColoring(image, Coloring.RED);
     this.blueChannel = setColoring(image, Coloring.BLUE);
   }
@@ -179,7 +179,7 @@ public class PPM {
           case BLUE:
             temp.get(row).add(image.get(row).get(column).getBlue());
             break;
-          case GREEEN:
+          case GREEN:
             temp.get(row).add(image.get(row).get(column).getGreen());
             break;
         }
@@ -199,7 +199,7 @@ public class PPM {
         return this.blueChannel;
       case RED:
         return this.redChannel;
-      case GREEEN:
+      case GREEN:
         return this.greenChannel;
       default:
         throw new IllegalArgumentException("Illegal Coloring");

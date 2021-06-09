@@ -107,7 +107,7 @@ public class TestPPM {
   @Test
   public void testGetColorChannelGreen() {
     assertEquals(ImageExamples.checkerboardRGB(),
-        examples.ppmExample4.getColorChannel(Coloring.GREEEN));
+        examples.ppmExample4.getColorChannel(Coloring.GREEN));
   }
 
   // tests the normal functionality of the getColorChannel method when blue is passed
@@ -115,6 +115,11 @@ public class TestPPM {
   public void testGetColorChannelBlue() {
     assertEquals(ImageExamples.checkerboardRGB(),
         examples.ppmExample4.getColorChannel(Coloring.BLUE));
+  }
+
+  @Test
+  public void testImport() {
+
   }
 
 }
