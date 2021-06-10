@@ -23,8 +23,5 @@ public abstract class ImageImpl<T> implements Images<T> {
   @Override
   public abstract void createSepia();
 
-  @Override
-  public T getImage() {
-    return image;
-  }
+
 }

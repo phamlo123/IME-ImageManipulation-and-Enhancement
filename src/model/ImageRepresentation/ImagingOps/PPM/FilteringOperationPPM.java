@@ -6,6 +6,7 @@ import model.ImageOps;
 import model.ImageRepresentation.ImagingOps.ImagingOperation;
 import model.ImageRepresentation.PPM;
 import model.ImageRepresentation.util.Arithmetic;
+import model.ImageRepresentation.util.ImageUtil;
 
 /**
  *
@@ -26,8 +27,7 @@ public class FilteringOperationPPM extends ImagingOPsPPM implements ImagingOpera
     red = Arithmetic.helperForMultiplying(redChannel, matrix);
     green = Arithmetic.helperForMultiplying(greenChannel, matrix);
     blue = Arithmetic.helperForMultiplying(blueChannel, matrix);
-    return getLists(red, green, blue);
+    return ImageUtil.getLists(red, green, blue);
   }
-
 
 }

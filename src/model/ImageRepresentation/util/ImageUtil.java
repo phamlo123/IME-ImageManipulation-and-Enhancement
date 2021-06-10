@@ -19,7 +19,7 @@ public class ImageUtil {
    * @param filename the path of the file.
    * @return a list of list of colors based on the information in the PPM file.
    */
-  public static List<List<Color>> readPPM(String filename) {
+  private static List<List<Color>> readPPM(String filename) {
     Scanner sc;
 
     try {
@@ -72,4 +72,30 @@ public class ImageUtil {
   public static PPM importImageFile(String fileName) {
     return new PPM(ImageUtil.readPPM(fileName));
   }
-}
+
+
+  /**
+   * this method creates a List of Lists of Colors based on the given lists of red, green, and blue
+   * value.
+   * @param red is the list of list of red values.
+   * @param green is the list of lists of green values.
+   * @param blue is the list of list of blue values.
+   * @return a list of list of colors that is a combination of the three red, green, and blue
+   *         parameters.
+   */
+  public static List<List<Color>> getLists(List<List<Integer>> red, List<List<Integer>> green,
+      List<List<Integer>> blue) {
+    List<List<Color>> temp = new ArrayList<>();
+
+    int height = red.size();
+    int width = red.get(0).size();
+
+    for (int row = 0; row < height; row++) {
+      temp.add(new ArrayList<>());
+      for (int column = 0; column < width; column++) {
+        temp.get(row).add(new Color(red.get(row).get(column), green.get(row).get(column),
+            blue.get(row).get(column)));
+      }
+    }
+    return temp;
+  }}
