@@ -30,6 +30,7 @@ public class ImageExamples {
           isWhite = true;
         }
       }
+      isWhite = !isWhite;
     }
     return checkerboard;
   }

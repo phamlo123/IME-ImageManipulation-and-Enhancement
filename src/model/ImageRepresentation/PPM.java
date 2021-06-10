@@ -64,6 +64,7 @@ public class PPM {
           isWhite = true;
         }
       }
+      isWhite = !isWhite;
     }
     return temp;
   }
