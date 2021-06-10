@@ -12,6 +12,9 @@ import model.Matrices;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Class to
+ */
 public class ImageImplPPMTest {
 
   ImageExamples examples;

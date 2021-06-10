@@ -12,12 +12,20 @@ public enum Matrices {
   MATRIX_FOR_GRAY_SCALING(Factory.LIST_C),
   MATRIX_FOR_SEPIA(Factory.LIST_D);
 
-  private List<List<Double>> matrix;
+  private final List<List<Double>> matrix;
 
+  /**
+   * Creates a Matrices object that stores the given matrix.
+   * @param matrix the list of list of Double to be stored in the Matrices object
+   */
   Matrices(List<List<Double>> matrix) {
     this.matrix = matrix;
   }
 
+  /**
+   * Class used to create all the constant matrices to be passed into the Matrices enumerations
+   * used for filtering.
+   */
   static class Factory {
 
     private static final List<List<Double>> LIST_A = initialize1((double) 1 / 16);
@@ -25,10 +33,11 @@ public enum Matrices {
     private static final List<List<Double>> LIST_C = initialize3();
     private static final List<List<Double>> LIST_D = initialize4();
 
+
     /**
-     *
-     * @param d
-     * @return
+     * Returns the matrix used for blurring.
+     * @param d the used in calculating specific matrix values
+     * @return matrix used for blurring as a list of list of Double
      */
     static private List<List<Double>> initialize1(Double d) {
       List<List<Double>> temp = new ArrayList<>();
@@ -52,9 +61,9 @@ public enum Matrices {
     }
 
     /**
-     *
-     * @param d
-     * @return
+     * Returns the matrix used for sharpening.
+     * @param d the used in calculating specific matrix values
+     * @return matrix used for sharpening as a list of list of Double
      */
     static private List<List<Double>> initialize2(Double d) {
       List<List<Double>> temp = new ArrayList<>();
@@ -74,8 +83,8 @@ public enum Matrices {
     }
 
     /**
-     *
-     * @return
+     * Returns the matrix used for grey scaling.
+     * @return matrix used for grey scaling as a list of list of Double
      */
     static private List<List<Double>> initialize3() {
       List<List<Double>> temp = new ArrayList<>();
@@ -91,8 +100,8 @@ public enum Matrices {
     }
 
     /**
-     *
-     * @return
+     * Returns the matrix used for sepia.
+     * @return matrix used for sepia as a list of list of Double
      */
     static private List<List<Double>> initialize4() {
       List<List<Double>> temp = new ArrayList<>();
@@ -113,14 +122,17 @@ public enum Matrices {
   }
 
   /**
-   *
-   * @return
+   * Returns the matrix stored in this Matrices object.
+   * @return the matrix as a list of list of Double
    */
   public List<List<Double>> getMatrix() {
-    return this.matrix;
-  }
-
-  public static void main(String[] arg) {
-    System.out.println(MATRIX_FOR_BLURRING.getMatrix());
+    List<List<Double>> temp = new ArrayList<>();
+    for (int i = 0; i < this.matrix.size(); i++) {
+      temp.add(new ArrayList<>());
+      for (int j = 0; j < this.matrix.get(i).size(); j++) {
+        temp.get(i).add(this.matrix.get(i).get(j));
+      }
+    }
+    return temp;
   }
 }
