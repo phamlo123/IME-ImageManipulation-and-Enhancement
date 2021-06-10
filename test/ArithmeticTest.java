@@ -200,7 +200,8 @@ public class ArithmeticTest {
       listB.add(Arrays.asList(30, 50, 60, 300, 45));
       listC.add(Arrays.asList(100, 270, 200, 65, 140));
     }
-    List<List<Integer>> listE = Arithmetic.helperForMultiplyingEigen(Coloring.RED, listA, listB, listC, listD);
+    List<List<Integer>> listE = Arithmetic.helperForMultiplyingEigen(Coloring.RED,
+        listA, listB, listC, listD);
     List<List<Integer>> listF = new ArrayList<>();
     System.out.println(listE);
     listF.add(Arrays.asList(30, 58, 112, 222, 50));

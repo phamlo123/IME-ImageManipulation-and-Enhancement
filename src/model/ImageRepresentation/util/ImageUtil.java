@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class is a function object class that contains methods to help process a ppm file
+ */
 public class ImageUtil {
 
   /**
-   * Read an image file in the PPM format and print the colors.
+   * Read an image file in the PPM format create a list of list of Colors from that PPM file.
    *
    * @param filename the path of the file.
+   * @return a list of list of colors based on the information in the PPM file.
    */
   public static List<List<Color>> readPPM(String filename) {
     Scanner sc;

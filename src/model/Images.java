@@ -1,28 +1,28 @@
 package model;
 
 /**
- * this interface contains all operations to be performed on an image
+ * This interface contains all operations to be performed on an image.
  */
 public interface Images<T> {
 
 
   /**
-   * Blur this image
+   * Blur the image.
    */
   void blurringImage();
 
   /**
-   * sharpen this image
+   * sharpen the image.
    */
   void sharpeningImage();
 
   /**
-   * create a greyscale version of this image
+   * create a greyscale version of the image.
    */
    void createMonochrome();
 
   /**
-   * create a sepia version of this image.
+   * create a sepia version of the image.
    */
   void createSepia();
 

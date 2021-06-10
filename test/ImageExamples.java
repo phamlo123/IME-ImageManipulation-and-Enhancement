@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.ImageImpl;
 import model.ImageRepresentation.ImageImplPPM;
 import model.ImageRepresentation.PPM;
 import model.Images;

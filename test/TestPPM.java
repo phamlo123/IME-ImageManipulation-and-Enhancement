@@ -5,6 +5,9 @@ import model.ImageRepresentation.PPM;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ *
+ */
 public class TestPPM {
 
   ImageExamples examples;
@@ -111,5 +114,5 @@ public class TestPPM {
     PPM ppmClone = PPM.importImageFile("importTest.ppm");
     assertEquals(ppm, ppmClone);
   }
-  
+
 }

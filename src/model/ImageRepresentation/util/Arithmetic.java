@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
 
+/**
+ * This class is a function object class that contain methods to process two or more matrices in
+ * the form of list of list of objects.
+ */
 public class Arithmetic {
 
 
   /**
-   * @param channel
-   * @param matrix
-   * @return
+   * This method helps multiply two list of lists of Numbers that align the center of the
+   * kernel with each of all elements of the main list of lists {see @link}
+   * @param channel is the main list of lists of numbers that the kernel will be applied to
+   * @param matrix is the kernel matrix in the form of a list of list of numbers
+   * @return a result List of list of Integers after kernel is applied for all the numbers in the
+   *         channel list.
    */
-
   public static List<List<Integer>> helperForMultiplying(List<List<Integer>> channel,
       List<List<Double>> matrix) {
     int height = channel.size();
@@ -40,13 +46,18 @@ public class Arithmetic {
 
 
   /**
-   * @param coloring
-   * @param redChannel
-   * @param greenChannel
-   * @param blueChannel
-   * @param matrix
-   * @return
-   * @throws IllegalArgumentException
+   * Method to multiply two matrices in the form of list of list of Integers and combine the results
+   * for all of the integers in a new list of list of integers
+   * @param coloring the type of color that determines what color channel is being performed on.
+   * @param redChannel is a list of list of numbers that represent the red value of all the pixels
+   *                   in an image
+   * @param greenChannel is a list of list of numbers that represent the green value of all the pixels
+   *                     in an image
+   * @param blueChannel is a list of list of numbers that represent the green value of all the pixels
+   *                    in an image
+   * @param matrix is the matrix that will be used to apply to all the integers in the given lists.
+   * @return a list of list of integers after multiplication.
+   * @throws IllegalArgumentException if the coloring type is not supported.
    */
   public static List<List<Integer>> helperForMultiplyingEigen(Coloring coloring,
       List<List<Integer>> redChannel,
@@ -96,8 +107,13 @@ public class Arithmetic {
   }
 
   /**
-   * @param sum
-   * @return
+   * This method sets assign upper and lower bound to a number and also turn that number into the
+   * nearest lower integer.
+   * @param sum is the number to be applied the bounds to
+   * @param upperLimit is the upper bound
+   * @param lowerLimit is the lower bound
+   * @return an integer that is rounded down of a double number and is within the specified range.
+   * @throws IllegalArgumentException if lowerbound is greater than upperbound
    */
   public static int verifySum(double sum, int upperLimit, int lowerLimit)
       throws IllegalArgumentException {

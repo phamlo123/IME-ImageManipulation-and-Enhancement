@@ -11,7 +11,9 @@ import model.ImageRepresentation.util.Arithmetic;
 import model.Matrices;
 
 /**
- *
+ * This class extends the ImageImpl abstract class that is parameterized by type PPM. This class
+ * will implements the Images interface and will therefore implements all the methods in the
+ * interface onto a PPM object.
  */
 public class ImageImplPPM extends ImageImpl<PPM> {
 
@@ -44,15 +46,15 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     this.image = new PPM(helperForColoringAndFiltering(ImageOps.COLORING, this.image, matrix));
   }
 
-
-
   /**
-   *
-   * @param imageOps
-   * @param ppm
-   * @param matrix
-   * @return
+   * Delegate the operations into the right type of helper functions.
+   * @param imageOps the kind of operations to be performed on this image
+   * @param ppm the PPM object that is being operated on.
+   * @param matrix the kernel that is used to process the PPM image.
+   * @return a List of list of Colors that can be used to represent a PPM image.
    */
+
+
   private List<List<Color>> helperForColoringAndFiltering(ImageOps imageOps, PPM ppm,
       List<List<Double>> matrix) {
     List<List<Integer>> redChannel = ppm.getColorChannel(Coloring.RED);
@@ -80,11 +82,13 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
   /**
-   *
-   * @param red
-   * @param green
-   * @param blue
-   * @return
+   * this method creates a List of List of Colors based on the given lists of red, green, and blue
+   * value.
+   * @param red is the list of list of red values.
+   * @param green is the list of lists of green values.
+   * @param blue is the list of list of blue values.
+   * @return a list of list of colors that is a combination of the three red, green, and blue
+   *         parameters.
    */
   private List<List<Color>> getLists(List<List<Integer>> red, List<List<Integer>> green,
       List<List<Integer>> blue) {
@@ -104,13 +108,4 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
 
-
-
-  public static void main(String[] args) {
-
-    PPM ppm = PPM.importImageFile("Koala.ppm");
-    ImageImplPPM t = new ImageImplPPM(ppm);
-
-    t.getImage().exportPPM("t3.ppm");
-  }
 }

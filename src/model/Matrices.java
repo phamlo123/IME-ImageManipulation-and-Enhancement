@@ -25,7 +25,11 @@ public enum Matrices {
     private static final List<List<Double>> LIST_C = initialize3();
     private static final List<List<Double>> LIST_D = initialize4();
 
-
+    /**
+     *
+     * @param d
+     * @return
+     */
     static private List<List<Double>> initialize1(Double d) {
       List<List<Double>> temp = new ArrayList<>();
       for (int i = 0; i < 3; i++) {
@@ -47,7 +51,11 @@ public enum Matrices {
       return temp;
     }
 
-
+    /**
+     *
+     * @param d
+     * @return
+     */
     static private List<List<Double>> initialize2(Double d) {
       List<List<Double>> temp = new ArrayList<>();
       for (int i = 0; i < 5; i++) {
@@ -65,6 +73,10 @@ public enum Matrices {
       return temp;
     }
 
+    /**
+     *
+     * @return
+     */
     static private List<List<Double>> initialize3() {
       List<List<Double>> temp = new ArrayList<>();
       for (int i = 0; i < 3; i++) {
@@ -78,6 +90,10 @@ public enum Matrices {
       return temp;
     }
 
+    /**
+     *
+     * @return
+     */
     static private List<List<Double>> initialize4() {
       List<List<Double>> temp = new ArrayList<>();
       for (int i = 0; i < 3; i++) {
@@ -96,6 +112,10 @@ public enum Matrices {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public List<List<Double>> getMatrix() {
     return this.matrix;
   }

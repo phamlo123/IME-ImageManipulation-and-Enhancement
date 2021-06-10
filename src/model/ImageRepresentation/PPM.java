@@ -11,7 +11,7 @@ import model.Coloring;
 import model.ImageRepresentation.util.ImageUtil;
 
 /**
- * this class contains information about image that is a PPM.
+ *
  */
 public class PPM {
 
