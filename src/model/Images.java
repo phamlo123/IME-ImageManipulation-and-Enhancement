@@ -26,6 +26,10 @@ public interface Images<T> {
    */
   void createSepia();
 
+  /**
+   * Returns the image of this image representation.
+   * @return the image
+   */
   T getImage();
 
 }
