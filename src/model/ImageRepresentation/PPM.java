@@ -22,6 +22,7 @@ public class PPM {
 
   /**
    * Constructs a PPM from an image.
+   *
    * @param image the list of list of color to create the PPM from
    */
   public PPM(List<List<Color>> image) {
@@ -47,6 +48,7 @@ public class PPM {
 
   /**
    * Creates a PPM with a checkerboard with the specified height and width given as the image.
+   *
    * @param height the height of the checkerboard image
    * @param width  the width of the checkerboard image
    */
@@ -59,8 +61,9 @@ public class PPM {
 
   /**
    * Creates a list of list of colors that represents a checkerboard image.
-   * @param height  the height of the checkerboard
-   * @param width   the width of the checkerboard
+   *
+   * @param height the height of the checkerboard
+   * @param width  the width of the checkerboard
    * @return the created checkerboard as a list of list of colors
    */
   private static List<List<Color>> createListOfColor(int height, int width) {
@@ -84,28 +87,13 @@ public class PPM {
 
   /**
    * Exports the image stored in this PPM to the file name given.
+   *
    * @param fileName the name of the file to write to
-   * @return a String containing all the pixels of this PPM's image
    */
-  public String exportPPM(String fileName) {
-    StringBuilder stringBuilder = new StringBuilder();
+  public void exportPPM(String fileName) {
 
     int height = this.image.size();
     int width = this.image.get(0).size();
-
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        stringBuilder.append(String.format("(%d, %d) ", i, j));
-        stringBuilder.append("(");
-        stringBuilder.append(this.image.get(i).get(j).getRed());
-        stringBuilder.append(", ");
-        stringBuilder.append(this.image.get(i).get(j).getBlue());
-        stringBuilder.append(", ");
-        stringBuilder.append(this.image.get(i).get(j).getGreen());
-        stringBuilder.append(")");
-        stringBuilder.append("\n");
-      }
-    }
 
     StringBuilder stringBuilder1 = new StringBuilder();
 
@@ -130,11 +118,11 @@ public class PPM {
     } catch (IOException e) {
       System.out.print(e.getMessage());
     }
-    return stringBuilder.toString();
   }
 
   /**
    * Creates a new PPM object with the image at the desired file name.
+   *
    * @param fileName the name of the file to import from
    * @return the created PPM object
    */
@@ -144,6 +132,7 @@ public class PPM {
 
   /**
    * Creates a copy of this PPM's image.
+   *
    * @return the copy of this PPM's image as a list of list of colors
    */
   public List<List<Color>> getImage() {
@@ -179,6 +168,7 @@ public class PPM {
 
   /**
    * Returns a list of list representing the values of each pixel for the specified color.
+   *
    * @param image the image to retrieve the color values of
    * @param color the color values to retrieve for each pixel
    * @return the list of list of the specified color values for each pixel
@@ -207,6 +197,7 @@ public class PPM {
 
   /**
    * Returns a copy of this PPM's specified color channel.
+   *
    * @param coloring the Coloring type desired
    * @return the color channel of this PPM as a list of list of Integer
    * @throws IllegalArgumentException if an invalid Coloring is passed

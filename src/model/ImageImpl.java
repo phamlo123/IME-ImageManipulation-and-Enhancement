@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * This class implements the Images interface and is parameterized by type T, which is
  * an unspecified image type.
