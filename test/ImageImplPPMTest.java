@@ -27,15 +27,73 @@ public class ImageImplPPMTest {
   // checkerboard
   @Test
   public void testCreateMonochromeCheckerboard() {
-    assertEquals(ImageExamples.checkerboard(), examples.ppmExample4.getImage());
-    examples.ppmImage1.createMonochrome();
-    assertEquals(ImageExamples.checkerboard(), examples.ppmExample4.getImage());
+    List<List<Integer>> red = examples.ppmExample4.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = examples.ppmExample4.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = examples.ppmExample4.getColorChannel(Coloring.GREEN);
+
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+    List<List<Integer>> monoRed =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoBlue =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoGreen =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(monoRed.get(i).get(j), monoGreen.get(i).get(j),
+            monoBlue.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(examples.ppmExample4);
+    images.createMonochrome();
+
+    assertEquals(new PPM(color), images.getImage());
   }
 
   // tests the normal functionality of the createMonochrome method with an imported image
   @Test
   public void testCreateMonochromeImported() {
+    PPM ppm = PPM.importImageFile("Koala.ppm");
+    List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
 
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+
+    List<List<Integer>> monoRed =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoBlue =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoGreen =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(monoRed.get(i).get(j), monoGreen.get(i).get(j),
+            monoBlue.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(PPM.importImageFile("Koala.ppm"));
+    images.createMonochrome();
+    assertFalse(images.getImage().equals(PPM.importImageFile("Koala.ppm")));
+    assertEquals(new PPM(color), images.getImage());
   }
 
   // createSepia tests
@@ -43,15 +101,73 @@ public class ImageImplPPMTest {
   // tests the normal functionality of the createSepia method with a black and white checkerboard
   @Test
   public void testCreateSepiaCheckerboard() {
-    assertEquals(ImageExamples.checkerboard(), examples.ppmExample4.getImage());
-    examples.ppmImage1.createSepia();
-    assertEquals(ImageExamples.checkerboard(), examples.ppmExample4.getImage());
+    List<List<Integer>> red = examples.ppmExample4.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = examples.ppmExample4.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = examples.ppmExample4.getColorChannel(Coloring.GREEN);
+
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+    List<List<Integer>> sepiaRed =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaBlue =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaGreen =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(sepiaRed.get(i).get(j), sepiaGreen.get(i).get(j),
+            sepiaBlue.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(examples.ppmExample4);
+    images.createSepia();
+
+    assertEquals(new PPM(color), images.getImage());
   }
 
   // tests the normal functionality of the createSepia method with an imported image
   @Test
   public void testCreateSepiaImported() {
+    PPM ppm = PPM.importImageFile("Northeastern.ppm");
+    List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
 
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+    List<List<Integer>> sepiaRed =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaBlue =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaGreen =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(sepiaRed.get(i).get(j), sepiaGreen.get(i).get(j),
+            sepiaBlue.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(PPM.importImageFile("Northeastern.ppm"));
+    images.createSepia();
+    assertFalse(images.getImage().equals(PPM.importImageFile("Northeastern.ppm")));
+
+    assertEquals(new PPM(color), images.getImage());
   }
 
   // blurringImage tests
@@ -166,7 +282,6 @@ public class ImageImplPPMTest {
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
 
-
     assertEquals(red.size(), blue.size());
     assertEquals(blue.size(), green.size());
     List<List<Integer>> sharpedRed =
@@ -192,9 +307,6 @@ public class ImageImplPPMTest {
 
     assertEquals(new PPM(color), images.getImage());
   }
-
-
-
 
 
 }

@@ -28,8 +28,8 @@ public class TestPPM {
   // and checking the image properties
   @Test
   public void testExportNormal() {
-    examples.ppmExample4.exportPPM();
-    assertEquals(ImageExamples.checkerboard(),PPM.importImageFile("s.ppm").getImage());
+    examples.ppmExample4.exportPPM("test.ppm");
+    assertEquals(ImageExamples.checkerboard(),PPM.importImageFile("test.ppm").getImage());
   }
 
   // getImage tests
@@ -79,19 +79,19 @@ public class TestPPM {
   // tests the normal functionality of the hashcode method with a PPM object
   @Test
   public void testHashcodeExample1() {
-    assertEquals(1862422245, examples.ppmExample1.hashCode());
+    assertEquals(2024816285, examples.ppmExample1.hashCode());
   }
 
   // tests the normal functionality of the hashcode method with a copy of the first PPM object
   @Test
   public void testHashcodeCopyOfExample1() {
-    assertEquals(1862422245, examples.ppmExample3.hashCode());
+    assertEquals(2024816285, examples.ppmExample3.hashCode());
   }
 
   // tests the normal functionality of the hashcode method with a second example
   @Test
   public void testHashcodeExample2() {
-    assertEquals(1650984420, examples.ppmExample2.hashCode());
+    assertEquals(1423719491, examples.ppmExample2.hashCode());
   }
 
   // getColorChannel tests
