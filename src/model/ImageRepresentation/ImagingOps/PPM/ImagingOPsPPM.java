@@ -6,8 +6,6 @@ import java.util.List;
 import model.Coloring;
 import model.ImageOps;
 import model.ImageRepresentation.ImagingOps.ImagingOperation;
-import model.ImageRepresentation.ImagingOps.PPM.ColoringOperationPPM;
-import model.ImageRepresentation.ImagingOps.PPM.FilteringOperationPPM;
 import model.ImageRepresentation.PPM;
 
 /**
