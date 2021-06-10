@@ -1,4 +1,4 @@
-package model.ImageRepresentation;
+package model.ImageRepresentation.util;
 
 
 import java.awt.Color;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class ImageUtil {
 
   /**
@@ -44,7 +47,6 @@ public class ImageUtil {
     }
     int width = sc.nextInt();
     int height = sc.nextInt();
-    int maxValue = sc.nextInt();
 
     List<List<Color>> image = new ArrayList<>();
     for (int i = 0; i < height; i++) {

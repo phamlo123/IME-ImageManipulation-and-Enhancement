@@ -100,4 +100,7 @@ public enum Matrices {
     return this.matrix;
   }
 
+  public static void main(String[] arg) {
+    System.out.println(MATRIX_FOR_BLURRING.getMatrix());
+  }
 }

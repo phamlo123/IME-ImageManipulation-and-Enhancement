@@ -7,6 +7,7 @@ import java.util.List;
 import model.Coloring;
 import model.ImageImpl;
 import model.ImageOps;
+import model.ImageRepresentation.util.Arithmetic;
 import model.Matrices;
 
 /**
@@ -44,38 +45,6 @@ public class ImageImplPPM extends ImageImpl<PPM> {
   }
 
 
-  /**
-   *
-   * @param channel
-   * @param matrix
-   * @return
-   */
-
-  private List<List<Integer>> helperForMultiplying2(List<List<Integer>> channel,
-      List<List<Double>> matrix) {
-    int height = channel.size();
-    int offset = (matrix.size() - 1) / 2;
-    for (int row = 0; row < height; row++) {
-      for (int column = 0; column < channel.get(row).size(); column++) {
-        double sum = 0;
-        for (int i = 0; i < matrix.size(); i++) {
-          inner:
-          for (int j = 0; j < matrix.get(i).size(); j++) {
-            try {
-              sum = sum + channel.get(row + i - offset).get(column + j - offset)
-                  * matrix.get(i).get(j);
-            } catch (IndexOutOfBoundsException e) {
-              continue inner;
-            }
-          }
-        }
-        int a = verifySum(sum);
-        channel.get(row).set(column, a);
-      }
-    }
-
-    return channel;
-  }
 
   /**
    *
@@ -88,18 +57,21 @@ public class ImageImplPPM extends ImageImpl<PPM> {
       List<List<Double>> matrix) {
     List<List<Integer>> redChannel = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> blueChannel = ppm.getColorChannel(Coloring.BLUE);
-    List<List<Integer>> greenChannel = ppm.getColorChannel(Coloring.GREEEN);
+    List<List<Integer>> greenChannel = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> red, blue, green;
     switch (imageOps) {
       case COLORING:
-        red = anotherHelper(Coloring.RED, redChannel, greenChannel, blueChannel, matrix);
-        green = anotherHelper(Coloring.GREEEN, redChannel, greenChannel, blueChannel, matrix);
-        blue = anotherHelper(Coloring.BLUE, redChannel, greenChannel, blueChannel, matrix);
+        red = Arithmetic.helperForMultiplyingEigen(Coloring.RED, redChannel,
+            greenChannel, blueChannel, matrix);
+        green = Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, redChannel,
+            greenChannel, blueChannel, matrix);
+        blue = Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, redChannel,
+            greenChannel, blueChannel, matrix);
         break;
       case FILTERING:
-        red = helperForMultiplying2(redChannel, matrix);
-        green = helperForMultiplying2(greenChannel, matrix);
-        blue = helperForMultiplying2(blueChannel, matrix);
+        red = Arithmetic.helperForMultiplying(redChannel, matrix);
+        green = Arithmetic.helperForMultiplying(greenChannel, matrix);
+        blue = Arithmetic.helperForMultiplying(blueChannel, matrix);
         break;
       default:
         throw new IllegalArgumentException();
@@ -131,81 +103,15 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     return temp;
   }
 
-  /**
-   *
-   * @param coloring
-   * @param redChannel
-   * @param greenChannel
-   * @param blueChannel
-   * @param matrix
-   * @return
-   * @throws IllegalArgumentException
-   */
-  private List<List<Integer>> anotherHelper(Coloring coloring, List<List<Integer>> redChannel,
-      List<List<Integer>> greenChannel, List<List<Integer>> blueChannel,
-      List<List<Double>> matrix) throws IllegalArgumentException {
-    switch (coloring) {
-      case RED:
-        for (int i = 0; i < redChannel.size(); i++) {
-          for (int j = 0; j < redChannel.get(i).size(); j++) {
-            double sum = matrix.get(0).get(0) * redChannel.get(i).get(j)
-                + matrix.get(0).get(1) * greenChannel.get(i).get(j)
-                + matrix.get(0).get(2) * blueChannel.get(i).get(j);
-            int a = verifySum(sum);
-            redChannel.get(i).set(j, a);
-          }
-        }
-        return redChannel;
-      case GREEEN:
-        for (int i = 0; i < greenChannel.size(); i++) {
-          for (int j = 0; j < greenChannel.get(i).size(); j++) {
-            double sum = matrix.get(1).get(0) * redChannel.get(i).get(j)
-                + matrix.get(1).get(1) * greenChannel.get(i).get(j)
-                + matrix.get(1).get(2) * blueChannel.get(i).get(j);
-            int a = verifySum(sum);
-            greenChannel.get(i).set(j, a);
-          }
-        }
-        return greenChannel;
-      case BLUE:
-        for (int i = 0; i < greenChannel.size(); i++) {
-          for (int j = 0; j < greenChannel.get(i).size(); j++) {
-            double sum = matrix.get(2).get(0) * redChannel.get(i).get(j)
-                + matrix.get(2).get(1) * greenChannel.get(i).get(j)
-                + matrix.get(2).get(2) * blueChannel.get(i).get(j);
-            int a = verifySum(sum);
-            blueChannel.get(i).set(j, a);
-          }
-        }
-        return blueChannel;
-      default:
-        throw new IllegalArgumentException();
-    }
-  }
 
-  /**
-   *
-   * @param sum
-   * @return
-   */
-  private int verifySum(Double sum) {
-    int a;
-    if (sum > 0) {
-      a = (int) Math.min(sum, 255);
-    } else {
-      a = (int) Math.max(sum, 0);
-    }
-    return a;
-  }
 
-  public static void main(String[] args) throws IOException {
+
+  public static void main(String[] args) {
 
     PPM ppm = PPM.importImageFile("Koala.ppm");
     ImageImplPPM t = new ImageImplPPM(ppm);
 
-    t.blurringImage();
-    t.blurringImage();
-    t.blurringImage();
+    t.createSepia();
     t.getImage().exportPPM();
   }
 }
