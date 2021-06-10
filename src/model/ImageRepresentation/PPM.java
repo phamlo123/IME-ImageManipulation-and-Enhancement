@@ -20,6 +20,10 @@ public class PPM {
   private final List<List<Integer>> greenChannel;
   private final List<List<Integer>> blueChannel;
 
+  /**
+   * Constructs a PPM from an image.
+   * @param image the list of list of color to create the PPM from
+   */
   public PPM(List<List<Color>> image) {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
@@ -31,6 +35,9 @@ public class PPM {
 
   }
 
+  /**
+   * Creates a PPM with a checkerboard as its image.
+   */
   public PPM() {
     this.image = createListOfColor(1024, 768);
     this.greenChannel = setColoring(image, Coloring.GREEN);
@@ -38,6 +45,11 @@ public class PPM {
     this.blueChannel = setColoring(image, Coloring.BLUE);
   }
 
+  /**
+   * Creates a PPM with a checkerboard with the specified height and width given as the image.
+   * @param height the height of the checkerboard image
+   * @param width  the width of the checkerboard image
+   */
   public PPM(int height, int width) {
     this.image = createListOfColor(height, width);
     this.greenChannel = setColoring(image, Coloring.GREEN);
@@ -46,9 +58,10 @@ public class PPM {
   }
 
   /**
-   * @param height
-   * @param width
-   * @return
+   * Creates a list of list of colors that represents a checkerboard image.
+   * @param height  the height of the checkerboard
+   * @param width   the width of the checkerboard
+   * @return the created checkerboard as a list of list of colors
    */
   private static List<List<Color>> createListOfColor(int height, int width) {
     boolean isWhite = true;
@@ -70,8 +83,9 @@ public class PPM {
   }
 
   /**
-   * @return
-   * @throws IOException
+   * Exports the image stored in this PPM to the file name given.
+   * @param fileName the name of the file to write to
+   * @return a String containing all the pixels of this PPM's image
    */
   public String exportPPM(String fileName) {
     StringBuilder stringBuilder = new StringBuilder();
@@ -99,13 +113,13 @@ public class PPM {
     stringBuilder1.append(width).append(" ").append(height).append("\n");
     stringBuilder1.append("255\n");
 
-    for (int i = 0; i < height; i++) {
+    for (List<Color> colors : this.image) {
       for (int j = 0; j < width; j++) {
-        stringBuilder1.append(this.image.get(i).get(j).getRed());
+        stringBuilder1.append(colors.get(j).getRed());
         stringBuilder1.append("\n");
-        stringBuilder1.append(this.image.get(i).get(j).getGreen());
+        stringBuilder1.append(colors.get(j).getGreen());
         stringBuilder1.append("\n");
-        stringBuilder1.append(this.image.get(i).get(j).getBlue());
+        stringBuilder1.append(colors.get(j).getBlue());
         stringBuilder1.append("\n");
       }
     }
@@ -120,13 +134,18 @@ public class PPM {
   }
 
   /**
-   * @param fileName
-   * @return
+   * Creates a new PPM object with the image at the desired file name.
+   * @param fileName the name of the file to import from
+   * @return the created PPM object
    */
   public static PPM importImageFile(String fileName) {
     return new PPM(ImageUtil.readPPM(fileName));
   }
 
+  /**
+   * Creates a copy of this PPM's image.
+   * @return the copy of this PPM's image as a list of list of colors
+   */
   public List<List<Color>> getImage() {
     List<List<Color>> temp = new ArrayList<>();
     for (int i = 0; i < image.size(); i++) {
@@ -159,9 +178,10 @@ public class PPM {
   }
 
   /**
-   * @param image
-   * @param color
-   * @return
+   * Returns a list of list representing the values of each pixel for the specified color.
+   * @param image the image to retrieve the color values of
+   * @param color the color values to retrieve for each pixel
+   * @return the list of list of the specified color values for each pixel
    */
   private List<List<Integer>> setColoring(List<List<Color>> image, Coloring color) {
     List<List<Integer>> temp = new ArrayList<>();
@@ -186,11 +206,12 @@ public class PPM {
   }
 
   /**
-   * @param coloring
-   * @return
-   * @throws IllegalStateException
+   * Returns a copy of this PPM's specified color channel.
+   * @param coloring the Coloring type desired
+   * @return the color channel of this PPM as a list of list of Integer
+   * @throws IllegalArgumentException if an invalid Coloring is passed
    */
-  public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalStateException {
+  public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException {
     switch (coloring) {
       case BLUE:
         List<List<Integer>> tempBlue = new ArrayList<>();

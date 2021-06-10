@@ -5,10 +5,14 @@ import model.ImageRepresentation.PPM;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class to ensure that the PPM class and all of its methods function correctly
+ */
 public class TestPPM {
 
   ImageExamples examples;
 
+  // initialize examples
   @Before
   public void setup() {
     examples = new ImageExamples();
@@ -98,12 +102,13 @@ public class TestPPM {
         examples.ppmExample4.getColorChannel(Coloring.BLUE));
   }
 
-
+  // throws an exception because the file name does not exist
   @Test(expected = IllegalArgumentException.class)
   public void testImportIllegal() {
     PPM.importImageFile("notExist.ppm");
   }
 
+  // tests the normal functionality of the importImageFile method
   @Test
   public void testImport() {
     PPM ppm = new PPM();

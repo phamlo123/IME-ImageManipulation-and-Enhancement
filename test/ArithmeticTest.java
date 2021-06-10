@@ -196,18 +196,17 @@ public class ArithmeticTest {
     List<List<Integer>> listC = new ArrayList<>();
     List<List<Double>> listD = Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix();
     for (int i = 0; i < 5; i++) {
-      listA.add(Arrays.asList(10, 15, 260, 15, 40));
-      listB.add(Arrays.asList(30, 50, 60, 300, 45));
-      listC.add(Arrays.asList(100, 270, 200, 65, 140));
+      listA.add(Arrays.asList(260, 255, 265, 275, 280));
+      listB.add(Arrays.asList(265, 285, 270, 285, 290));
+      listC.add(Arrays.asList(270, 275, 260, 265, 295));
     }
     List<List<Integer>> listE = Arithmetic.helperForMultiplyingEigen(Coloring.RED, listA, listB, listC, listD);
     List<List<Integer>> listF = new ArrayList<>();
-    System.out.println(listE);
-    listF.add(Arrays.asList(30, 58, 112, 222, 50));
-    listF.add(Arrays.asList(30, 58, 112, 222, 50));
-    listF.add(Arrays.asList(30, 58, 112, 222, 50));
-    listF.add(Arrays.asList(30, 58, 112, 222, 50));
-    listF.add(Arrays.asList(30, 58, 112, 222, 50));
+    listF.add(Arrays.asList(255, 255, 255, 255, 255));
+    listF.add(Arrays.asList(255, 255, 255, 255, 255));
+    listF.add(Arrays.asList(255, 255, 255, 255, 255));
+    listF.add(Arrays.asList(255, 255, 255, 255, 255));
+    listF.add(Arrays.asList(255, 255, 255, 255, 255));
     assertEquals(listF.size(), listE.size());
     for (int i = 0; i < 5; i++) {
       assertEquals(listE.get(i).size(), listF.get(i).size());
