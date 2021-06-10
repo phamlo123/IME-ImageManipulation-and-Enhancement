@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import model.Coloring;
 import model.ImageRepresentation.util.ImageUtil;
-import model.Images;
 
 /**
  * this class contains information about image that is a PPM.
@@ -47,7 +46,6 @@ public class PPM {
   }
 
   /**
-   *
    * @param height
    * @param width
    * @return
@@ -74,7 +72,7 @@ public class PPM {
    * @return
    * @throws IOException
    */
-  public String exportPPM() {
+  public String exportPPM(String fileName) {
     StringBuilder stringBuilder = new StringBuilder();
 
     int height = this.image.size();
@@ -111,7 +109,7 @@ public class PPM {
       }
     }
     try {
-      FileWriter fileWriter = new FileWriter("s.ppm");
+      FileWriter fileWriter = new FileWriter(fileName);
       fileWriter.write(stringBuilder1.toString());
       fileWriter.close();
     } catch (IOException e) {
@@ -121,7 +119,6 @@ public class PPM {
   }
 
   /**
-   *
    * @param fileName
    * @return
    */
@@ -161,7 +158,6 @@ public class PPM {
   }
 
   /**
-   *
    * @param image
    * @param color
    * @return
@@ -196,24 +192,38 @@ public class PPM {
   public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalStateException {
     switch (coloring) {
       case BLUE:
-        return this.blueChannel;
+        List<List<Integer>> tempBlue = new ArrayList<>();
+        int size = this.blueChannel.size();
+        for (int i = 0; i < size; i++) {
+          tempBlue.add(new ArrayList<>());
+          for (int j = 0; j < this.blueChannel.get(i).size(); j++) {
+            tempBlue.get(i).add(this.blueChannel.get(i).get(j));
+          }
+        }
+        return tempBlue;
       case RED:
-        return this.redChannel;
+        List<List<Integer>> tempRed = new ArrayList<>();
+        int sizeRed = this.redChannel.size();
+        for (int i = 0; i < sizeRed; i++) {
+          tempRed.add(new ArrayList<>());
+          for (int j = 0; j < this.redChannel.get(i).size(); j++) {
+            tempRed.get(i).add(this.redChannel.get(i).get(j));
+          }
+        }
+        return tempRed;
       case GREEN:
-        return this.greenChannel;
+        List<List<Integer>> tempGreen = new ArrayList<>();
+        int sizeGreen = this.greenChannel.size();
+        for (int i = 0; i < sizeGreen; i++) {
+          tempGreen.add(new ArrayList<>());
+          for (int j = 0; j < this.greenChannel.get(i).size(); j++) {
+            tempGreen.get(i).add(this.greenChannel.get(i).get(j));
+          }
+        }
+        return tempGreen;
       default:
         throw new IllegalArgumentException("Illegal Coloring");
     }
   }
 
-
-  public static void main(String[] arg) throws IOException {
-    PPM ppm3 = importImageFile("Koala.ppm");
-    ppm3.exportPPM();
-    PPM ppm4 = importImageFile("s.ppm");
-    Images<PPM> t = new ImageImplPPM(ppm4);
-    t.blurringImage();
-
-    System.out.println(ppm3.equals(t.getImage()));
-  }
 }

@@ -81,6 +81,30 @@ public class ArithmeticTest {
   }
 
   @Test
+  public void testHelperForMultiplyingWithEven() {
+    List<List<Integer>> listA = new ArrayList<>();
+    List<List<Double>> listB = Matrices.MATRIX_FOR_BLURRING.getMatrix();
+    for (int i = 0; i < 4; i++) {
+      listA.add(Arrays.asList(10, 150, 1, 0, 100, 100, 100, 255));
+    }
+    List<List<Integer>> listD = Arithmetic.helperForMultiplying(listA, listB);
+    List<List<Integer>> listC = new ArrayList<>();
+    listC.add(Arrays.asList(31, 58, 28, 18, 56, 75, 104, 114));
+    listC.add(Arrays.asList(42, 77, 38, 25, 75, 100, 138, 152));
+    listC.add(Arrays.asList(42, 77, 38, 25, 75, 100, 138, 152));
+    listC.add(Arrays.asList(31, 58, 28, 18, 56, 75, 104, 114));
+    System.out.println(listD);
+
+    assertEquals(listC.size(), listD.size());
+    for (int i = 0; i < 4; i++) {
+      assertEquals(listD.get(i).size(), listC.get(i).size());
+      for (int j = 0; j < listD.get(i).size(); j++) {
+        assertEquals(listC.get(i).get(j), listD.get(i).get(j));
+      }
+    }
+  }
+
+  @Test
   public void testHelperForMultiplyingWith5WithOver255() {
     List<List<Integer>> listA = new ArrayList<>();
     List<List<Double>> listB = Matrices.MATRIX_FOR_BLURRING.getMatrix();
@@ -128,5 +152,8 @@ public class ArithmeticTest {
     int a =Arithmetic.verifySum(-100.0, 255, 10);
     assertEquals(10, a);
   }
+
+
+
 
 }

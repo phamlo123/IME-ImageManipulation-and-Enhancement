@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class ImageUtil {
 
   /**
-   * Read an image file in the PPM format and print the colors.
    *
-   * @param filename the path of the file.
+   * @param filename
+   * @return
    */
   public static List<List<Color>> readPPM(String filename) {
     Scanner sc;

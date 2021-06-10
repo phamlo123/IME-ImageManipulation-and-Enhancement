@@ -108,6 +108,8 @@ public class ImageImplPPMTest {
     assertEquals(new PPM(color), images.getImage());
   }
 
+
+
   @Test
   public void testSharpeningCheckerBoard() {
     List<List<Integer>> red = examples.ppmExample4.getColorChannel(Coloring.RED);
@@ -141,7 +143,7 @@ public class ImageImplPPMTest {
   }
 
   @Test
-  public void testSharpendingImported() {
+  public void testSharpeningImported() {
     PPM ppm = PPM.importImageFile("Northeastern.ppm");
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
@@ -156,8 +158,8 @@ public class ImageImplPPMTest {
         Arithmetic.helperForMultiplying(blue, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
     List<List<Integer>> sharpedGreen =
         Arithmetic.helperForMultiplying(green, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
-    List<List<Color>> color = new ArrayList<>();
 
+    List<List<Color>> color = new ArrayList<>();
     int size = red.size();
     for (int i = 0; i < size; i++) {
       color.add(new ArrayList<>());
@@ -173,8 +175,6 @@ public class ImageImplPPMTest {
 
     assertEquals(new PPM(color), images.getImage());
   }
-
-
 
 
 

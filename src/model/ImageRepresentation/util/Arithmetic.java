@@ -91,7 +91,7 @@ public class Arithmetic {
         }
         return temp;
       default:
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Color not supported");
     }
   }
 
@@ -112,4 +112,6 @@ public class Arithmetic {
     }
     return a;
   }
+
+
 }
