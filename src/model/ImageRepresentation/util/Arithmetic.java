@@ -35,7 +35,6 @@ public class Arithmetic {
         temp.get(row).add(a);
       }
     }
-    System.out.println(offset);
     return temp;
   }
 
@@ -100,7 +99,11 @@ public class Arithmetic {
    * @param sum
    * @return
    */
-  public static int verifySum(Double sum, int upperLimit, int lowerLimit) {
+  public static int verifySum(Double sum, int upperLimit, int lowerLimit)
+      throws IllegalArgumentException {
+    if (lowerLimit > upperLimit) {
+      throw new IllegalArgumentException("Lower limit is greater than upper limit");
+    }
     int a;
     if (sum > lowerLimit) {
       a = (int) Math.min(sum, upperLimit);
