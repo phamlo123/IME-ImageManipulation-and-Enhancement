@@ -37,8 +37,9 @@ public class ImageExamples {
 
   public static List<List<Integer>> checkerboardRGB() {
     List<List<Integer>> checkerboardRGB = new ArrayList<>();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
       checkerboardRGB.add(Arrays.asList(255, 0, 255, 0, 255, 0, 255, 0, 255, 0));
+      checkerboardRGB.add(Arrays.asList(0, 255, 0, 255, 0, 255, 0, 255, 0, 255));
     }
     return checkerboardRGB;
   }

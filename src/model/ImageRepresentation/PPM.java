@@ -75,7 +75,7 @@ public class PPM {
    * @return
    * @throws IOException
    */
-  public String exportPPM() {
+  public String exportPPM(String fileName) {
     StringBuilder stringBuilder = new StringBuilder();
 
     int height = this.image.size();
@@ -112,7 +112,7 @@ public class PPM {
       }
     }
     try {
-      FileWriter fileWriter = new FileWriter("s.ppm");
+      FileWriter fileWriter = new FileWriter(fileName);
       fileWriter.write(stringBuilder1.toString());
       fileWriter.close();
     } catch (IOException e) {
@@ -210,7 +210,7 @@ public class PPM {
 
   public static void main(String[] arg) throws IOException {
     PPM ppm3 = importImageFile("Koala.ppm");
-    ppm3.exportPPM();
+    ppm3.exportPPM("s.ppm");
     PPM ppm4 = importImageFile("s.ppm");
     Images<PPM> t = new ImageImplPPM(ppm4);
     t.blurringImage();

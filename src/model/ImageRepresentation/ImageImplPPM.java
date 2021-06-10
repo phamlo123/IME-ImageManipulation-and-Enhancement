@@ -112,6 +112,6 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     ImageImplPPM t = new ImageImplPPM(ppm);
 
     t.createSepia();
-    t.getImage().exportPPM();
+    t.getImage().exportPPM("s.ppm");
   }
 }
