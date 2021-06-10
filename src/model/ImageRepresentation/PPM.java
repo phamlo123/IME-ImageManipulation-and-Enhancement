@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import model.Coloring;
-import model.ImageRepresentation.ArithmetichelperClass.ImageUtil;
+import model.ImageRepresentation.util.ImageUtil;
 import model.Images;
 
 /**
@@ -20,7 +20,6 @@ public class PPM {
   private final List<List<Integer>> redChannel;
   private final List<List<Integer>> greenChannel;
   private final List<List<Integer>> blueChannel;
-
 
   public PPM(List<List<Color>> image) {
     if (image == null) {

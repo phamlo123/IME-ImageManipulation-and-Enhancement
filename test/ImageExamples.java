@@ -5,6 +5,7 @@ import java.util.List;
 import model.ImageImpl;
 import model.ImageRepresentation.ImageImplPPM;
 import model.ImageRepresentation.PPM;
+import model.Images;
 
 /**
  * Class to hold the examples used by multiple test classes.
@@ -41,5 +42,6 @@ public class ImageExamples {
     return checkerboardRGB;
   }
 
-  ImageImpl<PPM> ppmImage1 = new ImageImplPPM(ppmExample4);
+
+  Images<PPM> ppmImage1 = new ImageImplPPM(ppmExample4);
 }

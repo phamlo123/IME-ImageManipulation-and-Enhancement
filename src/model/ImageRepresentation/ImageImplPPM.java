@@ -7,7 +7,7 @@ import java.util.List;
 import model.Coloring;
 import model.ImageImpl;
 import model.ImageOps;
-import model.ImageRepresentation.ArithmetichelperClass.Arithmetic;
+import model.ImageRepresentation.util.Arithmetic;
 import model.Matrices;
 
 /**
@@ -106,14 +106,12 @@ public class ImageImplPPM extends ImageImpl<PPM> {
 
 
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
 
     PPM ppm = PPM.importImageFile("Koala.ppm");
     ImageImplPPM t = new ImageImplPPM(ppm);
 
-    t.blurringImage();
-    t.blurringImage();
-    t.blurringImage();
+    t.createSepia();
     t.getImage().exportPPM();
   }
 }

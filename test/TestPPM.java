@@ -117,9 +117,4 @@ public class TestPPM {
         examples.ppmExample4.getColorChannel(Coloring.BLUE));
   }
 
-  @Test
-  public void testImport() {
-
-  }
-
 }
