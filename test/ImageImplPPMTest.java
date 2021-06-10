@@ -313,4 +313,92 @@ public class ImageImplPPMTest {
   }
 
 
+  // tests the normal functionality of the sharpeningImage method with an imported image
+  @Test
+  public void testSharpendingImportedMultiple() {
+    PPM ppm = ImageUtil.importImageFile("Northeastern.ppm");
+    List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
+
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+    List<List<Integer>> sharpedRed =
+        Arithmetic.helperForMultiplying(red, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
+    List<List<Integer>> sharpedBlue =
+        Arithmetic.helperForMultiplying(blue, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
+    List<List<Integer>> sharpedGreen =
+        Arithmetic.helperForMultiplying(green, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
+
+    List<List<Integer>> sharpedRed1 =
+        Arithmetic.helperForMultiplying(sharpedRed, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
+    List<List<Integer>> sharpedBlue1 =
+        Arithmetic.helperForMultiplying(sharpedBlue, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
+    List<List<Integer>> sharpedGreen1 =
+        Arithmetic.helperForMultiplying(sharpedGreen, Matrices.MATRIX_FOR_SHARPENING.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(sharpedRed1.get(i).get(j), sharpedGreen1.get(i).get(j),
+            sharpedBlue1.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Northeastern.ppm"));
+    images.sharpeningImage();
+    assertFalse(images.getImage().equals(new PPM(color)));
+    images.sharpeningImage();
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Northeastern.ppm")));
+
+    assertEquals(new PPM(color), images.getImage());
+  }
+
+  // tests the normal functionality of the blurringImage method with an imported image
+  @Test
+  public void testBlurringImportedMultiple() {
+    PPM ppm = ImageUtil.importImageFile("Koala.ppm");
+    List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
+
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+
+    List<List<Integer>> blurredRed =
+        Arithmetic.helperForMultiplying(red, Matrices.MATRIX_FOR_BLURRING.getMatrix());
+    List<List<Integer>> blurredBlue =
+        Arithmetic.helperForMultiplying(blue, Matrices.MATRIX_FOR_BLURRING.getMatrix());
+    List<List<Integer>> blurredGreen =
+        Arithmetic.helperForMultiplying(green, Matrices.MATRIX_FOR_BLURRING.getMatrix());
+
+    List<List<Integer>> blurredRed1 =
+        Arithmetic.helperForMultiplying(blurredRed, Matrices.MATRIX_FOR_BLURRING.getMatrix());
+    List<List<Integer>> blurredBlue1 =
+        Arithmetic.helperForMultiplying(blurredBlue, Matrices.MATRIX_FOR_BLURRING.getMatrix());
+    List<List<Integer>> blurredGreen1 =
+        Arithmetic.helperForMultiplying(blurredGreen, Matrices.MATRIX_FOR_BLURRING.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(blurredRed1.get(i).get(j), blurredGreen1.get(i).get(j),
+            blurredBlue1.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Koala.ppm"));
+    images.blurringImage();
+    assertFalse(images.getImage().equals(new PPM(color)));
+    images.blurringImage();
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Koala.ppm")));
+    assertEquals(new PPM(color), images.getImage());
+  }
+
+
+
 }
