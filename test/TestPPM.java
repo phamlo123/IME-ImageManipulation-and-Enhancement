@@ -116,5 +116,4 @@ public class TestPPM {
     assertEquals(ImageExamples.checkerboardRGB(),
         examples.ppmExample4.getColorChannel(Coloring.BLUE));
   }
-
 }

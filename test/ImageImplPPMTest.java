@@ -32,6 +32,12 @@ public class ImageImplPPMTest {
     assertEquals(ImageExamples.checkerboard(), examples.ppmExample4.getImage());
   }
 
+  // tests the normal functionality of the createMonochrome method with an imported image
+  @Test
+  public void testCreateMonochromeImported() {
+
+  }
+
   // createSepia tests
 
   // tests the normal functionality of the createSepia method with a black and white checkerboard
@@ -42,7 +48,15 @@ public class ImageImplPPMTest {
     assertEquals(ImageExamples.checkerboard(), examples.ppmExample4.getImage());
   }
 
+  // tests the normal functionality of the createSepia method with an imported image
+  @Test
+  public void testCreateSepiaImported() {
 
+  }
+
+  // blurringImage tests
+
+  // tests the normal functionality of the blurringImage method with a black and white checkerboard
   @Test
   public void testBlurringCheckerBoard() {
     List<List<Integer>> red = examples.ppmExample4.getColorChannel(Coloring.RED);
@@ -74,7 +88,7 @@ public class ImageImplPPMTest {
     assertEquals(new PPM(color), images.getImage());
   }
 
-
+  // tests the normal functionality of the blurringImage method with an imported image
   @Test
   public void testBlurringImported() {
     PPM ppm = PPM.importImageFile("Koala.ppm");
@@ -108,6 +122,10 @@ public class ImageImplPPMTest {
     assertEquals(new PPM(color), images.getImage());
   }
 
+  // sharpeningImage tests
+
+  // tests the normal functionality of the sharpeningImage method with a black and white
+  // checkerboard
   @Test
   public void testSharpeningCheckerBoard() {
     List<List<Integer>> red = examples.ppmExample4.getColorChannel(Coloring.RED);
@@ -140,6 +158,7 @@ public class ImageImplPPMTest {
     assertEquals(new PPM(color), images.getImage());
   }
 
+  // tests the normal functionality of the sharpeningImage method with an imported image
   @Test
   public void testSharpendingImported() {
     PPM ppm = PPM.importImageFile("Northeastern.ppm");
