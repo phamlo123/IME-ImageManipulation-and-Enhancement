@@ -7,6 +7,7 @@ import model.Coloring;
 import model.ImageRepresentation.ImageImplPPM;
 import model.ImageRepresentation.PPM;
 import model.ImageRepresentation.util.Arithmetic;
+import model.ImageRepresentation.util.ImageUtil;
 import model.Images;
 import model.Matrices;
 import org.junit.Before;
@@ -65,7 +66,7 @@ public class ImageImplPPMTest {
   // tests the normal functionality of the createMonochrome method with an imported image
   @Test
   public void testCreateMonochromeImported() {
-    PPM ppm = PPM.importImageFile("Koala.ppm");
+    PPM ppm = ImageUtil.importImageFile("Koala.ppm");
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
@@ -93,9 +94,9 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<PPM> images = new ImageImplPPM(PPM.importImageFile("Koala.ppm"));
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Koala.ppm"));
     images.createMonochrome();
-    assertFalse(images.getImage().equals(PPM.importImageFile("Koala.ppm")));
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Koala.ppm")));
     assertEquals(new PPM(color), images.getImage());
   }
 
@@ -139,7 +140,7 @@ public class ImageImplPPMTest {
   // tests the normal functionality of the createSepia method with an imported image
   @Test
   public void testCreateSepiaImported() {
-    PPM ppm = PPM.importImageFile("Northeastern.ppm");
+    PPM ppm = ImageUtil.importImageFile("Northeastern.ppm");
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
@@ -166,9 +167,9 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<PPM> images = new ImageImplPPM(PPM.importImageFile("Northeastern.ppm"));
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Northeastern.ppm"));
     images.createSepia();
-    assertFalse(images.getImage().equals(PPM.importImageFile("Northeastern.ppm")));
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Northeastern.ppm")));
 
     assertEquals(new PPM(color), images.getImage());
   }
@@ -210,7 +211,7 @@ public class ImageImplPPMTest {
   // tests the normal functionality of the blurringImage method with an imported image
   @Test
   public void testBlurringImported() {
-    PPM ppm = PPM.importImageFile("Koala.ppm");
+    PPM ppm = ImageUtil.importImageFile("Koala.ppm");
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
@@ -235,9 +236,9 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<PPM> images = new ImageImplPPM(PPM.importImageFile("Koala.ppm"));
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Koala.ppm"));
     images.blurringImage();
-    assertFalse(images.getImage().equals(PPM.importImageFile("Koala.ppm")));
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Koala.ppm")));
     assertEquals(new PPM(color), images.getImage());
   }
 
@@ -280,7 +281,7 @@ public class ImageImplPPMTest {
   // tests the normal functionality of the sharpeningImage method with an imported image
   @Test
   public void testSharpendingImported() {
-    PPM ppm = PPM.importImageFile("Northeastern.ppm");
+    PPM ppm = ImageUtil.importImageFile("Northeastern.ppm");
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
@@ -304,9 +305,9 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<PPM> images = new ImageImplPPM(PPM.importImageFile("Northeastern.ppm"));
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Northeastern.ppm"));
     images.sharpeningImage();
-    assertFalse(images.getImage().equals(PPM.importImageFile("Northeastern.ppm")));
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Northeastern.ppm")));
 
     assertEquals(new PPM(color), images.getImage());
   }

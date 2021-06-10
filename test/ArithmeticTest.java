@@ -96,7 +96,6 @@ public class ArithmeticTest {
     listC.add(Arrays.asList(165, 203, 242, 255, 175));
     listC.add(Arrays.asList(123, 152, 181, 198, 131));
 
-    System.out.println(listD);
     assertEquals(listC.size(), listD.size());
     for (int i = 0; i < 5; i++) {
       assertEquals(listD.get(i).size(), listC.get(i).size());

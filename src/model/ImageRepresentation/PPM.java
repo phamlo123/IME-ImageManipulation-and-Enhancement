@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import model.Coloring;
-import model.ImageRepresentation.util.ImageUtil;
 
 /**
  *
  */
-public class PPM {
+public class PPM implements PpmInterface {
 
   private final List<List<Color>> image;
   private final List<List<Integer>> redChannel;
@@ -53,7 +52,7 @@ public class PPM {
    * @param width  the width of the checkerboard image
    */
   public PPM(int height, int width) {
-    if(height <= 0 || width <= 0) {
+    if (height <= 0 || width <= 0) {
       throw new IllegalArgumentException("height or width are less than or equal to 0");
     }
 
@@ -89,11 +88,7 @@ public class PPM {
     return temp;
   }
 
-  /**
-   * Exports the image stored in this PPM to the file name given.
-   *
-   * @param fileName the name of the file to write to
-   */
+  @Override
   public void exportPPM(String fileName) {
 
     int height = this.image.size();
@@ -124,21 +119,8 @@ public class PPM {
     }
   }
 
-  /**
-   * Creates a new PPM object with the image at the desired file name.
-   *
-   * @param fileName the name of the file to import from
-   * @return the created PPM object
-   */
-  public static PPM importImageFile(String fileName) {
-    return new PPM(ImageUtil.readPPM(fileName));
-  }
 
-  /**
-   * Creates a copy of this PPM's image.
-   *
-   * @return the copy of this PPM's image as a list of list of colors
-   */
+  @Override
   public List<List<Color>> getImage() {
     List<List<Color>> temp = new ArrayList<>();
     for (int i = 0; i < image.size(); i++) {
@@ -199,13 +181,7 @@ public class PPM {
     return temp;
   }
 
-  /**
-   * Returns a copy of this PPM's specified color channel.
-   *
-   * @param coloring the Coloring type desired
-   * @return the color channel of this PPM as a list of list of Integer
-   * @throws IllegalArgumentException if an invalid Coloring is passed
-   */
+  @Override
   public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException {
     switch (coloring) {
       case BLUE:

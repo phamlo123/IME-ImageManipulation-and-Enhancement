@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import model.ImageRepresentation.PPM;
 
 /**
  * This class is a function object class that contains methods to help process a ppm file
@@ -60,5 +61,15 @@ public class ImageUtil {
       }
     }
     return image;
+  }
+
+  /**
+   * Creates a new PPM object with the image at the desired file name.
+   *
+   * @param fileName the name of the file to import from
+   * @return the created PPM object
+   */
+  public static PPM importImageFile(String fileName) {
+    return new PPM(ImageUtil.readPPM(fileName));
   }
 }

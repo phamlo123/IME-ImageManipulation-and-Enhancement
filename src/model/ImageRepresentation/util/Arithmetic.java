@@ -34,6 +34,7 @@ public class Arithmetic {
               sum = sum + channel.get(row + i - offset).get(column + j - offset)
                   * matrix.get(i).get(j);
             } catch (IndexOutOfBoundsException e) {
+              continue;
             }
           }
         }
