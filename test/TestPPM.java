@@ -29,7 +29,7 @@ public class TestPPM {
   @Test
   public void testExportNormal() {
     examples.ppmExample4.exportPPM("test.ppm");
-    assertEquals(ImageExamples.checkerboard(),PPM.importImageFile("test.ppm").getImage());
+    assertEquals(new PPM(ImageExamples.checkerboard()),PPM.importImageFile("test.ppm"));
   }
 
   // getImage tests
@@ -74,25 +74,6 @@ public class TestPPM {
     assertTrue(examples.ppmExample1.equals(examples.ppmExample1));
   }
 
-  // hashcode tests
-
-  // tests the normal functionality of the hashcode method with a PPM object
-  @Test
-  public void testHashcodeExample1() {
-    assertEquals(2024816285, examples.ppmExample1.hashCode());
-  }
-
-  // tests the normal functionality of the hashcode method with a copy of the first PPM object
-  @Test
-  public void testHashcodeCopyOfExample1() {
-    assertEquals(2024816285, examples.ppmExample3.hashCode());
-  }
-
-  // tests the normal functionality of the hashcode method with a second example
-  @Test
-  public void testHashcodeExample2() {
-    assertEquals(1423719491, examples.ppmExample2.hashCode());
-  }
 
   // getColorChannel tests
 
@@ -116,4 +97,19 @@ public class TestPPM {
     assertEquals(ImageExamples.checkerboardRGB(),
         examples.ppmExample4.getColorChannel(Coloring.BLUE));
   }
+
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testImportIllegal() {
+    PPM.importImageFile("notExist.ppm");
+  }
+
+  @Test
+  public void testImport() {
+    PPM ppm = new PPM();
+    ppm.exportPPM("importTest.ppm");
+    PPM ppmClone = PPM.importImageFile("importTest.ppm");
+    assertEquals(ppm, ppmClone);
+  }
+  
 }

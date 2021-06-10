@@ -1,6 +1,5 @@
 package model.ImageRepresentation.util;
 
-
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,15 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- */
 public class ImageUtil {
 
   /**
+   * Read an image file in the PPM format and print the colors.
    *
-   * @param filename
-   * @return
+   * @param filename the path of the file.
    */
   public static List<List<Color>> readPPM(String filename) {
     Scanner sc;
@@ -47,6 +43,7 @@ public class ImageUtil {
     }
     int width = sc.nextInt();
     int height = sc.nextInt();
+    int maxValue = sc.nextInt();
 
     List<List<Color>> image = new ArrayList<>();
     for (int i = 0; i < height; i++) {

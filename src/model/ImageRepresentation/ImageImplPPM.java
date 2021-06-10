@@ -111,7 +111,6 @@ public class ImageImplPPM extends ImageImpl<PPM> {
     PPM ppm = PPM.importImageFile("Koala.ppm");
     ImageImplPPM t = new ImageImplPPM(ppm);
 
-    t.createSepia();
-    t.getImage().exportPPM("t.ppm");
+    t.getImage().exportPPM("t3.ppm");
   }
 }
