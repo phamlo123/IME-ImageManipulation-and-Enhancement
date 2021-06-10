@@ -116,5 +116,24 @@ public class TestPPM {
     PPM ppmClone = PPM.importImageFile("importTest.ppm");
     assertEquals(ppm, ppmClone);
   }
-  
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNegativeHeight() {
+    PPM ppm = new PPM(-1, 1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testZeroHeight() {
+    PPM ppm = new PPM(0, 1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNegativeWidth() {
+    PPM ppm = new PPM(1, -1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void test0Width() {
+    PPM ppm = new PPM(1, 0);
+  }
 }

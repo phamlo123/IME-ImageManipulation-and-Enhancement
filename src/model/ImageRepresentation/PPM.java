@@ -53,6 +53,10 @@ public class PPM {
    * @param width  the width of the checkerboard image
    */
   public PPM(int height, int width) {
+    if(height <= 0 || width <= 0) {
+      throw new IllegalArgumentException("height or width are less than or equal to 0");
+    }
+
     this.image = createListOfColor(height, width);
     this.greenChannel = setColoring(image, Coloring.GREEN);
     this.redChannel = setColoring(image, Coloring.RED);
