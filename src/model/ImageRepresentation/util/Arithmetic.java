@@ -59,10 +59,11 @@ public class Arithmetic {
    *                     pixels in an image
    * @param blueChannel  is a list of list of numbers that represent the green value of all the
    *                     pixels in an image
-   * @param matrix       is the matrix that will be used to apply to all the integers in the given
-   *                     lists.
+   * @param matrix       is the 3-by-3 matrix that will be used to apply to all the integers in the
+   *                     given lists.
    * @return a list of list of integers after multiplication.
-   * @throws IllegalArgumentException if the coloring type is not supported.
+   * @throws IllegalArgumentException if the coloring type is not supported or matrix is not
+   *                                  compatible (only 3 by 3 matrices are compatible).
    */
   public static List<List<Integer>> helperForMultiplyingEigen(Coloring coloring,
       List<List<Integer>> redChannel,
@@ -74,9 +75,15 @@ public class Arithmetic {
         for (int i = 0; i < redChannel.size(); i++) {
           temp.add(new ArrayList<>());
           for (int j = 0; j < redChannel.get(i).size(); j++) {
-            double sum = matrix.get(0).get(0) * redChannel.get(i).get(j)
-                + matrix.get(0).get(1) * greenChannel.get(i).get(j)
-                + matrix.get(0).get(2) * blueChannel.get(i).get(j);
+            double sum;
+            try {
+              sum = matrix.get(0).get(0) * redChannel.get(i).get(j)
+                  + matrix.get(0).get(1) * greenChannel.get(i).get(j)
+                  + matrix.get(0).get(2) * blueChannel.get(i).get(j);
+            } catch (IndexOutOfBoundsException e) {
+              throw new IllegalArgumentException("Provided matrix is not compatible");
+
+            }
             int a = Arithmetic.verifySum(sum, 255, 0);
             temp.get(i).add(a);
           }
@@ -86,9 +93,14 @@ public class Arithmetic {
         for (int i = 0; i < greenChannel.size(); i++) {
           temp.add(new ArrayList<>());
           for (int j = 0; j < greenChannel.get(i).size(); j++) {
-            double sum = matrix.get(1).get(0) * redChannel.get(i).get(j)
-                + matrix.get(1).get(1) * greenChannel.get(i).get(j)
-                + matrix.get(1).get(2) * blueChannel.get(i).get(j);
+            double sum;
+            try {
+              sum = matrix.get(1).get(0) * redChannel.get(i).get(j)
+                  + matrix.get(1).get(1) * greenChannel.get(i).get(j)
+                  + matrix.get(1).get(2) * blueChannel.get(i).get(j);
+            } catch (IndexOutOfBoundsException e) {
+              throw new IllegalArgumentException("Provided matrix is not compatible");
+            }
             int a = Arithmetic.verifySum(sum, 255, 0);
             temp.get(i).add(a);
           }
@@ -98,9 +110,14 @@ public class Arithmetic {
         for (int i = 0; i < greenChannel.size(); i++) {
           temp.add(new ArrayList<>());
           for (int j = 0; j < greenChannel.get(i).size(); j++) {
-            double sum = matrix.get(2).get(0) * redChannel.get(i).get(j)
-                + matrix.get(2).get(1) * greenChannel.get(i).get(j)
-                + matrix.get(2).get(2) * blueChannel.get(i).get(j);
+            double sum;
+            try {
+              sum = matrix.get(2).get(0) * redChannel.get(i).get(j)
+                  + matrix.get(2).get(1) * greenChannel.get(i).get(j)
+                  + matrix.get(2).get(2) * blueChannel.get(i).get(j);
+            } catch (IndexOutOfBoundsException e) {
+              throw new IllegalArgumentException("Provided matrix is not compatible");
+            }
             int a = Arithmetic.verifySum(sum, 255, 0);
             temp.get(i).add(a);
           }

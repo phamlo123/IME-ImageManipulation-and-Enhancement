@@ -218,6 +218,23 @@ public class ArithmeticTest {
     }
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidMatrix() {
+    List<List<Integer>> listA = new ArrayList<>();
+    List<List<Integer>> listB = new ArrayList<>();
+    List<List<Integer>> listC = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      listA.add(Arrays.asList(260, 255, 265, 275, 280));
+      listB.add(Arrays.asList(265, 285, 270, 285, 290));
+      listC.add(Arrays.asList(270, 275, 260, 265, 295));
+    }
+
+    List<List<Double>> listD = new ArrayList<>();
+    listD.add(Arrays.asList(11.1, 12.1));
+    List<List<Integer>> listE = Arithmetic.helperForMultiplyingEigen(Coloring.RED,
+        listA, listB, listC, listD);
+  }
+
 
   @Test
   public void testLimit() {
