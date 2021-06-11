@@ -9,13 +9,14 @@ import model.ImageRepresentation.util.Arithmetic;
 import model.ImageRepresentation.util.ImageUtil;
 
 /**
- * This class inherits members of its abstract super class and contains methods to filter
- * a PPM object.
+ * This class inherits members of its abstract super class and contains methods to filter a PPM
+ * object.
  */
 public class FilteringOperationPPM extends ImagingOPsPPM implements ImagingOperation<PPM> {
 
   /**
    * Construct an object of FilteringOperationPPM given the ppm parameter
+   *
    * @param ppm a PPM object to be operated on.
    */
   public FilteringOperationPPM(PPM ppm) {

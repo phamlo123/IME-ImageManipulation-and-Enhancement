@@ -497,5 +497,4 @@ public class ImageImplPPMTest {
   }
 
 
-
 }

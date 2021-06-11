@@ -19,7 +19,7 @@ public interface Images<T> {
   /**
    * create a greyscale version of the image.
    */
-   void createMonochrome();
+  void createMonochrome();
 
   /**
    * create a sepia version of the image.
@@ -28,6 +28,7 @@ public interface Images<T> {
 
   /**
    * Returns the image of this image representation.
+   *
    * @return the image
    */
   T getImage();

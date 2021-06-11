@@ -145,7 +145,8 @@ public class ArithmeticTest {
       listB.add(Arrays.asList(30, 50, 60, 30, 45));
       listC.add(Arrays.asList(100, 120, 200, 65, 140));
     }
-    List<List<Integer>> listE = Arithmetic.helperForMultiplyingEigen(Coloring.RED, listA, listB, listC, listD);
+    List<List<Integer>> listE = Arithmetic
+        .helperForMultiplyingEigen(Coloring.RED, listA, listB, listC, listD);
     List<List<Integer>> listF = new ArrayList<>();
     listF.add(Arrays.asList(30, 47, 61, 29, 50));
     listF.add(Arrays.asList(30, 47, 61, 29, 50));
@@ -172,7 +173,8 @@ public class ArithmeticTest {
       listB.add(Arrays.asList(30, 50, 60, -30, 45));
       listC.add(Arrays.asList(100, -120, 200, 65, 140));
     }
-    List<List<Integer>> listE = Arithmetic.helperForMultiplyingEigen(Coloring.RED, listA, listB, listC, listD);
+    List<List<Integer>> listE = Arithmetic
+        .helperForMultiplyingEigen(Coloring.RED, listA, listB, listC, listD);
     List<List<Integer>> listF = new ArrayList<>();
     listF.add(Arrays.asList(30, 30, 53, 0, 50));
     listF.add(Arrays.asList(30, 30, 53, 0, 50));

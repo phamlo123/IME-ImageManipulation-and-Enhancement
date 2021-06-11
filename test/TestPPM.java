@@ -34,7 +34,7 @@ public class TestPPM {
   @Test
   public void testExportNormal() {
     examples.ppmExample4.exportPPM("test.ppm");
-    assertEquals(new PPM(ImageExamples.checkerboard()),ImageUtil.importImageFile("test.ppm"));
+    assertEquals(new PPM(ImageExamples.checkerboard()), ImageUtil.importImageFile("test.ppm"));
   }
 
   // getImage tests
@@ -78,7 +78,6 @@ public class TestPPM {
   public void testEqualsSamePPM() {
     assertTrue(examples.ppmExample1.equals(examples.ppmExample1));
   }
-
 
   // getColorChannel tests
 

@@ -25,7 +25,7 @@ public class ColoringOperationPPMTest {
 
     List<List<Color>> b = a.helperForColoringAndFiltering(Matrices.MATRIX_FOR_GRAY_SCALING
         .getMatrix());
-    PPM ppm = new PPM(10,10);
+    PPM ppm = new PPM(10, 10);
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
@@ -59,7 +59,7 @@ public class ColoringOperationPPMTest {
 
     List<List<Color>> b = a.helperForColoringAndFiltering(Matrices.MATRIX_FOR_SEPIA
         .getMatrix());
-    PPM ppm = new PPM(10,10);
+    PPM ppm = new PPM(10, 10);
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
@@ -68,8 +68,9 @@ public class ColoringOperationPPMTest {
         blue, Matrices.MATRIX_FOR_SEPIA.getMatrix());
     List<List<Integer>> colorBlue = Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, red, green,
         blue, Matrices.MATRIX_FOR_SEPIA.getMatrix());
-    List<List<Integer>> colorGreen = Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, red, green,
-        blue, Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> colorGreen = Arithmetic
+        .helperForMultiplyingEigen(Coloring.GREEN, red, green,
+            blue, Matrices.MATRIX_FOR_SEPIA.getMatrix());
 
     int height = colorRed.size();
     int width = colorRed.get(0).size();

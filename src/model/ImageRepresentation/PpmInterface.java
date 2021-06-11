@@ -10,6 +10,7 @@ import model.Coloring;
 public interface PpmInterface {
 
   void exportPPM(String fileName);
+
   /**
    * Creates a copy of this PPM's image.
    *

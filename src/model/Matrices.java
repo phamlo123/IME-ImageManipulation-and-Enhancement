@@ -16,6 +16,7 @@ public enum Matrices {
 
   /**
    * Creates a Matrices object that stores the given matrix.
+   *
    * @param matrix the list of list of Double to be stored in the Matrices object
    */
   Matrices(List<List<Double>> matrix) {
@@ -23,8 +24,8 @@ public enum Matrices {
   }
 
   /**
-   * Class used to create all the constant matrices to be passed into the Matrices enumerations
-   * used for filtering.
+   * Class used to create all the constant matrices to be passed into the Matrices enumerations used
+   * for filtering.
    */
   static class Factory {
 
@@ -36,6 +37,7 @@ public enum Matrices {
 
     /**
      * Returns the matrix used for blurring.
+     *
      * @param d the used in calculating specific matrix values
      * @return matrix used for blurring as a list of list of Double
      */
@@ -55,13 +57,14 @@ public enum Matrices {
           }
         }
       }
-      temp.get(0).set(1, d*2);
-      temp.get(2).set(1, d*2);
+      temp.get(0).set(1, d * 2);
+      temp.get(2).set(1, d * 2);
       return temp;
     }
 
     /**
      * Returns the matrix used for sharpening.
+     *
      * @param d the used in calculating specific matrix values
      * @return matrix used for sharpening as a list of list of Double
      */
@@ -84,6 +87,7 @@ public enum Matrices {
 
     /**
      * Returns the matrix used for grey scaling.
+     *
      * @return matrix used for grey scaling as a list of list of Double
      */
     static private List<List<Double>> initialize3() {
@@ -101,6 +105,7 @@ public enum Matrices {
 
     /**
      * Returns the matrix used for sepia.
+     *
      * @return matrix used for sepia as a list of list of Double
      */
     static private List<List<Double>> initialize4() {
@@ -123,6 +128,7 @@ public enum Matrices {
 
   /**
    * Returns the matrix stored in this Matrices object.
+   *
    * @return the matrix as a list of list of Double
    */
   public List<List<Double>> getMatrix() {

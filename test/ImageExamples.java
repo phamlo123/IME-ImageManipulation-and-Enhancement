@@ -11,6 +11,7 @@ import model.Images;
  * Class to hold the examples used by multiple test classes.
  */
 public class ImageExamples {
+
   PPM ppmExample1 = ImageUtil.importImageFile("Koala.ppm");
   PPM ppmExample2 = ImageUtil.importImageFile("Northeastern.ppm");
   PPM ppmExample3 = ImageUtil.importImageFile("Koala.ppm");

@@ -77,11 +77,12 @@ public class ImageUtil {
   /**
    * this method creates a List of Lists of Colors based on the given lists of red, green, and blue
    * value.
-   * @param red is the list of list of red values.
+   *
+   * @param red   is the list of list of red values.
    * @param green is the list of lists of green values.
-   * @param blue is the list of list of blue values.
+   * @param blue  is the list of list of blue values.
    * @return a list of list of colors that is a combination of the three red, green, and blue
-   *         parameters.
+   * parameters.
    */
   public static List<List<Color>> getLists(List<List<Integer>> red, List<List<Integer>> green,
       List<List<Integer>> blue) {
@@ -98,4 +99,5 @@ public class ImageUtil {
       }
     }
     return temp;
-  }}
+  }
+}
