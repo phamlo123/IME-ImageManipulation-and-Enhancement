@@ -19,6 +19,7 @@ public class ImageImplPPM extends ImageImpl<PPM> {
 
   public ImageImplPPM(PPM ppm) {
     super(ppm);
+
   }
 
   @Override

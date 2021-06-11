@@ -10,7 +10,7 @@ import java.util.Objects;
 import model.Coloring;
 
 /**
- *
+ * This class represents an object that is an image in a ppm format
  */
 public class PPM implements PpmInterface {
 

@@ -10,14 +10,15 @@ import model.ImageRepresentation.util.Arithmetic;
 import model.ImageRepresentation.util.ImageUtil;
 
 /**
- *
+ * This class inherits members of its abstract super class and contains methods to color
+ * a PPM object.
  */
 public class ColoringOperationPPM extends ImagingOPsPPM implements ImagingOperation<PPM> {
 
 
   /**
-   *
-   * @param ppm
+   * Construct an object of FilteringOperationPPM given the ppm parameter
+   * @param ppm a PPM object to be operated on.
    */
   public ColoringOperationPPM(PPM ppm) {
     super(ppm, ImageOps.COLORING);

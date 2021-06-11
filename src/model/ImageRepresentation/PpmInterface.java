@@ -5,7 +5,7 @@ import java.util.List;
 import model.Coloring;
 
 /**
- *
+ * This interface contains methods that can be performed on a ppm object.
  */
 public interface PpmInterface {
 

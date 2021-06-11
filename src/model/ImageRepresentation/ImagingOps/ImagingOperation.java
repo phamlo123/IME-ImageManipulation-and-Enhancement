@@ -3,6 +3,10 @@ package model.ImageRepresentation.ImagingOps;
 import java.awt.Color;
 import java.util.List;
 
+/**
+ * This interface contains methods to assist with filtering an image object.
+ * @param <T> is the type of image object
+ */
 public interface ImagingOperation<T> {
 
   /**

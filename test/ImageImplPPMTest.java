@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Class to
+ * Class to test ImageImplPPM class methods
  */
 public class ImageImplPPMTest {
 
@@ -395,6 +395,103 @@ public class ImageImplPPMTest {
     images.blurringImage();
     assertFalse(images.getImage().equals(new PPM(color)));
     images.blurringImage();
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Koala.ppm")));
+    assertEquals(new PPM(color), images.getImage());
+  }
+
+  @Test
+  public void testCreateSepiaImportedMultiple() {
+    PPM ppm = ImageUtil.importImageFile("Northeastern.ppm");
+    List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
+
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+    List<List<Integer>> sepiaRed =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaBlue =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaGreen =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, red, green, blue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+
+    List<List<Integer>> sepiaRed1 =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, sepiaRed, sepiaGreen, sepiaBlue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaBlue1 =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, sepiaRed, sepiaGreen, sepiaBlue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Integer>> sepiaGreen1 =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, sepiaRed, sepiaGreen, sepiaBlue,
+            Matrices.MATRIX_FOR_SEPIA.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(sepiaRed1.get(i).get(j), sepiaGreen1.get(i).get(j),
+            sepiaBlue1.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Northeastern.ppm"));
+    images.createSepia();
+    assertFalse(images.getImage().equals(new PPM(color)));
+    images.createSepia();
+    assertFalse(images.getImage().equals(ImageUtil.importImageFile("Northeastern.ppm")));
+
+    assertEquals(new PPM(color), images.getImage());
+  }
+
+  // tests the normal functionality of the createMonochrome method with an imported image
+  @Test
+  public void testCreateMonochromeImportedMultiple() {
+    PPM ppm = ImageUtil.importImageFile("Koala.ppm");
+    List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
+    List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
+    List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
+
+    assertEquals(red.size(), blue.size());
+    assertEquals(blue.size(), green.size());
+
+    List<List<Integer>> monoRed =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoBlue =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoGreen =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, red, green, blue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+
+    List<List<Integer>> monoRed1 =
+        Arithmetic.helperForMultiplyingEigen(Coloring.RED, monoRed, monoGreen, monoBlue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoBlue1 =
+        Arithmetic.helperForMultiplyingEigen(Coloring.BLUE, monoRed, monoGreen, monoBlue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Integer>> monoGreen1 =
+        Arithmetic.helperForMultiplyingEigen(Coloring.GREEN, monoRed, monoGreen, monoBlue,
+            Matrices.MATRIX_FOR_GRAY_SCALING.getMatrix());
+    List<List<Color>> color = new ArrayList<>();
+
+    int size = red.size();
+    for (int i = 0; i < size; i++) {
+      color.add(new ArrayList<>());
+      for (int j = 0; j < red.get(i).size(); j++) {
+        color.get(i).add(new Color(monoRed1.get(i).get(j), monoGreen1.get(i).get(j),
+            monoBlue1.get(i).get(j)));
+      }
+    }
+
+    Images<PPM> images = new ImageImplPPM(ImageUtil.importImageFile("Koala.ppm"));
+    images.createMonochrome();
+    assertFalse(images.getImage().equals(new PPM(color)));
+    images.createMonochrome();
     assertFalse(images.getImage().equals(ImageUtil.importImageFile("Koala.ppm")));
     assertEquals(new PPM(color), images.getImage());
   }
