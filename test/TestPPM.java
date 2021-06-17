@@ -1,8 +1,8 @@
 import static org.junit.Assert.*;
 
 import model.Coloring;
+import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.PPM;
-import model.ImageRepresentation.util.ImageUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +34,7 @@ public class TestPPM {
   @Test
   public void testExportNormal() {
     examples.ppmExample4.exportPPM("test.ppm");
-    assertEquals(new PPM(ImageExamples.checkerboard()), ImageUtil.importImageFile("test.ppm"));
+    assertEquals(new PPM(ImageExamples.checkerboard()), PPM.importImageFile("test.ppm"));
   }
 
   // getImage tests
@@ -105,36 +105,36 @@ public class TestPPM {
   // throws an exception because the file name does not exist
   @Test(expected = IllegalArgumentException.class)
   public void testImportIllegal() {
-    ImageUtil.importImageFile("notExist.ppm");
+    PPM.importImageFile("notExist.ppm");
   }
 
   // tests the normal functionality of the importImageFile method
   @Test
   public void testImport() {
-    PPM ppm = new PPM();
+    ImageFormat ppm = new PPM();
     ppm.exportPPM("importTest.ppm");
-    PPM ppmClone = ImageUtil.importImageFile("importTest.ppm");
+    ImageFormat ppmClone = PPM.importImageFile("importTest.ppm");
     assertEquals(ppm, ppmClone);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeHeight() {
-    PPM ppm = new PPM(-1, 1);
+    ImageFormat ppm = new PPM(-1, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testZeroHeight() {
-    PPM ppm = new PPM(0, 1);
+    ImageFormat ppm = new PPM(0, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeWidth() {
-    PPM ppm = new PPM(1, -1);
+    ImageFormat ppm = new PPM(1, -1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void test0Width() {
-    PPM ppm = new PPM(1, 0);
+    ImageFormat ppm = new PPM(1, 0);
   }
 
 }

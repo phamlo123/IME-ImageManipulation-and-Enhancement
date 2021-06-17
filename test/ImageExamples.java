@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import model.ImageRepresentation.ImageImplPPM;
 import model.ImageRepresentation.PPM;
+import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.util.ImageUtil;
 import model.Images;
 
@@ -12,10 +13,10 @@ import model.Images;
  */
 public class ImageExamples {
 
-  PPM ppmExample1 = ImageUtil.importImageFile("Koala.ppm");
-  PPM ppmExample2 = ImageUtil.importImageFile("Northeastern.ppm");
-  PPM ppmExample3 = ImageUtil.importImageFile("Koala.ppm");
-  PPM ppmExample4 = new PPM(10, 10);
+  ImageFormat ppmExample1 = PPM.importImageFile("sample.ppm");
+  ImageFormat ppmExample2 = PPM.importImageFile("Northeastern.ppm");
+  ImageFormat ppmExample3 = PPM.importImageFile("sample.ppm");
+  ImageFormat ppmExample4 = new PPM(10, 10);
 
   public static List<List<Color>> checkerboard() {
     List<List<Color>> checkerboard = new ArrayList<>();
@@ -46,5 +47,5 @@ public class ImageExamples {
   }
 
 
-  Images<PPM> ppmImage1 = new ImageImplPPM(ppmExample4);
+  Images<ImageFormat> ppmImage1 = new ImageImplPPM(ppmExample4);
 }

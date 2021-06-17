@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
+import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.ImagingOps.ImagingOperation;
 import model.ImageRepresentation.ImagingOps.PPM.ColoringOperationPPM;
 import model.ImageRepresentation.ImagingOps.PPM.FilteringOperationPPM;
@@ -12,6 +13,9 @@ import model.ImageRepresentation.util.Arithmetic;
 import model.Matrices;
 import org.junit.Test;
 
+/***
+ * Class containing tests for FilteringOperation members.
+ */
 public class FilteringOperationPPMTest {
 
   ImagingOperation a = new FilteringOperationPPM(new PPM(10, 10));
@@ -26,7 +30,7 @@ public class FilteringOperationPPMTest {
 
     List<List<Color>> b = a.helperForColoringAndFiltering(Matrices.MATRIX_FOR_BLURRING
         .getMatrix());
-    PPM ppm = new PPM(10, 10);
+    ImageFormat ppm = new PPM(10, 10);
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
@@ -60,7 +64,7 @@ public class FilteringOperationPPMTest {
 
     List<List<Color>> b = a.helperForColoringAndFiltering(Matrices.MATRIX_FOR_SHARPENING
         .getMatrix());
-    PPM ppm = new PPM(10, 10);
+    ImageFormat ppm = new PPM(10, 10);
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);

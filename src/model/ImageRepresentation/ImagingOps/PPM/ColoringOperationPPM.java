@@ -5,7 +5,7 @@ import java.util.List;
 import model.Coloring;
 import model.ImageOps;
 import model.ImageRepresentation.ImagingOps.ImagingOperation;
-import model.ImageRepresentation.PPM;
+import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.util.Arithmetic;
 import model.ImageRepresentation.util.ImageUtil;
 
@@ -13,7 +13,7 @@ import model.ImageRepresentation.util.ImageUtil;
  * This class inherits members of its abstract super class and contains methods to color a PPM
  * object.
  */
-public class ColoringOperationPPM extends ImagingOPsPPM implements ImagingOperation<PPM> {
+public class ColoringOperationPPM extends ImagingOPsPPM implements ImagingOperation<ImageFormat> {
 
 
   /**
@@ -21,7 +21,7 @@ public class ColoringOperationPPM extends ImagingOPsPPM implements ImagingOperat
    *
    * @param ppm a PPM object to be operated on.
    */
-  public ColoringOperationPPM(PPM ppm) {
+  public ColoringOperationPPM(ImageFormat ppm) {
     super(ppm, ImageOps.COLORING);
 
   }

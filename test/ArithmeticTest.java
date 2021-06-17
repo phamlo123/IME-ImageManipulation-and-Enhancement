@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class containing tests for Arithmetic static methods.
+ */
 public class ArithmeticTest {
 
   @Test

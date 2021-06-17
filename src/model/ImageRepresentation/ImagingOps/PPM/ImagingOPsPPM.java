@@ -4,15 +4,15 @@ import java.util.List;
 import model.Coloring;
 import model.ImageOps;
 import model.ImageRepresentation.ImagingOps.ImagingOperation;
-import model.ImageRepresentation.PPM;
+import model.ImageRepresentation.ImageFormat;
 
 /**
  * Abstract class to provide a unified way to construct a PPM imaging operator by dissecting the PPM
  * object parameter into red, blue and green color channels.
  */
-public abstract class ImagingOPsPPM implements ImagingOperation<PPM> {
+public abstract class ImagingOPsPPM implements ImagingOperation<ImageFormat> {
 
-  protected PPM imageObject;
+  protected ImageFormat imageObject;
   protected ImageOps imageOps;
   protected List<List<Integer>> redChannel;
   protected List<List<Integer>> blueChannel;
@@ -24,7 +24,7 @@ public abstract class ImagingOPsPPM implements ImagingOperation<PPM> {
    * @param imageObject is the PPM object to be dissected
    * @param imageOps    is the kind of operation
    */
-  public ImagingOPsPPM(PPM imageObject, ImageOps imageOps) {
+  public ImagingOPsPPM(ImageFormat imageObject, ImageOps imageOps) {
     if (imageObject == null) {
       throw new IllegalArgumentException("image Object is null");
     }

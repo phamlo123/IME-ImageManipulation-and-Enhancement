@@ -19,7 +19,7 @@ public class ImageUtil {
    * @param filename the path of the file.
    * @return a list of list of colors based on the information in the PPM file.
    */
-  private static List<List<Color>> readPPM(String filename) {
+  public static List<List<Color>> readPPM(String filename) {
     Scanner sc;
 
     try {
@@ -63,15 +63,6 @@ public class ImageUtil {
     return image;
   }
 
-  /**
-   * Creates a new PPM object with the image at the desired file name.
-   *
-   * @param fileName the name of the file to import from
-   * @return the created PPM object
-   */
-  public static PPM importImageFile(String fileName) {
-    return new PPM(ImageUtil.readPPM(fileName));
-  }
 
 
   /**

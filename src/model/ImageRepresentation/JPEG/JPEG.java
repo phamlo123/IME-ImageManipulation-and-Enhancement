@@ -1,22 +1,29 @@
-package model.ImageRepresentation;
+package model.ImageRepresentation.JPEG;
 
 import java.awt.Color;
 import java.util.List;
 import model.Coloring;
+import model.ImageRepresentation.ImageFormat;
 
-/**
- * This interface contains methods that can be performed on a ppm object.
- */
-public interface PpmInterface {
+public class JPEG implements ImageFormat {
 
-  void exportPPM(String fileName);
+  /**
+   * @param fileName
+   */
+  @Override
+  public void exportPPM(String fileName) {
+
+  }
 
   /**
    * Creates a copy of this PPM's image.
    *
    * @return the copy of this PPM's image as a list of list of colors
    */
-  List<List<Color>> getImage();
+  @Override
+  public List<List<Color>> getImage() {
+    return null;
+  }
 
   /**
    * Returns a copy of this PPM's specified color channel.
@@ -25,5 +32,8 @@ public interface PpmInterface {
    * @return the color channel of this PPM as a list of list of Integer
    * @throws IllegalArgumentException if an invalid Coloring is passed
    */
-  List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException;
+  @Override
+  public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException {
+    return null;
+  }
 }

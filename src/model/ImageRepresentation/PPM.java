@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import model.Coloring;
+import model.ImageRepresentation.util.ImageUtil;
 
 /**
  * This class represents an object that is an image in a ppm format
  */
-public class PPM implements PpmInterface {
+public class PPM implements ImageFormat {
 
   private final List<List<Color>> image;
   private final List<List<Integer>> redChannel;
@@ -87,6 +88,17 @@ public class PPM implements PpmInterface {
     }
     return temp;
   }
+
+  /**
+   * Creates a new PPM object with the image at the desired file name.
+   *
+   * @param fileName the name of the file to import from
+   * @return the created PPM object
+   */
+  public static PPM importImageFile(String fileName) {
+    return new PPM(ImageUtil.readPPM(fileName));
+  }
+
 
   @Override
   public void exportPPM(String fileName) {

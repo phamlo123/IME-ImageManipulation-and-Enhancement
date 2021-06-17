@@ -5,6 +5,7 @@ import java.util.List;
 import model.ImageOps;
 import model.ImageRepresentation.ImagingOps.ImagingOperation;
 import model.ImageRepresentation.PPM;
+import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.util.Arithmetic;
 import model.ImageRepresentation.util.ImageUtil;
 
@@ -12,14 +13,14 @@ import model.ImageRepresentation.util.ImageUtil;
  * This class inherits members of its abstract super class and contains methods to filter a PPM
  * object.
  */
-public class FilteringOperationPPM extends ImagingOPsPPM implements ImagingOperation<PPM> {
+public class FilteringOperationPPM extends ImagingOPsPPM implements ImagingOperation<ImageFormat> {
 
   /**
    * Construct an object of FilteringOperationPPM given the ppm parameter
    *
    * @param ppm a PPM object to be operated on.
    */
-  public FilteringOperationPPM(PPM ppm) {
+  public FilteringOperationPPM(ImageFormat ppm) {
     super(ppm, ImageOps.FILTERING);
   }
 

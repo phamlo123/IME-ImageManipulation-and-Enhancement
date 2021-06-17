@@ -11,6 +11,9 @@ import model.ImageRepresentation.util.Arithmetic;
 import model.Matrices;
 import org.junit.Test;
 
+/**
+ *  * Class containing tests for ColoringOperation members.
+ */
 public class ColoringOperationPPMTest {
 
   ImagingOperation a = new ColoringOperationPPM(new PPM(10, 10));
