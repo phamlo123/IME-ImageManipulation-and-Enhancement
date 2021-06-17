@@ -38,7 +38,6 @@ public class JPEG implements ImageFormat {
   }
 
   @Override
-  public JPEG importImage(String fileName) {
-    return null;
+  public void importImage(String fileName) {
   }
 }

@@ -31,6 +31,6 @@ public interface ImageFormat {
   List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException;
 
 
-  ImageFormat importImage(String fileName);
+  void importImage(String fileName);
 
 }

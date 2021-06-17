@@ -13,6 +13,15 @@ public class PNG implements ImageFormat {
 
   private BufferedImage image;
 
+  @Override
+  public void importImage(String fileName) {
+    try {
+      this.image = ImageIO.read(new File(fileName));
+    } catch (IOException e) {
+      System.out.println("File " + fileName + " not found!");
+    }
+  }
+
   /**
    * @param fileName
    */

@@ -13,7 +13,7 @@ import model.ImageRepresentation.util.ImageUtil;
 /**
  *
  */
-public class PPM {
+public class PPM implements ImageFormat {
 
   private final List<List<Color>> image;
   private final List<List<Integer>> redChannel;
@@ -85,27 +85,11 @@ public class PPM {
   /**
    * Exports the image stored in this PPM to the file name given.
    * @param fileName the name of the file to write to
-   * @return a String containing all the pixels of this PPM's image
    */
-  public String export(String fileName) {
-    StringBuilder stringBuilder = new StringBuilder();
+  public void exportPPM(String fileName) {
 
     int height = this.image.size();
     int width = this.image.get(0).size();
-
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        stringBuilder.append(String.format("(%d, %d) ", i, j));
-        stringBuilder.append("(");
-        stringBuilder.append(this.image.get(i).get(j).getRed());
-        stringBuilder.append(", ");
-        stringBuilder.append(this.image.get(i).get(j).getBlue());
-        stringBuilder.append(", ");
-        stringBuilder.append(this.image.get(i).get(j).getGreen());
-        stringBuilder.append(")");
-        stringBuilder.append("\n");
-      }
-    }
 
     StringBuilder stringBuilder1 = new StringBuilder();
 
@@ -130,7 +114,6 @@ public class PPM {
     } catch (IOException e) {
       System.out.print(e.getMessage());
     }
-    return stringBuilder.toString();
   }
 
   /**
@@ -249,8 +232,7 @@ public class PPM {
   }
 
   @Override
-  public PPM importImage(String fileName) {
-    return null;
+  public void importImage(String fileName) {
   }
 
 }
