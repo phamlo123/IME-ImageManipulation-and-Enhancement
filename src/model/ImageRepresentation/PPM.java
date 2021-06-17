@@ -231,4 +231,9 @@ public class PPM implements ImageFormat {
     }
   }
 
+  @Override
+  public PPM importImage(String fileName) {
+    return null;
+  }
+
 }

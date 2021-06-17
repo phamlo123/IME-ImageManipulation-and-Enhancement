@@ -8,8 +8,6 @@ import model.ImageImpl;
 import model.ImageRepresentation.ImagingOps.PPM.ColoringOperationPPM;
 import model.ImageRepresentation.ImagingOps.PPM.FilteringOperationPPM;
 import model.ImageRepresentation.ImagingOps.ImagingOperation;
-import model.ImageRepresentation.util.ImageUtil;
-import model.Images;
 import model.Matrices;
 
 /**

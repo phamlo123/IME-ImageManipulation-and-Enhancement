@@ -8,7 +8,6 @@ import model.ImageRepresentation.ImageFormat;
 public class PNG implements ImageFormat {
 
 
-
   /**
    * @param fileName
    */
@@ -38,4 +37,11 @@ public class PNG implements ImageFormat {
   public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException {
     return null;
   }
+
+  @Override
+  public PNG importImage(String fileName) {
+    return null;
+  }
+
+
 }

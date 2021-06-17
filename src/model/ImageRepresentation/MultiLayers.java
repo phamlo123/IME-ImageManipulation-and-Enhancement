@@ -9,4 +9,6 @@ public interface MultiLayers {
   void addLayer(ImageFormat image) throws IllegalArgumentException;
 
   void removeLayer(ImageFormat image) throws IllegalArgumentException;
+
+  
 }
