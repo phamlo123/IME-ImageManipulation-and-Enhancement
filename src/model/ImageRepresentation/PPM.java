@@ -11,9 +11,9 @@ import model.Coloring;
 import model.ImageRepresentation.util.ImageUtil;
 
 /**
- * This class represents an object that is an image in a ppm format
+ *
  */
-public class PPM implements ImageFormat {
+public class PPM {
 
   private final List<List<Color>> image;
   private final List<List<Integer>> redChannel;
@@ -22,7 +22,6 @@ public class PPM implements ImageFormat {
 
   /**
    * Constructs a PPM from an image.
-   *
    * @param image the list of list of color to create the PPM from
    */
   public PPM(List<List<Color>> image) {
@@ -48,15 +47,10 @@ public class PPM implements ImageFormat {
 
   /**
    * Creates a PPM with a checkerboard with the specified height and width given as the image.
-   *
    * @param height the height of the checkerboard image
    * @param width  the width of the checkerboard image
    */
   public PPM(int height, int width) {
-    if (height <= 0 || width <= 0) {
-      throw new IllegalArgumentException("height or width are less than or equal to 0");
-    }
-
     this.image = createListOfColor(height, width);
     this.greenChannel = setColoring(image, Coloring.GREEN);
     this.redChannel = setColoring(image, Coloring.RED);
@@ -65,9 +59,8 @@ public class PPM implements ImageFormat {
 
   /**
    * Creates a list of list of colors that represents a checkerboard image.
-   *
-   * @param height the height of the checkerboard
-   * @param width  the width of the checkerboard
+   * @param height  the height of the checkerboard
+   * @param width   the width of the checkerboard
    * @return the created checkerboard as a list of list of colors
    */
   private static List<List<Color>> createListOfColor(int height, int width) {
@@ -90,21 +83,29 @@ public class PPM implements ImageFormat {
   }
 
   /**
-   * Creates a new PPM object with the image at the desired file name.
-   *
-   * @param fileName the name of the file to import from
-   * @return the created PPM object
+   * Exports the image stored in this PPM to the file name given.
+   * @param fileName the name of the file to write to
+   * @return a String containing all the pixels of this PPM's image
    */
-  public static PPM importImageFile(String fileName) {
-    return new PPM(ImageUtil.readPPM(fileName));
-  }
-
-
-  @Override
-  public void exportPPM(String fileName) {
+  public String export(String fileName) {
+    StringBuilder stringBuilder = new StringBuilder();
 
     int height = this.image.size();
     int width = this.image.get(0).size();
+
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        stringBuilder.append(String.format("(%d, %d) ", i, j));
+        stringBuilder.append("(");
+        stringBuilder.append(this.image.get(i).get(j).getRed());
+        stringBuilder.append(", ");
+        stringBuilder.append(this.image.get(i).get(j).getBlue());
+        stringBuilder.append(", ");
+        stringBuilder.append(this.image.get(i).get(j).getGreen());
+        stringBuilder.append(")");
+        stringBuilder.append("\n");
+      }
+    }
 
     StringBuilder stringBuilder1 = new StringBuilder();
 
@@ -129,10 +130,22 @@ public class PPM implements ImageFormat {
     } catch (IOException e) {
       System.out.print(e.getMessage());
     }
+    return stringBuilder.toString();
   }
 
+  /**
+   * Creates a new PPM object with the image at the desired file name.
+   * @param fileName the name of the file to import from
+   * @return the created PPM object
+   */
+  public static PPM importImageFile(String fileName) {
+    return new PPM(ImageUtil.readPPM(fileName));
+  }
 
-  @Override
+  /**
+   * Creates a copy of this PPM's image.
+   * @return the copy of this PPM's image as a list of list of colors
+   */
   public List<List<Color>> getImage() {
     List<List<Color>> temp = new ArrayList<>();
     for (int i = 0; i < image.size(); i++) {
@@ -166,7 +179,6 @@ public class PPM implements ImageFormat {
 
   /**
    * Returns a list of list representing the values of each pixel for the specified color.
-   *
    * @param image the image to retrieve the color values of
    * @param color the color values to retrieve for each pixel
    * @return the list of list of the specified color values for each pixel
@@ -193,7 +205,12 @@ public class PPM implements ImageFormat {
     return temp;
   }
 
-  @Override
+  /**
+   * Returns a copy of this PPM's specified color channel.
+   * @param coloring the Coloring type desired
+   * @return the color channel of this PPM as a list of list of Integer
+   * @throws IllegalArgumentException if an invalid Coloring is passed
+   */
   public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException {
     switch (coloring) {
       case BLUE:

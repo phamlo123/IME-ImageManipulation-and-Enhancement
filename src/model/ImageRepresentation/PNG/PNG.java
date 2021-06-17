@@ -1,20 +1,28 @@
 package model.ImageRepresentation.PNG;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import javax.imageio.ImageIO;
 import model.Coloring;
 import model.ImageRepresentation.ImageFormat;
 
 public class PNG implements ImageFormat {
 
-
+  private BufferedImage image;
 
   /**
    * @param fileName
    */
   @Override
   public void exportPPM(String fileName) {
-
+    try {
+      ImageIO.write(image, "png",new File(fileName));
+    } catch (IOException e) {
+      System.out.println("Error writing image to " + fileName);
+    }
   }
 
   /**
