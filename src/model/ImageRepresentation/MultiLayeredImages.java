@@ -30,6 +30,7 @@ public class MultiLayeredImages implements MultiLayers{
 
   @Override
   public void removeLayer(ImageFormat image) throws IllegalArgumentException {
+
   }
   
   

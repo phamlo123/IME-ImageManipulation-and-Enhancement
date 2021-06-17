@@ -7,12 +7,12 @@ import model.ImageRepresentation.ImageFormat;
 
 public class JPEG implements ImageFormat {
 
+
   /**
    * @param fileName
    */
   @Override
   public void exportPPM(String fileName) {
-
   }
 
   /**
@@ -34,6 +34,11 @@ public class JPEG implements ImageFormat {
    */
   @Override
   public List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException {
+    return null;
+  }
+
+  @Override
+  public JPEG importImage(String fileName) {
     return null;
   }
 }

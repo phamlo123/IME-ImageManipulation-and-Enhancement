@@ -248,4 +248,9 @@ public class PPM {
     }
   }
 
+  @Override
+  public PPM importImage(String fileName) {
+    return null;
+  }
+
 }
