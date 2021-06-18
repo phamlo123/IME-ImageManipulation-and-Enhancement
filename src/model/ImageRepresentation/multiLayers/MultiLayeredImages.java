@@ -9,7 +9,7 @@ import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.ImageImplPPM;
 import model.Images;
 
-public class MultiLayeredImages implements MultiLayers {
+public class MultiLayeredImages implements MultiLayers, Images<ImageFormat> {
 
   private List<ImageFormat> imageLayers;
   private List<Boolean> listVisibility;
@@ -107,4 +107,31 @@ public class MultiLayeredImages implements MultiLayers {
   }
 
 
+  @Override
+  public void blurringImage() {
+    imageOp.blurringImage();
+  }
+
+
+  @Override
+  public void sharpeningImage() {
+    imageOp.sharpeningImage();
+  }
+
+
+  @Override
+  public void createMonochrome() {
+    imageOp.createMonochrome();
+  }
+
+  @Override
+  public void createSepia() {
+    imageOp.createSepia();
+  }
+
+
+  @Override
+  public ImageFormat getImage() {
+    return imageOp.getImage();
+  }
 }
