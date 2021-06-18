@@ -1,13 +1,12 @@
-package model.ImagingOps.PPM;
+package model.ImagingOps;
 
 import java.awt.Color;
 import java.util.List;
 import model.Coloring;
 import model.ImageOps;
-import model.ImagingOps.ImagingOperation;
 import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.util.Arithmetic;
-import model.ImageRepresentation.util.ImageUtil;
+import model.util.Arithmetic;
+import model.util.ImageUtil;
 
 /**
  * This class inherits members of its abstract super class and contains methods to color a PPM
@@ -19,10 +18,10 @@ public class ColoringOperationPPM extends ImagingOPsPPM implements ImagingOperat
   /**
    * Construct an object of FilteringOperationPPM given the ppm parameter
    *
-   * @param ppm a PPM object to be operated on.
+   * @param imageFormat a PPM object to be operated on.
    */
-  public ColoringOperationPPM(ImageFormat ppm) {
-    super(ppm, ImageOps.COLORING);
+  public ColoringOperationPPM(ImageFormat imageFormat) {
+    super(imageFormat, ImageOps.COLORING);
 
   }
 

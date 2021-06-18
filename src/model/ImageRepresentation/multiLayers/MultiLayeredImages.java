@@ -1,26 +1,27 @@
-package model.ImageRepresentation;
+package model.ImageRepresentation.multiLayers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.spi.TimeZoneNameProvider;
 import model.FileFormat;
+import model.ImageRepresentation.ImageFormat;
+import model.ImageRepresentation.multiLayers.MultiLayers;
 
 public class MultiLayeredImages implements MultiLayers {
 
   private List<ImageFormat> imageLayers;
   private List<Boolean> listVisibility;
-  private ImageFormat currentImage;
+  private ImageFormat currentLayer;
 
   public MultiLayeredImages(List<ImageFormat> imageLayers) {
     Objects.requireNonNull(imageLayers);
     this.imageLayers = imageLayers;
     this.listVisibility = setUpVisibility(imageLayers);
-    this.currentImage = null;
+    this.currentLayer = imageLayers.get(imageLayers.size() - 1);
   }
 
   public MultiLayeredImages() {
-    this.currentImage = null;
+    this.currentLayer = null;
     this.imageLayers = new ArrayList<>();
     this.listVisibility = new ArrayList<>();
   }
@@ -45,7 +46,7 @@ public class MultiLayeredImages implements MultiLayers {
     for (int i = size - 1; i >= 0; i--) {
       if (listVisibility.get(i)) {
         ImageFormat image = imageLayers.get(i).convert(fileFormat);
-        image.exportPPM(fileName);
+        image.export(fileName);
         return;
       }
     }
@@ -53,10 +54,10 @@ public class MultiLayeredImages implements MultiLayers {
 
   @Override
   public void loadImages(ImageFormat imageFormat, int layerIndex) {
-    if(layerIndex < 0 || layerIndex > this.imageLayers.size()) {
+    if (layerIndex < 0 || layerIndex > this.imageLayers.size()) {
       throw new IllegalArgumentException("Invalid layer Index");
     }
-    if(imageFormat == null) {
+    if (imageFormat == null) {
       throw new IllegalArgumentException("Provided image to be loaded is null");
     }
     imageLayers.set(layerIndex, imageFormat);
@@ -71,7 +72,10 @@ public class MultiLayeredImages implements MultiLayers {
 
   @Override
   public void removeLayer(int layerIndex) throws IllegalArgumentException {
-
+    if (layerIndex < 0 || layerIndex > this.imageLayers.size()) {
+      throw new IllegalArgumentException("Invalid layer Index");
+    }
+    imageLayers.remove(layerIndex);
   }
 
   @Override
@@ -84,14 +88,12 @@ public class MultiLayeredImages implements MultiLayers {
   }
 
 
-
-
   @Override
   public void setCurrent(int index) throws IllegalArgumentException {
     if (index < 0 || index > imageLayers.size()) {
       throw new IllegalArgumentException();
     }
-    currentImage = imageLayers.get(index);
+    currentLayer = imageLayers.get(index);
   }
 
 

@@ -14,7 +14,7 @@ public interface ImageFormat {
   /**
    * @param fileName
    */
-  void exportPPM(String fileName);
+  void export(String fileName);
 
   /**
    * Creates a copy of this PPM's image.

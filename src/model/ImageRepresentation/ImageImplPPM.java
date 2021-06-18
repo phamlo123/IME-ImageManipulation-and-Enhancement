@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
 import model.ImageImpl;
-import model.ImagingOps.PPM.ColoringOperationPPM;
-import model.ImagingOps.PPM.FilteringOperationPPM;
+import model.ImagingOps.ColoringOperationPPM;
+import model.ImagingOps.FilteringOperationPPM;
 import model.ImagingOps.ImagingOperation;
 import model.ImageRepresentation.PPM.PPM;
 import model.Matrices;
@@ -18,9 +18,8 @@ import model.Matrices;
  */
 public class ImageImplPPM extends ImageImpl<ImageFormat> {
 
-  public ImageImplPPM(ImageFormat ppm) {
-    super(ppm);
-
+  public ImageImplPPM(ImageFormat imageFormat) {
+    super(imageFormat);
   }
 
   @Override

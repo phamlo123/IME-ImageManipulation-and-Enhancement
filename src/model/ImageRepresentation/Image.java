@@ -9,7 +9,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import model.Coloring;
 import model.FileFormat;
-import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.JPEG.JPEG;
 import model.ImageRepresentation.PNG.PNG;
 import model.ImageRepresentation.PPM.PPM;
@@ -24,6 +23,9 @@ public abstract class Image implements ImageFormat {
 
 
   public Image(List<List<Color>> listOfColor) {
+    if(listOfColor == null) {
+      throw new IllegalArgumentException();
+    }
     this.image = listOfColor;
     setColoring(image);
     this.bufferedImage = createBufferedImage(listOfColor);
@@ -42,6 +44,9 @@ public abstract class Image implements ImageFormat {
   }
 
   public Image(int height, int width) {
+    if(height < 0 || width < 0) {
+      throw new IllegalArgumentException();
+    }
     this.image = createListOfColor(height, width);
     this.bufferedImage = createBufferedImage(image);
     setColoring(image);
@@ -150,6 +155,7 @@ public abstract class Image implements ImageFormat {
     this.redChannel = red;
     this.blueChannel = blue;
   }
+
 
   /**
    * Creates a copy of this PPM's image.

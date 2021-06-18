@@ -1,7 +1,8 @@
-package model.ImageRepresentation;
+package model.ImageRepresentation.multiLayers;
 
 import java.util.List;
 import model.FileFormat;
+import model.ImageRepresentation.ImageFormat;
 
 public interface MultiLayers {
 
@@ -25,5 +26,6 @@ public interface MultiLayers {
   void setInvisibility(int layerIndex, boolean visible) throws IllegalArgumentException;
 
   void setCurrent(int index);
+
 
 }

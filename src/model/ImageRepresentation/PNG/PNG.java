@@ -25,7 +25,7 @@ public class PNG extends Image implements ImageFormat {
 
 
   @Override
-  public void exportPPM(String fileName) {
+  public void export(String fileName) {
     try {
       ImageIO.write(getBufferedImage(), "png", new File(fileName));
     } catch (IOException e) {

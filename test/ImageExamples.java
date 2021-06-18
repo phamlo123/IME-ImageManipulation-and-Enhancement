@@ -12,9 +12,9 @@ import model.Images;
  */
 public class ImageExamples {
 
-  ImageFormat ppmExample1 = PPM.importImageFile("sample.ppm");
-  ImageFormat ppmExample2 = PPM.importImageFile("Northeastern.ppm");
-  ImageFormat ppmExample3 = PPM.importImageFile("sample.ppm");
+  ImageFormat ppmExample1 = new PPM("sample.ppm");
+  ImageFormat ppmExample2 = new PPM("Northeastern.ppm");
+  ImageFormat ppmExample3 = new PPM("sample.ppm");
   ImageFormat ppmExample4 = new PPM(10, 10);
 
   public static List<List<Color>> checkerboard() {

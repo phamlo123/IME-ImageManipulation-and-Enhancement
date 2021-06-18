@@ -1,4 +1,4 @@
-package model.ImagingOps.PPM;
+package model.ImagingOps;
 
 import java.util.List;
 import model.Coloring;

@@ -24,7 +24,7 @@ public class JPEG extends Image implements ImageFormat {
 
 
   @Override
-  public void exportPPM(String fileName) {
+  public void export(String fileName) {
     try {
       ImageIO.write(getBufferedImage(), "jpg", new File(fileName));
     } catch (IOException e) {

@@ -21,11 +21,6 @@ public class TestPPM {
 
   // constructor tests
 
-  // throws an exception because null is passed into the constructor
-  @Test(expected = IllegalArgumentException.class)
-  public void testPPMConstructorNull() {
-    new PPM(null);
-  }
 
   // export tests
 
@@ -33,8 +28,8 @@ public class TestPPM {
   // and checking the image properties
   @Test
   public void testExportNormal() {
-    examples.ppmExample4.exportPPM("test.ppm");
-    assertEquals(new PPM(ImageExamples.checkerboard()), PPM.importImageFile("test.ppm"));
+    examples.ppmExample4.export("test.ppm");
+    assertEquals(new PPM(ImageExamples.checkerboard()), new PPM("test.ppm"));
   }
 
   // getImage tests
@@ -105,15 +100,15 @@ public class TestPPM {
   // throws an exception because the file name does not exist
   @Test(expected = IllegalArgumentException.class)
   public void testImportIllegal() {
-    PPM.importImageFile("notExist.ppm");
+    new PPM("notExist.ppm");
   }
 
   // tests the normal functionality of the importImageFile method
   @Test
   public void testImport() {
     ImageFormat ppm = new PPM();
-    ppm.exportPPM("importTest.ppm");
-    ImageFormat ppmClone = PPM.importImageFile("importTest.ppm");
+    ppm.export("importTest.ppm");
+    ImageFormat ppmClone = new PPM("importTest.ppm");
     assertEquals(ppm, ppmClone);
   }
 

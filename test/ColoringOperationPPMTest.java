@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
 import model.ImagingOps.ImagingOperation;
-import model.ImagingOps.PPM.ColoringOperationPPM;
+import model.ImagingOps.ColoringOperationPPM;
 import model.ImageRepresentation.PPM.PPM;
-import model.ImageRepresentation.util.Arithmetic;
+import model.util.Arithmetic;
 import model.Matrices;
 import org.junit.Test;
 

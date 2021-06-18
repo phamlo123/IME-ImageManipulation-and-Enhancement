@@ -5,7 +5,7 @@ import java.util.List;
 import model.Coloring;
 import model.ImageRepresentation.PPM.PPM;
 import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.util.ImageUtil;
+import model.util.ImageUtil;
 import org.junit.Test;
 
 /**
@@ -15,7 +15,7 @@ public class ImageUtilTest {
 
   @Test
   public void testGetList() {
-    ImageFormat ppm = PPM.importImageFile("sample.ppm");
+    ImageFormat ppm = new PPM("sample.ppm");
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);

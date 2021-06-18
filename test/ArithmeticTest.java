@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import model.Coloring;
-import model.ImageRepresentation.util.Arithmetic;
+import model.util.Arithmetic;
 import model.Matrices;
 import org.junit.Test;
 

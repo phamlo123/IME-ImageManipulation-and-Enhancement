@@ -9,7 +9,6 @@ import java.util.Objects;
 import model.Coloring;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.util.ImageUtil;
 
 /**
  *
@@ -43,12 +42,15 @@ public class PPM extends Image implements ImageFormat {
   }
 
 
+  public PPM(String fileName) {
+    super(fileName);
+  }
   /**
    * Exports the image stored in this PPM to the file name given.
    *
    * @param fileName the name of the file to write to
    */
-  public void exportPPM(String fileName) {
+  public void export(String fileName) {
 
     int height = getImage().size();
     int width = getImage().get(0).size();
@@ -78,15 +80,6 @@ public class PPM extends Image implements ImageFormat {
     }
   }
 
-  /**
-   * Creates a new PPM object with the image at the desired file name.
-   *
-   * @param fileName the name of the file to import from
-   * @return the created PPM object
-   */
-  public static PPM importImageFile(String fileName) {
-    return new PPM(ImageUtil.readPPM(fileName));
-  }
 
 
   @Override
@@ -108,11 +101,6 @@ public class PPM extends Image implements ImageFormat {
   public int hashCode() {
     return Objects.hash(getImage(), getColorChannel(Coloring.RED), getColorChannel(Coloring.GREEN),
         getColorChannel(Coloring.BLUE));
-  }
-
-
-  @Override
-  public void importImage(String fileName) {
   }
 
 }
