@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.util.List;
 import model.Coloring;
-import model.ImageRepresentation.PPM;
+import model.ImageRepresentation.PPM.PPM;
 import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.util.ImageUtil;
 import org.junit.Test;

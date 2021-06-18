@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import model.Coloring;
 import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.PPM;
+import model.ImageRepresentation.PPM.PPM;
 import org.junit.Before;
 import org.junit.Test;
 

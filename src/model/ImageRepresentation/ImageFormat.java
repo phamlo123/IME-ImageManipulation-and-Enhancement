@@ -1,8 +1,10 @@
 package model.ImageRepresentation;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import model.Coloring;
+import model.FileFormat;
 
 /**
  * This interface contains methods that can be performed on a ppm object.
@@ -32,5 +34,9 @@ public interface ImageFormat {
 
 
   void importImage(String fileName);
+
+  ImageFormat convert(FileFormat fileFormat) throws IllegalArgumentException;
+
+  BufferedImage getBufferedImage();
 
 }

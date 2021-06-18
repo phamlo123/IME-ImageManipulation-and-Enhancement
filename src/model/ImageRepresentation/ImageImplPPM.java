@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
 import model.ImageImpl;
-import model.ImageRepresentation.ImagingOps.PPM.ColoringOperationPPM;
-import model.ImageRepresentation.ImagingOps.PPM.FilteringOperationPPM;
-import model.ImageRepresentation.ImagingOps.ImagingOperation;
+import model.ImagingOps.PPM.ColoringOperationPPM;
+import model.ImagingOps.PPM.FilteringOperationPPM;
+import model.ImagingOps.ImagingOperation;
+import model.ImageRepresentation.PPM.PPM;
 import model.Matrices;
 
 /**

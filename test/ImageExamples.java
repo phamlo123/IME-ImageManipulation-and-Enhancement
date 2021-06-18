@@ -3,9 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import model.ImageRepresentation.ImageImplPPM;
-import model.ImageRepresentation.PPM;
+import model.ImageRepresentation.PPM.PPM;
 import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.util.ImageUtil;
 import model.Images;
 
 /**
