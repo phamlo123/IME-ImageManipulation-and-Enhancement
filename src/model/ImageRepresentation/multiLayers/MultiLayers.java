@@ -3,8 +3,9 @@ package model.ImageRepresentation.multiLayers;
 import java.util.List;
 import model.FileFormat;
 import model.ImageRepresentation.ImageFormat;
+import model.Images;
 
-public interface MultiLayers {
+public interface MultiLayers extends Images {
 
   /**
    *  Export the top most and visible layer into a certain image format
@@ -29,4 +30,5 @@ public interface MultiLayers {
 
   ImageFormat getCurrentLayer();
 
+  public int getCurrentLayerIndex();
 }

@@ -46,5 +46,5 @@ public class ImageExamples {
   }
 
 
-  Images<ImageFormat> ppmImage1 = new ImageImplPPM(ppmExample4);
+  Images ppmImage1 = new ImageImplPPM(ppmExample4);
 }

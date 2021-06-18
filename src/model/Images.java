@@ -1,9 +1,11 @@
 package model;
 
+import model.ImageRepresentation.ImageFormat;
+
 /**
  * This interface contains all operations to be performed on an image.
  */
-public interface Images<T> {
+public interface Images {
 
 
   /**
@@ -31,7 +33,7 @@ public interface Images<T> {
    *
    * @return the image
    */
-  T getImage();
+  ImageFormat getImage();
 
 }
 

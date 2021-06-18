@@ -57,7 +57,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(examples.ppmExample4);
+    Images images = new ImageImplPPM(examples.ppmExample4);
     images.createMonochrome();
 
     assertEquals(new Image(color), images.getImage());
@@ -94,7 +94,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("sample.ppm"));
+    Images images = new ImageImplPPM(new Image("sample.ppm"));
     images.createMonochrome();
     assertFalse(images.getImage().equals(new Image("sample.ppm")));
     assertEquals(new Image(color), images.getImage());
@@ -131,7 +131,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(examples.ppmExample4);
+    Images images = new ImageImplPPM(examples.ppmExample4);
     images.createSepia();
 
     assertEquals(new Image(color), images.getImage());
@@ -167,7 +167,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("Northeastern.ppm"));
+    Images images = new ImageImplPPM(new Image("Northeastern.ppm"));
     images.createSepia();
     assertFalse(images.getImage().equals(new Image("Northeastern.ppm")));
 
@@ -202,7 +202,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(examples.ppmExample4);
+    Images images = new ImageImplPPM(examples.ppmExample4);
     images.blurringImage();
 
     assertEquals(new Image(color), images.getImage());
@@ -236,7 +236,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("sample.ppm"));
+    Images images = new ImageImplPPM(new Image("sample.ppm"));
     images.blurringImage();
     assertFalse(images.getImage().equals(new Image("sample.ppm")));
     assertEquals(new Image(color), images.getImage());
@@ -271,7 +271,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(examples.ppmExample4);
+    Images images = new ImageImplPPM(examples.ppmExample4);
 
     assertFalse(images.getImage().equals(new Image(color)));
     images.sharpeningImage();
@@ -305,7 +305,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("Northeastern.ppm"));
+    Images images = new ImageImplPPM(new Image("Northeastern.ppm"));
     images.sharpeningImage();
     assertFalse(images.getImage().equals(new Image("Northeastern.ppm")));
 
@@ -347,7 +347,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("Northeastern.ppm"));
+    Images images = new ImageImplPPM(new Image("Northeastern.ppm"));
     images.sharpeningImage();
     assertFalse(images.getImage().equals(new Image(color)));
     images.sharpeningImage();
@@ -391,7 +391,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("sample.ppm"));
+    Images images = new ImageImplPPM(new Image("sample.ppm"));
     images.blurringImage();
     assertFalse(images.getImage().equals(new Image(color)));
     images.blurringImage();
@@ -438,7 +438,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("Northeastern.ppm"));
+    Images images = new ImageImplPPM(new Image("Northeastern.ppm"));
     images.createSepia();
     assertFalse(images.getImage().equals(new Image(color)));
     images.createSepia();
@@ -488,7 +488,7 @@ public class ImageImplPPMTest {
       }
     }
 
-    Images<ImageFormat> images = new ImageImplPPM(new Image("sample.ppm"));
+    Images images = new ImageImplPPM(new Image("sample.ppm"));
     images.createMonochrome();
     assertFalse(images.getImage().equals(new Image(color)));
     images.createMonochrome();

@@ -16,7 +16,7 @@ import model.Matrices;
  * will implements the Images interface and will therefore implements all the methods in the
  * interface onto a PPM object.
  */
-public class ImageImplPPM implements Images<ImageFormat> {
+public class ImageImplPPM implements Images {
   private ImageFormat image;
   public ImageImplPPM(ImageFormat imageFormat) {
     if (imageFormat == null) {
@@ -71,7 +71,7 @@ public class ImageImplPPM implements Images<ImageFormat> {
 
   public static void main(String[] args) {
     ImageFormat i = new Image("abc.jpg");
-    Images<ImageFormat> a = new ImageImplPPM(i);
+    Images a = new ImageImplPPM(i);
     a.createSepia();
     a.getImage().getConverter().exportImage("k", FileFormat.JPEG);
 

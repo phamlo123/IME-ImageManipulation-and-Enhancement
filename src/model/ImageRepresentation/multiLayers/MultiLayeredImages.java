@@ -1,6 +1,7 @@
 package model.ImageRepresentation.multiLayers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import model.FileFormat;
@@ -9,12 +10,12 @@ import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.ImageImplPPM;
 import model.Images;
 
-public class MultiLayeredImages implements MultiLayers, Images<ImageFormat> {
+public class MultiLayeredImages implements MultiLayers, Images {
 
   private List<ImageFormat> imageLayers;
   private List<Boolean> listVisibility;
   private ImageFormat currentLayer;
-  private Images<ImageFormat> imageOp;
+  private Images imageOp;
 
   public MultiLayeredImages(List<ImageFormat> imageLayers) {
     Objects.requireNonNull(imageLayers);
@@ -106,6 +107,11 @@ public class MultiLayeredImages implements MultiLayers, Images<ImageFormat> {
     return new Image(currentLayer.getImage());
   }
 
+  @Override
+  public int getCurrentLayerIndex() {
+    return imageLayers.indexOf(currentLayer);
+  }
+
 
   @Override
   public void blurringImage() {
@@ -116,22 +122,36 @@ public class MultiLayeredImages implements MultiLayers, Images<ImageFormat> {
   @Override
   public void sharpeningImage() {
     imageOp.sharpeningImage();
+    currentLayer = imageOp.getImage();
   }
 
 
   @Override
   public void createMonochrome() {
     imageOp.createMonochrome();
+    currentLayer = imageOp.getImage();
   }
 
   @Override
   public void createSepia() {
     imageOp.createSepia();
+    currentLayer = imageOp.getImage();
   }
 
 
   @Override
   public ImageFormat getImage() {
     return imageOp.getImage();
+  }
+
+  public static void main(String[] args) {
+    MultiLayers multiLayers = new MultiLayeredImages(new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
+        new Image("sample.ppm"), new Image("abc.jpg"))));
+
+    multiLayers.createSepia();
+
+    multiLayers.getCurrentLayer().getConverter().exportImage("Tdig", FileFormat.PPM);
+
+
   }
 }
