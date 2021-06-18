@@ -1,57 +1,65 @@
 package model.ImageRepresentation;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
+import java.util.Objects;
 import model.Coloring;
-import model.FileFormat;
-import model.ImageRepresentation.JPEG.JPEG;
-import model.ImageRepresentation.PNG.PNG;
-import model.ImageRepresentation.PPM.PPM;
+import model.converter.Converter;
+import model.converter.SimpleConverter;
+import model.util.ImageUtil;
 
-public abstract class Image implements ImageFormat {
+public class Image implements ImageFormat {
 
-  private BufferedImage bufferedImage;
+  private Converter converter;
   private List<List<Color>> image;
   private List<List<Integer>> redChannel;
   private List<List<Integer>> greenChannel;
   private List<List<Integer>> blueChannel;
 
-
   public Image(List<List<Color>> listOfColor) {
-    if(listOfColor == null) {
+    if (listOfColor == null) {
       throw new IllegalArgumentException();
     }
     this.image = listOfColor;
     setColoring(image);
-    this.bufferedImage = createBufferedImage(listOfColor);
   }
 
   public Image() {
-    this.image = new ArrayList<>();
+    this.image = createListOfColor(1024, 768);
     setColoring(image);
-    this.bufferedImage = createBufferedImage(image);
+    this.converter = getConverter();
+  }
+
+
+  public Image(int height, int width) {
+    if (height <= 0 || width <= 0) {
+      throw new IllegalArgumentException("Illegal height or width length");
+    } else {
+      this.image = createListOfColor(height, width);
+      setColoring(getImage());
+      this.converter = getConverter();
+    }
   }
 
   public Image(String fileName) {
-    importImage(fileName);
-    this.image = getListOfColor(bufferedImage);
-    setColoring(image);
-  }
-
-  public Image(int height, int width) {
-    if(height < 0 || width < 0) {
-      throw new IllegalArgumentException();
+    if (!verifyImport(fileName)) {
+      throw new IllegalArgumentException("Illegal Imported File");
     }
-    this.image = createListOfColor(height, width);
-    this.bufferedImage = createBufferedImage(image);
-    setColoring(image);
+    this.converter = new SimpleConverter(fileName);
+    this.image = converter.getListOfColor();
+    setColoring(getImage());
   }
 
+
+  private boolean verifyImport(String fileName) {
+    try {
+      Converter converter = new SimpleConverter(fileName);
+      return true;
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
+  }
 
   /**
    * Creates a list of list of colors that represents a checkerboard image.
@@ -75,6 +83,17 @@ public abstract class Image implements ImageFormat {
         }
       }
       isWhite = !isWhite;
+    }
+    return temp;
+  }
+
+  public List<List<Color>> getImage() {
+    List<List<Color>> temp = new ArrayList<>();
+    for (int i = 0; i < image.size(); i++) {
+      temp.add(new ArrayList<>());
+      for (int j = 0; j < image.get(i).size(); j++) {
+        temp.get(i).add(image.get(i).get(j));
+      }
     }
     return temp;
   }
@@ -157,80 +176,33 @@ public abstract class Image implements ImageFormat {
   }
 
 
-  /**
-   * Creates a copy of this PPM's image.
-   *
-   * @return the copy of this PPM's image as a list of list of colors
-   */
-  public List<List<Color>> getImage() {
-    List<List<Color>> temp = new ArrayList<>();
-    for (int i = 0; i < image.size(); i++) {
-      temp.add(new ArrayList<>());
-      for (int j = 0; j < image.get(i).size(); j++) {
-        temp.get(i).add(image.get(i).get(j));
-      }
-    }
-    return temp;
-  }
-
-
-  public ImageFormat convert(FileFormat fileFormat) throws IllegalArgumentException {
-    ImageFormat imageFormat;
-    switch (fileFormat) {
-      case PPM:
-        imageFormat = new PPM(this.getImage());
-        break;
-      case JPEG:
-        imageFormat = new JPEG(this.getImage());
-        break;
-      case PNG:
-        imageFormat = new PNG(this.getImage());
-        break;
-      default:
-        throw new IllegalArgumentException();
-    }
-    return imageFormat;
+  @Override
+  public Converter getConverter() {
+    return new SimpleConverter(ImageUtil.createBufferedImage(this.image));
   }
 
 
   @Override
-  public void importImage(String fileName) {
-    try {
-      this.bufferedImage = ImageIO.read(new File(fileName));
-    } catch (IOException e) {
-      System.out.println("File " + fileName + " not found!");
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-  }
-
-
-  protected BufferedImage createBufferedImage(List<List<Color>> listOfColor) {
-    int height = listOfColor.size();
-    int width = listOfColor.get(0).size();
-    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    for (int row = 0; row < height; row++) {
-      for (int column = 0; column < width; column++) {
-        bufferedImage.setRGB(column, row, listOfColor.get(row).get(column).getRGB());
-      }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
-    return bufferedImage;
-  }
-
-
-  protected static List<List<Color>> getListOfColor(BufferedImage bufferedImage) {
-    int height = bufferedImage.getHeight();
-    int width = bufferedImage.getWidth();
-    List<List<Color>> listOfColor = new ArrayList<>();
-    for (int i = 0; i < height; i++) {
-      listOfColor.add(new ArrayList<>());
-      for (int j = 0; j < width; j++) {
-        listOfColor.get(i).add(new Color(bufferedImage.getRGB(i, j)));
-      }
-    }
-    return listOfColor;
+    Image image = (Image) o;
+    return Objects.equals(getImage(), image.getImage()) && Objects
+        .equals(getColorChannel(Coloring.RED), image.getColorChannel(Coloring.RED)) && Objects
+        .equals(getColorChannel(Coloring.GREEN), image.getColorChannel(Coloring.GREEN)) && Objects
+        .equals(getColorChannel(Coloring.BLUE), image.getColorChannel(Coloring.BLUE));
   }
 
   @Override
-  public BufferedImage getBufferedImage() {
-    return bufferedImage;
+  public int hashCode() {
+    return Objects.hash(getImage(), getColorChannel(Coloring.RED), getColorChannel(Coloring.GREEN),
+        getColorChannel(Coloring.BLUE));
   }
+
+
+
 }

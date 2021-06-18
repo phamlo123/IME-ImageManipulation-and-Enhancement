@@ -2,27 +2,19 @@ package model.ImageRepresentation;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
 import model.FileFormat;
+import model.converter.Converter;
 
 /**
  * This interface contains methods that can be performed on a ppm object.
  */
 public interface ImageFormat {
 
-  /**
-   * @param fileName
-   */
-  void export(String fileName);
 
-  /**
-   * Creates a copy of this PPM's image.
-   *
-   * @return the copy of this PPM's image as a list of list of colors
-   */
   List<List<Color>> getImage();
-
   /**
    * Returns a copy of this PPM's specified color channel.
    *
@@ -33,10 +25,6 @@ public interface ImageFormat {
   List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException;
 
 
-  void importImage(String fileName);
-
-  ImageFormat convert(FileFormat fileFormat) throws IllegalArgumentException;
-
-  BufferedImage getBufferedImage();
+  Converter getConverter();
 
 }

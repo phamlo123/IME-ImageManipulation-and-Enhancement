@@ -27,5 +27,6 @@ public interface MultiLayers {
 
   void setCurrent(int index);
 
+  ImageFormat getCurrentLayer();
 
 }

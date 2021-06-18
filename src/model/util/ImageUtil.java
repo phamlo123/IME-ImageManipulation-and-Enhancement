@@ -1,8 +1,11 @@
 package model.util;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -43,7 +46,7 @@ public class ImageUtil {
 
     token = sc.next();
     if (!token.equals("P3")) {
-      System.out.println("Invalid PPM file: plain RAW file should begin with P3");
+      throw new IllegalArgumentException("PPM file should start with P3");
     }
     int width = sc.nextInt();
     int height = sc.nextInt();
@@ -61,7 +64,6 @@ public class ImageUtil {
     }
     return image;
   }
-
 
 
   /**
@@ -89,5 +91,54 @@ public class ImageUtil {
       }
     }
     return temp;
+  }
+
+
+  public static BufferedImage createBufferedImage(List<List<Color>> listOfColor) {
+    int height = listOfColor.size();
+    int width = listOfColor.get(0).size();
+    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    for (int row = 0; row < height; row++) {
+      for (int column = 0; column < width; column++) {
+        bufferedImage.setRGB(column, row, listOfColor.get(row).get(column).getRGB());
+      }
+    }
+    return bufferedImage;
+  }
+
+
+  /**
+   * Exports the image stored in this PPM to the file name given.
+   *
+   * @param fileName the name of the file to write to
+   */
+  public static void exportPPM(String fileName, List<List<Color>> image) {
+
+    int height = image.size();
+    int width = image.get(0).size();
+
+    StringBuilder stringBuilder1 = new StringBuilder();
+
+    stringBuilder1.append("P3\n");
+    stringBuilder1.append(width).append(" ").append(height).append("\n");
+    stringBuilder1.append("255\n");
+
+    for (List<Color> colors : image) {
+      for (int j = 0; j < width; j++) {
+        stringBuilder1.append(colors.get(j).getRed());
+        stringBuilder1.append("\n");
+        stringBuilder1.append(colors.get(j).getGreen());
+        stringBuilder1.append("\n");
+        stringBuilder1.append(colors.get(j).getBlue());
+        stringBuilder1.append("\n");
+      }
+    }
+    try {
+      FileWriter fileWriter = new FileWriter(fileName);
+      fileWriter.write(stringBuilder1.toString());
+      fileWriter.close();
+    } catch (IOException e) {
+      System.out.print(e.getMessage());
+    }
   }
 }

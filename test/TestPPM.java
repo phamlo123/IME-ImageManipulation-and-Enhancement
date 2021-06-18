@@ -1,8 +1,9 @@
 import static org.junit.Assert.*;
 
 import model.Coloring;
+import model.FileFormat;
+import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.PPM.PPM;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,8 +29,8 @@ public class TestPPM {
   // and checking the image properties
   @Test
   public void testExportNormal() {
-    examples.ppmExample4.export("test.ppm");
-    assertEquals(new PPM(ImageExamples.checkerboard()), new PPM("test.ppm"));
+    examples.ppmExample4.getConverter().exportImage("test.ppm", FileFormat.PPM);
+    assertEquals(new Image(ImageExamples.checkerboard()), new Image("test.ppm"));
   }
 
   // getImage tests
@@ -100,36 +101,36 @@ public class TestPPM {
   // throws an exception because the file name does not exist
   @Test(expected = IllegalArgumentException.class)
   public void testImportIllegal() {
-    new PPM("notExist.ppm");
+    new Image("notExist.ppm");
   }
 
   // tests the normal functionality of the importImageFile method
   @Test
   public void testImport() {
-    ImageFormat ppm = new PPM();
-    ppm.export("importTest.ppm");
-    ImageFormat ppmClone = new PPM("importTest.ppm");
+    ImageFormat ppm = new Image();
+    ppm.getConverter().exportImage("importTest.ppm", FileFormat.PPM);
+    ImageFormat ppmClone = new Image("importTest.ppm");
     assertEquals(ppm, ppmClone);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeHeight() {
-    ImageFormat ppm = new PPM(-1, 1);
+    ImageFormat ppm = new Image(-1, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testZeroHeight() {
-    ImageFormat ppm = new PPM(0, 1);
+    ImageFormat ppm = new Image(0, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeWidth() {
-    ImageFormat ppm = new PPM(1, -1);
+    ImageFormat ppm = new Image(1, -1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void test0Width() {
-    ImageFormat ppm = new PPM(1, 0);
+    ImageFormat ppm = new Image(1, 0);
   }
 
 }

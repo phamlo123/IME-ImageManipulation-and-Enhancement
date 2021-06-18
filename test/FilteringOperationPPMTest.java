@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
+import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
 import model.ImagingOps.ImagingOperation;
 import model.ImagingOps.ColoringOperationPPM;
 import model.ImagingOps.FilteringOperationPPM;
-import model.ImageRepresentation.PPM.PPM;
 import model.util.Arithmetic;
 import model.Matrices;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.junit.Test;
  */
 public class FilteringOperationPPMTest {
 
-  ImagingOperation a = new FilteringOperationPPM(new PPM(10, 10));
+  ImagingOperation a = new FilteringOperationPPM(new Image(10, 10));
 
   @Test(expected = IllegalArgumentException.class)
   public void testNullConstructor() {
@@ -30,7 +30,7 @@ public class FilteringOperationPPMTest {
 
     List<List<Color>> b = a.helperForColoringAndFiltering(Matrices.MATRIX_FOR_BLURRING
         .getMatrix());
-    ImageFormat ppm = new PPM(10, 10);
+    ImageFormat ppm = new Image(10, 10);
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
@@ -55,7 +55,7 @@ public class FilteringOperationPPMTest {
     assertEquals(height, b.size());
     assertEquals(width, b.get(0).size());
     assertEquals(b, temp);
-    assertEquals(new PPM(b), new PPM(temp));
+    assertEquals(new Image(b), new Image(temp));
   }
 
 
@@ -64,7 +64,7 @@ public class FilteringOperationPPMTest {
 
     List<List<Color>> b = a.helperForColoringAndFiltering(Matrices.MATRIX_FOR_SHARPENING
         .getMatrix());
-    ImageFormat ppm = new PPM(10, 10);
+    ImageFormat ppm = new Image(10, 10);
     List<List<Integer>> red = ppm.getColorChannel(Coloring.RED);
     List<List<Integer>> green = ppm.getColorChannel(Coloring.GREEN);
     List<List<Integer>> blue = ppm.getColorChannel(Coloring.BLUE);
@@ -89,6 +89,6 @@ public class FilteringOperationPPMTest {
     assertEquals(height, b.size());
     assertEquals(width, b.get(0).size());
     assertEquals(b, temp);
-    assertEquals(new PPM(b), new PPM(temp));
+    assertEquals(new Image(b), new Image(temp));
   }
 }
