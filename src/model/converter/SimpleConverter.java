@@ -48,7 +48,7 @@ public class SimpleConverter implements Converter {
 
   @Override
   public void exportImage(String fileName, FileFormat fileFormat) throws IllegalArgumentException {
-    String file = null;
+    String file;
     switch (fileFormat) {
       case PNG:
         file = "png";
@@ -58,7 +58,7 @@ public class SimpleConverter implements Converter {
         break;
       case PPM:
         ImageUtil.exportPPM(fileName, getListOfColor());
-        break;
+        return;
       default:
         throw new IllegalArgumentException("file extension not supported");
     }

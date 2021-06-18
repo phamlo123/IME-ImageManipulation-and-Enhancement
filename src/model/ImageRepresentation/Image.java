@@ -55,10 +55,10 @@ public class Image implements ImageFormat {
   private boolean verifyImport(String fileName) {
     try {
       Converter converter = new SimpleConverter(fileName);
-      return true;
     } catch (IllegalArgumentException e) {
       return false;
     }
+    return true;
   }
 
   /**

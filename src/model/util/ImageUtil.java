@@ -21,14 +21,13 @@ public class ImageUtil {
    * @param filename the path of the file.
    * @return a list of list of colors based on the information in the PPM file.
    */
-  public static List<List<Color>> readPPM(String filename) {
+  public static List<List<Color>> readPPM(String filename) throws IllegalArgumentException {
     Scanner sc;
 
     try {
       sc = new Scanner(new FileInputStream(filename));
     } catch (FileNotFoundException e) {
-      System.out.println("File " + filename + " not found!");
-      return null;
+      throw new IllegalArgumentException("file new found");
     }
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines
