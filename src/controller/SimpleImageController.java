@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +38,7 @@ public class SimpleImageController implements ImageController {
   }
 
   @Override
-  public void processInteractive() throws IllegalArgumentException {
+  public void processInteractive() throws IllegalStateException {
     this.renderCommands();
     Scanner scanner = new Scanner(in);
     while (scanner.hasNext()) {
@@ -46,14 +47,16 @@ public class SimpleImageController implements ImageController {
   }
 
   @Override
-  public void processFile(File fileName) throws FileNotFoundException, IllegalArgumentException {
-    this.renderCommands();
+  public void processFile(File fileName) throws FileNotFoundException, IllegalStateException {
     Scanner scanner = new Scanner(fileName);
     while (scanner.hasNext()) {
       this.process(scanner.next(), scanner);
     }
   }
 
+  /**
+   * Prints the available commands to the console for the user to see.
+   */
   private void renderCommands() {
     System.out.println("Available commands include:");
     System.out.println("blur //blur the image");
@@ -65,10 +68,19 @@ public class SimpleImageController implements ImageController {
     System.out.println("save (fileName) (fileFormat) //save images");
     System.out.println("visible (layerIndex) //set to visible");
     System.out.println("invisible (layerIndex) //set to invisible");
-    System.out.println("current (layerIndex) //set current layer\n");
+    System.out.println("current (layerIndex) //set current layer");
+    System.out.println("end //ends the program\n");
   }
 
-  private void process(String command, Scanner scanner) throws IllegalArgumentException {
+  /**
+   * Method to handle all the commands available to the user for image processing.
+   *
+   * @param command the command to be executed, if it exists. If it does not exist, the method asks
+   *                the user to enter a valid command
+   * @param scanner the scanner used to read input from the user
+   * @throws IllegalStateException if the scanner has no more input to read
+   */
+  private void process(String command, Scanner scanner) throws IllegalStateException {
     ImageCommand cmd = null;
     switch (command) {
       case "blur":
@@ -86,39 +98,66 @@ public class SimpleImageController implements ImageController {
       case "create":
         cmd = new CreateCommand();
         break;
+      case "remove":
+        cmd = new RemoveCommand(this.toInt(scanner));
+        break;
+      case "getCurrent":
+        cmd = new GetCurrentCommand();
+        break;
       case "load":
         cmd = new LoadCommand(new Image(this.getNext(scanner)),
-            this.toInt(this.getNext(scanner)));
+            this.toInt(scanner));
         break;
       case "save":
-        cmd = new SaveCommand(this.getNext(scanner), this.toFormat(this.getNext(scanner)));
+        cmd = new SaveCommand(this.getNext(scanner), this.toFormat(scanner));
         break;
       case "visible":
-        cmd = new VisibleCommand(this.toInt(this.getNext(scanner)), true);
+        cmd = new VisibleCommand(this.toInt(scanner), true);
         break;
       case "invisible":
-        cmd = new VisibleCommand(this.toInt(this.getNext(scanner)), false);
+        cmd = new VisibleCommand(this.toInt(scanner), false);
         break;
       case "current":
-        cmd = new CurrentCommand(this.toInt(this.getNext(scanner)));
+        cmd = new CurrentCommand(this.toInt(scanner));
+        break;
+      case "end":
+        System.exit(0);
     }
     if (cmd != null) {
-      cmd.go(model);
+      try {
+        cmd.go(model);
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+      }
     } else {
-      throw new IllegalArgumentException("Illegal command");
+      System.out.println("Please enter a valid command");
     }
   }
 
-  private String getNext(Scanner scanner) throws IllegalArgumentException {
+  /**
+   * Gets the next thing the user inputs as a String.
+   * @param scanner the scanner used to retrieve the user input
+   * @return the next piece of user input as a String
+   * @throws IllegalStateException if there is nothing for the scanner to read
+   */
+  private String getNext(Scanner scanner) throws IllegalStateException {
     if (scanner.hasNext()) {
       return scanner.next();
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalStateException();
     }
   }
 
-  private FileFormat toFormat(String s) throws IllegalArgumentException {
-    switch (s) {
+  /**
+   * Converts the next piece of user input from a String into a valid file format type. If the
+   * input is not a valid file format type, the method asks the user to input a valid
+   * file format type.
+   * @param scanner the scanner used to retrieve the user input
+   * @return the correct FileFormat that corresponds to the user input
+   * @throws IllegalStateException if there is nothing for the scanner to read
+   */
+  private FileFormat toFormat(Scanner scanner) throws IllegalStateException {
+    switch (this.getNext(scanner)) {
       case "png":
         return FileFormat.PNG;
       case "jpg":
@@ -127,31 +166,36 @@ public class SimpleImageController implements ImageController {
       case "ppm":
         return FileFormat.PPM;
       default:
-        throw new IllegalArgumentException("Invalid file format");
+        System.out.println("Please enter a valid file format");
+        return this.toFormat(scanner);
     }
   }
 
-  private int toInt(String s) throws IllegalArgumentException {
+  /**
+   * Converts the next piece of user input to an integer, if it can be. If not, the method
+   * asks the user to input a valid number.
+   * @param scanner the scanner used to retrieve the user input
+   * @return the integer converted from the given String user input
+   * @throws IllegalStateException
+   */
+  private int toInt(Scanner scanner) throws IllegalStateException {
     try {
-      return Integer.parseInt(s);
+      return Integer.parseInt(this.getNext(scanner));
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("Cannot parse String to int");
+      System.out.println("Please enter a valid number");
+      return toInt(scanner);
     }
   }
 
   public static void main(String[] args) {
-    /*
+
     List<ImageFormat> images = new ArrayList<>(
         Arrays.asList(new Image("Koala.ppm"), new Image("diagram.png"), new Image("abc.jpg")));
     ImageController controller = new SimpleImageController(new MultiLayeredImages(images),
         new InputStreamReader(System.in));
     controller.processInteractive();
 
-     */
-    List<ImageFormat> images = new ArrayList<>(
-        Arrays.asList(new Image("Koala.ppm"), new Image("diagram.png"), new Image("abc.jpg")));
-    MultiLayers multiLayers = new MultiLayeredImages(images);
-    multiLayers.createMonochrome();
-    multiLayers.getCurrentLayer().getConverter().exportImage("hello",FileFormat.JPEG);
+    ImageCommand load = new LoadCommand(null,2);
+
   }
 }
