@@ -155,7 +155,7 @@ public class MultiLayeredImages implements MultiLayers {
     return imageOp.getImage();
   }
 
-  private void exportAll() {
+  public void exportAll() {
     for (ImageFormat i : this.imageLayers) {
       i.getConverter().exportImage("a", FileFormat.JPEG);
     }
