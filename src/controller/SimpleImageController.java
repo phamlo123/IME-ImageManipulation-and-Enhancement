@@ -70,8 +70,10 @@ public class SimpleImageController implements ImageController {
     this.output("gray //make the image monochrome\n");
     this.output("sepia //make the image sepia\n");
     this.output("create //adds a new layer\n");
+    this.output("remove (layerIndex) //remove the given layer");
     this.output("load (imageFormat) (layerIndex) //loads images\n");
     this.output("save (fileName) (fileFormat) //save images\n");
+    this.output("export //export all the images");
     this.output("visible (layerIndex) //set to visible\n");
     this.output("invisible (layerIndex) //set to invisible\n");
     this.output("current (layerIndex) //set current layer\n");
@@ -108,13 +110,15 @@ public class SimpleImageController implements ImageController {
       case "remove":
         cmd = new RemoveCommand(this.toInt(scanner));
         break;
-
       case "load":
         cmd = new LoadCommand(new Image(this.getNext(scanner)),
             this.toInt(scanner));
         break;
       case "save":
         cmd = new SaveCommand(this.getNext(scanner), this.toFormat(scanner));
+        break;
+      case "export":
+        cmd = new ExportAllCommand(this.getNext(scanner));
         break;
       case "visible":
         cmd = new VisibleCommand(this.toInt(scanner), true);

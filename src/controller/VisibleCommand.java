@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Objects;
 import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.util.ImageUtil;
 
 /**
  * Command class used for setting images in the model as visible or invisible.
@@ -25,7 +26,7 @@ public class VisibleCommand implements ImageCommand {
 
   @Override
   public void go(MultiLayers model) {
-    Objects.requireNonNull(model);
+    ImageUtil.checkNull(model);
     model.setInvisibility(layerIndex, visible);
   }
 }
