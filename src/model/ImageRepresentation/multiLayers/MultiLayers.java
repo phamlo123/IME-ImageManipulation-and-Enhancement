@@ -52,13 +52,6 @@ public interface MultiLayers extends Images {
   void setCurrent(int index);
 
   /**
-   * Get the current layer as an image object.
-   *
-   * @return the image object in the current layer.
-   */
-  ImageFormat getCurrentLayer();
-
-  /**
    * Get the layer index of the current layer.
    *
    * @return the index of the current layer.

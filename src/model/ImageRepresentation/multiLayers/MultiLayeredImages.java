@@ -11,6 +11,11 @@ import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.ImageImplPPM;
 import model.Images;
 
+/**
+ * This class implements the MultiLayers interface to provide mechanisms to represent multiple
+ * layers, each can contain an individual image (ImageFormat). Filtering and Coloring operations can
+ * also be performed on the image that is in the current layer
+ */
 public class MultiLayeredImages implements MultiLayers {
 
   private List<ImageFormat> imageLayers;
@@ -18,14 +23,27 @@ public class MultiLayeredImages implements MultiLayers {
   private ImageFormat currentLayer;
   private Images imageOp;
 
-  public MultiLayeredImages(List<ImageFormat> imageLayers) {
+  /**
+   * This create an instance of this class by assigning the list of images to the layers of this
+   * object. And set the current layer to be the top most layer and all layers are set to be visible.
+   * @param imageLayers is the list of images being passed in.
+   * @throws IllegalArgumentException if the list of images is null or any of its element is null
+   */
+  public MultiLayeredImages(List<ImageFormat> imageLayers) throws IllegalArgumentException {
     Objects.requireNonNull(imageLayers);
+    for(ImageFormat i: imageLayers) {
+      Objects.requireNonNull(i);
+    }
     this.imageLayers = imageLayers;
     this.listVisibility = setUpVisibility(imageLayers);
     this.currentLayer = imageLayers.get(imageLayers.size() - 1);
     this.imageOp = new ImageImplPPM(currentLayer);
   }
 
+  /**
+   * Create an instance of this class with an empty list of layers and everything else being empty
+   * or null.
+   */
   public MultiLayeredImages() {
     this.currentLayer = null;
     this.imageLayers = new ArrayList<>();
@@ -34,6 +52,12 @@ public class MultiLayeredImages implements MultiLayers {
   }
 
 
+  /**
+   * Helper method to help set up visibility status of the given list of images. All non-null images
+   * are set to be visible by default, and non-visible otherwise.
+   * @param imageLayers is the given list of images
+   * @return a list of booleans representing visibility of all the images in this list.
+   */
   private List<Boolean> setUpVisibility(List<ImageFormat> imageLayers) {
     List<Boolean> listOfVisibility = new ArrayList<>();
     for (int i = 0; i < imageLayers.size(); i++) {
@@ -103,10 +127,6 @@ public class MultiLayeredImages implements MultiLayers {
     currentLayer = imageLayers.get(index);
   }
 
-  @Override
-  public ImageFormat getCurrentLayer() {
-    return new Image(currentLayer.getImage());
-  }
 
   @Override
   public int getCurrentLayerIndex() {
@@ -184,7 +204,6 @@ public class MultiLayeredImages implements MultiLayers {
     multiLayers.createSepia();
 
     multiLayers.exportAll("cde");
-
 
   }
 }
