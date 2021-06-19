@@ -1,14 +1,17 @@
+package model;
+
 import static org.junit.Assert.*;
 
 import model.Coloring;
 import model.FileFormat;
+import model.ImageExamples;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the PPM class and all of its methods function correctly
+ * Test class to ensure that the PPM class and all of its methods function correctly.
  */
 public class TestPPM {
 

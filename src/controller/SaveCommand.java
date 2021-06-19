@@ -3,6 +3,7 @@ package controller;
 import java.util.Objects;
 import model.FileFormat;
 import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.util.ImageUtil;
 
 /**
  * Command class used for saving images from the model to a file.
@@ -19,15 +20,15 @@ public class SaveCommand implements ImageCommand {
    * @param fileFormat  the type of file to create (png, jpg, or ppm)
    */
   public SaveCommand(String fileName, FileFormat fileFormat) {
-    Objects.requireNonNull(fileFormat);
-    Objects.requireNonNull(fileName);
+    ImageUtil.checkNull(fileName);
+    ImageUtil.checkNull(fileFormat);
     this.fileName = fileName;
     this.fileFormat = fileFormat;
   }
 
   @Override
   public void go(MultiLayers model) {
-    Objects.requireNonNull(model);
+    ImageUtil.checkNull(model);
     model.saveImages(fileName, fileFormat);
   }
 }
