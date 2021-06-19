@@ -61,7 +61,7 @@ public class MultiLayeredImages implements MultiLayers {
   @Override
   public void loadImages(ImageFormat imageFormat, int layerIndex) {
     if (layerIndex < 0 || layerIndex >= this.imageLayers.size()) {
-      throw new IllegalArgumentException("Invalid layer Index");
+      throw new IllegalArgumentException("Index " + layerIndex + " out of bounds");
     }
     if (imageFormat == null) {
       throw new IllegalArgumentException("Provided image to be loaded is null");
@@ -79,7 +79,7 @@ public class MultiLayeredImages implements MultiLayers {
   @Override
   public void removeLayer(int layerIndex) throws IllegalArgumentException {
     if (layerIndex < 0 || layerIndex >= this.imageLayers.size()) {
-      throw new IllegalArgumentException("Invalid layer Index");
+      throw new IllegalArgumentException("Index " + layerIndex + " out of bounds");
     }
     imageLayers.remove(layerIndex);
   }
@@ -87,7 +87,7 @@ public class MultiLayeredImages implements MultiLayers {
   @Override
   public void setInvisibility(int layerIndex, boolean visible) throws IllegalArgumentException {
     if (layerIndex < 0 || layerIndex >= listVisibility.size()) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Index " + layerIndex + " out of bounds");
     } else {
       listVisibility.set(layerIndex, visible);
     }
@@ -97,7 +97,7 @@ public class MultiLayeredImages implements MultiLayers {
   @Override
   public void setCurrent(int index) throws IllegalArgumentException {
     if (index < 0 || index >= imageLayers.size()) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Index " + index + " out of bounds");
     }
     currentLayer = imageLayers.get(index);
   }
@@ -156,16 +156,16 @@ public class MultiLayeredImages implements MultiLayers {
   }
 
   private void exportAll() {
-    for(ImageFormat i: this.imageLayers) {
+    for (ImageFormat i : this.imageLayers) {
       i.getConverter().exportImage("a", FileFormat.JPEG);
     }
   }
 
 
-
   public static void main(String[] args) {
-    MultiLayers multiLayers = new MultiLayeredImages(new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
-        new Image("sample.ppm"), new Image("abc.jpg"))));
+    MultiLayers multiLayers = new MultiLayeredImages(
+        new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
+            new Image("sample.ppm"), new Image("abc.jpg"))));
 
     multiLayers.createSepia();
 
