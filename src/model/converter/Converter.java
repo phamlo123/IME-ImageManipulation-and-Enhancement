@@ -13,4 +13,6 @@ public interface Converter {
 
   List<List<Color>> getListOfColor();
 
+  String exportWithPath(String fileName);
+
 }

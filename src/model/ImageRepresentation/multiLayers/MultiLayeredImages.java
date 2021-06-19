@@ -1,5 +1,6 @@
 package model.ImageRepresentation.multiLayers;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -155,9 +156,22 @@ public class MultiLayeredImages implements MultiLayers {
     return imageOp.getImage();
   }
 
-  private void exportAll() {
+  @Override
+  public void exportAll(String baseName) {
+    int t = 0;
+    StringBuilder stringBuilder = new StringBuilder();
     for (ImageFormat i : this.imageLayers) {
-      i.getConverter().exportImage("a", FileFormat.JPEG);
+      t = t + 1;
+      String name = baseName + "" + t + "";
+      stringBuilder.append(i.getConverter().exportWithPath(name));
+      stringBuilder.append("\n");
+    }
+    try {
+      FileWriter fileWriter = new FileWriter(baseName + ".txt");
+      fileWriter.write(stringBuilder.toString());
+      fileWriter.close();
+    } catch (IOException e) {
+      System.out.print(e.getMessage());
     }
   }
 
@@ -169,7 +183,7 @@ public class MultiLayeredImages implements MultiLayers {
 
     multiLayers.createSepia();
 
-    multiLayers.saveImages("tttt", FileFormat.JPEG);
+    multiLayers.exportAll("cde");
 
 
   }
