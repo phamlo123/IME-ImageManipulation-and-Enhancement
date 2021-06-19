@@ -176,7 +176,7 @@ public class SimpleImageController implements ImageController {
    * asks the user to input a valid number.
    * @param scanner the scanner used to retrieve the user input
    * @return the integer converted from the given String user input
-   * @throws IllegalStateException
+   * @throws IllegalStateException if there is nothing for the scanner to read
    */
   private int toInt(Scanner scanner) throws IllegalStateException {
     try {
@@ -194,8 +194,6 @@ public class SimpleImageController implements ImageController {
     ImageController controller = new SimpleImageController(new MultiLayeredImages(images),
         new InputStreamReader(System.in));
     controller.processInteractive();
-
-    ImageCommand load = new LoadCommand(null,2);
 
   }
 }
