@@ -101,9 +101,7 @@ public class SimpleImageController implements ImageController {
       case "remove":
         cmd = new RemoveCommand(this.toInt(scanner));
         break;
-      case "getCurrent":
-        cmd = new GetCurrentCommand();
-        break;
+
       case "load":
         cmd = new LoadCommand(new Image(this.getNext(scanner)),
             this.toInt(scanner));
