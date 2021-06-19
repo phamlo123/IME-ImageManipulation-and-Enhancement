@@ -1,5 +1,11 @@
 package controller;
 
-public class BlurCommand {
+import model.ImageRepresentation.multiLayers.MultiLayers;
 
+public class BlurCommand implements ImageCommand {
+
+  @Override
+  public void go(MultiLayers model) {
+    model.blurringImage();
+  }
 }

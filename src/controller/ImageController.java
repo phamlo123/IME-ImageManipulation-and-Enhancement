@@ -9,13 +9,13 @@ public interface ImageController {
    * Processes the commands desired by the user input from the console interactively
    * @throws IllegalStateException
    */
-  void processInteractive();
+  void processInteractive() throws IllegalArgumentException ;
 
   /**
    * Processes the commands desired by the user input from a file
    * @param fileName
    * @throws IllegalStateException
    */
-  void processFile(File fileName) throws FileNotFoundException;
+  void processFile(File fileName) throws FileNotFoundException, IllegalArgumentException;
 
 }
