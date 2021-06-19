@@ -32,6 +32,7 @@ public class ImageImplPPM implements Images {
     this.image = new Image(imagingOperation.helperForColoringAndFiltering(matrix));
   }
 
+
   @Override
   public void sharpeningImage() {
     List<List<Double>> matrix = Matrices.MATRIX_FOR_SHARPENING.getMatrix();
