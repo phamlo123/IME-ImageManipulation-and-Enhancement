@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Objects;
 import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.util.ImageUtil;
 
 /**
  * Command class used for removing the specified layer from the model.
@@ -19,8 +20,8 @@ public class RemoveCommand implements ImageCommand {
   }
 
   @Override
-  public void go(MultiLayers model) {
-    Objects.requireNonNull(model);
+  public void go(MultiLayers model) throws IllegalArgumentException {
+    ImageUtil.checkNull(model);
     model.removeLayer(layerIndex);
   }
 }

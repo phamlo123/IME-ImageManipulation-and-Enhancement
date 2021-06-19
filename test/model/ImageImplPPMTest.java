@@ -1,9 +1,12 @@
+package model;
+
 import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import model.Coloring;
+import model.ImageExamples;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageImplPPM;
 import model.ImageRepresentation.ImageFormat;

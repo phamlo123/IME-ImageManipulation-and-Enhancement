@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -138,6 +139,17 @@ public class ImageUtil {
       fileWriter.close();
     } catch (IOException e) {
       System.out.print(e.getMessage());
+    }
+  }
+
+  /**
+   * Checks if the given object is null. If it is, throws an exception.
+   * @param object the object to be checked
+   * @throws IllegalArgumentException if the given object is null
+   */
+  public static void checkNull(Object object) throws IllegalArgumentException {
+    if (object == null) {
+      throw new IllegalArgumentException("Cannot pass null parameters");
     }
   }
 }

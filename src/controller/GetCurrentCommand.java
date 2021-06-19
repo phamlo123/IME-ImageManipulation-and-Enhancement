@@ -5,13 +5,13 @@ import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
- * Command class used for making the images in the model monochrome.
+ * Command class used for getting the current layer in the model.
  */
-public class GrayCommand implements ImageCommand {
+public class GetCurrentCommand implements ImageCommand {
 
   @Override
   public void go(MultiLayers model) throws IllegalArgumentException {
     ImageUtil.checkNull(model);
-    model.createMonochrome();
+    model.getCurrentLayer();
   }
 }
