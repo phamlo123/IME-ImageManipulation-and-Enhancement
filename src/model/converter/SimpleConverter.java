@@ -69,6 +69,9 @@ public class SimpleConverter implements Converter {
     }
   }
 
+
+
+
   @Override
   public List<List<Color>> getListOfColor() {
     int height = bufferedImage.getHeight();
@@ -81,6 +84,18 @@ public class SimpleConverter implements Converter {
       }
     }
     return listOfColor;
+  }
+
+  @Override
+  public String exportWithPath(String fileName) {
+    try {
+      File f = new File(fileName);
+      ImageIO.write(this.bufferedImage, "jpg", new File(fileName));
+      return f.getAbsolutePath();
+    } catch (IOException e) {
+      System.out.println("Error writing image to " + fileName);
+      return null;
+    }
   }
 
 }

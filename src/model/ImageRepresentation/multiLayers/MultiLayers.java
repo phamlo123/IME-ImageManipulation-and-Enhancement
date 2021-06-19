@@ -68,6 +68,7 @@ public interface MultiLayers extends Images {
   /**
    * Export all of the non-null images in the layers of this object. The exported file is a text
    * file that contains the locations of all the exported image files.
+   * @param baseName the base for the File names of the exported image files
    */
-  void exportAll();
+  void exportAll(String baseName);
 }
