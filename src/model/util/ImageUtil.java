@@ -108,9 +108,10 @@ public class ImageUtil {
 
 
   /**
-   * Exports the image stored in this PPM to the file name given.
+   * Exports the image stored in this List of List of Colors to the file name given.
    *
    * @param fileName the name of the file to write to
+   * @param image is the list that contains color values for all pixels in the exported image
    */
   public static void exportPPM(String fileName, List<List<Color>> image) {
 

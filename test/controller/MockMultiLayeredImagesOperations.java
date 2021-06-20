@@ -77,6 +77,11 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
   }
 
   @Override
+  public void importAll(String textFile) {
+
+  }
+
+  @Override
   public void blurringImage() {
     log.append("blurringImage called.");
   }

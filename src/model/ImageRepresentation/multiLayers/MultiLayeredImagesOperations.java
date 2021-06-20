@@ -290,13 +290,4 @@ public class MultiLayeredImagesOperations implements MultiLayers {
   }
 
 
-  public static void main(String[] args) {
-    MultiLayers multiLayers = new MultiLayeredImagesOperations(
-        new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
-            new Image("sample.ppm"), new Image("abc.jpg"))));
-
-    multiLayers.exportAll("TGB", FileFormat.JPEG);
-    MultiLayers multiLayers1 = new MultiLayeredImagesOperations("TGB.txt");
-    System.out.println(multiLayers1.getLayer(0));
-  }
 }

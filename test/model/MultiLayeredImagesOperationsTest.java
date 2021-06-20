@@ -46,9 +46,9 @@ public class MultiLayeredImagesOperationsTest {
   @Test
   public void testSaveImages() {
     MultiLayers multiLayers = new MultiLayeredImagesOperations(new ArrayList<>(Arrays.asList(abc)));
-    multiLayers.saveImages("ForTesting", FileFormat.JPEG);
-    Image image = new Image("ForTesting.jpg");
-    assertEquals(image.getImage(), abc.getImage());
+    multiLayers.saveImages("ForTesting", FileFormat.PNG);
+    Image image = new Image("ForTesting.png");
+    assertEquals(image, abc);
   }
 
   @Test
@@ -229,14 +229,14 @@ public class MultiLayeredImagesOperationsTest {
   @Test
   public void testExportAll() {
     MultiLayers multiLayers = new MultiLayeredImagesOperations(listOfImage);
-    multiLayers.exportAll("cdf", FileFormat.PPM);
+    multiLayers.exportAll("cdf", FileFormat.PNG);
     MultiLayers multiLayers1 = new MultiLayeredImagesOperations("cdf.txt");
     assertEquals(3, multiLayers1.getNumLayers());
     assertEquals(northeastern, multiLayers1.getLayer(0));
     assertEquals(abc, multiLayers1.getLayer(1));
     assertEquals(dragon, multiLayers1.getLayer(2));
-
   }
+
 
   @Test
   public void testLoadingMultiLayer() {
@@ -278,6 +278,28 @@ public class MultiLayeredImagesOperationsTest {
     multiLayers.removeLayer(2);
     multiLayers.getLayer(2);
   }
+
+  @Test
+  public void testImportAll() {
+    MultiLayers m = new MultiLayeredImagesOperations(listOfImage);
+    m.exportAll("ForTest", FileFormat.PPM);
+    MultiLayers m1 = new MultiLayeredImagesOperations();
+    m1.importAll("ForTest.txt");
+    assertEquals(3, m1.getNumLayers());
+    assertEquals(m1.getLayer(0), m.getLayer(0));
+    assertEquals(m1.getLayer(1), m.getLayer(1));
+    assertEquals(m1.getLayer(2), m.getLayer(2));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testImportNonExistent() {
+    MultiLayers m = new MultiLayeredImagesOperations();
+    m.importAll("something.txt");
+  }
+
+
+
+
 
 
 

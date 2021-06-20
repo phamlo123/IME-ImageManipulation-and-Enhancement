@@ -69,7 +69,7 @@ public interface MultiLayers extends ImagesOperations {
   void exportAll(String baseName, FileFormat fileFormat) throws IllegalArgumentException;
 
   /**
-   * Get the image in the given layer
+   * Get the image in the given layer.
    *
    * @param layerIndex the index of the given layer
    * @return the image of the given layer
@@ -77,14 +77,14 @@ public interface MultiLayers extends ImagesOperations {
   ImageFormat getLayer(int layerIndex);
 
   /**
-   * Get the number of layers in this object
+   * Get the number of layers in this object.
    *
    * @return the number of layers
    */
   int getNumLayers();
 
   /**
-   * Find out if the given layer is visible
+   * Find out if the given layer is visible.
    *
    * @param layerIndex is the index of the given layer
    * @return a boolean whether the given layer is visible
@@ -93,5 +93,9 @@ public interface MultiLayers extends ImagesOperations {
   boolean isVisible(int layerIndex) throws IllegalArgumentException;
 
 
+  /**
+   * Load all image files whose paths are in the given text file to this object.
+   * @param textFile is the name of the text file where paths to other images are included
+   */
   void importAll(String textFile);
 }
