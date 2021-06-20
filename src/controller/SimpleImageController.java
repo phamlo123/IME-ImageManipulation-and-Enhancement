@@ -52,7 +52,13 @@ public class SimpleImageController implements ImageController {
   public void processFile(File fileName)
       throws FileNotFoundException, IllegalStateException, IllegalArgumentException {
     ImageUtil.checkNull(fileName);
-    Scanner scanner = new Scanner(fileName);
+    this.renderCommands();
+    Scanner scanner;
+    try {
+      scanner = new Scanner(fileName);
+    } catch (FileNotFoundException e) {
+      throw new FileNotFoundException();
+    }
     while (scanner.hasNext()) {
       this.process(scanner.next(), scanner);
     }
@@ -86,10 +92,9 @@ public class SimpleImageController implements ImageController {
    * @param command the command to be executed, if it exists. If it does not exist, the method asks
    *                the user to enter a valid command
    * @param scanner the scanner used to read input from the user
-   * @throws IllegalStateException if there is nothing for the scanner to read, or the appendable
-   *                               has an error appending
+   * @throws IllegalStateException if the appendable has an error appending
    */
-  private void process(String command, Scanner scanner) throws IllegalStateException {
+  private void process(String command, Scanner scanner) {
     ImageCommand cmd = null;
     switch (command) {
       case "blur":
@@ -164,7 +169,7 @@ public class SimpleImageController implements ImageController {
    * @return the next piece of user input as a String
    * @throws IllegalStateException if there is nothing for the scanner to read
    */
-  private String getNext(Scanner scanner) throws IllegalStateException {
+  private String getNext(Scanner scanner) {
     if (scanner.hasNext()) {
       return scanner.next();
     } else {
@@ -178,8 +183,7 @@ public class SimpleImageController implements ImageController {
    *
    * @param scanner the scanner used to retrieve the user input
    * @return the correct FileFormat that corresponds to the user input
-   * @throws IllegalStateException if there is nothing for the scanner to read, or the appendable
-   *                               has an error appending
+   * @throws IllegalStateException if the appendable has an error appending
    */
   private FileFormat toFormat(Scanner scanner) throws IllegalStateException {
     switch (this.getNext(scanner)) {
@@ -202,8 +206,7 @@ public class SimpleImageController implements ImageController {
    *
    * @param scanner the scanner used to retrieve the user input
    * @return the integer converted from the given String user input
-   * @throws IllegalStateException if there is nothing for the scanner to read, or the appendable
-   *                               has an error appending
+   * @throws IllegalStateException if the appendable has an error appending
    */
   private int toInt(Scanner scanner) throws IllegalStateException {
     try {
