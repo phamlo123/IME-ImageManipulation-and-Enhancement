@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import model.Coloring;
+import model.enumTypes.Coloring;
 import model.converter.Converter;
 import model.converter.SimpleConverter;
 import model.util.ImageUtil;
 
+/**
+ * This class represents the program internal representation of an image.
+ */
 public class Image implements ImageFormat {
 
   private Converter converter;
@@ -17,21 +20,39 @@ public class Image implements ImageFormat {
   private List<List<Integer>> greenChannel;
   private List<List<Integer>> blueChannel;
 
+  /**
+   * Create an image with the given list of lists of color, which represents a RGB color value for
+   * all pixels in the image.
+   *
+   * @param listOfColor is the list being analyzed
+   */
   public Image(List<List<Color>> listOfColor) {
     if (listOfColor == null) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("list of color is null");
     }
     this.image = listOfColor;
+    this.converter = getConverter();
     setColoring(image);
   }
 
+  /**
+   * Create image with height 1024 and width 768, which is a checkerboard of alternating color
+   * value.
+   */
   public Image() {
     this.image = createListOfColor(1024, 768);
     setColoring(image);
     this.converter = getConverter();
   }
 
-
+  /**
+   * Create an image with a given height and width, which is a checkerboard of alternating color
+   * values.
+   *
+   * @param height of the image in pixel
+   * @param width  of the image in pixel
+   * @throws IllegalArgumentException if height or width is less than or equal to 0.
+   */
   public Image(int height, int width) {
     if (height <= 0 || width <= 0) {
       throw new IllegalArgumentException("Illegal height or width length");
@@ -42,23 +63,31 @@ public class Image implements ImageFormat {
     }
   }
 
-  public Image(String fileName) {
-    if (!verifyImport(fileName)) {
-      throw new IllegalArgumentException("Illegal Imported File");
-    }
-    this.converter = new SimpleConverter(fileName);
+  /**
+   * Create an image from an imported image file with the given file name.
+   *
+   * @param fileName is the name of the image file
+   */
+  public Image(String fileName) throws IllegalArgumentException {
+    this.converter = getImport(fileName);
     this.image = converter.getListOfColor();
     setColoring(getImage());
   }
 
-
-  private boolean verifyImport(String fileName) {
+  /**
+   * Get the converter from the imported image file with the given file name.
+   *
+   * @param fileName is the name of the file
+   * @return a Converted of the with the given imported File
+   * @throws IllegalArgumentException if the file cannot be imported
+   */
+  private Converter getImport(String fileName) throws IllegalArgumentException{
     try {
       Converter converter = new SimpleConverter(fileName);
+      return converter;
     } catch (IllegalArgumentException e) {
-      return false;
+      throw new IllegalArgumentException("Illegal Imported File");
     }
-    return true;
   }
 
   /**
@@ -89,7 +118,8 @@ public class Image implements ImageFormat {
 
   public List<List<Color>> getImage() {
     List<List<Color>> temp = new ArrayList<>();
-    for (int i = 0; i < image.size(); i++) {
+    int size = image.size();
+    for (int i = 0; i < size; i++) {
       temp.add(new ArrayList<>());
       for (int j = 0; j < image.get(i).size(); j++) {
         temp.get(i).add(image.get(i).get(j));
@@ -149,7 +179,7 @@ public class Image implements ImageFormat {
    * @param image the image to retrieve the color values of
    * @return the list of list of the specified color values for each pixel
    */
-  protected void setColoring(List<List<Color>> image) {
+  private void setColoring(List<List<Color>> image) {
     List<List<Integer>> red = new ArrayList<>();
     List<List<Integer>> green = new ArrayList<>();
     List<List<Integer>> blue = new ArrayList<>();
@@ -202,7 +232,6 @@ public class Image implements ImageFormat {
     return Objects.hash(getImage(), getColorChannel(Coloring.RED), getColorChannel(Coloring.GREEN),
         getColorChannel(Coloring.BLUE));
   }
-
 
 
 }

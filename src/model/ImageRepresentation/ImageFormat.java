@@ -1,15 +1,12 @@
 package model.ImageRepresentation;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
-import model.Coloring;
-import model.FileFormat;
+import model.enumTypes.Coloring;
 import model.converter.Converter;
 
 /**
- * This interface contains methods that can be performed on a ppm object.
+ * This interface contains methods that can be performed on an image object.
  */
 public interface ImageFormat {
 
@@ -24,7 +21,10 @@ public interface ImageFormat {
    */
   List<List<Integer>> getColorChannel(Coloring coloring) throws IllegalArgumentException;
 
-
+  /**
+   * Get the converter of this image.
+   * @return the Converter object of this image
+   */
   Converter getConverter();
 
 }

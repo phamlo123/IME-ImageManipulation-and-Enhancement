@@ -2,7 +2,9 @@ package controller;
 
 import static org.junit.Assert.*;
 
-import model.FileFormat;
+import controller.command.ImageCommand;
+import controller.command.SaveCommand;
+import model.enumTypes.FileFormat;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,11 +1,21 @@
 package controller;
 
+import controller.command.BlurCommand;
+import controller.command.CreateCommand;
+import controller.command.CurrentCommand;
+import controller.command.ExportAllCommand;
+import controller.command.GrayCommand;
+import controller.command.ImageCommand;
+import controller.command.LoadCommand;
+import controller.command.RemoveCommand;
+import controller.command.SaveCommand;
+import controller.command.SepiaCommand;
+import controller.command.SharpenCommand;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Scanner;
-import model.FileFormat;
+import model.enumTypes.FileFormat;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.util.ImageUtil;

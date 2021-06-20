@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.util.List;
-import model.Coloring;
+import model.enumTypes.Coloring;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
 import model.util.ImageUtil;

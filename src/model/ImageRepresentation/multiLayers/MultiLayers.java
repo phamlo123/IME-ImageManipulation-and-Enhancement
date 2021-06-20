@@ -1,6 +1,6 @@
 package model.ImageRepresentation.multiLayers;
 
-import model.FileFormat;
+import model.enumTypes.FileFormat;
 import model.ImageRepresentation.ImageFormat;
 import model.Images;
 
@@ -28,6 +28,7 @@ public interface MultiLayers extends Images {
   /**
    * Remove the layer with the specified index from this multi-layers object, cannot remove current
    * layer.
+   *
    * @param layerIndex is the index of the layer to be removed
    * @throws IllegalArgumentException if the index is out of bounds or if the layer to be removed is
    *                                  the current layer.
@@ -52,13 +53,6 @@ public interface MultiLayers extends Images {
   void setCurrent(int index);
 
   /**
-   * Get the current layer as an image object.
-   *
-   * @return the image object in the current layer.
-   */
-  ImageFormat getCurrentLayer();
-
-  /**
    * Get the layer index of the current layer.
    *
    * @return the index of the current layer.
@@ -68,7 +62,33 @@ public interface MultiLayers extends Images {
   /**
    * Export all of the non-null images in the layers of this object. The exported file is a text
    * file that contains the locations of all the exported image files.
+   *
    * @param baseName the base for the File names of the exported image files
    */
   void exportAll(String baseName);
+
+  /**
+   * Get the image in the given layer
+   *
+   * @param layerIndex the index of the given layer
+   * @return the image of the given layer
+   */
+  ImageFormat getLayer(int layerIndex);
+
+  /**
+   * Get the number of layers in this object
+   *
+   * @return the number of layers
+   */
+  int getNumLayers();
+
+  /**
+   * Find out if the given layer is visible
+   *
+   * @param layerIndex is the index of the given layer
+   * @return a boolean whether the given layer is visible
+   * @throws IllegalArgumentException if the index is out of bounds
+   */
+  boolean isVisible(int layerIndex) throws IllegalArgumentException;
+
 }

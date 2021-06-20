@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.Objects;
+import controller.command.ImageCommand;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.util.ImageUtil;
 

@@ -3,9 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.Coloring;
+import model.enumTypes.Coloring;
+import model.enumTypes.Matrices;
 import model.util.Arithmetic;
-import model.Matrices;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

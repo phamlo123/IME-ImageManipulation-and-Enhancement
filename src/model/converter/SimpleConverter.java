@@ -10,23 +10,39 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import model.FileFormat;
+import model.enumTypes.FileFormat;
 
 import model.util.ImageUtil;
 
+/**
+ * This class implements the Converter interface to represent a converting object for an image.
+ */
 public class SimpleConverter implements Converter {
 
   private BufferedImage bufferedImage;
 
+  /**
+   * Create an instance of this class by importing the image file with the given name and assign
+   * the image to the buffered Image field.
+   * @param fileName is the file name of the image to be imported
+   */
   public SimpleConverter(String fileName) {
     this();
     this.bufferedImage = importImage(fileName);
   }
 
+  /**
+   * Create a default instance of this class.
+   */
   public SimpleConverter() {
     this.bufferedImage = null;
   }
 
+  /**
+   * Create an instance of this class that assign the buffered image in the argument as the image
+   * of this object.
+   * @param bufferedImage is the image that is being assigned to the converter
+   */
   public SimpleConverter(BufferedImage bufferedImage) {
     this.bufferedImage = bufferedImage;
   }
@@ -63,7 +79,7 @@ public class SimpleConverter implements Converter {
         throw new IllegalArgumentException("file extension not supported");
     }
     try {
-      ImageIO.write(this.bufferedImage, file, new File(fileName));
+      ImageIO.write(this.bufferedImage, file, new File(fileName + "." + file));
     } catch (IOException e) {
       System.out.println("Error writing image to " + fileName);
     }
@@ -90,7 +106,7 @@ public class SimpleConverter implements Converter {
   public String exportWithPath(String fileName) {
     try {
       File f = new File(fileName);
-      ImageIO.write(this.bufferedImage, "jpg", new File(fileName));
+      ImageIO.write(bufferedImage, "jpg", new File(fileName + ".jpg"));
       return f.getAbsolutePath();
     } catch (IOException e) {
       System.out.println("Error writing image to " + fileName);

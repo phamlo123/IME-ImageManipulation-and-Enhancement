@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImageImplPPM;
+import model.ImageRepresentation.ImagesImpl;
 import model.ImageRepresentation.ImageFormat;
-import model.Images;
 
 /**
  * Class to hold the examples used by multiple test classes.
@@ -48,5 +47,5 @@ public class ImageExamples {
   }
 
 
-  Images ppmImage1 = new ImageImplPPM(ppmExample4);
+  Images ppmImage1 = new ImagesImpl(ppmExample4);
 }

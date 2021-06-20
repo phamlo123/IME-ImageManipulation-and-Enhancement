@@ -5,14 +5,14 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import model.Coloring;
+import model.enumTypes.Coloring;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
 import model.ImagingOps.ImagingOperation;
-import model.ImagingOps.ColoringOperationPPM;
-import model.ImagingOps.FilteringOperationPPM;
+import model.ImagingOps.ColoringOperation;
+import model.ImagingOps.FilteringOperation;
+import model.enumTypes.Matrices;
 import model.util.Arithmetic;
-import model.Matrices;
 import org.junit.Test;
 
 /***
@@ -20,11 +20,11 @@ import org.junit.Test;
  */
 public class FilteringOperationPPMTest {
 
-  ImagingOperation a = new FilteringOperationPPM(new Image(10, 10));
+  ImagingOperation a = new FilteringOperation(new Image(10, 10));
 
   @Test(expected = IllegalArgumentException.class)
   public void testNullConstructor() {
-    ImagingOperation a = new ColoringOperationPPM(null);
+    ImagingOperation a = new ColoringOperation(null);
   }
 
   @Test
