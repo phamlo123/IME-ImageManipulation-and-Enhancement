@@ -99,7 +99,7 @@ public class SimpleImageController implements ImageController {
     this.output("sepia //make the image sepia\n");
     this.output("create //adds a new layer\n");
     this.output("remove (layerIndex) //remove the given layer\n");
-    this.output("load (imageFormat) (layerIndex) //loads images\n");
+    this.output("load (fileName) (layerIndex) //loads images\n");
     this.output("save (fileName) (fileFormat) //save images\n");
     this.output("export //export all the images\n");
     this.output("visible (layerIndex) //set to visible\n");
