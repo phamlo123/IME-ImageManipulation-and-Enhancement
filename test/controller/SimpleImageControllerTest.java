@@ -9,7 +9,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import model.ImageRepresentation.Image;
-import model.ImageRepresentation.multiLayers.MultiLayeredImages;
+import model.ImageRepresentation.multiLayers.MultiLayeredImagesOperations;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,14 +58,14 @@ public class SimpleImageControllerTest {
   @Before
   public void setup() {
     examples = new ControllerExamples();
-    model = new MultiLayeredImages(
+    model = new MultiLayeredImagesOperations(
         new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
             new Image("sample.ppm"), new Image("abc.jpg"))));
     appendable = new StringBuilder();
     invalidAppendable = new InvalidAppendable();
     log = new StringBuilder();
     dontCareOutput = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
     dontCareInput = new StringReader("");
   }
 

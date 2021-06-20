@@ -14,11 +14,8 @@ import controller.command.SharpenCommand;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Scanner;
-import model.ImageRepresentation.multiLayers.MultiLayeredImages;
 import model.enumTypes.FileFormat;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.multiLayers.MultiLayers;
@@ -148,7 +145,7 @@ public class SimpleImageController implements ImageController {
         cmd = new SaveCommand(this.getNext(scanner), this.toFormat(scanner));
         break;
       case "export":
-        cmd = new ExportAllCommand(this.getNext(scanner));
+        cmd = new ExportAllCommand(this.getNext(scanner), this.toFormat(scanner));
         break;
       case "visible":
         cmd = new VisibleCommand(this.toInt(scanner), true);

@@ -22,7 +22,7 @@ public class GrayCommandTest {
   public void setup() {
     gray = new GrayCommand();
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // go tests

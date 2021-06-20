@@ -22,7 +22,7 @@ public class CreateCommandTest {
   public void setup() {
     create = new CreateCommand();
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // go tests

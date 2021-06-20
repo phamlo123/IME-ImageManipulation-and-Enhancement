@@ -2,13 +2,13 @@ package model.ImageRepresentation.multiLayers;
 
 import model.enumTypes.FileFormat;
 import model.ImageRepresentation.ImageFormat;
-import model.Images;
+import model.ImagesOperations;
 
 /**
  * This interface extends the Images interface to include methods that can be applied to multiple
  * layers of image objects.
  */
-public interface MultiLayers extends Images {
+public interface MultiLayers extends ImagesOperations {
 
   /**
    * Export the top most and visible layer into a certain image format.
@@ -64,8 +64,9 @@ public interface MultiLayers extends Images {
    * file that contains the locations of all the exported image files.
    *
    * @param baseName the base for the File names of the exported image files
+   * @param fileFormat
    */
-  void exportAll(String baseName);
+  void exportAll(String baseName, FileFormat fileFormat) throws IllegalArgumentException;
 
   /**
    * Get the image in the given layer

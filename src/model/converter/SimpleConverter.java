@@ -22,8 +22,9 @@ public class SimpleConverter implements Converter {
   private BufferedImage bufferedImage;
 
   /**
-   * Create an instance of this class by importing the image file with the given name and assign
-   * the image to the buffered Image field.
+   * Create an instance of this class by importing the image file with the given name and assign the
+   * image to the buffered Image field.
+   *
    * @param fileName is the file name of the image to be imported
    */
   public SimpleConverter(String fileName) {
@@ -39,8 +40,9 @@ public class SimpleConverter implements Converter {
   }
 
   /**
-   * Create an instance of this class that assign the buffered image in the argument as the image
-   * of this object.
+   * Create an instance of this class that assign the buffered image in the argument as the image of
+   * this object.
+   *
    * @param bufferedImage is the image that is being assigned to the converter
    */
   public SimpleConverter(BufferedImage bufferedImage) {
@@ -86,8 +88,6 @@ public class SimpleConverter implements Converter {
   }
 
 
-
-
   @Override
   public List<List<Color>> getListOfColor() {
     int height = bufferedImage.getHeight();
@@ -103,10 +103,27 @@ public class SimpleConverter implements Converter {
   }
 
   @Override
-  public String exportWithPath(String fileName) {
+  public String exportWithPath(String fileName, FileFormat fileFormat)
+      throws IllegalArgumentException {
+    String format;
+    switch (fileFormat) {
+      case JPEG:
+        format = "jpg";
+        break;
+      case PNG:
+        format = "png";
+        break;
+      case PPM:
+        ImageUtil.exportPPM(fileName, this.getListOfColor());
+        File f = new File(fileName);
+        String s = f.getAbsolutePath();
+        return s;
+      default:
+        throw new IllegalArgumentException();
+    }
     try {
       File f = new File(fileName);
-      ImageIO.write(bufferedImage, "jpg", new File(fileName + ".jpg"));
+      ImageIO.write(bufferedImage, format, new File(fileName));
       return f.getAbsolutePath();
     } catch (IOException e) {
       System.out.println("Error writing image to " + fileName);

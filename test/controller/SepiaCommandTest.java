@@ -22,7 +22,7 @@ public class SepiaCommandTest {
   public void setup() {
     sepia = new SepiaCommand();
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // go tests

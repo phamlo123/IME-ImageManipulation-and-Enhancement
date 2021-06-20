@@ -22,7 +22,7 @@ public class SharpenCommandTest {
   public void setup() {
     sharpen = new SharpenCommand();
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // go tests

@@ -81,7 +81,7 @@ public class Image implements ImageFormat {
    * @return a Converted of the with the given imported File
    * @throws IllegalArgumentException if the file cannot be imported
    */
-  private Converter getImport(String fileName) throws IllegalArgumentException{
+  private Converter getImport(String fileName) throws IllegalArgumentException {
     try {
       Converter converter = new SimpleConverter(fileName);
       return converter;
@@ -221,17 +221,14 @@ public class Image implements ImageFormat {
       return false;
     }
     Image image = (Image) o;
-    return Objects.equals(getImage(), image.getImage()) && Objects
-        .equals(getColorChannel(Coloring.RED), image.getColorChannel(Coloring.RED)) && Objects
-        .equals(getColorChannel(Coloring.GREEN), image.getColorChannel(Coloring.GREEN)) && Objects
-        .equals(getColorChannel(Coloring.BLUE), image.getColorChannel(Coloring.BLUE));
+    List<List<Color>> colors = getImage();
+    return colors.equals(image.getImage());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getImage(), getColorChannel(Coloring.RED), getColorChannel(Coloring.GREEN),
-        getColorChannel(Coloring.BLUE));
+    System.out.println("hello");
+    return Objects.hash(getImage());
   }
-
 
 }

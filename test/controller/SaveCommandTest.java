@@ -23,7 +23,7 @@ public class SaveCommandTest {
   public void setup() {
     save = new SaveCommand("hello", FileFormat.PNG);
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // constructor tests

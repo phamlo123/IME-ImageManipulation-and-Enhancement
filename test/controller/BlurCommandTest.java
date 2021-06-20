@@ -21,7 +21,7 @@ public class BlurCommandTest {
   public void setup() {
     blur = new BlurCommand();
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // go tests

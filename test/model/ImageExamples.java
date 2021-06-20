@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImagesImpl;
+import model.ImageRepresentation.ImagesOperationsImpl;
 import model.ImageRepresentation.ImageFormat;
 
 /**
@@ -47,5 +47,5 @@ public class ImageExamples {
   }
 
 
-  Images ppmImage1 = new ImagesImpl(ppmExample4);
+  ImagesOperations ppmImage1 = new ImagesOperationsImpl(ppmExample4);
 }

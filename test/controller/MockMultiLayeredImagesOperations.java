@@ -8,11 +8,11 @@ import model.ImageRepresentation.multiLayers.MultiLayers;
  * Mock class of MultiLayeredImages used to test the communication between the controller and
  * model.
  */
-public class MockMultiLayeredImages implements MultiLayers {
+public class MockMultiLayeredImagesOperations implements MultiLayers {
 
   StringBuilder log;
 
-  public MockMultiLayeredImages(StringBuilder log) {
+  public MockMultiLayeredImagesOperations(StringBuilder log) {
     this.log = log;
   }
 
@@ -56,9 +56,8 @@ public class MockMultiLayeredImages implements MultiLayers {
   }
 
   @Override
-  public void exportAll(String baseName, FileFormat fileFormat) throws IllegalArgumentException {
-    log.append("exportAll called. baseName = ").append(baseName).append(", fileFormat = ")
-        .append(fileFormat);
+  public void exportAll(String baseName, FileFormat fileFormat) {
+    log.append("exportAll called. baseName = ").append(baseName);
   }
 
   @Override

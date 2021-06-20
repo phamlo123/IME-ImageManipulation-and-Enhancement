@@ -21,7 +21,7 @@ public class VisibleCommandTest {
   public void setup() {
     visible = new VisibleCommand(0,true);
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // go tests

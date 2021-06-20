@@ -23,7 +23,7 @@ public class LoadCommandTest {
   public void setup() {
     load = new LoadCommand(new Image(ImageExamples.checkerboard()), 0);
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // constructor test

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import controller.command.ExportAllCommand;
 import controller.command.ImageCommand;
 import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.enumTypes.FileFormat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,9 +21,9 @@ public class ExportAllCommandTest {
 
   @Before
   public void setup() {
-    export = new ExportAllCommand("hello");
+    export = new ExportAllCommand("hello", FileFormat.PPM);
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // constructor test
@@ -30,7 +31,7 @@ public class ExportAllCommandTest {
   // throws an exception because the given String is null
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorNull() {
-    new ExportAllCommand(null);
+    new ExportAllCommand(null, FileFormat.PPM);
   }
 
   // go tests

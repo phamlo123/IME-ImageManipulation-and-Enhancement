@@ -22,7 +22,7 @@ public class RemoveCommandTest {
   public void setup() {
     remove = new RemoveCommand(0);
     log = new StringBuilder();
-    mockModel = new MockMultiLayeredImages(log);
+    mockModel = new MockMultiLayeredImagesOperations(log);
   }
 
   // go tests

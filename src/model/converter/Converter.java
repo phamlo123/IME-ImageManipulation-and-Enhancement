@@ -41,6 +41,6 @@ public interface Converter {
    * @param fileName is the name of the new image file
    * @return the path of the file
    */
-  String exportWithPath(String fileName);
+  String exportWithPath(String fileName, FileFormat fileFormat);
 
 }
