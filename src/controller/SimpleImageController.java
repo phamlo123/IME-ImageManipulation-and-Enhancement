@@ -1,16 +1,18 @@
 package controller;
 
 import controller.command.BlurCommand;
-import controller.command.CreateCommand;
+import controller.command.AddLayerCommand;
 import controller.command.CurrentCommand;
 import controller.command.ExportAllCommand;
 import controller.command.GrayCommand;
 import controller.command.ImageCommand;
+import controller.command.ImportAllCommand;
 import controller.command.ImportCommand;
 import controller.command.RemoveCommand;
 import controller.command.ExportCommand;
 import controller.command.SepiaCommand;
 import controller.command.SharpenCommand;
+import controller.command.VisibleCommand;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -97,7 +99,7 @@ public class SimpleImageController implements ImageController {
     this.output("sharpen //sharpen the image\n");
     this.output("gray //make the image monochrome\n");
     this.output("sepia //make the image sepia\n");
-    this.output("create //adds a new layer\n");
+    this.output("addLayer //adds a new layer\n");
     this.output("remove (layerIndex) //remove the given layer\n");
     this.output("import (fileName) (layerIndex) //loads images\n");
     this.output("importAll (fileName) //loads all the images in the given text file\n");
@@ -133,8 +135,8 @@ public class SimpleImageController implements ImageController {
       case "sepia":
         cmd = new SepiaCommand();
         break;
-      case "create":
-        cmd = new CreateCommand();
+      case "addLayer":
+        cmd = new AddLayerCommand();
         break;
       case "remove":
         cmd = new RemoveCommand(this.toInt(scanner));
@@ -144,8 +146,11 @@ public class SimpleImageController implements ImageController {
           cmd = new ImportCommand(new Image(this.getNext(scanner)),
               this.toInt(scanner));
         } catch (IllegalArgumentException e) {
-          this.output(e.getMessage() + ", Please re-enter correct file path.\n");
+          this.output(e.getMessage() + ", Please enter a valid command.\n");
         }
+        break;
+      case "importAll":
+        cmd = new ImportAllCommand(this.getNext(scanner));
         break;
       case "export":
         cmd = new ExportCommand(this.getNext(scanner), this.toFormat(scanner));

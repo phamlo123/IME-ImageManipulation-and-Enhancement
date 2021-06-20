@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the SaveCommand class and all of its methods
+ * Test class to ensure that the ExportCommand class and all of its methods
  * function correctly
  */
 public class ExportCommandTest {

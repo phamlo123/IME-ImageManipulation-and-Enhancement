@@ -5,7 +5,7 @@ import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
- * Command class used for loading the images in the model.
+ * Command class used for importing an image into the model.
  */
 public class ImportCommand implements ImageCommand {
 

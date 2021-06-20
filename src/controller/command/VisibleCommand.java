@@ -1,4 +1,4 @@
-package controller;
+package controller.command;
 
 import controller.command.ImageCommand;
 import model.ImageRepresentation.multiLayers.MultiLayers;

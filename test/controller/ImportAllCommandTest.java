@@ -3,6 +3,7 @@ package controller;
 import static org.junit.Assert.*;
 
 import controller.command.ImageCommand;
+import controller.command.ImportAllCommand;
 import controller.command.ImportCommand;
 import model.ImageExamples;
 import model.ImageRepresentation.Image;
@@ -11,17 +12,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the ImportCommand class and all of its methods function correctly
+ * Test class to ensure that the ImportAllCommand class and all of its methods
+ * function correctly
  */
-public class ImportCommandTest {
+public class ImportAllCommandTest {
 
-  ImageCommand load;
+  ImportAllCommand importAll;
   StringBuilder log;
   MultiLayers mockModel;
 
   @Before
   public void setup() {
-    load = new ImportCommand(new Image(ImageExamples.checkerboard()), 0);
+    importAll = new ImportAllCommand("hello");
     log = new StringBuilder();
     mockModel = new MockMultiLayeredImagesOperations(log);
   }
@@ -32,7 +34,7 @@ public class ImportCommandTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorNull() {
-    new ImportCommand(null,0);
+    new ImportAllCommand(null);
   }
 
   // go tests
@@ -40,14 +42,15 @@ public class ImportCommandTest {
   // throws an exception because the model given is null
   @Test(expected = IllegalArgumentException.class)
   public void testGoNull() {
-    load.go(null);
+    importAll.go(null);
   }
 
   // tests the normal functionality of the LoadCommand go method, makes sure the model calls
   // the correct method
   @Test
   public void testGoNormal() {
-    load.go(mockModel);
-    assertEquals("loadImages called. layerIndex = 0", log.toString());
+    importAll.go(mockModel);
+    assertEquals("importAll called. textFile = hello", log.toString());
   }
+
 }

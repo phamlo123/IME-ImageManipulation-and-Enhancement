@@ -5,7 +5,7 @@ import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
- * Command class used for saving images from the model to a file.
+ * Command class used for exporting the top image from the model to a file.
  */
 public class ExportCommand implements ImageCommand {
 
