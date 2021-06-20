@@ -3,7 +3,7 @@ package controller;
 import static org.junit.Assert.*;
 
 import controller.command.ImageCommand;
-import controller.command.LoadCommand;
+import controller.command.ImportCommand;
 import model.ImageExamples;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.multiLayers.MultiLayers;
@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * Test class to ensure that the LoadCommand class and all of its methods function correctly
  */
-public class LoadCommandTest {
+public class ImportCommandTest {
 
   ImageCommand load;
   StringBuilder log;
@@ -21,7 +21,7 @@ public class LoadCommandTest {
 
   @Before
   public void setup() {
-    load = new LoadCommand(new Image(ImageExamples.checkerboard()), 0);
+    load = new ImportCommand(new Image(ImageExamples.checkerboard()), 0);
     log = new StringBuilder();
     mockModel = new MockMultiLayeredImagesOperations(log);
   }
@@ -32,7 +32,7 @@ public class LoadCommandTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorNull() {
-    new LoadCommand(null,0);
+    new ImportCommand(null,0);
   }
 
   // go tests

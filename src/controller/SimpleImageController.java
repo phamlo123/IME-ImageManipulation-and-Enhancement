@@ -6,9 +6,9 @@ import controller.command.CurrentCommand;
 import controller.command.ExportAllCommand;
 import controller.command.GrayCommand;
 import controller.command.ImageCommand;
-import controller.command.LoadCommand;
+import controller.command.ImportCommand;
 import controller.command.RemoveCommand;
-import controller.command.SaveCommand;
+import controller.command.ExportCommand;
 import controller.command.SepiaCommand;
 import controller.command.SharpenCommand;
 import java.io.File;
@@ -99,9 +99,11 @@ public class SimpleImageController implements ImageController {
     this.output("sepia //make the image sepia\n");
     this.output("create //adds a new layer\n");
     this.output("remove (layerIndex) //remove the given layer\n");
-    this.output("load (fileName) (layerIndex) //loads images\n");
-    this.output("save (fileName) (fileFormat) //save images\n");
-    this.output("export //export all the images\n");
+    this.output("import (fileName) (layerIndex) //loads images\n");
+    this.output("importAll (fileName) //loads all the images in the given text file\n");
+    this.output(
+        "export (fileName) (fileFormat) //export the top image to the given name and format\n");
+    this.output("exportAll //export all the images to the given name and format\n");
     this.output("visible (layerIndex) //set to visible\n");
     this.output("invisible (layerIndex) //set to invisible\n");
     this.output("current (layerIndex) //set current layer\n");
@@ -137,18 +139,18 @@ public class SimpleImageController implements ImageController {
       case "remove":
         cmd = new RemoveCommand(this.toInt(scanner));
         break;
-      case "load":
+      case "import":
         try {
-          cmd = new LoadCommand(new Image(this.getNext(scanner)),
+          cmd = new ImportCommand(new Image(this.getNext(scanner)),
               this.toInt(scanner));
         } catch (IllegalArgumentException e) {
           this.output(e.getMessage() + ", Please re-enter correct file path.\n");
         }
         break;
-      case "save":
-        cmd = new SaveCommand(this.getNext(scanner), this.toFormat(scanner));
-        break;
       case "export":
+        cmd = new ExportCommand(this.getNext(scanner), this.toFormat(scanner));
+        break;
+      case "exportAll":
         cmd = new ExportAllCommand(this.getNext(scanner), this.toFormat(scanner));
         break;
       case "visible":

@@ -3,7 +3,7 @@ package controller;
 import static org.junit.Assert.*;
 
 import controller.command.ImageCommand;
-import controller.command.SaveCommand;
+import controller.command.ExportCommand;
 import model.enumTypes.FileFormat;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import org.junit.Before;
@@ -13,7 +13,7 @@ import org.junit.Test;
  * Test class to ensure that the SaveCommand class and all of its methods
  * function correctly
  */
-public class SaveCommandTest {
+public class ExportCommandTest {
 
   ImageCommand save;
   StringBuilder log;
@@ -21,7 +21,7 @@ public class SaveCommandTest {
 
   @Before
   public void setup() {
-    save = new SaveCommand("hello", FileFormat.PNG);
+    save = new ExportCommand("hello", FileFormat.PNG);
     log = new StringBuilder();
     mockModel = new MockMultiLayeredImagesOperations(log);
   }
@@ -31,13 +31,13 @@ public class SaveCommandTest {
   // throws an exception because the given fileName is null
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorFileNameNull() {
-    new SaveCommand(null, FileFormat.PNG);
+    new ExportCommand(null, FileFormat.PNG);
   }
 
   // throws an exception because the given FileFormat is null
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorFileFormatNull() {
-    new SaveCommand("hello", null);
+    new ExportCommand("hello", null);
   }
 
   // go tests
