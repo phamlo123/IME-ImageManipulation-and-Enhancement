@@ -53,7 +53,7 @@ public class SimpleImageController implements ImageController {
   }
 
   @Override
-  public void processInteractive() throws IllegalStateException {
+  public void processInteractive() throws IllegalStateException, FileNotFoundException {
     this.renderCommands();
     Scanner scanner = new Scanner(in);
     String next;
@@ -95,6 +95,7 @@ public class SimpleImageController implements ImageController {
    */
   private void renderCommands() throws IllegalStateException {
     this.output("Available commands include:\n");
+    this.output("file //run the given text file with valid commands\n");
     this.output("blur //blur the image\n");
     this.output("sharpen //sharpen the image\n");
     this.output("gray //make the image monochrome\n");
@@ -120,9 +121,15 @@ public class SimpleImageController implements ImageController {
    * @param scanner the scanner used to read input from the user
    * @throws IllegalStateException if the appendable has an error appending
    */
-  private void process(String command, Scanner scanner) {
+  private void process(String command, Scanner scanner) throws FileNotFoundException {
     ImageCommand cmd = null;
     switch (command) {
+      case "file":
+        try {
+          this.processFile(new File(this.getNext(scanner)));
+        } catch (FileNotFoundException e) {
+          this.output("File not found, Please enter another command\n");
+        }
       case "blur":
         cmd = new BlurCommand();
         break;
@@ -146,7 +153,7 @@ public class SimpleImageController implements ImageController {
           cmd = new ImportCommand(new Image(this.getNext(scanner)),
               this.toInt(scanner));
         } catch (IllegalArgumentException e) {
-          this.output(e.getMessage() + ", Please enter a valid command.\n");
+          this.output(e.getMessage() + ", Please enter a valid command\n");
         }
         break;
       case "importAll":

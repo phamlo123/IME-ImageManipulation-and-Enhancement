@@ -94,7 +94,7 @@ public class SimpleImageControllerTest {
   // throws an exception because the appendable has an error appending (using a custom faulty
   // appendable)
   @Test(expected = IllegalStateException.class)
-  public void testProcessInteractiveInvalidAppendable() {
+  public void testProcessInteractiveInvalidAppendable() throws FileNotFoundException {
     new SimpleImageController(model, new StringReader("blur end"), invalidAppendable)
         .processInteractive();
   }
@@ -102,7 +102,7 @@ public class SimpleImageControllerTest {
   // tests that the controller asks for a valid command when an invalid command is given (with
   // end to stop the program)
   @Test
-  public void testProcessInteractiveInvalidCommand() {
+  public void testProcessInteractiveInvalidCommand() throws FileNotFoundException {
     new SimpleImageController(model, new StringReader("invalid end"), appendable)
         .processInteractive();
     assertEquals(examples.toString1, appendable.toString());
@@ -112,7 +112,7 @@ public class SimpleImageControllerTest {
   // is given for a command that requires a number (with number to avoid exception and
   // end to stop the program)
   @Test
-  public void testProcessInteractiveInvalidNumber() {
+  public void testProcessInteractiveInvalidNumber() throws FileNotFoundException {
     new SimpleImageController(model, new StringReader("current notNumber 2 end"), appendable)
         .processInteractive();
     assertEquals(examples.toString2, appendable.toString());
@@ -122,7 +122,7 @@ public class SimpleImageControllerTest {
   // command that requires a file format (with valid format to avoid exception and
   // end to stop the program)
   @Test
-  public void testProcessInteractiveInvalidFileFormat() {
+  public void testProcessInteractiveInvalidFileFormat() throws FileNotFoundException {
     new SimpleImageController(model, new StringReader("export hello notFormat png end"), appendable)
         .processInteractive();
     assertEquals(examples.toString3, appendable.toString());
@@ -132,7 +132,7 @@ public class SimpleImageControllerTest {
   // command that requires a file (with valid file to avoid exception and
   // end to stop the program)
   @Test
-  public void testProcessInteractiveInvalidFile() {
+  public void testProcessInteractiveInvalidFile() throws FileNotFoundException {
     new SimpleImageController(model,
         new StringReader("import doesNotExist.png import Northeastern.ppm 0 end"), appendable)
         .processInteractive();
@@ -143,7 +143,7 @@ public class SimpleImageControllerTest {
   // command when the types of input given to the controller are correct, but are unreasonable to
   // use for the model (with end to stop the program)
   @Test
-  public void testProcessInteractiveInvalidModelParameters() {
+  public void testProcessInteractiveInvalidModelParameters() throws FileNotFoundException {
     new SimpleImageController(model, new StringReader("remove 5 end"), appendable)
         .processInteractive();
     assertEquals(examples.toString7, appendable.toString());
@@ -154,7 +154,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid blur command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveBlur() {
+  public void testProcessInteractiveBlur() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("blur end"), dontCareOutput)
         .processInteractive();
     assertEquals("blurringImage called.", log.toString());
@@ -163,7 +163,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid sharpen command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveSharpen() {
+  public void testProcessInteractiveSharpen() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("sharpen end"), dontCareOutput)
         .processInteractive();
     assertEquals("sharpeningImage called.", log.toString());
@@ -172,7 +172,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid gray command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveGray() {
+  public void testProcessInteractiveGray() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("gray end"), dontCareOutput)
         .processInteractive();
     assertEquals("createMonochrome called.", log.toString());
@@ -181,7 +181,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid sepia command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveSepia() {
+  public void testProcessInteractiveSepia() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("sepia end"), dontCareOutput)
         .processInteractive();
     assertEquals("createSepia called.", log.toString());
@@ -190,7 +190,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid addLayer command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveAddLayer() {
+  public void testProcessInteractiveAddLayer() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("addLayer end"), dontCareOutput)
         .processInteractive();
     assertEquals("addLayer called.", log.toString());
@@ -199,7 +199,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid remove command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveRemove() {
+  public void testProcessInteractiveRemove() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("remove 0 end"), dontCareOutput)
         .processInteractive();
     assertEquals("removeLayer called. layerIndex = 0", log.toString());
@@ -208,7 +208,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid import command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveImport() {
+  public void testProcessInteractiveImport() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("import Northeastern.ppm 0 end"),
         dontCareOutput)
         .processInteractive();
@@ -218,7 +218,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid importAll command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveImportAll() {
+  public void testProcessInteractiveImportAll() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("importAll ImportAll.txt end"),
         dontCareOutput)
         .processInteractive();
@@ -228,7 +228,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid export command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveExport() {
+  public void testProcessInteractiveExport() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("export toExportAll png end"),
         dontCareOutput)
         .processInteractive();
@@ -238,7 +238,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid exportAll command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveExportAll() {
+  public void testProcessInteractiveExportAll() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("exportAll toExport png end"),
         dontCareOutput)
         .processInteractive();
@@ -248,7 +248,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid visible command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveVisible() {
+  public void testProcessInteractiveVisible() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("visible 0 true end"), dontCareOutput)
         .processInteractive();
     assertEquals("setInvisibility called. layerIndex = 0, visible = true", log.toString());
@@ -257,7 +257,7 @@ public class SimpleImageControllerTest {
   // tests that the model receives the correct inputs for a valid current command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveCurrent() {
+  public void testProcessInteractiveCurrent() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("current 0 end"), dontCareOutput)
         .processInteractive();
     assertEquals("setCurrent called. index = 0", log.toString());
