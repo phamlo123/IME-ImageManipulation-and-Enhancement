@@ -65,3 +65,8 @@ java -jar hwork5.jar
 A list of available command will appear. You can call any command avaiable. However, note that a command after successfully run will not show message that it was successfully run. If some inputs are incorrect it will ask the user to re-enter the input until they are correct. You can quit the program by typing 
 
 
+Some design changes: 
+- ImagesOperations is not parameterized any more. We now know we have a consistent internal representation of images. 
+- We rename PPM to Image and completely got rid of PPM class. We put additional methods in ImageUtil class to help read and write a PPM image file since ImageIO does not support PPM
+- We renamed some other classes and interfaces for better readability but their purposes are the same as before. 
+
