@@ -69,4 +69,5 @@ Some design changes:
 - ImagesOperations is not parameterized any more. We now know we have a consistent internal representation of images. 
 - We rename PPM to Image and completely got rid of PPM class. We put additional methods in ImageUtil class to help read and write a PPM image file since ImageIO does not support PPM
 - We renamed some other classes and interfaces for better readability but their purposes are the same as before. 
-
+- Most of the program is function now. However, due to time constraint and complexity in testing, we 
+Have not but will implement exportAll function so that all the exported files are in the same folder as opposed to being in the main file.
