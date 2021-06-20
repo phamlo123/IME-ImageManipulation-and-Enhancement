@@ -305,6 +305,16 @@ public class MultiLayeredImagesOperationsTest {
     assertEquals(2, multiLayers.getNumLayers());
   }
 
+  @Test
+  public void testDifferentFormat() {
+    multiLayers.createMonochrome();
+    multiLayers.saveImages("Testing.ppm", FileFormat.PPM);
+    ImagesOperations imagesOperations = new ImagesOperationsImpl(dragon);
+    imagesOperations.createMonochrome();
+    assertEquals(imagesOperations.getImage(), new Image("Testing.ppm"));
+  }
+
+
 
 
 
