@@ -1,0 +1,14 @@
+addLayer 
+import abc.jpg 0
+addLayer
+import dragon.png 1
+blur
+sepia
+current 1
+sharpen
+gray
+export dragonBlurSepia png
+remove 1
+current 0
+export abcGraySharp jpg
+end

@@ -106,7 +106,7 @@ public class SimpleImageController implements ImageController {
     this.output("importAll (fileName) //loads all the images in the given text file\n");
     this.output(
         "export (fileName) (fileFormat) //export the top image to the given name and format\n");
-    this.output("exportAll //export all the images to the given name and format\n");
+    this.output("exportAll (baseName) (fileFormat) //export all the images to the given name and format\n");
     this.output("visible (layerIndex) //set to visible\n");
     this.output("invisible (layerIndex) //set to invisible\n");
     this.output("current (layerIndex) //set current layer\n");
@@ -119,9 +119,8 @@ public class SimpleImageController implements ImageController {
    * @param command the command to be executed, if it exists. If it does not exist, the method asks
    *                the user to enter a valid command
    * @param scanner the scanner used to read input from the user
-   * @throws IllegalStateException if the appendable has an error appending
    */
-  private void process(String command, Scanner scanner) throws FileNotFoundException {
+  private void process(String command, Scanner scanner) {
     ImageCommand cmd = null;
     switch (command) {
       case "file":

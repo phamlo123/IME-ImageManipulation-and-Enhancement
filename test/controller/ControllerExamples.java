@@ -6,6 +6,7 @@ package controller;
 public class ControllerExamples {
 
   String toString1 = "Available commands include:\n"
+      + "file //run the given text file with valid commands\n"
       + "blur //blur the image\n"
       + "sharpen //sharpen the image\n"
       + "gray //make the image monochrome\n"
@@ -15,7 +16,7 @@ public class ControllerExamples {
       + "import (fileName) (layerIndex) //loads images\n"
       + "importAll (fileName) //loads all the images in the given text file\n"
       + "export (fileName) (fileFormat) //export the top image to the given name and format\n"
-      + "exportAll //export all the images to the given name and format\n"
+      + "exportAll (baseName) (fileFormat) //export all the images to the given name and format\n"
       + "visible (layerIndex) //set to visible\n"
       + "invisible (layerIndex) //set to invisible\n"
       + "current (layerIndex) //set current layer\n"
@@ -25,6 +26,7 @@ public class ControllerExamples {
       + "Program ended";
 
   String toString2 = "Available commands include:\n"
+      + "file //run the given text file with valid commands\n"
       + "blur //blur the image\n"
       + "sharpen //sharpen the image\n"
       + "gray //make the image monochrome\n"
@@ -34,7 +36,7 @@ public class ControllerExamples {
       + "import (fileName) (layerIndex) //loads images\n"
       + "importAll (fileName) //loads all the images in the given text file\n"
       + "export (fileName) (fileFormat) //export the top image to the given name and format\n"
-      + "exportAll //export all the images to the given name and format\n"
+      + "exportAll (baseName) (fileFormat) //export all the images to the given name and format\n"
       + "visible (layerIndex) //set to visible\n"
       + "invisible (layerIndex) //set to invisible\n"
       + "current (layerIndex) //set current layer\n"
@@ -44,6 +46,7 @@ public class ControllerExamples {
       + "Program ended";
 
   String toString3 = "Available commands include:\n"
+      + "file //run the given text file with valid commands\n"
       + "blur //blur the image\n"
       + "sharpen //sharpen the image\n"
       + "gray //make the image monochrome\n"
@@ -53,7 +56,7 @@ public class ControllerExamples {
       + "import (fileName) (layerIndex) //loads images\n"
       + "importAll (fileName) //loads all the images in the given text file\n"
       + "export (fileName) (fileFormat) //export the top image to the given name and format\n"
-      + "exportAll //export all the images to the given name and format\n"
+      + "exportAll (baseName) (fileFormat) //export all the images to the given name and format\n"
       + "visible (layerIndex) //set to visible\n"
       + "invisible (layerIndex) //set to invisible\n"
       + "current (layerIndex) //set current layer\n"
@@ -72,6 +75,7 @@ public class ControllerExamples {
       + "Program ended";
 
   String toString7 = "Available commands include:\n"
+      + "file //run the given text file with valid commands\n"
       + "blur //blur the image\n"
       + "sharpen //sharpen the image\n"
       + "gray //make the image monochrome\n"
@@ -81,7 +85,7 @@ public class ControllerExamples {
       + "import (fileName) (layerIndex) //loads images\n"
       + "importAll (fileName) //loads all the images in the given text file\n"
       + "export (fileName) (fileFormat) //export the top image to the given name and format\n"
-      + "exportAll //export all the images to the given name and format\n"
+      + "exportAll (baseName) (fileFormat) //export all the images to the given name and format\n"
       + "visible (layerIndex) //set to visible\n"
       + "invisible (layerIndex) //set to invisible\n"
       + "current (layerIndex) //set current layer\n"
@@ -94,6 +98,7 @@ public class ControllerExamples {
       + "Program ended";
 
   String toString9 = "Available commands include:\n"
+      + "file //run the given text file with valid commands\n"
       + "blur //blur the image\n"
       + "sharpen //sharpen the image\n"
       + "gray //make the image monochrome\n"
@@ -103,17 +108,17 @@ public class ControllerExamples {
       + "import (fileName) (layerIndex) //loads images\n"
       + "importAll (fileName) //loads all the images in the given text file\n"
       + "export (fileName) (fileFormat) //export the top image to the given name and format\n"
-      + "exportAll //export all the images to the given name and format\n"
+      + "exportAll (baseName) (fileFormat) //export all the images to the given name and format\n"
       + "visible (layerIndex) //set to visible\n"
       + "invisible (layerIndex) //set to invisible\n"
       + "current (layerIndex) //set current layer\n"
       + "end //ends the program\n"
       + "\n"
-      + "Illegal Imported File, Please enter a valid command.\n"
+      + "Illegal Imported File, Please enter a valid command\n"
       + "Please enter a valid command\n"
       + "Program ended";
 
-  String toString10 = "Illegal Imported File, Please enter a valid command.\n"
+  String toString10 = "Illegal Imported File, Please enter a valid command\n"
       + "Please enter a valid command\n"
       + "Program ended";
 
