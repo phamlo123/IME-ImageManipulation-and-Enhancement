@@ -5,9 +5,9 @@ import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
- * Command class used for loading the images in the model.
+ * Command class used for importing an image into the model.
  */
-public class LoadCommand implements ImageCommand {
+public class ImportCommand implements ImageCommand {
 
   private final ImageFormat imageFormat;
   private final int layerIndex;
@@ -17,7 +17,7 @@ public class LoadCommand implements ImageCommand {
    * @param imageFormat the image to be set at the given layer index
    * @param layerIndex  the layer index determining where to set the given image
    */
-  public LoadCommand(ImageFormat imageFormat, int layerIndex) {
+  public ImportCommand(ImageFormat imageFormat, int layerIndex) {
     ImageUtil.checkNull(imageFormat);
     this.imageFormat = imageFormat;
     this.layerIndex = layerIndex;

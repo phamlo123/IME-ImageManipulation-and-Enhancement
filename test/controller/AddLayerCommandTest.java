@@ -2,17 +2,17 @@ package controller;
 
 import static org.junit.Assert.*;
 
-import controller.command.CreateCommand;
+import controller.command.AddLayerCommand;
 import controller.command.ImageCommand;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the CreateCommand class and all of its methods
+ * Test class to ensure that the AddLayerCommand class and all of its methods
  * function correctly
  */
-public class CreateCommandTest {
+public class AddLayerCommandTest {
 
   ImageCommand create;
   StringBuilder log;
@@ -20,7 +20,7 @@ public class CreateCommandTest {
 
   @Before
   public void setup() {
-    create = new CreateCommand();
+    create = new AddLayerCommand();
     log = new StringBuilder();
     mockModel = new MockMultiLayeredImagesOperations(log);
   }

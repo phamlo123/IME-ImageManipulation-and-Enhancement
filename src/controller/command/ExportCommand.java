@@ -5,9 +5,9 @@ import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
- * Command class used for saving images from the model to a file.
+ * Command class used for exporting the top image from the model to a file.
  */
-public class SaveCommand implements ImageCommand {
+public class ExportCommand implements ImageCommand {
 
   private final String fileName;
   private final FileFormat fileFormat;
@@ -18,7 +18,7 @@ public class SaveCommand implements ImageCommand {
    * @param fileName    the name of the file to write to.
    * @param fileFormat  the type of file to create (png, jpg, or ppm)
    */
-  public SaveCommand(String fileName, FileFormat fileFormat) {
+  public ExportCommand(String fileName, FileFormat fileFormat) {
     ImageUtil.checkNull(fileName);
     ImageUtil.checkNull(fileFormat);
     this.fileName = fileName;

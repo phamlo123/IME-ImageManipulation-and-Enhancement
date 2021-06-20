@@ -123,9 +123,20 @@ public class SimpleImageControllerTest {
   // end to stop the program)
   @Test
   public void testProcessInteractiveInvalidFileFormat() {
-    new SimpleImageController(model, new StringReader("save hello notFormat png end"), appendable)
+    new SimpleImageController(model, new StringReader("export hello notFormat png end"), appendable)
         .processInteractive();
     assertEquals(examples.toString3, appendable.toString());
+  }
+
+  // tests that the controller asks for a valid file when an invalid file is given for a
+  // command that requires a file (with valid file to avoid exception and
+  // end to stop the program)
+  @Test
+  public void testProcessInteractiveInvalidFile() {
+    new SimpleImageController(model,
+        new StringReader("import doesNotExist.png import Northeastern.ppm 0 end"), appendable)
+        .processInteractive();
+    assertEquals(examples.toString9, appendable.toString());
   }
 
   // tests that the controller displays the error message given by the model and asks for another
@@ -176,11 +187,11 @@ public class SimpleImageControllerTest {
     assertEquals("createSepia called.", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid create command (with end to stop
+  // tests that the model receives the correct inputs for a valid addLayer command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveCreate() {
-    new SimpleImageController(mockModel, new StringReader("create end"), dontCareOutput)
+  public void testProcessInteractiveAddLayer() {
+    new SimpleImageController(mockModel, new StringReader("addLayer end"), dontCareOutput)
         .processInteractive();
     assertEquals("addLayer called.", log.toString());
   }
@@ -194,30 +205,41 @@ public class SimpleImageControllerTest {
     assertEquals("removeLayer called. layerIndex = 0", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid load command (with end to stop
+  // tests that the model receives the correct inputs for a valid import command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveLoad() {
-    new SimpleImageController(mockModel, new StringReader("load Northeastern.ppm 0 end"),
+  public void testProcessInteractiveImport() {
+    new SimpleImageController(mockModel, new StringReader("import Northeastern.ppm 0 end"),
         dontCareOutput)
         .processInteractive();
     assertEquals("loadImages called. layerIndex = 0", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid save command (with end to stop
+  // tests that the model receives the correct inputs for a valid importAll command (with end to stop
   // the program)
   @Test
-  public void testProcessInteractiveSave() {
-    new SimpleImageController(mockModel, new StringReader("save toSave png end"), dontCareOutput)
+  public void testProcessInteractiveImportAll() {
+    new SimpleImageController(mockModel, new StringReader("importAll ImportAll.txt end"),
+        dontCareOutput)
         .processInteractive();
-    assertEquals("saveImages called. fileName = toSave, fileFormat = PNG", log.toString());
+    assertEquals("importAll called. textFile = ImportAll.txt", log.toString());
   }
 
   // tests that the model receives the correct inputs for a valid export command (with end to stop
   // the program)
   @Test
   public void testProcessInteractiveExport() {
-    new SimpleImageController(mockModel, new StringReader("export toExport png end"),
+    new SimpleImageController(mockModel, new StringReader("export toExportAll png end"),
+        dontCareOutput)
+        .processInteractive();
+    assertEquals("saveImages called. fileName = toExportAll, fileFormat = PNG", log.toString());
+  }
+
+  // tests that the model receives the correct inputs for a valid exportAll command (with end to stop
+  // the program)
+  @Test
+  public void testProcessInteractiveExportAll() {
+    new SimpleImageController(mockModel, new StringReader("exportAll toExport png end"),
         dontCareOutput)
         .processInteractive();
     assertEquals("exportAll called. baseName = toExport, fileFormat = PNG", log.toString());
@@ -293,6 +315,16 @@ public class SimpleImageControllerTest {
     assertEquals(examples.toString6, appendable.toString());
   }
 
+  // tests that the controller asks for a valid file when an invalid file is given for a
+  // command that requires a file (with valid file to avoid exception and
+  // end to stop the program)
+  @Test
+  public void testProcessFileInvalidFile() throws FileNotFoundException {
+    new SimpleImageController(model, dontCareInput, appendable)
+        .processFile(new File("InvalidImport.txt"));
+    assertEquals(examples.toString10, appendable.toString());
+  }
+
   // tests that the controller displays the error message given by the model and asks for another
   // command when the types of input given to the controller are correct, but are unreasonable to
   // use for the model (with end to stop the program)
@@ -341,12 +373,12 @@ public class SimpleImageControllerTest {
     assertEquals("createSepia called.", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid create command (with end to stop
+  // tests that the model receives the correct inputs for a valid addLayer command (with end to stop
   // the program)
   @Test
-  public void testProcessFileCreate() throws FileNotFoundException {
+  public void testProcessFileAddLayer() throws FileNotFoundException {
     new SimpleImageController(mockModel, dontCareInput, dontCareOutput)
-        .processFile(new File("Create.txt"));
+        .processFile(new File("AddLayer.txt"));
     assertEquals("addLayer called.", log.toString());
   }
 
@@ -359,22 +391,22 @@ public class SimpleImageControllerTest {
     assertEquals("removeLayer called. layerIndex = 0", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid load command (with end to stop
+  // tests that the model receives the correct inputs for a valid import command (with end to stop
   // the program)
   @Test
-  public void testProcessFileLoad() throws FileNotFoundException {
+  public void testProcessFileImport() throws FileNotFoundException {
     new SimpleImageController(mockModel, dontCareInput, dontCareOutput)
-        .processFile(new File("Load.txt"));
+        .processFile(new File("Import.txt"));
     assertEquals("loadImages called. layerIndex = 0", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid save command (with end to stop
+  // tests that the model receives the correct inputs for a valid importAll command (with end to stop
   // the program)
   @Test
-  public void testProcessFileSave() throws FileNotFoundException {
+  public void testProcessFileImportAll() throws FileNotFoundException {
     new SimpleImageController(mockModel, dontCareInput, dontCareOutput)
-        .processFile(new File("Save.txt"));
-    assertEquals("saveImages called. fileName = toSave, fileFormat = PNG", log.toString());
+        .processFile(new File("ImportAll.txt"));
+    assertEquals("importAll called. textFile = ImportAll.txt", log.toString());
   }
 
   // tests that the model receives the correct inputs for a valid export command (with end to stop
@@ -383,7 +415,16 @@ public class SimpleImageControllerTest {
   public void testProcessFileExport() throws FileNotFoundException {
     new SimpleImageController(mockModel, dontCareInput, dontCareOutput)
         .processFile(new File("Export.txt"));
-    assertEquals("exportAll called. baseName = toExport, fileFormat = PNG", log.toString());
+    assertEquals("saveImages called. fileName = toExport, fileFormat = PNG", log.toString());
+  }
+
+  // tests that the model receives the correct inputs for a valid exportAll command (with end to stop
+  // the program)
+  @Test
+  public void testProcessFileExportAll() throws FileNotFoundException {
+    new SimpleImageController(mockModel, dontCareInput, dontCareOutput)
+        .processFile(new File("ExportAll.txt"));
+    assertEquals("exportAll called. baseName = toExportAll, fileFormat = PNG", log.toString());
   }
 
   // tests that the model receives the correct inputs for a valid visible command (with end to stop

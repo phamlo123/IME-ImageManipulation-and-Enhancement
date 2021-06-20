@@ -78,7 +78,7 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
 
   @Override
   public void importAll(String textFile) {
-
+    log.append("importAll called. textFile = ").append(textFile);
   }
 
   @Override
