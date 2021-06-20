@@ -10,8 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the ExportAllCommand class and all of its methods
- * function correctly
+ * Test class to ensure that the ExportAllCommand class and all of its methods function correctly
  */
 public class ExportAllCommandTest {
 
@@ -47,6 +46,6 @@ public class ExportAllCommandTest {
   @Test
   public void testGoNormal() {
     export.go(mockModel);
-    assertEquals("exportAll called. baseName = hello",log.toString());
+    assertEquals("exportAll called. baseName = hello, fileFormat = PPM", log.toString());
   }
 }

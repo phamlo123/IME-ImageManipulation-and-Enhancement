@@ -14,8 +14,8 @@ import model.util.ImageUtil;
  */
 public class Image implements ImageFormat {
 
-  private Converter converter;
-  private List<List<Color>> image;
+  private final Converter converter;
+  private final List<List<Color>> image;
   private List<List<Integer>> redChannel;
   private List<List<Integer>> greenChannel;
   private List<List<Integer>> blueChannel;
@@ -83,8 +83,7 @@ public class Image implements ImageFormat {
    */
   private Converter getImport(String fileName) throws IllegalArgumentException {
     try {
-      Converter converter = new SimpleConverter(fileName);
-      return converter;
+      return new SimpleConverter(fileName);
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("Illegal Imported File");
     }
@@ -177,7 +176,6 @@ public class Image implements ImageFormat {
    * Returns a list of list representing the values of each pixel for the specified color.
    *
    * @param image the image to retrieve the color values of
-   * @return the list of list of the specified color values for each pixel
    */
   private void setColoring(List<List<Color>> image) {
     List<List<Integer>> red = new ArrayList<>();
