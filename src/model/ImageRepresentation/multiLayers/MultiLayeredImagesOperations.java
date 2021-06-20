@@ -21,8 +21,8 @@ import model.ImageRepresentation.ImageFormat;
  */
 public class MultiLayeredImagesOperations implements MultiLayers {
 
-  private List<ImageFormat> imageLayers;
-  private List<Boolean> listVisibility;
+  private final List<ImageFormat> imageLayers;
+  private final List<Boolean> listVisibility;
   private ImageFormat currentLayer;
   private ImagesOperations imageOp;
 
@@ -100,8 +100,8 @@ public class MultiLayeredImagesOperations implements MultiLayers {
    */
   private List<Boolean> setUpVisibility(List<ImageFormat> imageLayers) {
     List<Boolean> listOfVisibility = new ArrayList<>();
-    for (int i = 0; i < imageLayers.size(); i++) {
-      if (imageLayers.get(i) != null) {
+    for (ImageFormat imageLayer : imageLayers) {
+      if (imageLayer != null) {
         listOfVisibility.add(true);
       } else {
         listOfVisibility.add(false);
@@ -261,8 +261,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
       throw new IllegalArgumentException();
     }
     try {
-      ImageFormat imageFormat = new Image(this.imageLayers.get(layerIndex).getImage());
-      return imageFormat;
+      return new Image(this.imageLayers.get(layerIndex).getImage());
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("there is no image in this layer");
     }
@@ -279,8 +278,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
     if (layerIndex < 0 || layerIndex >= imageLayers.size()) {
       throw new IllegalArgumentException("Invalid index");
     }
-    boolean a = listVisibility.get(layerIndex);
-    return a;
+    return listVisibility.get(layerIndex);
   }
 
 

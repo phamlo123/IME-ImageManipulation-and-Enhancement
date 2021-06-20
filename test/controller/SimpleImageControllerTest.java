@@ -217,9 +217,10 @@ public class SimpleImageControllerTest {
   // the program)
   @Test
   public void testProcessInteractiveExport() {
-    new SimpleImageController(mockModel, new StringReader("export toExport end"), dontCareOutput)
+    new SimpleImageController(mockModel, new StringReader("export toExport png end"),
+        dontCareOutput)
         .processInteractive();
-    assertEquals("exportAll called. baseName = toExport", log.toString());
+    assertEquals("exportAll called. baseName = toExport, fileFormat = PNG", log.toString());
   }
 
   // tests that the model receives the correct inputs for a valid visible command (with end to stop
@@ -382,7 +383,7 @@ public class SimpleImageControllerTest {
   public void testProcessFileExport() throws FileNotFoundException {
     new SimpleImageController(mockModel, dontCareInput, dontCareOutput)
         .processFile(new File("Export.txt"));
-    assertEquals("exportAll called. baseName = toExport", log.toString());
+    assertEquals("exportAll called. baseName = toExport, fileFormat = PNG", log.toString());
   }
 
   // tests that the model receives the correct inputs for a valid visible command (with end to stop

@@ -57,7 +57,8 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
 
   @Override
   public void exportAll(String baseName, FileFormat fileFormat) {
-    log.append("exportAll called. baseName = ").append(baseName);
+    log.append("exportAll called. baseName = ").append(baseName).append(", fileFormat = ")
+        .append(fileFormat);
   }
 
   @Override

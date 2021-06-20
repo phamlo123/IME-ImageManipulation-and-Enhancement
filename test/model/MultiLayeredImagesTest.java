@@ -8,7 +8,7 @@ import java.util.List;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.ImagesImpl;
-import model.ImageRepresentation.multiLayers.MultiLayeredImages;
+import model.ImageRepresentation.multiLayers.MultiLayeredImagesOperations;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.enumTypes.FileFormat;
 import org.junit.Test;
@@ -21,24 +21,19 @@ public class MultiLayeredImagesTest {
 
   List<ImageFormat> listOfImage = new ArrayList<>(Arrays.asList(northeastern, abc, dragon));
 
-  MultiLayers multiLayers = new MultiLayeredImages(listOfImage);
+  MultiLayers multiLayers = new MultiLayeredImagesOperations(listOfImage);
 
   @Test
   public void testGetCurrentIndex() {
 
-    MultiLayers multiLayers = new MultiLayeredImages(listOfImage);
+    MultiLayers multiLayers = new MultiLayeredImagesOperations(listOfImage);
 
     assertEquals(2, multiLayers.getCurrentLayerIndex());
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testNullConstructor() {
-    MultiLayers multiLayers = new MultiLayeredImages(null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
   public void testNullConstructor1() {
-    MultiLayers multiLayers = new MultiLayeredImages(
+    MultiLayers multiLayers = new MultiLayeredImagesOperations(
         new ArrayList<>(Arrays.asList(null, new Image("Koala.ppm"))));
   }
 
@@ -50,7 +45,7 @@ public class MultiLayeredImagesTest {
 
   @Test
   public void testSaveImages() {
-    MultiLayers multiLayers = new MultiLayeredImages(new ArrayList<>(Arrays.asList(abc)));
+    MultiLayers multiLayers = new MultiLayeredImagesOperations(new ArrayList<>(Arrays.asList(abc)));
     multiLayers.saveImages("ForTesting.ppm", FileFormat.PPM);
     Image image = new Image("ForTesting.ppm");
     assertEquals(image, abc);
@@ -59,7 +54,7 @@ public class MultiLayeredImagesTest {
 
   @Test
   public void testLoadImages() {
-    MultiLayers multiLayers = new MultiLayeredImages();
+    MultiLayers multiLayers = new MultiLayeredImagesOperations();
     multiLayers.addLayer();
     multiLayers.addLayer();
     multiLayers.loadImages(abc, 0);
@@ -69,7 +64,7 @@ public class MultiLayeredImagesTest {
 
   @Test
   public void testAddLayer() {
-    MultiLayers multiLayers2 = new MultiLayeredImages();
+    MultiLayers multiLayers2 = new MultiLayeredImagesOperations();
     assertEquals(0, multiLayers2.getNumLayers());
     multiLayers2.addLayer();
     multiLayers2.addLayer();

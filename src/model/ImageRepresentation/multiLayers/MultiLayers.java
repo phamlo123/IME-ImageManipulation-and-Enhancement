@@ -63,8 +63,8 @@ public interface MultiLayers extends ImagesOperations {
    * Export all of the non-null images in the layers of this object. The exported file is a text
    * file that contains the locations of all the exported image files.
    *
-   * @param baseName the base for the File names of the exported image files
-   * @param fileFormat
+   * @param baseName   the base for the File names of the exported image files
+   * @param fileFormat the type of file to export as
    */
   void exportAll(String baseName, FileFormat fileFormat) throws IllegalArgumentException;
 
