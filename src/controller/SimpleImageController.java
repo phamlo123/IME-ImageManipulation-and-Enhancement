@@ -239,13 +239,4 @@ public class SimpleImageController implements ImageController {
       return toInt(scanner);
     }
   }
-
-  public static void main(String[] args) throws FileNotFoundException {
-    MultiLayers multiLayers = new MultiLayeredImages(
-        new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
-            new Image("sample.ppm"), new Image("abc.jpg"))));
-
-    new SimpleImageController(multiLayers, new InputStreamReader(System.in), System.out)
-        .processInteractive();
-  }
 }
