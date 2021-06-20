@@ -18,51 +18,12 @@ public class LoadCommandTest {
   ImageCommand load;
   StringBuilder log;
   MultiLayers mockModel;
-  String toString;
 
   @Before
   public void setup() {
     load = new LoadCommand(new Image(ImageExamples.checkerboard()), 0);
     log = new StringBuilder();
     mockModel = new MockMultiLayeredImages(log);
-    toString = "loadImages called. imageFormat = [[java.awt.Color[r=255,g=255,b=255], java.awt.Col"
-        + "or[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.a"
-        + "wt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b="
-        + "255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r="
-        + "0,g=0,b=0]], [java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt."
-        + "Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], jav"
-        + "a.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255"
-        + ",b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255]], [java.awt.Col"
-        + "or[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], "
-        + "java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,"
-        + "b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r="
-        + "255,g=255,b=255], java.awt.Color[r=0,g=0,b=0]], [java.awt.Color[r=0,g=0,b=0], java.awt."
-        + "Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255"
-        + "], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g"
-        + "=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color"
-        + "[r=255,g=255,b=255]], [java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], "
-        + "java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g="
-        + "255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Co"
-        + "lor[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0]], [jav"
-        + "a.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0"
-        + "], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255"
-        + ",g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt"
-        + ".Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255]], [java.awt.Color[r=255,g=255,b="
-        + "255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r="
-        + "0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Co"
-        + "lor[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255],"
-        + " java.awt.Color[r=0,g=0,b=0]], [java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255"
-        + ",b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color"
-        + "[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt"
-        + ".Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=25"
-        + "5]], [java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r="
-        + "255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java."
-        + "awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0],"
-        + " java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0]], [java.awt.Color[r=0,g"
-        + "=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color"
-        + "[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], ja"
-        + "va.awt.Color[r=0,g=0,b=0], java.awt.Color[r=255,g=255,b=255], java.awt.Color[r=0,g=0,b="
-        + "0], java.awt.Color[r=255,g=255,b=255]]], layerIndex = 0";
   }
 
   // constructor test
@@ -87,6 +48,6 @@ public class LoadCommandTest {
   @Test
   public void testGoNormal() {
     load.go(mockModel);
-    assertEquals(toString, log.toString());
+    assertEquals("loadImages called. layerIndex = 0", log.toString());
   }
 }

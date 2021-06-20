@@ -14,7 +14,11 @@ import controller.command.SharpenCommand;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import model.ImageRepresentation.multiLayers.MultiLayeredImages;
 import model.enumTypes.FileFormat;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.multiLayers.MultiLayers;
@@ -53,8 +57,14 @@ public class SimpleImageController implements ImageController {
   public void processInteractive() throws IllegalStateException {
     this.renderCommands();
     Scanner scanner = new Scanner(in);
+    String next;
     while (scanner.hasNext()) {
-      this.process(scanner.next(), scanner);
+      next = scanner.next();
+      if (next.equals("end")) {
+        this.output("Program ended");
+        return;
+      }
+      this.process(next, scanner);
     }
   }
 
@@ -62,7 +72,7 @@ public class SimpleImageController implements ImageController {
   public void processFile(File fileName)
       throws FileNotFoundException, IllegalStateException, IllegalArgumentException {
     ImageUtil.checkNull(fileName);
-    this.renderCommands();
+    String next;
     Scanner scanner;
     try {
       scanner = new Scanner(fileName);
@@ -70,7 +80,12 @@ public class SimpleImageController implements ImageController {
       throw new FileNotFoundException();
     }
     while (scanner.hasNext()) {
-      this.process(scanner.next(), scanner);
+      next = scanner.next();
+      if (next.equals("end")) {
+        this.output("Program ended");
+        return;
+      }
+      this.process(next, scanner);
     }
   }
 
@@ -144,14 +159,12 @@ public class SimpleImageController implements ImageController {
       case "current":
         cmd = new CurrentCommand(this.toInt(scanner));
         break;
-      case "end":
-        System.exit(0);
     }
     if (cmd != null) {
       try {
         cmd.go(model);
       } catch (IllegalArgumentException e) {
-        this.output(e.getMessage() + "\n");
+        this.output(e.getMessage() + ", Please enter a valid command\n");
       }
     } else {
       this.output("Please enter a valid command\n");
@@ -225,5 +238,14 @@ public class SimpleImageController implements ImageController {
       this.output("Please enter a valid number\n");
       return toInt(scanner);
     }
+  }
+
+  public static void main(String[] args) throws FileNotFoundException {
+    MultiLayers multiLayers = new MultiLayeredImages(
+        new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
+            new Image("sample.ppm"), new Image("abc.jpg"))));
+
+    new SimpleImageController(multiLayers, new InputStreamReader(System.in), System.out)
+        .processInteractive();
   }
 }

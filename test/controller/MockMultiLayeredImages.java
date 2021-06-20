@@ -24,8 +24,7 @@ public class MockMultiLayeredImages implements MultiLayers {
 
   @Override
   public void loadImages(ImageFormat imageFormat, int layerIndex) {
-    log.append("loadImages called. imageFormat = ").append(imageFormat.getImage())
-        .append(", layerIndex = ")
+    log.append("loadImages called. layerIndex = ")
         .append(layerIndex);
   }
 
@@ -61,9 +60,6 @@ public class MockMultiLayeredImages implements MultiLayers {
     log.append("exportAll called. baseName = ").append(baseName);
   }
 
-  /**
-   * @param layerIndex
-   */
   @Override
   public ImageFormat getLayer(int layerIndex) {
     return null;
