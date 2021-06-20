@@ -14,7 +14,8 @@ public interface ImageController {
    *
    * @throws IllegalStateException if there is nothing left from the user to read
    */
-  void processInteractive() throws IllegalStateException, IllegalArgumentException;
+  void processInteractive()
+      throws IllegalStateException, IllegalArgumentException, FileNotFoundException;
 
   /**
    * Processes the commands desired by the user input from a file.
