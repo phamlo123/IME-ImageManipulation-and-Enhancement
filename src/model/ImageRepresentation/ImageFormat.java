@@ -2,7 +2,7 @@ package model.ImageRepresentation;
 
 import java.awt.Color;
 import java.util.List;
-import model.Coloring;
+import model.enumTypes.Coloring;
 import model.converter.Converter;
 
 /**

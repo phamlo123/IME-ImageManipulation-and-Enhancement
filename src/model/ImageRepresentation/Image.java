@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import model.Coloring;
+import model.enumTypes.Coloring;
 import model.converter.Converter;
 import model.converter.SimpleConverter;
 import model.util.ImageUtil;
@@ -28,7 +28,7 @@ public class Image implements ImageFormat {
    */
   public Image(List<List<Color>> listOfColor) {
     if (listOfColor == null) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("list of color is null");
     }
     this.image = listOfColor;
     this.converter = getConverter();
@@ -68,28 +68,26 @@ public class Image implements ImageFormat {
    *
    * @param fileName is the name of the image file
    */
-  public Image(String fileName) {
-    if (!verifyImport(fileName)) {
-      throw new IllegalArgumentException("Illegal Imported File");
-    }
-    this.converter = new SimpleConverter(fileName);
+  public Image(String fileName) throws IllegalArgumentException {
+    this.converter = getImport(fileName);
     this.image = converter.getListOfColor();
     setColoring(getImage());
   }
 
   /**
-   * Verify if the image file with the given file name can be imported.
+   * Get the converter from the imported image file with the given file name.
    *
    * @param fileName is the name of the file
-   * @return a boolean telling whether or not the file could be imported
+   * @return a Converted of the with the given imported File
+   * @throws IllegalArgumentException if the file cannot be imported
    */
-  private boolean verifyImport(String fileName) {
+  private Converter getImport(String fileName) throws IllegalArgumentException{
     try {
       Converter converter = new SimpleConverter(fileName);
+      return converter;
     } catch (IllegalArgumentException e) {
-      return false;
+      throw new IllegalArgumentException("Illegal Imported File");
     }
-    return true;
   }
 
   /**
@@ -120,7 +118,8 @@ public class Image implements ImageFormat {
 
   public List<List<Color>> getImage() {
     List<List<Color>> temp = new ArrayList<>();
-    for (int i = 0; i < image.size(); i++) {
+    int size = image.size();
+    for (int i = 0; i < size; i++) {
       temp.add(new ArrayList<>());
       for (int j = 0; j < image.get(i).size(); j++) {
         temp.get(i).add(image.get(i).get(j));

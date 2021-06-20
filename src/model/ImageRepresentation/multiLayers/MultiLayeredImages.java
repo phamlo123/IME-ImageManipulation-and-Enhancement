@@ -1,14 +1,14 @@
 package model.ImageRepresentation.multiLayers;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import model.FileFormat;
+import model.enumTypes.FileFormat;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.ImageImplPPM;
+import model.ImageRepresentation.ImagesImpl;
 import model.Images;
 
 /**
@@ -25,19 +25,25 @@ public class MultiLayeredImages implements MultiLayers {
 
   /**
    * This create an instance of this class by assigning the list of images to the layers of this
-   * object. And set the current layer to be the top most layer and all layers are set to be visible.
+   * object. And set the current layer to be the top most layer and all layers are set to be
+   * visible.
+   *
    * @param imageLayers is the list of images being passed in.
    * @throws IllegalArgumentException if the list of images is null or any of its element is null
    */
   public MultiLayeredImages(List<ImageFormat> imageLayers) throws IllegalArgumentException {
-    Objects.requireNonNull(imageLayers);
-    for(ImageFormat i: imageLayers) {
-      Objects.requireNonNull(i);
+    if (imageLayers == null) {
+      throw new IllegalArgumentException("List is null");
+    }
+    for (ImageFormat i : imageLayers) {
+      if (i == null) {
+        throw new IllegalArgumentException("image is null");
+      }
     }
     this.imageLayers = imageLayers;
     this.listVisibility = setUpVisibility(imageLayers);
     this.currentLayer = imageLayers.get(imageLayers.size() - 1);
-    this.imageOp = new ImageImplPPM(currentLayer);
+    this.imageOp = new ImagesImpl(currentLayer);
   }
 
   /**
@@ -55,6 +61,7 @@ public class MultiLayeredImages implements MultiLayers {
   /**
    * Helper method to help set up visibility status of the given list of images. All non-null images
    * are set to be visible by default, and non-visible otherwise.
+   *
    * @param imageLayers is the given list of images
    * @return a list of booleans representing visibility of all the images in this list.
    */
@@ -92,6 +99,7 @@ public class MultiLayeredImages implements MultiLayers {
       throw new IllegalArgumentException("Provided image to be loaded is null");
     }
     imageLayers.set(layerIndex, imageFormat);
+    listVisibility.set(layerIndex, true);
   }
 
 
@@ -103,6 +111,10 @@ public class MultiLayeredImages implements MultiLayers {
 
   @Override
   public void removeLayer(int layerIndex) throws IllegalArgumentException {
+    if (layerIndex == getCurrentLayerIndex()) {
+      throw new IllegalArgumentException("Cannot remove current layer, set new current layer "
+          + "before removing this one");
+    }
     if (layerIndex < 0 || layerIndex >= this.imageLayers.size()) {
       throw new IllegalArgumentException("Index " + layerIndex + " out of bounds");
     }
@@ -125,6 +137,7 @@ public class MultiLayeredImages implements MultiLayers {
       throw new IllegalArgumentException("Index " + index + " out of bounds");
     }
     currentLayer = imageLayers.get(index);
+    imageOp = new ImagesImpl(currentLayer);
   }
 
 
@@ -170,11 +183,11 @@ public class MultiLayeredImages implements MultiLayers {
     imageLayers.set(index, currentLayer);
   }
 
-
   @Override
   public ImageFormat getImage() {
     return imageOp.getImage();
   }
+
 
   @Override
   public void exportAll(String baseName) {
@@ -195,15 +208,41 @@ public class MultiLayeredImages implements MultiLayers {
     }
   }
 
+  @Override
+  public ImageFormat getLayer(int layerIndex) throws IllegalArgumentException {
+    if (layerIndex < 0 || layerIndex >= imageLayers.size()) {
+      throw new IllegalArgumentException();
+    }
+    try {
+      ImageFormat imageFormat = new Image(this.imageLayers.get(layerIndex).getImage());
+      return imageFormat;
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("there is no image in this layer");
+    }
+  }
+
+  @Override
+  public int getNumLayers() {
+    return imageLayers.size();
+  }
+
+
+  @Override
+  public boolean isVisible(int layerIndex) throws IllegalArgumentException {
+    if (layerIndex < 0 || layerIndex >= imageLayers.size()) {
+      throw new IllegalArgumentException("Invalid index");
+    }
+    boolean a = listVisibility.get(layerIndex);
+    return a;
+  }
+
 
   public static void main(String[] args) {
     MultiLayers multiLayers = new MultiLayeredImages(
         new ArrayList<>(Arrays.asList(new Image("Koala.ppm"),
             new Image("sample.ppm"), new Image("abc.jpg"))));
 
-    multiLayers.createSepia();
-
-    multiLayers.exportAll("cde");
+    multiLayers.saveImages("TTTT", FileFormat.JPEG);
 
   }
 }

@@ -2,7 +2,7 @@ package model.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Coloring;
+import model.enumTypes.Coloring;
 
 /**
  * This class is a function object class that contain methods to process two or more matrices in the

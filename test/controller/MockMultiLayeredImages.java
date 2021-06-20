@@ -1,6 +1,6 @@
 package controller;
 
-import model.FileFormat;
+import model.enumTypes.FileFormat;
 import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 
@@ -50,10 +50,6 @@ public class MockMultiLayeredImages implements MultiLayers {
     log.append("setCurrent called. index = ").append(index);
   }
 
-  @Override
-  public ImageFormat getCurrentLayer() {
-    return null;
-  }
 
   @Override
   public int getCurrentLayerIndex() {
@@ -63,6 +59,24 @@ public class MockMultiLayeredImages implements MultiLayers {
   @Override
   public void exportAll(String baseName) {
     log.append("exportAll called. baseName = ").append(baseName);
+  }
+
+  /**
+   * @param layerIndex
+   */
+  @Override
+  public ImageFormat getLayer(int layerIndex) {
+    return null;
+  }
+
+  @Override
+  public int getNumLayers() {
+    return 0;
+  }
+
+  @Override
+  public boolean isVisible(int layerIndex) throws IllegalArgumentException {
+    return false;
   }
 
   @Override

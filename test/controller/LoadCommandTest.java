@@ -2,9 +2,10 @@ package controller;
 
 import static org.junit.Assert.*;
 
+import controller.command.ImageCommand;
+import controller.command.LoadCommand;
 import model.ImageExamples;
 import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImageFormat;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;

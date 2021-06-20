@@ -2,6 +2,8 @@ package controller;
 
 import static org.junit.Assert.*;
 
+import controller.command.ImageCommand;
+import controller.command.RemoveCommand;
 import model.ImageRepresentation.multiLayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;

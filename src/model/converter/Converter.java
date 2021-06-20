@@ -3,7 +3,7 @@ package model.converter;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import model.FileFormat;
+import model.enumTypes.FileFormat;
 
 
 /**

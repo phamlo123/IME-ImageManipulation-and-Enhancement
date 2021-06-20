@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import model.FileFormat;
+import model.enumTypes.FileFormat;
 
 import model.util.ImageUtil;
 
@@ -79,7 +79,7 @@ public class SimpleConverter implements Converter {
         throw new IllegalArgumentException("file extension not supported");
     }
     try {
-      ImageIO.write(this.bufferedImage, file, new File(fileName));
+      ImageIO.write(this.bufferedImage, file, new File(fileName + "." + file));
     } catch (IOException e) {
       System.out.println("Error writing image to " + fileName);
     }
@@ -106,7 +106,7 @@ public class SimpleConverter implements Converter {
   public String exportWithPath(String fileName) {
     try {
       File f = new File(fileName);
-      ImageIO.write(this.bufferedImage, "jpg", new File(fileName));
+      ImageIO.write(bufferedImage, "jpg", new File(fileName + ".jpg"));
       return f.getAbsolutePath();
     } catch (IOException e) {
       System.out.println("Error writing image to " + fileName);
