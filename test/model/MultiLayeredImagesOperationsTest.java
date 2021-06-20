@@ -298,6 +298,13 @@ public class MultiLayeredImagesOperationsTest {
   }
 
 
+  @Test
+  public void testGetNumLayers() {
+    assertEquals(3, multiLayers.getNumLayers());
+    multiLayers.removeLayer(0);
+    assertEquals(2, multiLayers.getNumLayers());
+  }
+
 
 
 

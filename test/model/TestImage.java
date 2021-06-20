@@ -2,6 +2,10 @@ package model;
 
 import static org.junit.Assert.*;
 
+import model.ImageRepresentation.multiLayers.MultiLayeredImagesOperations;
+import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.converter.Converter;
+import model.converter.SimpleConverter;
 import model.enumTypes.Coloring;
 import model.ImageRepresentation.Image;
 import model.ImageRepresentation.ImageFormat;
@@ -135,6 +139,20 @@ public class TestImage {
     ImageFormat ppm = new Image(1, 0);
   }
 
+
+  @Test
+  public void testImportFromConstructor() {
+    Image image = new Image("abc.jpg");
+    assertFalse(new Image().equals(image));
+  }
+
+  @Test
+  public void testGetConverter() {
+    Image image = new Image("Koala.ppm");
+    Converter converter = image.getConverter();
+    converter.exportImage("KoalaTest.ppm", FileFormat.PPM);
+    assertEquals(image, new Image("KoalaTest.ppm"));
+  }
 
 
 }

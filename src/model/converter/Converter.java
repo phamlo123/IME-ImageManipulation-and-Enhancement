@@ -39,6 +39,7 @@ public interface Converter {
    * Export the image object into a file with JPEG extension and with the given file name. Create
    * a string that is the path to that newly created file
    * @param fileName is the name of the new image file
+   * @param fileFormat is the desired format for the exported image file
    * @return the path of the file
    */
   String exportWithPath(String fileName, FileFormat fileFormat);
