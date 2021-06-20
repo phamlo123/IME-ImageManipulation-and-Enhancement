@@ -70,13 +70,5 @@ public class ImagesOperationsImpl implements ImagesOperations {
     return new Image(temp);
   }
 
-  public static void main(String[] args) {
-    ImageFormat i = new Image("abc.jpg");
-    ImagesOperations a = new ImagesOperationsImpl(i);
-    a.createSepia();
-    a.getImage().getConverter().exportImage("k", FileFormat.JPEG);
-
-
-  }
 
 }
