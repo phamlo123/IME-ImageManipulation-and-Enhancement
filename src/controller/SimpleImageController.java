@@ -138,8 +138,12 @@ public class SimpleImageController implements ImageController {
         cmd = new RemoveCommand(this.toInt(scanner));
         break;
       case "load":
-        cmd = new LoadCommand(new Image(this.getNext(scanner)),
-            this.toInt(scanner));
+        try {
+          cmd = new LoadCommand(new Image(this.getNext(scanner)),
+              this.toInt(scanner));
+        } catch (IllegalArgumentException e) {
+          this.output(e.getMessage() + ", Please re-enter correct file path.\n");
+        }
         break;
       case "save":
         cmd = new SaveCommand(this.getNext(scanner), this.toFormat(scanner));
