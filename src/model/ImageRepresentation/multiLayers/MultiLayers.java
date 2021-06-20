@@ -92,4 +92,6 @@ public interface MultiLayers extends ImagesOperations {
    */
   boolean isVisible(int layerIndex) throws IllegalArgumentException;
 
+
+  void importAll(String textFile);
 }

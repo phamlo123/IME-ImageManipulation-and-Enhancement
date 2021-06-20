@@ -21,8 +21,8 @@ import model.ImageRepresentation.ImageFormat;
  */
 public class MultiLayeredImagesOperations implements MultiLayers {
 
-  private final List<ImageFormat> imageLayers;
-  private final List<Boolean> listVisibility;
+  private List<ImageFormat> imageLayers;
+  private List<Boolean> listVisibility;
   private ImageFormat currentLayer;
   private ImagesOperations imageOp;
 
@@ -65,11 +65,19 @@ public class MultiLayeredImagesOperations implements MultiLayers {
     if (textFile == null) {
       throw new IllegalArgumentException("text file name is null");
     } else {
-      this.imageLayers = helperForProcessingTextFile(textFile);
-      this.currentLayer = imageLayers.get(imageLayers.size() - 1);
-      this.imageOp = new ImagesOperationsImpl(currentLayer);
-      this.listVisibility = setUpVisibility(imageLayers);
+      importAll(textFile);
     }
+  }
+
+  @Override
+  public void importAll(String textFile) {
+    if (textFile == null) {
+      throw new IllegalArgumentException("text file name is null");
+    }
+    this.imageLayers = helperForProcessingTextFile(textFile);
+    this.currentLayer = imageLayers.get(imageLayers.size() - 1);
+    this.imageOp = new ImagesOperationsImpl(currentLayer);
+    this.listVisibility = setUpVisibility(imageLayers);
   }
 
   private List<ImageFormat> helperForProcessingTextFile(String textFile)
