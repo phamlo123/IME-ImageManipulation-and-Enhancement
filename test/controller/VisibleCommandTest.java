@@ -1,16 +1,16 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import controller.command.ImageCommand;
 import controller.command.VisibleCommand;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test class to ensure that the VisibleCommand class and all of its methods
- * function correctly
+ * function correctly.
  */
 public class VisibleCommandTest {
 
@@ -30,14 +30,14 @@ public class VisibleCommandTest {
   // throws an exception because the model given is null
   @Test(expected = IllegalArgumentException.class)
   public void testGoNull() {
-    visible.go(null);
+    visible.execute(null);
   }
 
   // tests the normal functionality of the VisibleCommand go method, makes sure the model calls
   // the correct method
   @Test
   public void testGoNormal() {
-    visible.go(mockModel);
+    visible.execute(mockModel);
     assertEquals("setInvisibility called. layerIndex = 0, visible = true",log.toString());
   }
 }

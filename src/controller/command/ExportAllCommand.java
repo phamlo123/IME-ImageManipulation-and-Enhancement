@@ -1,7 +1,7 @@
 package controller.command;
 
-import model.ImageRepresentation.multiLayers.MultiLayers;
-import model.enumTypes.FileFormat;
+import model.imagerepresentation.multilayers.MultiLayers;
+import model.enums.FileFormat;
 import model.util.ImageUtil;
 
 /**
@@ -11,10 +11,12 @@ public class ExportAllCommand implements ImageCommand {
 
   private final String baseName;
   private final FileFormat fileFormat;
+
   /**
    * Constructs a ExportAllCommand object with the base name for the file being written to as a
    * private field.
-   * @param baseName the name of the file to write the multiple images to
+   *
+   * @param baseName the name of the file to write the multiple images to.
    */
   public ExportAllCommand(String baseName, FileFormat fileFormat) {
     ImageUtil.checkNull(baseName);
@@ -23,7 +25,7 @@ public class ExportAllCommand implements ImageCommand {
   }
 
   @Override
-  public void go(MultiLayers model) {
+  public void execute(MultiLayers model) {
     ImageUtil.checkNull(model);
     model.exportAll(baseName, fileFormat);
   }

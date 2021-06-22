@@ -1,16 +1,16 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import controller.command.GrayCommand;
 import controller.command.ImageCommand;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test class to ensure that the GrayCommand class and all of its methods
- * function correctly
+ * function correctly.
  */
 public class GrayCommandTest {
 
@@ -30,14 +30,14 @@ public class GrayCommandTest {
   // throws an exception because the model given is null
   @Test(expected = IllegalArgumentException.class)
   public void testGoNull() {
-    gray.go(null);
+    gray.execute(null);
   }
 
   // tests the normal functionality of the GrayCommand go method, makes sure the model calls
   // the correct method
   @Test
   public void testGoNormal() {
-    gray.go(mockModel);
+    gray.execute(mockModel);
     assertEquals("createMonochrome called.",log.toString());
   }
 }

@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
@@ -12,8 +12,9 @@ public class ImportAllCommand implements ImageCommand {
 
   /**
    * Constructs an ImportAllCommand object with the filename to take the images from as a private
-   * field
-   * @param fileName the name of the file to import the images from
+   * field.
+   *
+   * @param fileName the name of the file to import the images from.
    */
   public ImportAllCommand(String fileName) {
     ImageUtil.checkNull(fileName);
@@ -21,7 +22,7 @@ public class ImportAllCommand implements ImageCommand {
   }
 
   @Override
-  public void go(MultiLayers model) {
+  public void execute(MultiLayers model) {
     ImageUtil.checkNull(model);
     model.importAll(this.fileName);
   }

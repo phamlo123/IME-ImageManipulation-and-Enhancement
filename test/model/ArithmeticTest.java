@@ -3,12 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.enumTypes.Coloring;
-import model.enumTypes.Matrices;
+import model.enums.Coloring;
+import model.enums.Matrices;
 import model.util.Arithmetic;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Class containing tests for Arithmetic static methods.

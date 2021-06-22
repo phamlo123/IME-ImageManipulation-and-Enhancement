@@ -1,6 +1,6 @@
 package model;
 
-import model.ImageRepresentation.ImageFormat;
+import model.imagerepresentation.ImageFormat;
 
 /**
  * This interface contains all operations to be performed on an image.

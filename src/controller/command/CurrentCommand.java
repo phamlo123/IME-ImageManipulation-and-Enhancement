@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
@@ -12,6 +12,7 @@ public class CurrentCommand implements ImageCommand {
 
   /**
    * Constructs a CurrentCommand object with the given layer index as a private field.
+   *
    * @param layerIndex the layer to set as the current
    */
   public CurrentCommand(int layerIndex) {
@@ -19,7 +20,7 @@ public class CurrentCommand implements ImageCommand {
   }
 
   @Override
-  public void go(MultiLayers model) throws IllegalArgumentException {
+  public void execute(MultiLayers model) throws IllegalArgumentException {
     ImageUtil.checkNull(model);
     model.setCurrent(layerIndex);
   }

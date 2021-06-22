@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImagesOperationsImpl;
-import model.ImageRepresentation.ImageFormat;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.ImagesOperationsImpl;
+import model.imagerepresentation.ImageFormat;
 
 /**
  * Class to hold the examples used by multiple test classes.
@@ -18,6 +18,11 @@ public class ImageExamples {
   ImageFormat ppmExample3 = new Image("sample.ppm");
   ImageFormat ppmExample4 = new Image(10, 10);
 
+  /**
+   * create checkerboard.
+   *
+   * @return checkerboard
+   */
   public static List<List<Color>> checkerboard() {
     List<List<Color>> checkerboard = new ArrayList<>();
     boolean isWhite = true;
@@ -37,6 +42,11 @@ public class ImageExamples {
     return checkerboard;
   }
 
+  /**
+   * Create chekcerboard RBG.
+   *
+   * @return checkerboard RBG.
+   */
   public static List<List<Integer>> checkerboardRGB() {
     List<List<Integer>> checkerboardRGB = new ArrayList<>();
     for (int i = 0; i < 5; i++) {

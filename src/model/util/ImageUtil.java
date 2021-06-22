@@ -8,11 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * This class is a function object class that contains methods to help process a ppm file
+ * This class is a function object class that contains methods to help process a ppm file.
  */
 public class ImageUtil {
 
@@ -74,7 +73,7 @@ public class ImageUtil {
    * @param green is the list of lists of green values.
    * @param blue  is the list of list of blue values.
    * @return a list of list of colors that is a combination of the three red, green, and blue
-   * parameters.
+   *         parameters.
    */
   public static List<List<Color>> getLists(List<List<Integer>> red, List<List<Integer>> green,
       List<List<Integer>> blue) {
@@ -93,7 +92,11 @@ public class ImageUtil {
     return temp;
   }
 
-
+  /**
+   * Create a buffered image from the given list of lists of colors.
+   * @param listOfColor source list.
+   * @return a list of list of colors.
+   */
   public static BufferedImage createBufferedImage(List<List<Color>> listOfColor) {
     int height = listOfColor.size();
     int width = listOfColor.get(0).size();
@@ -111,7 +114,7 @@ public class ImageUtil {
    * Exports the image stored in this List of List of Colors to the file name given.
    *
    * @param fileName the name of the file to write to
-   * @param image is the list that contains color values for all pixels in the exported image
+   * @param image    is the list that contains color values for all pixels in the exported image
    */
   public static void exportPPM(String fileName, List<List<Color>> image) {
 
@@ -145,6 +148,7 @@ public class ImageUtil {
 
   /**
    * Checks if the given object is null. If it is, throws an exception.
+   *
    * @param object the object to be checked
    * @throws IllegalArgumentException if the given object is null
    */

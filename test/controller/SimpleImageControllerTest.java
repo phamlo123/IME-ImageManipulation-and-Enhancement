@@ -1,6 +1,6 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,15 +8,15 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.multiLayers.MultiLayeredImagesOperations;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.multilayers.MultiLayeredImagesOperations;
+import model.imagerepresentation.multilayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test class to ensure that the SimpleImageController class and all of its methods function
- * correctly
+ * correctly.
  */
 public class SimpleImageControllerTest {
 
@@ -215,8 +215,8 @@ public class SimpleImageControllerTest {
     assertEquals("loadImages called. layerIndex = 0", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid importAll command (with end to stop
-  // the program)
+  // tests that the model receives the correct inputs for a valid importAll command
+  // (with end to stop the program)
   @Test
   public void testProcessInteractiveImportAll() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("importAll ImportAll.txt end"),
@@ -235,8 +235,8 @@ public class SimpleImageControllerTest {
     assertEquals("saveImages called. fileName = toExportAll, fileFormat = PNG", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid exportAll command (with end to stop
-  // the program)
+  // tests that the model receives the correct inputs for a valid exportAll command
+  // (with end to stop the program)
   @Test
   public void testProcessInteractiveExportAll() throws FileNotFoundException {
     new SimpleImageController(mockModel, new StringReader("exportAll toExport png end"),
@@ -400,8 +400,8 @@ public class SimpleImageControllerTest {
     assertEquals("loadImages called. layerIndex = 0", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid importAll command (with end to stop
-  // the program)
+  // tests that the model receives the correct inputs for a valid importAll command
+  // (with end to stop the program)
   @Test
   public void testProcessFileImportAll() throws FileNotFoundException {
     new SimpleImageController(mockModel, dontCareInput, dontCareOutput)
@@ -418,8 +418,8 @@ public class SimpleImageControllerTest {
     assertEquals("saveImages called. fileName = toExport, fileFormat = PNG", log.toString());
   }
 
-  // tests that the model receives the correct inputs for a valid exportAll command (with end to stop
-  // the program)
+  // tests that the model receives the correct inputs for a valid exportAll command
+  // (with end to stop the program)
   @Test
   public void testProcessFileExportAll() throws FileNotFoundException {
     new SimpleImageController(mockModel, dontCareInput, dontCareOutput)

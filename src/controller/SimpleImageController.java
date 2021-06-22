@@ -18,9 +18,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.Scanner;
-import model.enumTypes.FileFormat;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.enums.FileFormat;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.multilayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
@@ -34,7 +34,7 @@ public class SimpleImageController implements ImageController {
   private final Appendable out;
 
   /**
-   * Constructs a SimpleImageController used to process images according to user input commands
+   * Constructs a SimpleImageController used to process images according to user input commands.
    *
    * @param model the model to call image process functionality from
    * @param in    the Readable object to take in data
@@ -53,7 +53,7 @@ public class SimpleImageController implements ImageController {
   }
 
   @Override
-  public void processInteractive() throws IllegalStateException, FileNotFoundException {
+  public void processInteractive() throws IllegalStateException {
     this.renderCommands();
     Scanner scanner = new Scanner(in);
     String next;
@@ -106,7 +106,9 @@ public class SimpleImageController implements ImageController {
     this.output("importAll (fileName) //loads all the images in the given text file\n");
     this.output(
         "export (fileName) (fileFormat) //export the top image to the given name and format\n");
-    this.output("exportAll (baseName) (fileFormat) //export all the images to the given name and format\n");
+    this.output(
+        "exportAll (baseName) (fileFormat) //export all the images to the given "
+            + "name and format\n");
     this.output("visible (layerIndex) //set to visible\n");
     this.output("invisible (layerIndex) //set to invisible\n");
     this.output("current (layerIndex) //set current layer\n");
@@ -129,6 +131,7 @@ public class SimpleImageController implements ImageController {
         } catch (FileNotFoundException e) {
           this.output("File not found, Please enter another command\n");
         }
+        break;
       case "blur":
         cmd = new BlurCommand();
         break;
@@ -173,10 +176,12 @@ public class SimpleImageController implements ImageController {
       case "current":
         cmd = new CurrentCommand(this.toInt(scanner));
         break;
+      default:
+        cmd = null;
     }
     if (cmd != null) {
       try {
-        cmd.go(model);
+        cmd.execute(model);
       } catch (IllegalArgumentException e) {
         this.output(e.getMessage() + ", Please enter a valid command\n");
       }

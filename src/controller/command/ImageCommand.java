@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 
 /**
  * Represents a command that can be executed on MultiLayeredImages. Follows the command design
@@ -10,8 +10,9 @@ public interface ImageCommand {
 
   /**
    * Executes the specific method determined by each command class.
+   *
    * @param model the model to execute the specific command from
    */
-  void go(MultiLayers model);
+  void execute(MultiLayers model);
 
 }

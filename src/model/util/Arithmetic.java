@@ -2,7 +2,7 @@ package model.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.enumTypes.Coloring;
+import model.enums.Coloring;
 
 /**
  * This class is a function object class that contain methods to process two or more matrices in the
@@ -13,7 +13,7 @@ public class Arithmetic {
 
   /**
    * This method helps multiply two list of lists of Numbers that align the center of the kernel
-   * with each of all elements of the main list of lists {see @link}
+   * with each of all elements of the main list of lists {see @link}.
    *
    * @param channel is the main list of lists of numbers that the kernel will be applied to
    * @param matrix  is the kernel matrix in the form of a list of list of numbers
@@ -49,7 +49,7 @@ public class Arithmetic {
 
   /**
    * Method to multiply two matrices in the form of list of list of Integers and combine the results
-   * for all of the integers in a new list of list of integers
+   * for all of the integers in a new list of list of integers.
    *
    * @param coloring     the type of color that determines what color channel is being performed
    *                     on.
@@ -152,5 +152,21 @@ public class Arithmetic {
     return a;
   }
 
+
+  public static List<Integer> averageValue(List<Integer> integers) {
+    int total = 0;
+    int size = integers.size();
+    for (int i = 0; i < size; i++) {
+      total = total + integers.get(i);
+    }
+    int result = total / size;
+
+    List<Integer> list = new ArrayList<>();
+    for (int i = 0; i < size; i++) {
+      list.add(result);
+    }
+
+    return list;
+  }
 
 }

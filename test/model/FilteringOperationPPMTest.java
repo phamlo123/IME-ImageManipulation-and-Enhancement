@@ -1,21 +1,21 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import model.enumTypes.Coloring;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImageFormat;
-import model.ImagingOps.ImagingOperation;
-import model.ImagingOps.ColoringOperation;
-import model.ImagingOps.FilteringOperation;
-import model.enumTypes.Matrices;
+import model.enums.Coloring;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.ImageFormat;
+import model.imaging.ImagingOperation;
+import model.imaging.ColoringOperation;
+import model.imaging.FilteringOperation;
+import model.enums.Matrices;
 import model.util.Arithmetic;
 import org.junit.Test;
 
-/***
+/**
  * Class containing tests for FilteringOperation members.
  */
 public class FilteringOperationPPMTest {
