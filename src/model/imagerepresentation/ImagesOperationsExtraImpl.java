@@ -1,6 +1,5 @@
 package model.imagerepresentation;
 
-import model.ImagesOperations;
 import model.ImagesOperationsExtra;
 import model.enums.FileFormat;
 import model.imaging.ImagingOperationExtra;
@@ -19,22 +18,21 @@ public class ImagesOperationsExtraImpl extends ImagesOperationsImpl
   }
 
   @Override
-  public void downSize(double ratioWidth, double ratioHeight) {
+  public void downSize(double ratioWidth, double ratioHeight) throws IllegalArgumentException {
+    if (ratioHeight < 0 || ratioHeight > 1 || ratioWidth < 0 || ratioWidth > 1) {
+      throw new IllegalArgumentException("Invalid ratios");
+    }
     ImagingOperationExtra imagingOperationExtra = new ImagingOperationExtraImpl(this.image);
     this.image = new Image(imagingOperationExtra.downSize(ratioWidth, ratioHeight));
   }
 
   @Override
-  public void createMosaic(int numSeeds) {
+  public void createMosaic(int numSeeds) throws IllegalArgumentException {
+    if (numSeeds <= 0) {
+      throw new IllegalArgumentException("Number of seeds is less than or equal to 0");
+    }
     ImagingOperationExtra imagingOperationExtra = new ImagingOperationExtraImpl(this.image);
     this.image = new Image(imagingOperationExtra.createMosaic(numSeeds));
   }
 
-
-  public static void main(String[] args) {
-    Image image1 = new Image("cdf.jpg");
-    ImagesOperationsExtra i1 = new ImagesOperationsExtraImpl(image1);
-    i1.createMosaic(8000);
-    i1.getImage().getConverter().exportImage("cdfTest1", FileFormat.JPEG);
-  }
 }

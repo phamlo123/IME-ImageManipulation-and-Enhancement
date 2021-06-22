@@ -1,11 +1,11 @@
-package model;
+package model.position;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class Position2D implements Comparable<Position2D> {
+
+public class Position2D implements Comparable<Position2D>, Position {
 
   private int x;
   private int y;
@@ -26,6 +26,7 @@ public class Position2D implements Comparable<Position2D> {
     return this.y;
   }
 
+  @Override
   public double getDistanceFrom(Position2D position2D) {
     double distanceX = Math.pow(x - position2D.getX(), 2);
     double distanceY = Math.pow(y - position2D.getY(), 2);
@@ -33,6 +34,7 @@ public class Position2D implements Comparable<Position2D> {
     return distance;
   }
 
+  @Override
   public Position2D getNearestPosition(List<Position2D> position2DList) {
     Position2D nearest = position2DList.get(0);
     for (Position2D pos : position2DList) {
@@ -43,30 +45,7 @@ public class Position2D implements Comparable<Position2D> {
     return nearest;
   }
 
-
-  public Position2D getClosestNum(List<Position2D> list) {
-    Arrays.sort(list.toArray());
-    int low = 0;
-    int high = list.size() - 1;
-
-    if (high < 0) {
-      throw new IllegalArgumentException("The array cannot be empty");
-    }
-
-    while (low < high) {
-      int mid = (low + high) / 2;
-      assert (mid < high);
-      int d1 = Math.abs(this.compareTo(list.get(mid)));
-      int d2 = Math.abs(this.compareTo(list.get(mid + 1)));
-      if (d2 <= d1) {
-        low = mid + 1;
-      } else {
-        high = mid;
-      }
-    }
-    return list.get(high);
-  }
-
+  @Override
   public Integer getColorPos(List<List<Integer>> listOfColor) {
     try {
       return listOfColor.get(y).get(x);
