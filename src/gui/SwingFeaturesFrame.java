@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,7 +28,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -62,7 +62,7 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
   public SwingFeaturesFrame() {
     super();
     setTitle("Image Processor");
-    setSize(400, 400);
+    setSize(1500, 1000);
 
     mainPanel = new JPanel();
     //for elements to be arranged vertically within this panel
@@ -180,10 +180,14 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     JPanel imagePanel = new JPanel();
     //a border around the panel with a caption
     imagePanel.setBorder(BorderFactory.createTitledBorder("Image"));
-    imagePanel.setLayout(new GridLayout(1, 0, 10, 10));
+    imagePanel.add(new JScrollPane());
+    imagePanel.setLayout(new BorderLayout());
+    imagePanel.setSize(new Dimension(500, 500));
     //imagePanel.setMaximumSize(null);
-    mainPanel.add(imagePanel);
+    mainPanel.add(imagePanel, BorderLayout.CENTER);
 
+
+    /*
     String[] images = {};
     JLabel[] imageLabel = new JLabel[images.length];
     JScrollPane[] imageScrollPane = new JScrollPane[images.length];
@@ -195,27 +199,27 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
       imageScrollPane[i].setPreferredSize(new Dimension(100, 600));
       imagePanel.add(imageScrollPane[i]);
     }
-
+*/
     //Selection lists
     JPanel selectionListPanel = new JPanel();
     selectionListPanel.setBorder(BorderFactory.createTitledBorder("Selection lists"));
-    selectionListPanel.setLayout(new BoxLayout(selectionListPanel, BoxLayout.X_AXIS));
-    mainPanel.add(selectionListPanel);
+    selectionListPanel.setLayout(new FlowLayout());
+    mainPanel.add(selectionListPanel, BorderLayout.WEST);
 
     DefaultListModel<String> dataForListOfStrings = new DefaultListModel<>();
-    dataForListOfStrings.addElement("Apple");
-    dataForListOfStrings.addElement("Bear");
-    dataForListOfStrings.addElement("Cave");
-    dataForListOfStrings.addElement("Decorate");
-    dataForListOfStrings.addElement("Exciting");
-    dataForListOfStrings.addElement("Flicker");
+    dataForListOfStrings.addElement("Blur");
+    dataForListOfStrings.addElement("Sharpen");
+    dataForListOfStrings.addElement("Create GrayScale");
+    dataForListOfStrings.addElement("Create Sepia");
+    dataForListOfStrings.addElement("Down Size");
+    dataForListOfStrings.addElement("Create Mosaic");
 
     listOfStrings = new JList<>(dataForListOfStrings);
 
     listOfStrings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     listOfStrings.addListSelectionListener(this);
     selectionListPanel.add(listOfStrings);
-
+    /*
     DefaultListModel<Integer> dataForListOfIntegers = new DefaultListModel<>();
     for (int i = 0; i < 1000; i++) {
       dataForListOfIntegers.addElement(i);
@@ -224,12 +228,13 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     listOfIntegers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     listOfIntegers.addListSelectionListener(this);
     selectionListPanel.add(new JScrollPane(listOfIntegers));
-
+*/
     //dialog boxes
     JPanel dialogBoxesPanel = new JPanel();
     dialogBoxesPanel.setBorder(BorderFactory.createTitledBorder("Dialog boxes"));
-    dialogBoxesPanel.setLayout(new BoxLayout(dialogBoxesPanel, BoxLayout.PAGE_AXIS));
-    mainPanel.add(dialogBoxesPanel, BorderLayout.EAST);
+    dialogBoxesPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    dialogBoxesPanel.setLayout(new FlowLayout());
+    mainPanel.add(dialogBoxesPanel, BorderLayout.SOUTH);
 
     //color chooser
     JPanel colorChooserPanel = new JPanel();
