@@ -1,0 +1,16 @@
+Available commands include:
+file //run the given text file with valid commands
+blur //blur the image
+sharpen //sharpen the image
+gray //make the image monochrome
+sepia //make the image sepia
+addLayer //adds a new layer
+remove (layerIndex) //remove the given layer
+import (fileName) (layerIndex) //loads images
+importAll (fileName) //loads all the images in the given text file
+export (fileName) (fileFormat) //export the top image to the given name and format
+exportAll (baseName) (fileFormat) //export all the images to the given name and format
+visible (layerIndex) //set to visible
+invisible (layerIndex) //set to invisible
+current (layerIndex) //set current layer
+end //ends the program
