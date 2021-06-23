@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,7 +13,6 @@ import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,7 +26,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
@@ -35,12 +34,13 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * This class opens the main window, that has different elements illustrated in
- * it. It also doubles up as all the listeners for simplicity. Such a design is
- * not recommended in general.
+ * This class opens the main window, that has different elements illustrated in it. It also doubles
+ * up as all the listeners for simplicity. Such a design is not recommended in general.
  */
 
-public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemListener, ListSelectionListener {
+public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemListener,
+    ListSelectionListener {
+
   private JPasswordField pfield;
   private JButton pButton;
   private JLabel pDisplay;
@@ -61,24 +61,19 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
 
   public SwingFeaturesFrame() {
     super();
-    setTitle("Swing features");
+    setTitle("Image Processor");
     setSize(400, 400);
-
 
     mainPanel = new JPanel();
     //for elements to be arranged vertically within this panel
-    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+    mainPanel.setLayout(new BorderLayout());
     //scroll bars around this main panel
     mainScrollPane = new JScrollPane(mainPanel);
     add(mainScrollPane);
 
-    //text area
-    JTextArea textArea = new JTextArea(10, 20);
-    textArea.setBorder(BorderFactory.createTitledBorder("Regular text area"));
-    mainPanel.add(textArea);
-
+    /*
     //text area with a scrollbar
-    JTextArea sTextArea = new JTextArea(10, 20);
+    JTextArea sTextArea = new JTextArea(2, 10);
     JScrollPane scrollPane = new JScrollPane(sTextArea);
     sTextArea.setLineWrap(true);
     //scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -102,6 +97,7 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     pDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     pPanel.add(pDisplay);
 
+    /*
     //checkboxes
 
     JPanel checkBoxPanel = new JPanel();
@@ -124,6 +120,8 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     mainPanel.add(checkBoxPanel);
 
 
+     */
+    /*
     //radio buttons
     JPanel radioPanel = new JPanel();
     radioPanel.setBorder(BorderFactory.createTitledBorder("Radio buttons"));
@@ -143,10 +141,11 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
 
       radioButtons[i].setActionCommand("RB" + (i + 1));
       radioButtons[i].addActionListener(this);
-      if (i < 2)
+      if (i < 2) {
         rGroup1.add(radioButtons[i]);
-      else
+      } else {
         rGroup2.add(radioButtons[i]);
+      }
       radioPanel.add(radioButtons[i]);
 
     }
@@ -154,16 +153,16 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     radioDisplay = new JLabel("Which one did the user select?");
     radioPanel.add(radioDisplay);
     mainPanel.add(radioPanel);
-
+     */
     //combo boxes
-
+/*
     JPanel comboboxPanel = new JPanel();
     comboboxPanel.setBorder(BorderFactory.createTitledBorder("Combo boxes"));
     comboboxPanel.setLayout(new BoxLayout(comboboxPanel, BoxLayout.PAGE_AXIS));
     mainPanel.add(comboboxPanel);
 
     comboboxDisplay = new JLabel("Cold Stone Creamery: Which size do you "
-            + "want?");
+        + "want?");
     comboboxPanel.add(comboboxDisplay);
     String[] options = {"Like it", "Love it", "Gotta have it"};
     JComboBox<String> combobox = new JComboBox<String>();
@@ -175,16 +174,17 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     }
 
     comboboxPanel.add(combobox);
+*/
 
     //show an image with a scrollbar
     JPanel imagePanel = new JPanel();
     //a border around the panel with a caption
-    imagePanel.setBorder(BorderFactory.createTitledBorder("Showing an image"));
+    imagePanel.setBorder(BorderFactory.createTitledBorder("Image"));
     imagePanel.setLayout(new GridLayout(1, 0, 10, 10));
     //imagePanel.setMaximumSize(null);
     mainPanel.add(imagePanel);
 
-    String[] images = {"Jellyfish.jpg", "Koala.jpg", "Penguins.jpg"};
+    String[] images = {};
     JLabel[] imageLabel = new JLabel[images.length];
     JScrollPane[] imageScrollPane = new JScrollPane[images.length];
 
@@ -209,26 +209,27 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     dataForListOfStrings.addElement("Decorate");
     dataForListOfStrings.addElement("Exciting");
     dataForListOfStrings.addElement("Flicker");
+
     listOfStrings = new JList<>(dataForListOfStrings);
+
     listOfStrings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     listOfStrings.addListSelectionListener(this);
     selectionListPanel.add(listOfStrings);
 
-
     DefaultListModel<Integer> dataForListOfIntegers = new DefaultListModel<>();
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 1000; i++) {
       dataForListOfIntegers.addElement(i);
+    }
     listOfIntegers = new JList<>(dataForListOfIntegers);
     listOfIntegers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     listOfIntegers.addListSelectionListener(this);
     selectionListPanel.add(new JScrollPane(listOfIntegers));
 
-
     //dialog boxes
     JPanel dialogBoxesPanel = new JPanel();
     dialogBoxesPanel.setBorder(BorderFactory.createTitledBorder("Dialog boxes"));
     dialogBoxesPanel.setLayout(new BoxLayout(dialogBoxesPanel, BoxLayout.PAGE_AXIS));
-    mainPanel.add(dialogBoxesPanel);
+    mainPanel.add(dialogBoxesPanel, BorderLayout.EAST);
 
     //color chooser
     JPanel colorChooserPanel = new JPanel();
@@ -338,13 +339,14 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
         }
         break;
       case "Color chooser":
-        Color col = JColorChooser.showDialog(SwingFeaturesFrame.this, "Choose a color", colorChooserDisplay.getBackground());
+        Color col = JColorChooser.showDialog(SwingFeaturesFrame.this, "Choose a color",
+            colorChooserDisplay.getBackground());
         colorChooserDisplay.setBackground(col);
         break;
       case "Open file": {
         final JFileChooser fchooser = new JFileChooser(".");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JPG & GIF Images", "jpg", "gif");
+            "JPG & GIF Images", "jpg", "gif");
         fchooser.setFileFilter(filter);
         int retvalue = fchooser.showOpenDialog(SwingFeaturesFrame.this);
         if (retvalue == JFileChooser.APPROVE_OPTION) {
@@ -363,17 +365,25 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
       }
       break;
       case "Message":
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "This is a demo message", "Message", JOptionPane.PLAIN_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You are about to be deleted.", "Last Chance", JOptionPane.WARNING_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You have been deleted.", "Too late", JOptionPane.ERROR_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "Please start again.", "What to do next", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "This is a demo message", "Message",
+            JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You are about to be deleted.",
+            "Last Chance", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You have been deleted.", "Too late",
+            JOptionPane.ERROR_MESSAGE);
+        JOptionPane
+            .showMessageDialog(SwingFeaturesFrame.this, "Please start again.", "What to do next",
+                JOptionPane.INFORMATION_MESSAGE);
         break;
       case "Input":
         inputDisplay.setText(JOptionPane.showInputDialog("Please enter your username"));
         break;
       case "Option": {
-        String[] options = {"Uno", "Dos", "Tres", "Cuatro", "Cinco", "seis", "siete", "ocho", "nueve", "dies"};
-        int retvalue = JOptionPane.showOptionDialog(SwingFeaturesFrame.this, "Please choose number", "Options", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[4]);
+        String[] options = {"Uno", "Dos", "Tres", "Cuatro", "Cinco", "seis", "siete", "ocho",
+            "nueve", "dies"};
+        int retvalue = JOptionPane
+            .showOptionDialog(SwingFeaturesFrame.this, "Please choose number", "Options",
+                JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[4]);
         optionDisplay.setText(options[retvalue]);
       }
       break;
@@ -431,15 +441,17 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     // We don't know which list called this callback, because we're using it
     // for two lists.  In practice, you should use separate listeners
     JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-            "The source object is " + e.getSource(), "Source", JOptionPane.PLAIN_MESSAGE);
+        "The source object is " + e.getSource(), "Source", JOptionPane.PLAIN_MESSAGE);
     // Regardless, the event information tells us which index was selected
     JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-            "The changing index is " + e.getFirstIndex(), "Index", JOptionPane.PLAIN_MESSAGE);
+        "The changing index is " + e.getFirstIndex(), "Index", JOptionPane.PLAIN_MESSAGE);
     // This gets us the string value that's currently selected
     JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-            "The current string item is " + this.listOfStrings.getSelectedValue(), "Selected string", JOptionPane.PLAIN_MESSAGE);
+        "The current string item is " + this.listOfStrings.getSelectedValue(), "Selected string",
+        JOptionPane.PLAIN_MESSAGE);
     // This gets us the integer value that's currently selected
     JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-            "The current number item is " + this.listOfIntegers.getSelectedValue(), "Selected integer", JOptionPane.PLAIN_MESSAGE);
+        "The current number item is " + this.listOfIntegers.getSelectedValue(), "Selected integer",
+        JOptionPane.PLAIN_MESSAGE);
   }
 }

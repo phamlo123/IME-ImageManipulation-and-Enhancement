@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Random;
 import model.position.Position2D;
 import model.enums.Coloring;
-import model.imagerepresentation.Image;
 import model.imagerepresentation.ImageFormat;
 import model.util.Arithmetic;
 import model.util.ImageUtil;
@@ -36,7 +35,7 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
 
 
   private List<List<Integer>> helpMulti(int newHeight, int newWidth, Coloring coloring,
-      double ratioHeight, double ratioWidth) {
+      double ratioHeight, double ratioWidth) throws IllegalArgumentException {
     List<List<Integer>> list;
     switch (coloring) {
       case RED:
@@ -117,49 +116,30 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
       }
     }
 
-    for (Position2D key : map.keySet()) {
-      List<Position2D> listPos = map.get(key);
-      List<Integer> l = new ArrayList<>();
-      for (Position2D pos : listPos) {
-        l.add(pos.getColorPos(redChannel));
-      }
-
-      List<Integer> list = Arithmetic.averageValue(l);
-
-      for (int i = 0; i < listPos.size(); i++) {
-        redChannel.get(listPos.get(i).getY()).set(listPos.get(i).getX(), list.get(i));
-      }
-    }
-
-    for (Position2D key : map.keySet()) {
-      List<Position2D> listPos = map.get(key);
-      List<Integer> l = new ArrayList<>();
-      for (Position2D pos : listPos) {
-        l.add(pos.getColorPos(greenChannel));
-      }
-
-      List<Integer> list = Arithmetic.averageValue(l);
-
-      for (int i = 0; i < listPos.size(); i++) {
-        greenChannel.get(listPos.get(i).getY()).set(listPos.get(i).getX(), list.get(i));
-      }
-    }
-
-    for (Position2D key : map.keySet()) {
-      List<Position2D> listPos = map.get(key);
-      List<Integer> l = new ArrayList<>();
-      for (Position2D pos : listPos) {
-        l.add(pos.getColorPos(blueChannel));
-      }
-
-      List<Integer> list = Arithmetic.averageValue(l);
-
-      for (int i = 0; i < listPos.size(); i++) {
-        blueChannel.get(listPos.get(i).getY()).set(listPos.get(i).getX(), list.get(i));
-      }
-    }
+    updateNewColor(map, redChannel);
+    updateNewColor(map, greenChannel);
+    updateNewColor(map, blueChannel);
 
     return ImageUtil.getLists(redChannel, greenChannel, blueChannel);
+  }
+
+
+  private void updateNewColor(Map<Position2D, List<Position2D>> map,
+      List<List<Integer>> listOfColor) {
+    for (Position2D key : map.keySet()) {
+      List<Position2D> listPos = map.get(key);
+      List<Integer> l = new ArrayList<>();
+      for (Position2D pos : listPos) {
+        l.add(pos.getColorPos(listOfColor));
+      }
+
+      List<Integer> list = Arithmetic.averageValue(l);
+
+      for (int i = 0; i < listPos.size(); i++) {
+        listOfColor.get(listPos.get(i).getY()).set(listPos.get(i).getX(), list.get(i));
+      }
+    }
+
   }
 
   private List<Integer> getRandom(int numSeed, int min, int max) {
@@ -173,9 +153,4 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
   }
 
 
-
-  public static void main(String[] args) {
-    ImagingOperationExtraImpl e = new ImagingOperationExtraImpl(new Image("abc.jpg"));
-
-  }
 }
