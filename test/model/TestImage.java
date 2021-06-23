@@ -1,15 +1,14 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import model.ImageRepresentation.multiLayers.MultiLayeredImagesOperations;
-import model.ImageRepresentation.multiLayers.MultiLayers;
 import model.converter.Converter;
-import model.converter.SimpleConverter;
-import model.enumTypes.Coloring;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImageFormat;
-import model.enumTypes.FileFormat;
+import model.enums.Coloring;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.ImageFormat;
+import model.enums.FileFormat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +26,6 @@ public class TestImage {
   }
 
   // constructor tests
-
 
   // export tests
 
@@ -66,7 +64,7 @@ public class TestImage {
   // tests that the overridden equals method returns false when a null object is passed
   @Test
   public void testEqualsNull() {
-    assertFalse(examples.ppmExample1.equals(null));
+    assertFalse(examples.ppmExample1 == null);
   }
 
   // tests that the overridden equals method returns true when a copy PPM object is passed

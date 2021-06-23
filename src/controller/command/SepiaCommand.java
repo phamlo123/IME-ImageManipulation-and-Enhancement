@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
@@ -9,7 +9,7 @@ import model.util.ImageUtil;
 public class SepiaCommand implements ImageCommand {
 
   @Override
-  public void go(MultiLayers model) {
+  public void execute(MultiLayers model) {
     ImageUtil.checkNull(model);
     model.createSepia();
   }

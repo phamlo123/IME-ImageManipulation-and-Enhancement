@@ -1,7 +1,7 @@
 package controller.command;
 
-import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.ImageFormat;
+import model.imagerepresentation.multilayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
@@ -14,6 +14,7 @@ public class ImportCommand implements ImageCommand {
 
   /**
    * Constructs a LoadCommand object with the current layer index and image as private fields.
+   *
    * @param imageFormat the image to be set at the given layer index
    * @param layerIndex  the layer index determining where to set the given image
    */
@@ -24,7 +25,7 @@ public class ImportCommand implements ImageCommand {
   }
 
   @Override
-  public void go(MultiLayers model) throws IllegalArgumentException {
+  public void execute(MultiLayers model) throws IllegalArgumentException {
     ImageUtil.checkNull(model);
     model.loadImages(imageFormat, layerIndex);
   }

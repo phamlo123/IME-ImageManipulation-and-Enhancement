@@ -1,16 +1,16 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import controller.command.CurrentCommand;
 import controller.command.ImageCommand;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test class to ensure that the CurrentCommand class and all of its methods
- * function correctly
+ * function correctly.
  */
 public class CurrentCommandTest {
 
@@ -30,14 +30,14 @@ public class CurrentCommandTest {
   // throws an exception because the model given is null
   @Test(expected = IllegalArgumentException.class)
   public void testGoNull() {
-    current.go(null);
+    current.execute(null);
   }
 
   // tests the normal functionality of the CurrentCommand go method, makes sure the model calls
   // the correct method
   @Test
   public void testGoNormal() {
-    current.go(mockModel);
+    current.execute(mockModel);
     assertEquals("setCurrent called. index = 1",log.toString());
   }
 }

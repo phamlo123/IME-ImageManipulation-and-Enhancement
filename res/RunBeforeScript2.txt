@@ -1,0 +1,6 @@
+addLayer
+addLayer
+import abc.jpg 0
+import dragon.png 1
+exportAll abcAndDragon png
+end

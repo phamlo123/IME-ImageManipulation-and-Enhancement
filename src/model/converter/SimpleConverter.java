@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import model.enumTypes.FileFormat;
+import model.enums.FileFormat;
 
 import model.util.ImageUtil;
 

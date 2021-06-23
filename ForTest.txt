@@ -1,3 +1,0 @@
-/Users/terencepham/Desktop/CS3500/real/IME-ImageManipulation-and-Enhancement/ForTest1.ppm
-/Users/terencepham/Desktop/CS3500/real/IME-ImageManipulation-and-Enhancement/ForTest2.ppm
-/Users/terencepham/Desktop/CS3500/real/IME-ImageManipulation-and-Enhancement/ForTest3.ppm

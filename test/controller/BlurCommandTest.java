@@ -1,15 +1,15 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import controller.command.BlurCommand;
 import controller.command.ImageCommand;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the BlurCommand class and all of its methods function correctly
+ * Test class to ensure that the BlurCommand class and all of its methods function correctly.
  */
 public class BlurCommandTest {
 
@@ -29,14 +29,14 @@ public class BlurCommandTest {
   // throws an exception because the model given is null
   @Test(expected = IllegalArgumentException.class)
   public void testGoNull() {
-    blur.go(null);
+    blur.execute(null);
   }
 
   // tests the normal functionality of the BlurCommand go method, makes sure the model calls
   // the correct method
   @Test
   public void testGoNormal() {
-    blur.go(mockModel);
+    blur.execute(mockModel);
     assertEquals("blurringImage called.",log.toString());
   }
 }

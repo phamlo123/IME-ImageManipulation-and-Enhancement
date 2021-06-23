@@ -1,21 +1,22 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import model.ImageRepresentation.ImagesOperationsImpl;
-import model.enumTypes.Coloring;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImageFormat;
-import model.enumTypes.Matrices;
+import model.imagerepresentation.ImagesOperationsImpl;
+import model.enums.Coloring;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.ImageFormat;
+import model.enums.Matrices;
 import model.util.Arithmetic;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Class to test ImageImplPPM class methods
+ * Class to test ImageImplPPM class methods.
  */
 public class ImagesOperationsImplTest {
 

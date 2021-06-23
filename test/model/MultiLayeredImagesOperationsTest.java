@@ -1,18 +1,24 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.ImagesOperationsImpl;
-import model.ImageRepresentation.multiLayers.MultiLayeredImagesOperations;
-import model.ImageRepresentation.multiLayers.MultiLayers;
-import model.enumTypes.FileFormat;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.ImageFormat;
+import model.imagerepresentation.ImagesOperationsImpl;
+import model.imagerepresentation.multilayers.MultiLayeredImagesOperations;
+import model.imagerepresentation.multilayers.MultiLayers;
+import model.enums.FileFormat;
 import org.junit.Test;
 
+/**
+ * test class for MultilayersImagesOperations class.
+ */
 public class MultiLayeredImagesOperationsTest {
 
   Image northeastern = new Image("Northeastern.ppm");
@@ -259,7 +265,7 @@ public class MultiLayeredImagesOperationsTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testGetLayerIllegal() {
-   multiLayers.getLayer(11);
+    multiLayers.getLayer(11);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -313,11 +319,6 @@ public class MultiLayeredImagesOperationsTest {
     imagesOperations.createMonochrome();
     assertEquals(imagesOperations.getImage(), new Image("Testing.ppm"));
   }
-
-
-
-
-
 
 
 }

@@ -1,17 +1,17 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import controller.command.ImageCommand;
 import controller.command.ImportCommand;
 import model.ImageExamples;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.multilayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the ImportCommand class and all of its methods function correctly
+ * Test class to ensure that the ImportCommand class and all of its methods function correctly.
  */
 public class ImportCommandTest {
 
@@ -40,14 +40,14 @@ public class ImportCommandTest {
   // throws an exception because the model given is null
   @Test(expected = IllegalArgumentException.class)
   public void testGoNull() {
-    load.go(null);
+    load.execute(null);
   }
 
   // tests the normal functionality of the LoadCommand go method, makes sure the model calls
   // the correct method
   @Test
   public void testGoNormal() {
-    load.go(mockModel);
+    load.execute(mockModel);
     assertEquals("loadImages called. layerIndex = 0", log.toString());
   }
 }

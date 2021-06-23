@@ -1,8 +1,8 @@
 package controller;
 
-import model.enumTypes.FileFormat;
-import model.ImageRepresentation.ImageFormat;
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.enums.FileFormat;
+import model.imagerepresentation.ImageFormat;
+import model.imagerepresentation.multilayers.MultiLayers;
 
 /**
  * Mock class of MultiLayeredImages used to test the communication between the controller and

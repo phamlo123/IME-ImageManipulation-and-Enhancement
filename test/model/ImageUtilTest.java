@@ -1,17 +1,17 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 import java.util.List;
-import model.enumTypes.Coloring;
-import model.ImageRepresentation.Image;
-import model.ImageRepresentation.ImageFormat;
+import model.enums.Coloring;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.ImageFormat;
 import model.util.ImageUtil;
 import org.junit.Test;
 
 /**
- * Class that contains tests for ImageUtil static methods
+ * Class that contains tests for ImageUtil static methods.
  */
 public class ImageUtilTest {
 

@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.ImageRepresentation.multiLayers.MultiLayers;
+import model.imagerepresentation.multilayers.MultiLayers;
 import model.util.ImageUtil;
 
 /**
@@ -9,7 +9,7 @@ import model.util.ImageUtil;
 public class GrayCommand implements ImageCommand {
 
   @Override
-  public void go(MultiLayers model) throws IllegalArgumentException {
+  public void execute(MultiLayers model) throws IllegalArgumentException {
     ImageUtil.checkNull(model);
     model.createMonochrome();
   }
