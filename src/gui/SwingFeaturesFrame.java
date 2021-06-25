@@ -1,5 +1,6 @@
 package gui;
 
+import controller.ImageController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -45,14 +46,18 @@ import javax.xml.crypto.dsig.XMLObject;
  * up as all the listeners for simplicity. Such a design is not recommended in general.
  */
 
-public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemListener,
-    ListSelectionListener {
+public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSelectionListener {
 
   private JPasswordField pfield;
   private JButton pButton;
   private JLabel pDisplay;
   private JPanel mainPanel;
   private JScrollPane mainScrollPane;
+  private JPanel imagePanel;
+  private JPanel filteringBoxesPanel;
+  private JPanel checkerBoard;
+  private JPanel dialogBoxesPanel;
+  private JPanel otherOptions;
 
   private JLabel checkboxDisplay;
   private JLabel radioDisplay;
@@ -63,8 +68,21 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
   private JLabel inputDisplay;
   private JLabel optionDisplay;
 
+  private JButton downSizePanelButton;
+  private JButton mosaicPanelButton;
+  private JButton sharpenButton;
+  private JButton createGrayScaleButton;
+  private JButton createSepiaButton;
+  private JButton saveAllImagesButton;
+  private JButton saveAnImageButton;
+  private JButton blurButton;
+  private JButton loadImagePanelButton;
+  private JButton loadAllImagesButton;
+
+
   private JList<String> listOfStrings;
   private JList<Integer> listOfIntegers;
+
 
   public SwingFeaturesFrame() {
     super();
@@ -78,11 +96,9 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     mainScrollPane = new JScrollPane(mainPanel);
     add(mainScrollPane);
 
-    //natural height, maximum width
 
-    //show an image with a scrollbar
-    JPanel imagePanel = new JPanel();
-    //a border around the panel with a caption
+    imagePanel = new JPanel();
+
     TitledBorder title = BorderFactory.createTitledBorder("Image");
     title.setTitleJustification(TitledBorder.CENTER);
     imagePanel.setBorder(title);
@@ -90,10 +106,9 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     imagePanel.setLayout(new BorderLayout());
     imagePanel.setSize(new Dimension(500, 500));
     mainPanel.add(imagePanel, BorderLayout.CENTER);
-    //imagePanel.setMaximumSize(null);
 
     //Filtering Boxes
-    JPanel filteringBoxesPanel = new JPanel();
+    filteringBoxesPanel = new JPanel();
 
     TitledBorder title2 = BorderFactory.createTitledBorder("Filtering Options");
     title2.setTitleJustification(TitledBorder.CENTER);
@@ -102,31 +117,31 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     filteringBoxesPanel.setLayout(new GridLayout(18, 1, 0, 0));
     mainPanel.add(filteringBoxesPanel, BorderLayout.WEST);
 
-    JButton blurButton = new JButton("Blur");
+    blurButton = new JButton("Blur");
     blurButton.setSize(new Dimension(150, 20));
     blurButton.setMaximumSize(new Dimension(150, 20));
-    JButton sharpenButton = new JButton("Sharpen");
+
+    sharpenButton = new JButton("Sharpen");
     sharpenButton.setSize(new Dimension(150, 20));
     sharpenButton.setMaximumSize(new Dimension(150, 20));
 
-    JButton createGrayScaleButton = new JButton("Create Grayscale");
+    createGrayScaleButton = new JButton("Create Grayscale");
     createGrayScaleButton.setSize(new Dimension(150, 20));
     createGrayScaleButton.setMaximumSize(new Dimension(150, 20));
 
-    JButton createSepiaButton = new JButton("Create Sepia");
+    createSepiaButton = new JButton("Create Sepia");
     createSepiaButton.setSize(new Dimension(150, 20));
     createSepiaButton.setMaximumSize(new Dimension(150, 20));
 
-    JButton downSizePanelButton = new JButton("Downsize");
+    downSizePanelButton = new JButton("Downsize");
     downSizePanelButton.setSize(new Dimension(150, 20));
     downSizePanelButton.setActionCommand("Downsize");
-    downSizePanelButton.addActionListener(this);
+
     downSizePanelButton.setMaximumSize(new Dimension(150, 20));
 
-    JButton mosaicPanelButton = new JButton("Create Mosaic");
+    mosaicPanelButton = new JButton("Create Mosaic");
     mosaicPanelButton.setSize(new Dimension(150, 20));
     mosaicPanelButton.setActionCommand("Mosaic");
-    mosaicPanelButton.addActionListener(this);
     mosaicPanelButton.setMaximumSize(new Dimension(150, 20));
 
     filteringBoxesPanel.add(blurButton);
@@ -137,7 +152,7 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     filteringBoxesPanel.add(downSizePanelButton);
     filteringBoxesPanel.add(mosaicPanelButton);
 
-    JPanel otherOptions = new JPanel();
+    otherOptions = new JPanel();
 
     TitledBorder title4 = BorderFactory.createTitledBorder("Other Options");
     title4.setTitleJustification(TitledBorder.CENTER);
@@ -147,12 +162,12 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     otherOptions.setPreferredSize(new Dimension(250, 100));
     mainPanel.add(otherOptions, BorderLayout.EAST);
 
-    JPanel checkerBoard = new JPanel();
+    checkerBoard = new JPanel();
     checkerBoard.setLayout(new BorderLayout());
     checkerBoard.setPreferredSize(new Dimension(200, 200));
 
     //dialog boxes
-    JPanel dialogBoxesPanel = new JPanel();
+    dialogBoxesPanel = new JPanel();
     TitledBorder title3 = BorderFactory.createTitledBorder("File");
     title3.setTitleJustification(TitledBorder.CENTER);
     dialogBoxesPanel.setBorder(title3);
@@ -167,7 +182,6 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     dialogBoxesPanel.add(colorChooserPanel);
     JButton colorChooserButton = new JButton("Choose a color");
     colorChooserButton.setActionCommand("Color chooser");
-    colorChooserButton.addActionListener(this);
     colorChooserPanel.add(colorChooserButton);
     colorChooserDisplay = new JLabel("      ");
     colorChooserDisplay.setOpaque(true); //so that background color shows up
@@ -181,7 +195,6 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     dialogBoxesPanel.add(loadImagePanel);
     JButton loadImagePanelButton = new JButton("Load an Image");
     loadImagePanelButton.setActionCommand("Input1");
-    loadImagePanelButton.addActionListener(this);
     loadImagePanel.add(loadImagePanelButton);
 
     //Load All Images
@@ -190,7 +203,6 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     dialogBoxesPanel.add(loadAllImages);
     JButton loadAllImagesButton = new JButton("Load All Images");
     loadAllImagesButton.setActionCommand("Input2");
-    loadAllImagesButton.addActionListener(this);
     loadAllImages.add(loadAllImagesButton);
 
     //Save an Image
@@ -198,7 +210,6 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     saveAnImage.setLayout(new FlowLayout());
     dialogBoxesPanel.add(saveAnImage);
     JButton saveAnImageButton = new JButton("Save");
-    saveAnImageButton.addActionListener(this);
     saveAnImageButton.setActionCommand("Input3");
     saveAnImage.add(saveAnImageButton);
 
@@ -208,7 +219,6 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     dialogBoxesPanel.add(saveAllImage);
     JButton saveAllImagesButton = new JButton("Save All");
     saveAllImagesButton.setActionCommand("Input4");
-    saveAllImagesButton.addActionListener(this);
     saveAllImage.add(saveAllImagesButton);
 
     //JOptionsPane message dialog
@@ -225,111 +235,10 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
     JPanel optionsDialogPanel = new JPanel();
     optionsDialogPanel.setLayout(new FlowLayout());
     dialogBoxesPanel.add(optionsDialogPanel);
-
-
   }
 
 
-  @Override
-  public void actionPerformed(ActionEvent arg0) {
-    // TODO Auto-generated method stub
-    switch (arg0.getActionCommand()) {
-      case "password button":
-        pDisplay.setText(new String(pfield.getPassword()));
-        pfield.setText("");
-        break;
-      case "RB1":
-        radioDisplay.setText("Radio button 1 was selected");
-        break;
 
-      case "RB2":
-        radioDisplay.setText("Radio button 2 was selected");
-        break;
-
-      case "RB3":
-        radioDisplay.setText("Radio button 3 was selected");
-        break;
-
-      case "RB4":
-        radioDisplay.setText("Radio button 4 was selected");
-        break;
-
-      case "Size options":
-        if (arg0.getSource() instanceof JComboBox) {
-          JComboBox<String> box = (JComboBox<String>) arg0.getSource();
-          comboboxDisplay.setText("You selected: " + (String) box.getSelectedItem());
-
-
-        }
-        break;
-      case "Color chooser":
-        Color col = JColorChooser.showDialog(SwingFeaturesFrame.this, "Choose a color",
-            colorChooserDisplay.getBackground());
-        colorChooserDisplay.setBackground(col);
-        break;
-      case "Open file": {
-        final JFileChooser fchooser = new JFileChooser(".");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "JPG & GIF Images", "jpg", "gif");
-        fchooser.setFileFilter(filter);
-        int retvalue = fchooser.showOpenDialog(SwingFeaturesFrame.this);
-        if (retvalue == JFileChooser.APPROVE_OPTION) {
-          File f = fchooser.getSelectedFile();
-          fileOpenDisplay.setText(f.getAbsolutePath());
-        }
-      }
-      break;
-      case "Save file": {
-        final JFileChooser fchooser = new JFileChooser(".");
-        int retvalue = fchooser.showSaveDialog(SwingFeaturesFrame.this);
-        if (retvalue == JFileChooser.APPROVE_OPTION) {
-          File f = fchooser.getSelectedFile();
-          fileSaveDisplay.setText(f.getAbsolutePath());
-        }
-      }
-      break;
-      case "Message":
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "This is a demo message", "Message",
-            JOptionPane.PLAIN_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You are about to be deleted.",
-            "Last Chance", JOptionPane.WARNING_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You have been deleted.", "Too late",
-            JOptionPane.ERROR_MESSAGE);
-        JOptionPane
-            .showMessageDialog(SwingFeaturesFrame.this, "Please start again.", "What to do next",
-                JOptionPane.INFORMATION_MESSAGE);
-        break;
-      case "Input":
-        inputDisplay.setText(JOptionPane.showInputDialog("Please enter your username"));
-        break;
-      case "Input1":
-        inputDisplay.setText(JOptionPane.showInputDialog("Please enter image file name"));
-        break;
-      case "Input2":
-        inputDisplay.setText(JOptionPane.showInputDialog("Please enter text file name"));
-        break;
-      case "Input3":
-        inputDisplay.setText(JOptionPane.showInputDialog("Please enter name for this image"));
-        break;
-      case "Input4":
-        inputDisplay
-            .setText(JOptionPane.showInputDialog("Please enter base name for these images"));
-        break;
-      case "Mosaic":
-        inputDisplay
-            .setText(JOptionPane.showInputDialog("Please enter the number of seeds"));
-        break;
-      case "Option": {
-        String[] options = {"Uno", "Dos", "Tres", "Cuatro", "Cinco", "seis", "siete", "ocho",
-            "nueve", "dies"};
-        int retvalue = JOptionPane
-            .showOptionDialog(SwingFeaturesFrame.this, "Please choose number", "Options",
-                JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[4]);
-        optionDisplay.setText(options[retvalue]);
-      }
-      break;
-    }
-  }
 
   @Override
   public void itemStateChanged(ItemEvent arg0) {
@@ -395,4 +304,26 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
         "The current number item is " + this.listOfIntegers.getSelectedValue(), "Selected integer",
         JOptionPane.PLAIN_MESSAGE);
   }
+
+  /*
+
+  public void setListener(NewController controller) {
+
+    downSizePanelButton.addActionListener(controller);
+    mosaicPanelButton.addActionListener(controller);
+    sharpenButton.addActionListener(controller);
+    createGrayScaleButton.addActionListener(controller);
+    createSepiaButton.addActionListener(controller);
+    saveAllImagesButton.addActionListener(controller);
+    saveAnImageButton.addActionListener(controller);
+    blurButton.addActionListener(controller);
+    loadImagePanelButton.addActionListener(controller);
+    loadAllImagesButton.addActionListener(controller);
+  }
+
+  public void setText(String string) {
+    JOptionPane.showInputDialog(string);
+  }
+
+   */
 }
