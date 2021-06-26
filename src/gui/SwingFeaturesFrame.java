@@ -1,45 +1,27 @@
 package gui;
 
-import controller.ImageController;
+import controller.NewController;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.WindowEvent;
-import java.io.File;
-
+import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JColorChooser;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.crypto.dsig.XMLObject;
 
 /**
  * This class opens the main window, that has different elements illustrated in it. It also doubles
@@ -48,36 +30,23 @@ import javax.xml.crypto.dsig.XMLObject;
 
 public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSelectionListener {
 
-  private JPasswordField pfield;
-  private JButton pButton;
-  private JLabel pDisplay;
-  private JPanel mainPanel;
-  private JScrollPane mainScrollPane;
+  private final JLabel imageLabel;
+
   private JPanel imagePanel;
-  private JPanel filteringBoxesPanel;
-  private JPanel checkerBoard;
-  private JPanel dialogBoxesPanel;
-  private JPanel otherOptions;
+
 
   private JLabel checkboxDisplay;
-  private JLabel radioDisplay;
-  private JLabel comboboxDisplay;
-  private JLabel colorChooserDisplay;
-  private JLabel fileOpenDisplay;
-  private JLabel fileSaveDisplay;
-  private JLabel inputDisplay;
-  private JLabel optionDisplay;
 
-  private JButton downSizePanelButton;
-  private JButton mosaicPanelButton;
-  private JButton sharpenButton;
-  private JButton createGrayScaleButton;
-  private JButton createSepiaButton;
-  private JButton saveAllImagesButton;
-  private JButton saveAnImageButton;
-  private JButton blurButton;
-  private JButton loadImagePanelButton;
-  private JButton loadAllImagesButton;
+  private final JButton downSizePanelButton;
+  private final JButton mosaicPanelButton;
+  private final JButton sharpenButton;
+  private final JButton createGrayScaleButton;
+  private final JButton createSepiaButton;
+  private final JButton saveAllImagesButton;
+  private final JButton saveAnImageButton;
+  private final JButton blurButton;
+  private final JButton loadImagePanelButton;
+  private final JButton loadAllImagesButton;
 
 
   private JList<String> listOfStrings;
@@ -89,13 +58,12 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     setTitle("Image Processor");
     setSize(1000, 1000);
 
-    mainPanel = new JPanel();
+    JPanel mainPanel = new JPanel();
     //for elements to be arranged vertically within this panel
     mainPanel.setLayout(new BorderLayout());
     //scroll bars around this main panel
-    mainScrollPane = new JScrollPane(mainPanel);
+    JScrollPane mainScrollPane = new JScrollPane(mainPanel);
     add(mainScrollPane);
-
 
     imagePanel = new JPanel();
 
@@ -107,8 +75,10 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     imagePanel.setSize(new Dimension(500, 500));
     mainPanel.add(imagePanel, BorderLayout.CENTER);
 
+    imageLabel = new JLabel();
+
     //Filtering Boxes
-    filteringBoxesPanel = new JPanel();
+    JPanel filteringBoxesPanel = new JPanel();
 
     TitledBorder title2 = BorderFactory.createTitledBorder("Filtering Options");
     title2.setTitleJustification(TitledBorder.CENTER);
@@ -119,18 +89,22 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
 
     blurButton = new JButton("Blur");
     blurButton.setSize(new Dimension(150, 20));
+    blurButton.setActionCommand("Blur");
     blurButton.setMaximumSize(new Dimension(150, 20));
 
     sharpenButton = new JButton("Sharpen");
     sharpenButton.setSize(new Dimension(150, 20));
+    sharpenButton.setActionCommand("Sharpen");
     sharpenButton.setMaximumSize(new Dimension(150, 20));
 
     createGrayScaleButton = new JButton("Create Grayscale");
     createGrayScaleButton.setSize(new Dimension(150, 20));
+    createGrayScaleButton.setActionCommand("Gray");
     createGrayScaleButton.setMaximumSize(new Dimension(150, 20));
 
     createSepiaButton = new JButton("Create Sepia");
     createSepiaButton.setSize(new Dimension(150, 20));
+    createSepiaButton.setActionCommand("Sepia");
     createSepiaButton.setMaximumSize(new Dimension(150, 20));
 
     downSizePanelButton = new JButton("Downsize");
@@ -152,7 +126,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     filteringBoxesPanel.add(downSizePanelButton);
     filteringBoxesPanel.add(mosaicPanelButton);
 
-    otherOptions = new JPanel();
+    JPanel otherOptions = new JPanel();
 
     TitledBorder title4 = BorderFactory.createTitledBorder("Other Options");
     title4.setTitleJustification(TitledBorder.CENTER);
@@ -162,12 +136,12 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     otherOptions.setPreferredSize(new Dimension(250, 100));
     mainPanel.add(otherOptions, BorderLayout.EAST);
 
-    checkerBoard = new JPanel();
+    JPanel checkerBoard = new JPanel();
     checkerBoard.setLayout(new BorderLayout());
     checkerBoard.setPreferredSize(new Dimension(200, 200));
 
     //dialog boxes
-    dialogBoxesPanel = new JPanel();
+    JPanel dialogBoxesPanel = new JPanel();
     TitledBorder title3 = BorderFactory.createTitledBorder("File");
     title3.setTitleJustification(TitledBorder.CENTER);
     dialogBoxesPanel.setBorder(title3);
@@ -176,65 +150,41 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
 
     mainPanel.add(dialogBoxesPanel, BorderLayout.PAGE_END);
 
-    //color chooser
-    JPanel colorChooserPanel = new JPanel();
-    colorChooserPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(colorChooserPanel);
-    JButton colorChooserButton = new JButton("Choose a color");
-    colorChooserButton.setActionCommand("Color chooser");
-    colorChooserPanel.add(colorChooserButton);
-    colorChooserDisplay = new JLabel("      ");
-    colorChooserDisplay.setOpaque(true); //so that background color shows up
-    colorChooserDisplay.setBackground(Color.BLACK);
 
-    colorChooserPanel.add(colorChooserDisplay);
 
     //load an Image
     JPanel loadImagePanel = new JPanel();
     loadImagePanel.setLayout(new FlowLayout());
     dialogBoxesPanel.add(loadImagePanel);
-    JButton loadImagePanelButton = new JButton("Load an Image");
-    loadImagePanelButton.setActionCommand("Input1");
+    loadImagePanelButton = new JButton("Load an Image");
+    loadImagePanelButton.setActionCommand("Import");
     loadImagePanel.add(loadImagePanelButton);
 
     //Load All Images
     JPanel loadAllImages = new JPanel();
     loadAllImages.setLayout(new FlowLayout());
     dialogBoxesPanel.add(loadAllImages);
-    JButton loadAllImagesButton = new JButton("Load All Images");
-    loadAllImagesButton.setActionCommand("Input2");
+    loadAllImagesButton = new JButton("Load All Images");
+    loadAllImagesButton.setActionCommand("Import All");
     loadAllImages.add(loadAllImagesButton);
 
     //Save an Image
     JPanel saveAnImage = new JPanel();
     saveAnImage.setLayout(new FlowLayout());
     dialogBoxesPanel.add(saveAnImage);
-    JButton saveAnImageButton = new JButton("Save");
-    saveAnImageButton.setActionCommand("Input3");
+    saveAnImageButton = new JButton("Save");
+    saveAnImageButton.setActionCommand("Export");
     saveAnImage.add(saveAnImageButton);
 
     //Save all Images
     JPanel saveAllImage = new JPanel();
     saveAllImage.setLayout(new FlowLayout());
     dialogBoxesPanel.add(saveAllImage);
-    JButton saveAllImagesButton = new JButton("Save All");
-    saveAllImagesButton.setActionCommand("Input4");
+    saveAllImagesButton = new JButton("Save All");
+    saveAllImagesButton.setActionCommand("Export All");
     saveAllImage.add(saveAllImagesButton);
 
-    //JOptionsPane message dialog
-    JPanel messageDialogPanel = new JPanel();
-    messageDialogPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(messageDialogPanel);
 
-    //JOptionsPane input dialog
-    JPanel inputDialogPanel = new JPanel();
-    inputDialogPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(inputDialogPanel);
-
-    //JOptionsPane options dialog
-    JPanel optionsDialogPanel = new JPanel();
-    optionsDialogPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(optionsDialogPanel);
   }
 
 
@@ -305,7 +255,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
         JOptionPane.PLAIN_MESSAGE);
   }
 
-  /*
+
 
   public void setListener(NewController controller) {
 
@@ -321,9 +271,18 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     loadAllImagesButton.addActionListener(controller);
   }
 
-  public void setText(String string) {
-    JOptionPane.showInputDialog(string);
+  public String getText(String string) {
+    return JOptionPane.showInputDialog(string);
   }
 
-   */
+  public void setText(String string) {
+    JOptionPane.showMessageDialog(this,string);
+  }
+
+  public void setImage(BufferedImage image) {
+    imageLabel.setIcon(new ImageIcon(image));
+    JScrollPane scrollPane = new JScrollPane(imageLabel);
+    imagePanel.add(scrollPane);
+  }
+
 }

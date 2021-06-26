@@ -1,5 +1,6 @@
 package model.imagerepresentation.multilayers;
 
+import java.awt.image.BufferedImage;
 import model.enums.FileFormat;
 import model.imagerepresentation.ImageFormat;
 import model.ImagesOperations;
@@ -99,4 +100,12 @@ public interface MultiLayers extends ImagesOperations {
    * @param textFile is the name of the text file where paths to other images are included
    */
   void importAll(String textFile);
+
+  /**
+   * Returns the topmost image in the layers of images.
+   * @return the top image as a BufferedImage
+   * @throws IllegalArgumentException if no layer is visible
+   */
+  BufferedImage getTopmost() throws IllegalArgumentException;
+
 }

@@ -1,20 +1,17 @@
+
 package controller;
 
 import gui.SwingFeaturesFrame;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import javax.swing.JColorChooser;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.Scanner;
+import model.enums.FileFormat;
+import model.imagerepresentation.Image;
 import model.imagerepresentation.multilayers.MultiLayers;
 
-public class NewController implements ActionListener, Features {
+public class NewController implements ActionListener {
 
-  private SwingFeaturesFrame swingFeaturesFrame;
+  private final SwingFeaturesFrame swingFeaturesFrame;
   private final MultiLayers model;
 
   public NewController(MultiLayers model, SwingFeaturesFrame swingFeaturesFrame)
@@ -25,95 +22,81 @@ public class NewController implements ActionListener, Features {
     this.swingFeaturesFrame = swingFeaturesFrame;
     this.model = model;
     swingFeaturesFrame.setListener(this);
+    swingFeaturesFrame.setImage(model.getTopmost());
   }
 
 
   public void actionPerformed(ActionEvent arg0) {
     // TODO Auto-generated method stub
     switch (arg0.getActionCommand()) {
-      case "password button":
-        pDisplay.setText(new String(pfield.getPassword()));
-        pfield.setText("");
-        break;
-      case "RB1":
-        radioDisplay.setText("Radio button 1 was selected");
+      case "Blur":
+        swingFeaturesFrame.setText("Blur was selected");
+        model.blurringImage();
+        swingFeaturesFrame.setImage(model.getTopmost());
         break;
 
-      case "RB2":
-        radioDisplay.setText("Radio button 2 was selected");
+      case "Sharpen":
+        swingFeaturesFrame.setText("Sharpen was selected");
+        model.sharpeningImage();
+        swingFeaturesFrame.setImage(model.getTopmost());
         break;
 
-      case "RB3":
-        radioDisplay.setText("Radio button 3 was selected");
+      case "Gray":
+        swingFeaturesFrame.setText("Gray was selected");
+        model.createMonochrome();
+        swingFeaturesFrame.setImage(model.getTopmost());
         break;
 
-      case "RB4":
-        radioDisplay.setText("Radio button 4 was selected");
+      case "Sepia":
+        swingFeaturesFrame.setText("Sepia was selected");
+        model.createSepia();
+        swingFeaturesFrame.setImage(model.getTopmost());
         break;
-
-      case "Size options":
-        if (arg0.getSource() instanceof JComboBox) {
-          JComboBox<String> box = (JComboBox<String>) arg0.getSource();
-          comboboxDisplay.setText("You selected: " + (String) box.getSelectedItem());
+      case "Import":
+        String load = swingFeaturesFrame.getText("Please enter image file name and layer index");
+        Scanner loadScanner = new Scanner(load);
+        try {
+          model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner.next()));
+        } catch (IllegalArgumentException e) {
 
         }
         break;
-      case "Color chooser":
-        Color col = JColorChooser.showDialog(SwingFeaturesFrame.this, "Choose a color",
-            colorChooserDisplay.getBackground());
-        colorChooserDisplay.setBackground(col);
-        break;
-      case "Open file": {
-        final JFileChooser fchooser = new JFileChooser(".");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "JPG & GIF Images", "jpg", "gif");
-        fchooser.setFileFilter(filter);
-        int retvalue = fchooser.showOpenDialog(SwingFeaturesFrame.this);
-        if (retvalue == JFileChooser.APPROVE_OPTION) {
-          File f = fchooser.getSelectedFile();
-          fileOpenDisplay.setText(f.getAbsolutePath());
+      case "Import All":
+        String importAll = swingFeaturesFrame.getText("Please enter text file name");
+        try {
+          model.importAll(importAll);
+        } catch (IllegalArgumentException e) {
+
         }
-      }
-      break;
-      case "Save file": {
-        final JFileChooser fchooser = new JFileChooser(".");
-        int retvalue = fchooser.showSaveDialog(SwingFeaturesFrame.this);
-        if (retvalue == JFileChooser.APPROVE_OPTION) {
-          File f = fchooser.getSelectedFile();
-          fileSaveDisplay.setText(f.getAbsolutePath());
+        break;
+      case "Export":
+        String export = swingFeaturesFrame
+            .getText("Please enter name for this image and file format");
+        Scanner exportScanner = new Scanner(export);
+        try {
+          model.saveImages(exportScanner.next(), this.toFormat(exportScanner.next()));
+        } catch (IllegalArgumentException e) {
+
         }
-      }
-      break;
-      case "Message":
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "This is a demo message", "Message",
-            JOptionPane.PLAIN_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You are about to be deleted.",
-            "Last Chance", JOptionPane.WARNING_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You have been deleted.", "Too late",
-            JOptionPane.ERROR_MESSAGE);
-        JOptionPane
-            .showMessageDialog(SwingFeaturesFrame.this, "Please start again.", "What to do next",
-                JOptionPane.INFORMATION_MESSAGE);
         break;
-      case "Input":
-        swingFeaturesFrame.setText("Please enter your username");
-        break;
-      case "Input1":
-        swingFeaturesFrame.setText("Please enter image file name");
-        break;
-      case "Input2":
-        swingFeaturesFrame.setText("Please enter text file name");
-        break;
-      case "Input3":
-        swingFeaturesFrame.setText("Please enter name for this image");
-        break;
-      case "Input4":
-        swingFeaturesFrame
-            .setText("Please enter base name for these images");
+      case "Export All":
+        String exportAll = swingFeaturesFrame
+            .getText("Please enter name for this image and file format");
+        Scanner exportAllScanner = new Scanner(exportAll);
+        try {
+          model.exportAll(exportAllScanner.next(), this.toFormat(exportAllScanner.next()));
+        } catch (IllegalArgumentException e) {
+
+        }
         break;
       case "Mosaic":
         swingFeaturesFrame
-            .setText(JOptionPane.showInputDialog("Please enter the number of seeds"));
+            .getText("Please enter the number of seeds");
+        // mosaic
+        break;
+      case "Downsize":
+        swingFeaturesFrame.getText("Please enter desired width and height");
+        // downsize
         break;
       case "Option": {
         String[] options = {"Uno", "Dos", "Tres", "Cuatro", "Cinco", "seis", "siete", "ocho",
@@ -123,45 +106,29 @@ public class NewController implements ActionListener, Features {
     }
   }
 
-  @Override
-  public void blur() {
-
-  }
-
-  @Override
-  public void sharpen() {
-
-  }
-
-  @Override
-  public void save() {
-
-  }
-
-  @Override
-  public void saveAll() {
-
-  }
-
-  @Override
-  public void addLayer() {
-
-  }
-
-  @Override
-  public void addAllLayers() {
-
-  }
-
-  @Override
-  public void load() {
-
-  }
-
-  @Override
-  public void loadAll() {
-
+  /**
+   * Converts the next piece of user input from a String into a valid file format type. If the input
+   * is not a valid file format type, the method asks the user to input a valid file format type.
+   *
+   * @param toFormat String to be converted to file type
+   * @return the correct FileFormat that corresponds to the user input
+   * @throws IllegalStateException if the appendable has an error appending
+   */
+  private FileFormat toFormat(String toFormat) throws IllegalStateException {
+    switch (toFormat) {
+      case "png":
+        return FileFormat.PNG;
+      case "jpg":
+      case "jpeg":
+        return FileFormat.JPEG;
+      case "ppm":
+        return FileFormat.PPM;
+      default:
+        throw new IllegalArgumentException();
+    }
   }
 }
+
+
 
 

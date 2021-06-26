@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.image.BufferedImage;
 import model.enums.FileFormat;
 import model.imagerepresentation.ImageFormat;
 import model.imagerepresentation.multilayers.MultiLayers;
@@ -79,6 +80,11 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
   @Override
   public void importAll(String textFile) {
     log.append("importAll called. textFile = ").append(textFile);
+  }
+
+  @Override
+  public BufferedImage getTopmost() throws IllegalArgumentException {
+    return null;
   }
 
   @Override

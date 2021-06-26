@@ -1,5 +1,6 @@
 package model.imagerepresentation.multilayers;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +13,7 @@ import model.ImagesOperations;
 import model.enums.FileFormat;
 import model.imagerepresentation.Image;
 import model.imagerepresentation.ImageFormat;
+import model.util.ImageUtil;
 
 /**
  * This class implements the MultiLayers interface to provide mechanisms to represent multiple
@@ -82,6 +84,18 @@ public class MultiLayeredImagesOperations implements MultiLayers {
     this.currentLayer = imageLayers.get(imageLayers.size() - 1);
     this.imageOp = new ImagesOperationsImpl(currentLayer);
     this.listVisibility = setUpVisibility(imageLayers);
+  }
+
+  @Override
+  public BufferedImage getTopmost() throws IllegalArgumentException {
+    int size = imageLayers.size();
+    for (int i = size - 1; i >= 0; i--) {
+      if (listVisibility.get(i)) {
+        ImageFormat image = imageLayers.get(i);
+        return ImageUtil.createBufferedImage(image.getImage());
+      }
+    }
+    throw new IllegalArgumentException();
   }
 
   /**

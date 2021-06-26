@@ -1,6 +1,7 @@
 package model.imagerepresentation;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import model.enums.Coloring;
 import model.converter.Converter;

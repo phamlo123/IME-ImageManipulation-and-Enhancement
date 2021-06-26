@@ -10,5 +10,6 @@ public interface Features {
   void addAllLayers();
   void load();
   void loadAll();
+  void mosaic();
 
 }

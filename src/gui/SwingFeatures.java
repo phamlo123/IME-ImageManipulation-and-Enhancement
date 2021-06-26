@@ -1,8 +1,15 @@
 package gui;
 
+import controller.NewController;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.imagerepresentation.Image;
+import model.imagerepresentation.ImageFormat;
+import model.imagerepresentation.multilayers.MultiLayeredImagesOperations;
+import model.imagerepresentation.multilayers.MultiLayers;
 
 /**
  * This example shows the different user interface elements in Java Swing. Please use these examples
@@ -15,6 +22,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class SwingFeatures {
 
   public static void main(String[] args) {
+
+    /*
     SwingFeaturesFrame.setDefaultLookAndFeelDecorated(false);
     SwingFeaturesFrame frame = new SwingFeaturesFrame();
 
@@ -47,6 +56,25 @@ public class SwingFeatures {
     } catch (Exception e) {
     }
 
-  }
+     */
 
+    MultiLayers images = new MultiLayeredImagesOperations(new ArrayList<>(
+        Arrays.asList(new Image("Koala.jpg"), new Image("Jellyfish.jpg"))));
+    SwingFeaturesFrame view = new SwingFeaturesFrame();
+    NewController controller = new NewController(images, view);
+    view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    view.setVisible(true);
+    try {
+      UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+    } catch (UnsupportedLookAndFeelException e) {
+      // handle exception
+    } catch (ClassNotFoundException e) {
+      // handle exception
+    } catch (InstantiationException e) {
+      // handle exception
+    } catch (IllegalAccessException e) {
+      // handle exception
+    } catch (Exception e) {
+    }
+  }
 }

@@ -1,6 +1,7 @@
 package model.imagerepresentation;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -204,12 +205,10 @@ public class Image implements ImageFormat {
     this.blueChannel = blue;
   }
 
-
   @Override
   public Converter getConverter() {
     return new SimpleConverter(ImageUtil.createBufferedImage(this.image));
   }
-
 
   @Override
   public boolean equals(Object o) {
