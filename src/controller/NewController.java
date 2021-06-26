@@ -132,6 +132,36 @@ public class NewController implements ActionListener, Features {
   public void sharpen() {
 
   }
+
+  @Override
+  public void save() {
+
+  }
+
+  @Override
+  public void saveAll() {
+
+  }
+
+  @Override
+  public void addLayer() {
+
+  }
+
+  @Override
+  public void addAllLayers() {
+
+  }
+
+  @Override
+  public void load() {
+
+  }
+
+  @Override
+  public void loadAll() {
+
+  }
 }
 
 
