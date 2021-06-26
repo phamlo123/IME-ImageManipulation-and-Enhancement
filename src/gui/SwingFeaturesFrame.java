@@ -1,6 +1,7 @@
 package gui;
 
 import controller.ImageController;
+import controller.NewController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -48,9 +49,6 @@ import javax.xml.crypto.dsig.XMLObject;
 
 public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSelectionListener {
 
-  private JPasswordField pfield;
-  private JButton pButton;
-  private JLabel pDisplay;
   private JPanel mainPanel;
   private JScrollPane mainScrollPane;
   private JPanel imagePanel;
@@ -58,15 +56,13 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private JPanel checkerBoard;
   private JPanel dialogBoxesPanel;
   private JPanel otherOptions;
+  private JPanel saveAnImage;
+  private JPanel saveAllImage;
+  private JPanel loadImagePanel;
+  private JPanel loadAllImages;
+
 
   private JLabel checkboxDisplay;
-  private JLabel radioDisplay;
-  private JLabel comboboxDisplay;
-  private JLabel colorChooserDisplay;
-  private JLabel fileOpenDisplay;
-  private JLabel fileSaveDisplay;
-  private JLabel inputDisplay;
-  private JLabel optionDisplay;
 
   private JButton downSizePanelButton;
   private JButton mosaicPanelButton;
@@ -176,65 +172,41 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
 
     mainPanel.add(dialogBoxesPanel, BorderLayout.PAGE_END);
 
-    //color chooser
-    JPanel colorChooserPanel = new JPanel();
-    colorChooserPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(colorChooserPanel);
-    JButton colorChooserButton = new JButton("Choose a color");
-    colorChooserButton.setActionCommand("Color chooser");
-    colorChooserPanel.add(colorChooserButton);
-    colorChooserDisplay = new JLabel("      ");
-    colorChooserDisplay.setOpaque(true); //so that background color shows up
-    colorChooserDisplay.setBackground(Color.BLACK);
 
-    colorChooserPanel.add(colorChooserDisplay);
 
     //load an Image
-    JPanel loadImagePanel = new JPanel();
+    loadImagePanel = new JPanel();
     loadImagePanel.setLayout(new FlowLayout());
     dialogBoxesPanel.add(loadImagePanel);
-    JButton loadImagePanelButton = new JButton("Load an Image");
+    loadImagePanelButton = new JButton("Load an Image");
     loadImagePanelButton.setActionCommand("Input1");
     loadImagePanel.add(loadImagePanelButton);
 
     //Load All Images
-    JPanel loadAllImages = new JPanel();
+    loadAllImages = new JPanel();
     loadAllImages.setLayout(new FlowLayout());
     dialogBoxesPanel.add(loadAllImages);
-    JButton loadAllImagesButton = new JButton("Load All Images");
+    loadAllImagesButton = new JButton("Load All Images");
     loadAllImagesButton.setActionCommand("Input2");
     loadAllImages.add(loadAllImagesButton);
 
     //Save an Image
-    JPanel saveAnImage = new JPanel();
+    saveAnImage = new JPanel();
     saveAnImage.setLayout(new FlowLayout());
     dialogBoxesPanel.add(saveAnImage);
-    JButton saveAnImageButton = new JButton("Save");
+    saveAnImageButton = new JButton("Save");
     saveAnImageButton.setActionCommand("Input3");
     saveAnImage.add(saveAnImageButton);
 
     //Save all Images
-    JPanel saveAllImage = new JPanel();
+    saveAllImage = new JPanel();
     saveAllImage.setLayout(new FlowLayout());
     dialogBoxesPanel.add(saveAllImage);
-    JButton saveAllImagesButton = new JButton("Save All");
+    saveAllImagesButton = new JButton("Save All");
     saveAllImagesButton.setActionCommand("Input4");
     saveAllImage.add(saveAllImagesButton);
 
-    //JOptionsPane message dialog
-    JPanel messageDialogPanel = new JPanel();
-    messageDialogPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(messageDialogPanel);
 
-    //JOptionsPane input dialog
-    JPanel inputDialogPanel = new JPanel();
-    inputDialogPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(inputDialogPanel);
-
-    //JOptionsPane options dialog
-    JPanel optionsDialogPanel = new JPanel();
-    optionsDialogPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(optionsDialogPanel);
   }
 
 
@@ -305,7 +277,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
         JOptionPane.PLAIN_MESSAGE);
   }
 
-  /*
+
 
   public void setListener(NewController controller) {
 
@@ -325,5 +297,4 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     JOptionPane.showInputDialog(string);
   }
 
-   */
 }

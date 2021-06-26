@@ -14,7 +14,7 @@ import model.imagerepresentation.multilayers.MultiLayers;
 
 public class NewController implements ActionListener, Features {
 
-  private SwingFeaturesFrame swingFeaturesFrame;
+  private final SwingFeaturesFrame swingFeaturesFrame;
   private final MultiLayers model;
 
   public NewController(MultiLayers model, SwingFeaturesFrame swingFeaturesFrame)
