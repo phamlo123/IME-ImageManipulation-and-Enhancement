@@ -19,6 +19,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -131,17 +132,49 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
 
     JPanel otherOptions = new JPanel();
 
-    TitledBorder title4 = BorderFactory.createTitledBorder("Other Options");
-    title4.setTitleJustification(TitledBorder.CENTER);
-    otherOptions.setBorder(title4);
-    otherOptions.setLayout(new GridLayout(0, 1, 10, 0));
+    otherOptions.setLayout(new BorderLayout());
 
     otherOptions.setPreferredSize(new Dimension(250, 100));
     mainPanel.add(otherOptions, BorderLayout.EAST);
 
     JPanel checkerBoard = new JPanel();
-    checkerBoard.setLayout(new BorderLayout());
+    TitledBorder checkerBoardTitle = BorderFactory.createTitledBorder("Checker Board");
+    checkerBoardTitle.setTitleJustification(TitledBorder.CENTER);
+    checkerBoard.setBorder(checkerBoardTitle);
+    checkerBoard.setLayout(new GridLayout(4, 2, 0, 0));
     checkerBoard.setPreferredSize(new Dimension(200, 200));
+
+    JButton createCheckerBoardButton = new JButton("Create New Checker Board");
+    checkerBoard.add(createCheckerBoardButton);
+    JButton createDefaultCheckerBoardButton = new JButton("Create New Default Checker Board");
+    checkerBoard.add(createDefaultCheckerBoardButton);
+
+    //text area
+    JTextArea textAreaWidth = new JTextArea(1, 1);
+    textAreaWidth.setBorder(BorderFactory.createTitledBorder("CheckerBoard Width"));
+    checkerBoard.add(textAreaWidth);
+
+    JTextArea textAreaHeight = new JTextArea(1, 1);
+    textAreaHeight.setBorder(BorderFactory.createTitledBorder("CheckerBoard Height"));
+    checkerBoard.add(textAreaHeight);
+
+    JPanel layers = new JPanel();
+    TitledBorder layersTitle = BorderFactory.createTitledBorder("Layers");
+    layersTitle.setTitleJustification(TitledBorder.CENTER);
+    layers.setBorder(layersTitle);
+    layers.setLayout(new GridLayout(10, 1, 0, 0));
+
+    JButton makeInvisibleButton = new JButton("Make Invisible");
+    JButton makeVisibleButton = new JButton("Make Visible");
+    layers.add(makeInvisibleButton);
+    layers.add(makeVisibleButton);
+    JButton addLayerButton = new JButton("Add a Layer");
+    JButton removeLayerButton = new JButton("Remove a Layer");
+    layers.add(addLayerButton);
+    layers.add(removeLayerButton);
+
+    otherOptions.add(checkerBoard, BorderLayout.NORTH);
+    otherOptions.add(layers, BorderLayout.CENTER);
 
     //dialog boxes
     JPanel dialogBoxesPanel = new JPanel();
@@ -152,8 +185,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     dialogBoxesPanel.setLayout(new FlowLayout());
 
     mainPanel.add(dialogBoxesPanel, BorderLayout.PAGE_END);
-
-
 
     //load an Image
     JPanel loadImagePanel = new JPanel();
@@ -189,8 +220,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
 
 
   }
-
-
 
 
   @Override
@@ -259,7 +288,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   }
 
 
-
   public void setListener(NewController controller) {
 
     downSizePanelButton.addActionListener(controller);
@@ -279,7 +307,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   }
 
   public void setText(String string) {
-    JOptionPane.showMessageDialog(this,string);
+    JOptionPane.showMessageDialog(this, string);
   }
 
   public void setImage(BufferedImage image) {
