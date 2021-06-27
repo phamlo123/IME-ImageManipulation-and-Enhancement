@@ -94,6 +94,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
     for (int i = size - 1; i >= 0; i--) {
       if (listVisibility.get(i)) {
         ImageFormat image = imageLayers.get(i);
+        System.out.println(getCurrentLayerIndex());
         return ImageUtil.createBufferedImage(image.getImage());
       }
     }
