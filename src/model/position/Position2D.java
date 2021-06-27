@@ -10,8 +10,8 @@ import java.util.Objects;
  */
 public class Position2D implements Comparable<Position>, Position {
 
-  private int x;
-  private int y;
+  private final int x;
+  private final int y;
 
   /**
    * Construct a 2D position with the given x and y coordinates.

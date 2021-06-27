@@ -9,6 +9,9 @@ import model.imagerepresentation.ImageFormat;
 import model.imagerepresentation.ImagesOperationsExtraImpl;
 import org.junit.Test;
 
+/**
+ * This class provides tests for ImagesOperationsExtraImpl public methods.
+ */
 public class ImagesOperationsExtraImplTest {
 
   ImageFormat abc = new Image("abc.jpg");

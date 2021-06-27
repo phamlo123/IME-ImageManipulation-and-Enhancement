@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * This interface contains additional operations to be performed on an image.
+ */
 public interface ImagesOperationsExtra extends ImagesOperations {
 
 
