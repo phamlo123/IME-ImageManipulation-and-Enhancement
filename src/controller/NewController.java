@@ -1,26 +1,34 @@
-
 package controller;
+
 import static java.lang.String.valueOf;
 import gui.SwingFeaturesFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.Scanner;
 import model.enums.FileFormat;
 import model.imagerepresentation.Image;
 import model.imagerepresentation.ImageFormat;
 import model.imagerepresentation.multilayers.MultiLayers;
 
-
-public class NewController implements ActionListener, NewControllerInterface {
+/**
+ * Represents a controller that takes input from the graphical user interface and delegates
+ * that input to the model accordingly.
+ */
+public class NewController implements ActionListener {
 
   private final SwingFeaturesFrame swingFeaturesFrame;
   private final MultiLayers model;
 
+  /**
+   * Creates a new NewController object used for processing images based on User input.
+   * @param model              the model used for processing the images
+   * @param swingFeaturesFrame the view used to take user input and display images
+   * @throws IllegalArgumentException if the parameters are null
+   */
   public NewController(MultiLayers model, SwingFeaturesFrame swingFeaturesFrame)
       throws IllegalArgumentException {
     if (model == null || swingFeaturesFrame == null) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Cannot pass null parameters");
     }
     this.swingFeaturesFrame = swingFeaturesFrame;
     this.model = model;
@@ -30,10 +38,20 @@ public class NewController implements ActionListener, NewControllerInterface {
   }
 
 
+  /**
+   * Method that delegates to the model the desired functionality based on the press of a button
+   * from the view.
+   * @param arg0 the action from the view (button pressed)
+   */
   public void actionPerformed(ActionEvent arg0) {
     this.actionHelper(arg0.getActionCommand());
   }
 
+  /**
+   * Helper for actionPerformed that takes the String version of the ActionEvent given to
+   * actionPerformed. This method is public for easier testing.
+   * @param command the command to be executed.
+   */
   public void actionHelper(String command) {
     switch (command) {
       case "Blur":
@@ -130,7 +148,7 @@ public class NewController implements ActionListener, NewControllerInterface {
         try {
           model.setInvisibility(Integer.parseInt(visible), true);
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText(visible + " is set to visible");
+          swingFeaturesFrame.setText(visible + "is set to visible");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
           return;
@@ -141,7 +159,7 @@ public class NewController implements ActionListener, NewControllerInterface {
         try {
           model.setInvisibility(Integer.parseInt(invisible), false);
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText(invisible + " is set to invisible");
+          swingFeaturesFrame.setText(invisible + "is set to invisible");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
           return;
@@ -151,7 +169,7 @@ public class NewController implements ActionListener, NewControllerInterface {
         String current = swingFeaturesFrame.getText("Please enter a layer index");
         try {
           model.setCurrent(Integer.parseInt(current));
-          swingFeaturesFrame.setText(current + " is set to current");
+          swingFeaturesFrame.setText(current + "is set to current");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
           return;
@@ -217,6 +235,10 @@ public class NewController implements ActionListener, NewControllerInterface {
     setCurrentDisplay();
   }
 
+  /**
+   * Asks the view to display to the user the current layer being operated on and the number of
+   * layers in the model.
+   */
   private void setCurrentDisplay() {
     swingFeaturesFrame
         .setCurrentDisplay(valueOf(model.getCurrentLayerIndex()), valueOf(model.getNumLayers()));

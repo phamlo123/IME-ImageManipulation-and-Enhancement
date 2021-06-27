@@ -11,6 +11,10 @@ import model.imagerepresentation.multilayers.MultiLayers;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class to ensure that the NewController class and all of its methods function
+ *  * correctly.
+ */
 public class NewControllerTest {
 
   MultiLayers images;
@@ -174,5 +178,4 @@ public class NewControllerTest {
         .actionHelper("Downsize");
     assertEquals("downSize called. ratioWidth = 0.5, ratioHeight = 0.5", log.toString());
   }
-
 }
