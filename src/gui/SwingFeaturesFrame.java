@@ -2,6 +2,8 @@ package gui;
 
 import controller.NewController;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -9,10 +11,14 @@ import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -58,9 +64,15 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private final JButton removeLayerButton;
   private final JButton setCurrenButton;
 
+
+  private JLabel currentDisplay;
+  private JLabel numLayerDisplay;
+
   private JTextArea textAreaWidth;
   private JTextArea textAreaHeight;
 
+  final static String BUTTONPANEL = "Card with JButtons";
+  final static String TEXTPANEL = "Card with JTextField";
 
   private JList<String> listOfStrings;
   private JList<Integer> listOfIntegers;
@@ -85,7 +97,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     imagePanel.setBorder(title);
     imagePanel.add(new JScrollPane());
     imagePanel.setLayout(new BorderLayout());
-    imagePanel.setSize(new Dimension(500, 500));
+    imagePanel.setSize(new Dimension(490, 500));
     mainPanel.add(imagePanel, BorderLayout.CENTER);
 
     imageLabel = new JLabel();
@@ -162,14 +174,8 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     createDefaultCheckerBoardButton.setActionCommand("Default");
     checkerBoard.add(createDefaultCheckerBoardButton);
 
-    //text area
-    textAreaWidth = new JTextArea(1, 1);
-    textAreaWidth.setBorder(BorderFactory.createTitledBorder("CheckerBoard Width"));
-    checkerBoard.add(textAreaWidth);
 
-    textAreaHeight = new JTextArea(1, 1);
-    textAreaHeight.setBorder(BorderFactory.createTitledBorder("CheckerBoard Height"));
-    checkerBoard.add(textAreaHeight);
+
 
     JPanel layers = new JPanel();
     TitledBorder layersTitle = BorderFactory.createTitledBorder("Layers");
@@ -192,11 +198,32 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     setCurrenButton = new JButton("Set Current");
     setCurrenButton.setActionCommand("Set Current");
 
-    layers.add(setCurrenButton);
-
-
-    otherOptions.add(checkerBoard, BorderLayout.NORTH);
+    otherOptions.add(checkerBoard, BorderLayout.SOUTH);
     otherOptions.add(layers, BorderLayout.CENTER);
+
+    JPanel currentLayerPanel = new JPanel();
+    currentLayerPanel.setLayout(new GridLayout(2,2,0,0));
+
+    JLabel currentIndex = new JLabel("Current Layer ");
+    currentIndex.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    currentLayerPanel.add(currentIndex);
+
+    currentDisplay = new JLabel("-1");
+    currentDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    currentLayerPanel.add(currentDisplay);
+
+    JLabel layerNumber = new JLabel("Number of Layers ");
+    layerNumber.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    currentLayerPanel.add(layerNumber);
+
+    numLayerDisplay = new JLabel("0");
+    numLayerDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    currentLayerPanel.add(numLayerDisplay);
+
+
+
+    otherOptions.add(currentLayerPanel, BorderLayout.NORTH);
+
 
     //dialog boxes
     JPanel dialogBoxesPanel = new JPanel();
@@ -240,6 +267,19 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     saveAllImagesButton.setActionCommand("Export All");
     saveAllImage.add(saveAllImagesButton);
 
+
+
+    //menu
+
+    JPanel menu = new JPanel();
+    menu.setLayout(new CardLayout());
+    String comboBoxItems[] = { BUTTONPANEL, TEXTPANEL };
+    JComboBox cb = new JComboBox(comboBoxItems);
+    cb.setEditable(false);
+    cb.addItemListener(this);
+    menu.add(cb);
+
+    mainPanel.add(menu, BorderLayout.NORTH);
 
   }
 
@@ -342,6 +382,22 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   public void setImage(BufferedImage image) {
     imageLabel.setIcon(new ImageIcon(image));
     imageScroll.setViewportView(imageLabel);
+    imagePanel.requestFocus();
   }
 
+
+
+  public void saveFile() {
+    final JFileChooser fchooser = new JFileChooser(".");
+    int retvalue = fchooser.showSaveDialog(SwingFeaturesFrame.this);
+    if (retvalue == JFileChooser.APPROVE_OPTION) {
+      File f = fchooser.getSelectedFile();
+    }
+  }
+
+
+  public void setCurrentDisplay(String currentDisplay, String numLayer) {
+    this.currentDisplay.setText(currentDisplay);
+    this.numLayerDisplay.setText(numLayer);
+  }
 }

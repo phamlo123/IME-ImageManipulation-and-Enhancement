@@ -1,6 +1,8 @@
 
 package controller;
 
+import static java.lang.String.valueOf;
+
 import gui.SwingFeaturesFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +28,7 @@ public class NewController implements ActionListener {
     this.model = model;
     swingFeaturesFrame.setListener(this);
     swingFeaturesFrame.setImage(model.getTopmost());
+    setCurrentDisplay();
   }
 
 
@@ -35,22 +38,22 @@ public class NewController implements ActionListener {
       case "Blur":
         model.blurringImage();
         swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Blur was selected");
+        swingFeaturesFrame.setText("Blur Filtering has been successfully performed");
         break;
       case "Sharpen":
         model.sharpeningImage();
         swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Sharpen was selected");
+        swingFeaturesFrame.setText("Sharpen Filtering has been successfully performed");
         break;
       case "Gray":
         model.createMonochrome();
         swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Gray was selected");
+        swingFeaturesFrame.setText("GrayScaling has been successfully performed");
         break;
       case "Sepia":
         model.createSepia();
         swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Sepia was selected");
+        swingFeaturesFrame.setText("Sepia Filtering has been successfully performed");
         break;
       case "Import":
         String load = swingFeaturesFrame.getText("Please enter image file name and layer index");
@@ -58,9 +61,9 @@ public class NewController implements ActionListener {
         try {
           model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner.next()));
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Import was selected");
+          swingFeaturesFrame.setText("Import successful");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid file name or layer index. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + ". Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -69,21 +72,22 @@ public class NewController implements ActionListener {
         try {
           model.importAll(importAll);
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Import All was selected");
+          swingFeaturesFrame.setText("Import All successful");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid file name. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
       case "Export":
+        swingFeaturesFrame.saveFile();
         String export = swingFeaturesFrame
             .getText("Please enter name for this image and file format");
         Scanner exportScanner = new Scanner(export);
         try {
           model.saveImages(exportScanner.next(), this.toFormat(exportScanner.next()));
-          swingFeaturesFrame.setText("Export was selected");
+          swingFeaturesFrame.setText("Export successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid name or file format. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -93,9 +97,9 @@ public class NewController implements ActionListener {
         Scanner exportAllScanner = new Scanner(exportAll);
         try {
           model.exportAll(exportAllScanner.next(), this.toFormat(exportAllScanner.next()));
-          swingFeaturesFrame.setText("Export All was selected");
+          swingFeaturesFrame.setText("Export All successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid name or file format. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -107,9 +111,9 @@ public class NewController implements ActionListener {
         String remove = swingFeaturesFrame.getText("Please enter a layer index");
         try {
           model.removeLayer(Integer.parseInt(remove));
-          swingFeaturesFrame.setText("Remove layer was selected");
+          swingFeaturesFrame.setText("Remove layer" + remove + " successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + ". Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -118,9 +122,9 @@ public class NewController implements ActionListener {
         try {
           model.setInvisibility(Integer.parseInt(visible), true);
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Visible was selected");
+          swingFeaturesFrame.setText(visible + "is set to visible");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + ". Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -129,9 +133,9 @@ public class NewController implements ActionListener {
         try {
           model.setInvisibility(Integer.parseInt(invisible), false);
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Invisible was selected");
+          swingFeaturesFrame.setText(invisible + "is set to invisible");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -139,9 +143,9 @@ public class NewController implements ActionListener {
         String current = swingFeaturesFrame.getText("Please enter a layer index");
         try {
           model.setCurrent(Integer.parseInt(current));
-          swingFeaturesFrame.setText("Set current was selected");
+          swingFeaturesFrame.setText(current + "is set to current");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -152,20 +156,20 @@ public class NewController implements ActionListener {
           ImageFormat image = new Image(Integer.parseInt(checkerScanner.next()),
               Integer.parseInt(checkerScanner.next()));
           model.addLayer();
-          model.loadImages(image,model.getCurrentLayerIndex());
+          model.loadImages(image, model.getCurrentLayerIndex());
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Create checkerboard selected");
+          swingFeaturesFrame.setText("Custom CheckerBoard successfully created");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid height or width. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
       case "Default":
-          ImageFormat image = new Image();
-          model.addLayer();
-          model.loadImages(image,model.getCurrentLayerIndex());
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Create checkerboard selected");
+        ImageFormat image = new Image();
+        model.addLayer();
+        model.loadImages(image, model.getCurrentLayerIndex());
+        swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("CheckerBoard successfully created");
         break;
       case "Mosaic":
         String mosaic = swingFeaturesFrame
@@ -173,9 +177,10 @@ public class NewController implements ActionListener {
         try {
           model.createMosaic(Integer.parseInt(mosaic));
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Mosaic was selected");
+          swingFeaturesFrame.setText("Mosaic Filtering has been successfully performed with " +
+              mosaic +" seeds");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid number. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
@@ -187,13 +192,19 @@ public class NewController implements ActionListener {
           model.downSize(Double.parseDouble(downsizeScanner.next()),
               Double.parseDouble(downsizeScanner.next()));
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Downsize was selected");
+          swingFeaturesFrame.setText("Downsizing successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText("Invalid width or height. Please enter again.");
+          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
           this.actionPerformed(arg0);
         }
         break;
     }
+    setCurrentDisplay();
+  }
+
+  private void setCurrentDisplay() {
+    swingFeaturesFrame
+        .setCurrentDisplay(valueOf(model.getCurrentLayerIndex()), valueOf(model.getNumLayers()));
   }
 
   /**
