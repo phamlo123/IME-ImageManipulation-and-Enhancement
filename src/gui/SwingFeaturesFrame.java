@@ -56,6 +56,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private final JButton makeInvisibleButton;
   private final JButton addLayerButton;
   private final JButton removeLayerButton;
+  private final JButton setCurrenButton;
 
   private JTextArea textAreaWidth;
   private JTextArea textAreaHeight;
@@ -185,6 +186,12 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     removeLayerButton.setActionCommand("Remove Layer");
     layers.add(addLayerButton);
     layers.add(removeLayerButton);
+
+    setCurrenButton = new JButton("Set Current");
+    setCurrenButton.setActionCommand("Set Current");
+
+    layers.add(setCurrenButton);
+
 
     otherOptions.add(checkerBoard, BorderLayout.NORTH);
     otherOptions.add(layers, BorderLayout.CENTER);
@@ -319,6 +326,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     makeInvisibleButton.addActionListener(controller);
     addLayerButton.addActionListener(controller);
     removeLayerButton.addActionListener(controller);
+    setCurrenButton.addActionListener(controller);
   }
 
   public String getText(String string) {
