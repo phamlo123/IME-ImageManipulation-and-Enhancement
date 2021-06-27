@@ -50,6 +50,16 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private final JButton loadAllImagesButton;
   private final JScrollPane imageScroll;
 
+  private final JButton createCheckerBoardButton;
+  private final JButton createDefaultCheckerBoardButton;
+  private final JButton makeVisibleButton;
+  private final JButton makeInvisibleButton;
+  private final JButton addLayerButton;
+  private final JButton removeLayerButton;
+
+  private JTextArea textAreaWidth;
+  private JTextArea textAreaHeight;
+
 
   private JList<String> listOfStrings;
   private JList<Integer> listOfIntegers;
@@ -144,17 +154,17 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     checkerBoard.setLayout(new GridLayout(4, 2, 0, 0));
     checkerBoard.setPreferredSize(new Dimension(200, 200));
 
-    JButton createCheckerBoardButton = new JButton("Create New Checker Board");
+    createCheckerBoardButton = new JButton("Create New Checker Board");
     checkerBoard.add(createCheckerBoardButton);
-    JButton createDefaultCheckerBoardButton = new JButton("Create New Default Checker Board");
+    createDefaultCheckerBoardButton = new JButton("Create New Default Checker Board");
     checkerBoard.add(createDefaultCheckerBoardButton);
 
     //text area
-    JTextArea textAreaWidth = new JTextArea(1, 1);
+    textAreaWidth = new JTextArea(1, 1);
     textAreaWidth.setBorder(BorderFactory.createTitledBorder("CheckerBoard Width"));
     checkerBoard.add(textAreaWidth);
 
-    JTextArea textAreaHeight = new JTextArea(1, 1);
+    textAreaHeight = new JTextArea(1, 1);
     textAreaHeight.setBorder(BorderFactory.createTitledBorder("CheckerBoard Height"));
     checkerBoard.add(textAreaHeight);
 
@@ -163,13 +173,12 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     layersTitle.setTitleJustification(TitledBorder.CENTER);
     layers.setBorder(layersTitle);
     layers.setLayout(new GridLayout(10, 1, 0, 0));
-
-    JButton makeInvisibleButton = new JButton("Make Invisible");
-    JButton makeVisibleButton = new JButton("Make Visible");
+    makeInvisibleButton = new JButton("Make Invisible");
+    makeVisibleButton = new JButton("Make Visible");
     layers.add(makeInvisibleButton);
     layers.add(makeVisibleButton);
-    JButton addLayerButton = new JButton("Add a Layer");
-    JButton removeLayerButton = new JButton("Remove a Layer");
+    addLayerButton = new JButton("Add a Layer");
+    removeLayerButton = new JButton("Remove a Layer");
     layers.add(addLayerButton);
     layers.add(removeLayerButton);
 
