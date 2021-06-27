@@ -30,27 +30,27 @@ public class NewController implements ActionListener {
     // TODO Auto-generated method stub
     switch (arg0.getActionCommand()) {
       case "Blur":
-        swingFeaturesFrame.setText("Blur was selected");
         model.blurringImage();
         swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Blur was selected");
         break;
 
       case "Sharpen":
-        swingFeaturesFrame.setText("Sharpen was selected");
         model.sharpeningImage();
         swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Sharpen was selected");
         break;
 
       case "Gray":
-        swingFeaturesFrame.setText("Gray was selected");
         model.createMonochrome();
         swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Gray was selected");
         break;
 
       case "Sepia":
-        swingFeaturesFrame.setText("Sepia was selected");
         model.createSepia();
         swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Sepia was selected");
         break;
       case "Import":
         String load = swingFeaturesFrame.getText("Please enter image file name and layer index");
@@ -60,6 +60,8 @@ public class NewController implements ActionListener {
         } catch (IllegalArgumentException e) {
 
         }
+        swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Import was selected");
         break;
       case "Import All":
         String importAll = swingFeaturesFrame.getText("Please enter text file name");
@@ -68,6 +70,8 @@ public class NewController implements ActionListener {
         } catch (IllegalArgumentException e) {
 
         }
+        swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Import All was selected");
         break;
       case "Export":
         String export = swingFeaturesFrame
@@ -78,6 +82,8 @@ public class NewController implements ActionListener {
         } catch (IllegalArgumentException e) {
 
         }
+        swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Export was selected");
         break;
       case "Export All":
         String exportAll = swingFeaturesFrame
@@ -88,21 +94,32 @@ public class NewController implements ActionListener {
         } catch (IllegalArgumentException e) {
 
         }
+        swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Export All was selected");
         break;
       case "Mosaic":
-        swingFeaturesFrame
+        String mosaic = swingFeaturesFrame
             .getText("Please enter the number of seeds");
-        // mosaic
+        try {
+          model.createMosaic(Integer.parseInt(mosaic));
+        } catch (IllegalArgumentException e) {
+
+        }
+        swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Mosaic was selected");
         break;
       case "Downsize":
-        swingFeaturesFrame.getText("Please enter desired width and height");
-        // downsize
+        String downsize = swingFeaturesFrame.getText("Please enter desired width and height");
+        Scanner downsizeScanner = new Scanner(downsize);
+        try {
+          model.downSize(Double.parseDouble(downsizeScanner.next()),
+              Double.parseDouble(downsizeScanner.next()));
+        } catch (IllegalArgumentException e) {
+
+        }
+        swingFeaturesFrame.setImage(model.getTopmost());
+        swingFeaturesFrame.setText("Downsize was selected");
         break;
-      case "Option": {
-        String[] options = {"Uno", "Dos", "Tres", "Cuatro", "Cinco", "seis", "siete", "ocho",
-            "nueve", "dies"};
-      }
-      break;
     }
   }
 

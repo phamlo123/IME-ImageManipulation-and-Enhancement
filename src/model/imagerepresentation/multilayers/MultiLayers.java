@@ -1,6 +1,7 @@
 package model.imagerepresentation.multilayers;
 
 import java.awt.image.BufferedImage;
+import model.ImagesOperationsExtra;
 import model.enums.FileFormat;
 import model.imagerepresentation.ImageFormat;
 import model.ImagesOperations;
@@ -9,7 +10,7 @@ import model.ImagesOperations;
  * This interface extends the Images interface to include methods that can be applied to multiple
  * layers of image objects.
  */
-public interface MultiLayers extends ImagesOperations {
+public interface MultiLayers extends ImagesOperationsExtra {
 
   /**
    * Export the top most and visible layer into a certain image format.

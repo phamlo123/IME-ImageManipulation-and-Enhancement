@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import model.ImagesOperationsExtra;
+import model.imagerepresentation.ImagesOperationsExtraImpl;
 import model.imagerepresentation.ImagesOperationsImpl;
 import model.ImagesOperations;
 import model.enums.FileFormat;
@@ -25,7 +27,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
   private List<ImageFormat> imageLayers;
   private List<Boolean> listVisibility;
   private ImageFormat currentLayer;
-  private ImagesOperations imageOp;
+  private ImagesOperationsExtra imageOp;
 
   /**
    * This create an instance of this class by assigning the list of images to the layers of this
@@ -48,7 +50,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
     this.imageLayers = imageLayers;
     this.listVisibility = setUpVisibility(imageLayers);
     this.currentLayer = imageLayers.get(imageLayers.size() - 1);
-    this.imageOp = new ImagesOperationsImpl(currentLayer);
+    this.imageOp = new ImagesOperationsExtraImpl(currentLayer);
   }
 
   /**
@@ -82,7 +84,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
     }
     this.imageLayers = helperForProcessingTextFile(textFile);
     this.currentLayer = imageLayers.get(imageLayers.size() - 1);
-    this.imageOp = new ImagesOperationsImpl(currentLayer);
+    this.imageOp = new ImagesOperationsExtraImpl(currentLayer);
     this.listVisibility = setUpVisibility(imageLayers);
   }
 
@@ -202,7 +204,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
       throw new IllegalArgumentException("Index " + index + " out of bounds");
     }
     currentLayer = imageLayers.get(index);
-    imageOp = new ImagesOperationsImpl(currentLayer);
+    imageOp = new ImagesOperationsExtraImpl(currentLayer);
   }
 
 
@@ -314,4 +316,19 @@ public class MultiLayeredImagesOperations implements MultiLayers {
   }
 
 
+  @Override
+  public void downSize(double ratioWidth, double ratioHeight) throws IllegalArgumentException {
+    imageOp.downSize(ratioWidth,ratioHeight);
+    int index = getCurrentLayerIndex();
+    currentLayer = imageOp.getImage();
+    imageLayers.set(index, currentLayer);
+  }
+
+  @Override
+  public void createMosaic(int numSeeds) throws IllegalArgumentException {
+    imageOp.createMosaic(numSeeds);
+    int index = getCurrentLayerIndex();
+    currentLayer = imageOp.getImage();
+    imageLayers.set(index, currentLayer);
+  }
 }

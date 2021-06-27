@@ -111,4 +111,14 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
   public ImageFormat getImage() {
     return null;
   }
+
+  @Override
+  public void downSize(double ratioWidth, double ratioHeight) throws IllegalArgumentException {
+
+  }
+
+  @Override
+  public void createMosaic(int numSeeds) throws IllegalArgumentException {
+
+  }
 }

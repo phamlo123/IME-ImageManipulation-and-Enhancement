@@ -47,6 +47,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private final JButton blurButton;
   private final JButton loadImagePanelButton;
   private final JButton loadAllImagesButton;
+  private final JScrollPane imageScroll;
 
 
   private JList<String> listOfStrings;
@@ -76,6 +77,8 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     mainPanel.add(imagePanel, BorderLayout.CENTER);
 
     imageLabel = new JLabel();
+    imageScroll = new JScrollPane(imageLabel);
+    imagePanel.add(imageScroll);
 
     //Filtering Boxes
     JPanel filteringBoxesPanel = new JPanel();
@@ -281,8 +284,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
 
   public void setImage(BufferedImage image) {
     imageLabel.setIcon(new ImageIcon(image));
-    JScrollPane scrollPane = new JScrollPane(imageLabel);
-    imagePanel.add(scrollPane);
+    imageScroll.setViewportView(imageLabel);
   }
 
 }
