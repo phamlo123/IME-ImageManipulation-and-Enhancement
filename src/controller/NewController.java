@@ -229,7 +229,8 @@ public class NewController implements ActionListener, NewControllerInterface {
           ImageFormat image = new Image(Integer.parseInt(checkerScanner.next()),
               Integer.parseInt(checkerScanner2.next()));
           model.addLayer();
-          model.loadImages(image, model.getCurrentLayerIndex());
+          int layer = model.getNumLayers() - 1;
+          model.loadImages(image, layer);
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Custom CheckerBoard successfully created");
         } catch (IllegalArgumentException e) {
@@ -240,7 +241,8 @@ public class NewController implements ActionListener, NewControllerInterface {
       case "Default":
         ImageFormat image = new Image();
         model.addLayer();
-        model.loadImages(image, model.getCurrentLayerIndex());
+        int layer = model.getNumLayers() - 1;
+        model.loadImages(image, layer);
         swingFeaturesFrame.setImage(model.getTopmost());
         swingFeaturesFrame.setText("CheckerBoard successfully created");
         break;

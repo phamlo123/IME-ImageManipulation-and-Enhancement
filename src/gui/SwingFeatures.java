@@ -57,9 +57,9 @@ public class SwingFeatures {
 
      */
 
-    MultiLayers images = new MultiLayeredImagesOperations(new ArrayList<>(
-      Arrays.asList(new Image("Koala.jpg"), new Image("Jellyfish.jpg"))));
-    //MultiLayers images = new MultiLayeredImagesOperations();
+    //MultiLayers images = new MultiLayeredImagesOperations(new ArrayList<>(
+      //Arrays.asList(new Image("Koala.jpg"), new Image("Jellyfish.jpg"))));
+    MultiLayers images = new MultiLayeredImagesOperations();
     SwingFeaturesFrame view = new SwingFeaturesFrame();
     NewController controller = new NewController(images, view);
     view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
