@@ -14,7 +14,7 @@ import model.imagerepresentation.multilayers.MultiLayers;
  * Represents a controller that takes input from the graphical user interface and delegates
  * that input to the model accordingly.
  */
-public class NewController implements ActionListener {
+public class NewController implements ActionListener, NewControllerInterface {
 
   private final SwingFeaturesFrame swingFeaturesFrame;
   private final MultiLayers model;
