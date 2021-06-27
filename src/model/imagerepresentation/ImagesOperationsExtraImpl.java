@@ -1,7 +1,6 @@
 package model.imagerepresentation;
 
 import model.ImagesOperationsExtra;
-import model.enums.FileFormat;
 import model.imaging.ImagingOperationExtra;
 import model.imaging.ImagingOperationExtraImpl;
 
@@ -35,11 +34,4 @@ public class ImagesOperationsExtraImpl extends ImagesOperationsImpl
     this.image = new Image(imagingOperationExtra.createMosaic(numSeeds));
   }
 
-  public static void main(String[] args) {
-    Image i = new Image("Jellyfish.jpg");
-    ImagesOperationsExtra im = new ImagesOperationsExtraImpl(i);
-    im.createMosaic(100000);
-    im.getImage().getConverter().exportImage("sth", FileFormat.JPEG);
-
-  }
 }
