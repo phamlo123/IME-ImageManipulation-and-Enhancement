@@ -19,6 +19,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -56,8 +57,8 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private final JButton addLayerButton;
   private final JButton removeLayerButton;
 
-
-
+  private JTextArea textAreaWidth;
+  private JTextArea textAreaHeight;
 
 
   private JList<String> listOfStrings;
@@ -150,7 +151,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     TitledBorder checkerBoardTitle = BorderFactory.createTitledBorder("Checker Board");
     checkerBoardTitle.setTitleJustification(TitledBorder.CENTER);
     checkerBoard.setBorder(checkerBoardTitle);
-    checkerBoard.setLayout(new GridLayout(4,2,0,0));
+    checkerBoard.setLayout(new GridLayout(4, 2, 0, 0));
     checkerBoard.setPreferredSize(new Dimension(200, 200));
 
     createCheckerBoardButton = new JButton("Create New Checker Board");
@@ -158,14 +159,20 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     createDefaultCheckerBoardButton = new JButton("Create New Default Checker Board");
     checkerBoard.add(createDefaultCheckerBoardButton);
 
+    //text area
+    textAreaWidth = new JTextArea(1, 1);
+    textAreaWidth.setBorder(BorderFactory.createTitledBorder("CheckerBoard Width"));
+    checkerBoard.add(textAreaWidth);
 
-
+    textAreaHeight = new JTextArea(1, 1);
+    textAreaHeight.setBorder(BorderFactory.createTitledBorder("CheckerBoard Height"));
+    checkerBoard.add(textAreaHeight);
 
     JPanel layers = new JPanel();
     TitledBorder layersTitle = BorderFactory.createTitledBorder("Layers");
     layersTitle.setTitleJustification(TitledBorder.CENTER);
     layers.setBorder(layersTitle);
-    layers.setLayout(new GridLayout(10, 1, 0,0));
+    layers.setLayout(new GridLayout(10, 1, 0, 0));
     makeInvisibleButton = new JButton("Make Invisible");
     makeVisibleButton = new JButton("Make Visible");
     layers.add(makeInvisibleButton);
@@ -175,10 +182,8 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     layers.add(addLayerButton);
     layers.add(removeLayerButton);
 
-
     otherOptions.add(checkerBoard, BorderLayout.NORTH);
     otherOptions.add(layers, BorderLayout.CENTER);
-
 
     //dialog boxes
     JPanel dialogBoxesPanel = new JPanel();
