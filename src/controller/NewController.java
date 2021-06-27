@@ -31,8 +31,11 @@ public class NewController implements ActionListener {
 
 
   public void actionPerformed(ActionEvent arg0) {
-    // TODO Auto-generated method stub
-    switch (arg0.getActionCommand()) {
+    this.actionHelper(arg0.getActionCommand());
+  }
+
+  public void actionHelper(String command) {
+    switch (command) {
       case "Blur":
         model.blurringImage();
         swingFeaturesFrame.setImage(model.getTopmost());

@@ -84,7 +84,7 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
 
   @Override
   public BufferedImage getTopmost() throws IllegalArgumentException {
-    return null;
+    return new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
   }
 
   @Override
@@ -114,11 +114,12 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
 
   @Override
   public void downSize(double ratioWidth, double ratioHeight) throws IllegalArgumentException {
-
+    log.append("downSize called. ratioWidth = ").append(ratioWidth).append(", ratioHeight = ")
+        .append(ratioHeight);
   }
 
   @Override
   public void createMosaic(int numSeeds) throws IllegalArgumentException {
-
+    log.append("createMosaic called. numSeeds = ").append(numSeeds);
   }
 }
