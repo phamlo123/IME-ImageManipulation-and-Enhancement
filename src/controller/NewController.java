@@ -12,7 +12,7 @@ import model.imagerepresentation.ImageFormat;
 import model.imagerepresentation.multilayers.MultiLayers;
 
 
-public class NewController implements ActionListener {
+public class NewController implements ActionListener, NewControllerInterface {
 
   private final SwingFeaturesFrame swingFeaturesFrame;
   private final MultiLayers model;
@@ -130,7 +130,7 @@ public class NewController implements ActionListener {
         try {
           model.setInvisibility(Integer.parseInt(visible), true);
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText(visible + "is set to visible");
+          swingFeaturesFrame.setText(visible + " is set to visible");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
           return;
@@ -141,7 +141,7 @@ public class NewController implements ActionListener {
         try {
           model.setInvisibility(Integer.parseInt(invisible), false);
           swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText(invisible + "is set to invisible");
+          swingFeaturesFrame.setText(invisible + " is set to invisible");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
           return;
@@ -151,7 +151,7 @@ public class NewController implements ActionListener {
         String current = swingFeaturesFrame.getText("Please enter a layer index");
         try {
           model.setCurrent(Integer.parseInt(current));
-          swingFeaturesFrame.setText(current + "is set to current");
+          swingFeaturesFrame.setText(current + " is set to current");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
           return;

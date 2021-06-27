@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Position2D implements Comparable<Position2D>, Position {
+public class Position2D implements Comparable<Position>, Position {
 
   private int x;
   private int y;
@@ -27,7 +27,7 @@ public class Position2D implements Comparable<Position2D>, Position {
   }
 
   @Override
-  public double getDistanceFrom(Position2D position2D) {
+  public double getDistanceFrom(Position position2D) {
     double distanceX = Math.pow(x - position2D.getX(), 2);
     double distanceY = Math.pow(y - position2D.getY(), 2);
     double distance = Math.sqrt(distanceX + distanceY);
@@ -35,9 +35,9 @@ public class Position2D implements Comparable<Position2D>, Position {
   }
 
   @Override
-  public Position2D getNearestPosition(List<Position2D> position2DList) {
-    Position2D nearest = position2DList.get(0);
-    for (Position2D pos : position2DList) {
+  public Position getNearestPosition(List<Position> position2DList) {
+    Position nearest = position2DList.get(0);
+    for (Position pos : position2DList) {
       if (pos.getDistanceFrom(this) < nearest.getDistanceFrom(this)) {
         nearest = pos;
       }
@@ -74,7 +74,7 @@ public class Position2D implements Comparable<Position2D>, Position {
 
 
   @Override
-  public int compareTo(Position2D o) {
+  public int compareTo(Position o) {
     if (o.equals(this)) {
       return 0;
     }

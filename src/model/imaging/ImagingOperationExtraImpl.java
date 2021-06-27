@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import model.position.Position;
 import model.position.Position2D;
 import model.enums.Coloring;
 import model.imagerepresentation.ImageFormat;
@@ -84,13 +85,13 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
 
     List<Integer> randomListX = getRandom(numSeed, 0, width - 1);
     List<Integer> randomListY = getRandom(numSeed, 0, height - 1);
-    List<Position2D> position2DListSeed = new ArrayList<>();
+    List<Position> position2DListSeed = new ArrayList<>();
 
     for (int i = 0; i < randomListX.size(); i++) {
       position2DListSeed.add(new Position2D(randomListX.get(i), randomListY.get(i)));
     }
 
-    List<Position2D> position2DList = new ArrayList<>();
+    List<Position> position2DList = new ArrayList<>();
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
@@ -98,19 +99,19 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
       }
     }
 
-    List<Position2D> newPos = new ArrayList<>();
-    for (Position2D position2D : position2DList) {
-      newPos.add(position2D.getNearestPosition(position2DListSeed));
+    List<Position> newPos = new ArrayList<>();
+    for (Position position : position2DList) {
+      newPos.add(position.getNearestPosition(position2DListSeed));
     }
 
-    Map<Position2D, List<Position2D>> map = new HashMap<>();
+    Map<Position, List<Position>> map = new HashMap<>();
     for (int i = 0; i < position2DList.size(); i++) {
       if (!map.containsKey(newPos.get(i))) {
-        List<Position2D> list = new ArrayList<>();
+        List<Position> list = new ArrayList<>();
         list.add(position2DList.get(i));
         map.put(newPos.get(i), list);
       } else {
-        List<Position2D> list = map.get(newPos.get(i));
+        List<Position> list = map.get(newPos.get(i));
         list.add(position2DList.get(i));
         map.put(newPos.get(i), list);
       }
@@ -124,12 +125,12 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
   }
 
 
-  private void updateNewColor(Map<Position2D, List<Position2D>> map,
+  private void updateNewColor(Map<Position, List<Position>> map,
       List<List<Integer>> listOfColor) {
-    for (Position2D key : map.keySet()) {
-      List<Position2D> listPos = map.get(key);
+    for (Position key : map.keySet()) {
+      List<Position> listPos = map.get(key);
       List<Integer> l = new ArrayList<>();
-      for (Position2D pos : listPos) {
+      for (Position pos : listPos) {
         l.add(pos.getColorPos(listOfColor));
       }
 

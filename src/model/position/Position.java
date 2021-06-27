@@ -12,14 +12,14 @@ public interface Position {
    * @param position2D
    * @return
    */
-  double getDistanceFrom(Position2D position2D);
+  double getDistanceFrom(Position position2D);
 
   /**
    *
    * @param position2DList
    * @return
    */
-  Position2D getNearestPosition(List<Position2D> position2DList);
+  Position getNearestPosition(List<Position> position2DList);
 
   /**
    *
