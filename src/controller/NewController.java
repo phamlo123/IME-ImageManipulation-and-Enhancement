@@ -34,19 +34,16 @@ public class NewController implements ActionListener {
         swingFeaturesFrame.setImage(model.getTopmost());
         swingFeaturesFrame.setText("Blur was selected");
         break;
-
       case "Sharpen":
         model.sharpeningImage();
         swingFeaturesFrame.setImage(model.getTopmost());
         swingFeaturesFrame.setText("Sharpen was selected");
         break;
-
       case "Gray":
         model.createMonochrome();
         swingFeaturesFrame.setImage(model.getTopmost());
         swingFeaturesFrame.setText("Gray was selected");
         break;
-
       case "Sepia":
         model.createSepia();
         swingFeaturesFrame.setImage(model.getTopmost());
@@ -57,21 +54,23 @@ public class NewController implements ActionListener {
         Scanner loadScanner = new Scanner(load);
         try {
           model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner.next()));
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Import was selected");
         } catch (IllegalArgumentException e) {
-
+          swingFeaturesFrame.setText("Invalid file name or layer index. Please enter again.");
+          this.actionPerformed(arg0);
         }
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Import was selected");
         break;
       case "Import All":
         String importAll = swingFeaturesFrame.getText("Please enter text file name");
         try {
           model.importAll(importAll);
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Import All was selected");
         } catch (IllegalArgumentException e) {
-
+          swingFeaturesFrame.setText("Invalid file name. Please enter again.");
+          this.actionPerformed(arg0);
         }
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Import All was selected");
         break;
       case "Export":
         String export = swingFeaturesFrame
@@ -79,11 +78,12 @@ public class NewController implements ActionListener {
         Scanner exportScanner = new Scanner(export);
         try {
           model.saveImages(exportScanner.next(), this.toFormat(exportScanner.next()));
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Export was selected");
         } catch (IllegalArgumentException e) {
-
+          swingFeaturesFrame.setText("Invalid name or file format. Please enter again.");
+          this.actionPerformed(arg0);
         }
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Export was selected");
         break;
       case "Export All":
         String exportAll = swingFeaturesFrame
@@ -91,34 +91,38 @@ public class NewController implements ActionListener {
         Scanner exportAllScanner = new Scanner(exportAll);
         try {
           model.exportAll(exportAllScanner.next(), this.toFormat(exportAllScanner.next()));
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Export All was selected");
         } catch (IllegalArgumentException e) {
-
+          swingFeaturesFrame.setText("Invalid name or file format. Please enter again.");
+          this.actionPerformed(arg0);
         }
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Export All was selected");
         break;
       case "Mosaic":
         String mosaic = swingFeaturesFrame
             .getText("Please enter the number of seeds");
         try {
           model.createMosaic(Integer.parseInt(mosaic));
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Mosaic was selected");
         } catch (IllegalArgumentException e) {
-
+          swingFeaturesFrame.setText("Invalid number. Please enter again.");
+          this.actionPerformed(arg0);
         }
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Mosaic was selected");
         break;
       case "Downsize":
-        String downsize = swingFeaturesFrame.getText("Please enter desired width and height");
+        String downsize = swingFeaturesFrame
+            .getText("Please enter desired width and height as doubles");
         Scanner downsizeScanner = new Scanner(downsize);
         try {
           model.downSize(Double.parseDouble(downsizeScanner.next()),
               Double.parseDouble(downsizeScanner.next()));
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Downsize was selected");
         } catch (IllegalArgumentException e) {
-
+          swingFeaturesFrame.setText("Invalid width or height. Please enter again.");
+          this.actionPerformed(arg0);
         }
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Downsize was selected");
         break;
     }
   }

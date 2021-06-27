@@ -105,8 +105,7 @@ public interface MultiLayers extends ImagesOperationsExtra {
   /**
    * Returns the topmost image in the layers of images.
    * @return the top image as a BufferedImage
-   * @throws IllegalArgumentException if no layer is visible
    */
-  BufferedImage getTopmost() throws IllegalArgumentException;
+  BufferedImage getTopmost();
 
 }

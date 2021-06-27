@@ -89,7 +89,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
   }
 
   @Override
-  public BufferedImage getTopmost() throws IllegalArgumentException {
+  public BufferedImage getTopmost() {
     int size = imageLayers.size();
     for (int i = size - 1; i >= 0; i--) {
       if (listVisibility.get(i)) {
@@ -97,7 +97,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
         return ImageUtil.createBufferedImage(image.getImage());
       }
     }
-    throw new IllegalArgumentException();
+    return new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
   }
 
   /**
