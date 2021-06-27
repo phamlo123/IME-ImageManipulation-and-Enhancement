@@ -171,7 +171,7 @@ public class MultiLayeredImagesOperations implements MultiLayers {
   @Override
   public void addLayer() {
     this.imageLayers.add(null);
-    this.listVisibility.add(null);
+    this.listVisibility.add(false);
   }
 
   @Override

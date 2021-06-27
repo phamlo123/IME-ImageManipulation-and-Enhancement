@@ -2,7 +2,6 @@ package gui;
 
 import controller.NewController;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
@@ -13,11 +12,9 @@ import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -64,15 +62,32 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private final JButton removeLayerButton;
   private final JButton setCurrenButton;
 
+  private final JButton downSizePanelButton2;
+  private final JButton mosaicPanelButton2;
+  private final JButton sharpenButton2;
+  private final JButton createGrayScaleButton2;
+  private final JButton createSepiaButton2;
+  private final JButton saveAllImagesButton2;
+  private final JButton saveAnImageButton2;
+  private final JButton blurButton2;
+  private final JButton loadImagePanelButton2;
+  private final JButton loadAllImagesButton2;
+
+  private final JButton createCheckerBoardButton2;
+  private final JButton createDefaultCheckerBoardButton2;
+  private final JButton makeVisibleButton2;
+  private final JButton makeInvisibleButton2;
+  private final JButton addLayerButton2;
+  private final JButton removeLayerButton2;
+  private final JButton setCurrenButton2;
 
   private JLabel currentDisplay;
   private JLabel numLayerDisplay;
 
-  private JTextArea textAreaWidth;
-  private JTextArea textAreaHeight;
+  final static String FILE = "File";
+  final static String FILTERING = "Filtering";
+  final static String GENERAL = "General";
 
-  final static String BUTTONPANEL = "Card with JButtons";
-  final static String TEXTPANEL = "Card with JTextField";
 
   private JList<String> listOfStrings;
   private JList<Integer> listOfIntegers;
@@ -174,9 +189,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     createDefaultCheckerBoardButton.setActionCommand("Default");
     checkerBoard.add(createDefaultCheckerBoardButton);
 
-
-
-
     JPanel layers = new JPanel();
     TitledBorder layersTitle = BorderFactory.createTitledBorder("Layers");
     layersTitle.setTitleJustification(TitledBorder.CENTER);
@@ -198,11 +210,13 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     setCurrenButton = new JButton("Set Current");
     setCurrenButton.setActionCommand("Set Current");
 
+    layers.add(setCurrenButton);
+
     otherOptions.add(checkerBoard, BorderLayout.SOUTH);
     otherOptions.add(layers, BorderLayout.CENTER);
 
     JPanel currentLayerPanel = new JPanel();
-    currentLayerPanel.setLayout(new GridLayout(2,2,0,0));
+    currentLayerPanel.setLayout(new GridLayout(2, 2, 0, 0));
 
     JLabel currentIndex = new JLabel("Current Layer ");
     currentIndex.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -220,10 +234,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     numLayerDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     currentLayerPanel.add(numLayerDisplay);
 
-
-
     otherOptions.add(currentLayerPanel, BorderLayout.NORTH);
-
 
     //dialog boxes
     JPanel dialogBoxesPanel = new JPanel();
@@ -267,17 +278,89 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     saveAllImagesButton.setActionCommand("Export All");
     saveAllImage.add(saveAllImagesButton);
 
+    loadImagePanelButton2 = new JButton("Load");
+    loadImagePanelButton2.setActionCommand(loadImagePanelButton.getActionCommand());
+    loadAllImagesButton2 = new JButton("Load All");
+    loadAllImagesButton2.setActionCommand(loadAllImagesButton.getActionCommand());
 
+    saveAnImageButton2 = new JButton("Save");
+    saveAnImageButton2.setActionCommand(saveAnImageButton2.getActionCommand());
+
+    saveAllImagesButton2 = new JButton("Save All");
+    saveAllImagesButton2.setActionCommand(saveAllImagesButton.getActionCommand());
+
+    blurButton2 = new JButton("Blur");
+    blurButton2.setActionCommand(blurButton.getActionCommand());
+
+    sharpenButton2 = new JButton("Sharpen");
+    sharpenButton2.setActionCommand(sharpenButton.getActionCommand());
+
+    createGrayScaleButton2 = new JButton("GrayScale");
+    createGrayScaleButton2.setActionCommand(createGrayScaleButton.getActionCommand());
+
+    createSepiaButton2 = new JButton("Sepia");
+    createSepiaButton2.setActionCommand(createSepiaButton.getActionCommand());
+
+    downSizePanelButton2 = new JButton("DownSize");
+    downSizePanelButton2.setActionCommand(downSizePanelButton.getActionCommand());
+
+    mosaicPanelButton2 = new JButton("Mosaic");
+    mosaicPanelButton2.setActionCommand(mosaicPanelButton.getActionCommand());
+
+    makeVisibleButton2 = new JButton("Visible");
+    makeVisibleButton2.setActionCommand(makeVisibleButton.getActionCommand());
+
+    makeInvisibleButton2 = new JButton("Invisible");
+    makeInvisibleButton2.setActionCommand(makeInvisibleButton.getActionCommand());
+
+    addLayerButton2 = new JButton("Add Layer");
+    addLayerButton2.setActionCommand(addLayerButton.getActionCommand());
+
+    removeLayerButton2 = new JButton("Remove Layer");
+    removeLayerButton2.setActionCommand(removeLayerButton.getActionCommand());
+
+    setCurrenButton2 = new JButton("Set Current");
+    setCurrenButton2.setActionCommand(setCurrenButton.getActionCommand());
+
+    createCheckerBoardButton2 = new JButton("Create Checker");
+    createCheckerBoardButton2.setActionCommand(createCheckerBoardButton.getActionCommand());
+
+    createDefaultCheckerBoardButton2 = new JButton("Create Default Checker");
+    createDefaultCheckerBoardButton2
+        .setActionCommand(createDefaultCheckerBoardButton.getActionCommand());
 
     //menu
 
-    JPanel menu = new JPanel();
-    menu.setLayout(new CardLayout());
-    String comboBoxItems[] = { BUTTONPANEL, TEXTPANEL };
-    JComboBox cb = new JComboBox(comboBoxItems);
-    cb.setEditable(false);
-    cb.addItemListener(this);
-    menu.add(cb);
+    JTabbedPane menu = new JTabbedPane();
+    JPanel file = new JPanel();
+    file.setLayout(new FlowLayout());
+    file.add(loadImagePanelButton2);
+    file.add(loadAllImagesButton2);
+    file.add(saveAnImageButton2);
+    file.add(saveAllImagesButton2);
+
+    JPanel filtering = new JPanel();
+    filtering.setLayout(new FlowLayout());
+    filtering.add(blurButton2);
+    filtering.add(sharpenButton2);
+    filtering.add(createGrayScaleButton2);
+    filtering.add(createSepiaButton2);
+    filtering.add(downSizePanelButton2);
+    filtering.add(mosaicPanelButton2);
+
+    JPanel general = new JPanel();
+    general.setLayout(new FlowLayout());
+    general.add(makeVisibleButton2);
+    general.add(makeInvisibleButton2);
+    general.add(addLayerButton2);
+    general.add(removeLayerButton2);
+    general.add(setCurrenButton2);
+    general.add(createCheckerBoardButton2);
+    general.add(createDefaultCheckerBoardButton2);
+
+    menu.addTab(FILE, file);
+    menu.addTab(FILTERING, filtering);
+    menu.addTab(GENERAL, general);
 
     mainPanel.add(menu, BorderLayout.NORTH);
 
@@ -369,6 +452,24 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     addLayerButton.addActionListener(controller);
     removeLayerButton.addActionListener(controller);
     setCurrenButton.addActionListener(controller);
+
+    downSizePanelButton2.addActionListener(controller);
+    mosaicPanelButton2.addActionListener(controller);
+    sharpenButton2.addActionListener(controller);
+    createGrayScaleButton2.addActionListener(controller);
+    createSepiaButton2.addActionListener(controller);
+    saveAllImagesButton2.addActionListener(controller);
+    saveAnImageButton2.addActionListener(controller);
+    blurButton2.addActionListener(controller);
+    loadImagePanelButton2.addActionListener(controller);
+    loadAllImagesButton2.addActionListener(controller);
+    createCheckerBoardButton2.addActionListener(controller);
+    createDefaultCheckerBoardButton2.addActionListener(controller);
+    makeVisibleButton2.addActionListener(controller);
+    makeInvisibleButton2.addActionListener(controller);
+    addLayerButton2.addActionListener(controller);
+    removeLayerButton2.addActionListener(controller);
+    setCurrenButton2.addActionListener(controller);
   }
 
   public String getText(String string) {
@@ -384,7 +485,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     imageScroll.setViewportView(imageLabel);
     imagePanel.requestFocus();
   }
-
 
 
   public void saveFile() {

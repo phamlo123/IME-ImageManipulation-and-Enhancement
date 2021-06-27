@@ -1,18 +1,16 @@
 
 package controller;
-
 import static java.lang.String.valueOf;
-
 import gui.SwingFeaturesFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+
 import java.util.Scanner;
 import model.enums.FileFormat;
 import model.imagerepresentation.Image;
 import model.imagerepresentation.ImageFormat;
 import model.imagerepresentation.multilayers.MultiLayers;
-import model.util.ImageUtil;
+
 
 public class NewController implements ActionListener {
 
@@ -56,10 +54,12 @@ public class NewController implements ActionListener {
         swingFeaturesFrame.setText("Sepia Filtering has been successfully performed");
         break;
       case "Import":
-        String load = swingFeaturesFrame.getText("Please enter image file name and layer index");
+        String load = swingFeaturesFrame.getText("Please enter image file name");
         Scanner loadScanner = new Scanner(load);
+        String load2 = swingFeaturesFrame.getText("Please enter layer index");
+        Scanner loadScanner2 = new Scanner(load2);
         try {
-          model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner.next()));
+          model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner2.next()));
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Import successful");
         } catch (IllegalArgumentException e) {
@@ -110,7 +110,7 @@ public class NewController implements ActionListener {
         break;
       case "Add Layer":
         model.addLayer();
-        swingFeaturesFrame.setText("Add layer was selected");
+        swingFeaturesFrame.setText("New layer added successfully");
         break;
       case "Remove Layer":
         String remove = swingFeaturesFrame.getText("Please enter a layer index");
