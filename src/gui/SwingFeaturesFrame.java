@@ -96,7 +96,7 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   public SwingFeaturesFrame() {
     super();
     setTitle("Image Processor");
-    setSize(1000, 1000);
+    setSize(1400, 1000);
 
     JPanel mainPanel = new JPanel();
     //for elements to be arranged vertically within this panel
@@ -110,9 +110,12 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     TitledBorder title = BorderFactory.createTitledBorder("Image");
     title.setTitleJustification(TitledBorder.CENTER);
     imagePanel.setBorder(title);
-    imagePanel.add(new JScrollPane());
+    JScrollPane jScrollPane1 = new JScrollPane();
+    imagePanel.add(jScrollPane1);
     imagePanel.setLayout(new BorderLayout());
-    imagePanel.setSize(new Dimension(490, 500));
+
+    jScrollPane1.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
+
     mainPanel.add(imagePanel, BorderLayout.CENTER);
 
     imageLabel = new JLabel();
@@ -473,7 +476,14 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   }
 
   public String getText(String string) {
-    return JOptionPane.showInputDialog(string);
+    String temp = JOptionPane.showInputDialog(string);
+    if (temp == null) {
+      return "-1";
+    } else if (temp.equals("")) {
+      return "-1";
+    } else {
+      return temp;
+    }
   }
 
   public void setText(String string) {
@@ -481,9 +491,9 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   }
 
   public void setImage(BufferedImage image) {
+
     imageLabel.setIcon(new ImageIcon(image));
     imageScroll.setViewportView(imageLabel);
-    imagePanel.requestFocus();
   }
 
 

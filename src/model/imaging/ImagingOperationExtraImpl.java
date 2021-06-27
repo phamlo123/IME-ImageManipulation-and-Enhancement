@@ -13,6 +13,10 @@ import model.imagerepresentation.ImageFormat;
 import model.util.Arithmetic;
 import model.util.ImageUtil;
 
+/**
+ * This class implements the ImagingOperationExtra and extends the ColoringOperation class in order
+ * to reuse some of the methods already defined in that class.
+ */
 public class ImagingOperationExtraImpl extends ColoringOperation implements ImagingOperationExtra {
 
   public ImagingOperationExtraImpl(ImageFormat imageFormat) {

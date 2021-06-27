@@ -1,15 +1,24 @@
 package model.position;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * This class provides implementation for Position interface and is a way to represent 2-D position
+ * of a Pixel. It also implements the Comparable interface that can be used to rank position from
+ * low to high.
+ */
 public class Position2D implements Comparable<Position>, Position {
 
   private int x;
   private int y;
 
+  /**
+   * Construct a 2D position with the given x and y coordinates.
+   *
+   * @param x is the value of x coordinates
+   * @param y is the value of y coordinates
+   */
   public Position2D(int x, int y) {
     if (x < 0 || y < 0) {
       throw new IllegalArgumentException();
@@ -18,10 +27,12 @@ public class Position2D implements Comparable<Position>, Position {
     this.y = y;
   }
 
+  @Override
   public int getX() {
     return this.x;
   }
 
+  @Override
   public int getY() {
     return this.y;
   }
@@ -83,13 +94,6 @@ public class Position2D implements Comparable<Position>, Position {
     int result = (int) Math.round(distanceFrom1 - distanceFrom0);
     return result;
   }
-
-  public static Comparator<Position2D> position2DComparator = new Comparator<Position2D>() {
-    @Override
-    public int compare(Position2D o1, Position2D o2) {
-      return o1.compareTo(o2);
-    }
-  };
 
 
 }

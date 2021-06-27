@@ -39,12 +39,23 @@ public class NewController implements ActionListener, NewControllerInterface {
     setCurrentDisplay();
   }
 
-  @Override
+
+  /**
+   * Method that delegates to the model the desired functionality based on the press of a button
+   * from the view.
+   *
+   * @param arg0 the action from the view (button pressed)
+   */
   public void actionPerformed(ActionEvent arg0) {
     this.actionHelper(arg0.getActionCommand());
   }
 
-  @Override
+  /**
+   * Helper for actionPerformed that takes the String version of the ActionEvent given to
+   * actionPerformed. This method is public for easier testing.
+   *
+   * @param command the command to be executed.
+   */
   public void actionHelper(String command) {
     switch (command) {
       case "Blur":
@@ -69,9 +80,16 @@ public class NewController implements ActionListener, NewControllerInterface {
         break;
       case "Import":
         String load = swingFeaturesFrame.getText("Please enter image file name");
+        if (load.equals("-1")) {
+          return;
+        }
         Scanner loadScanner = new Scanner(load);
         String load2 = swingFeaturesFrame.getText("Please enter layer index");
+        if (load2.equals("-1")) {
+          return;
+        }
         Scanner loadScanner2 = new Scanner(load2);
+
         try {
           model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner2.next()));
           swingFeaturesFrame.setImage(model.getTopmost());
@@ -83,6 +101,9 @@ public class NewController implements ActionListener, NewControllerInterface {
         break;
       case "Import All":
         String importAll = swingFeaturesFrame.getText("Please enter text file name");
+        if (importAll.equals("-1")) {
+          return;
+        }
         try {
           model.importAll(importAll);
           swingFeaturesFrame.setImage(model.getTopmost());
@@ -95,8 +116,14 @@ public class NewController implements ActionListener, NewControllerInterface {
       case "Export":
         String export = swingFeaturesFrame
             .getText("Please enter name for this image");
+        if (export.equals("-1")) {
+          return;
+        }
         Scanner exportScanner = new Scanner(export);
         String export2 = swingFeaturesFrame.getText("Please enter file format");
+        if (export2.equals("-1")) {
+          return;
+        }
         Scanner scannerExport2 = new Scanner(export2);
         try {
           model.saveImages(exportScanner.next(), this.toFormat(scannerExport2.next()));
@@ -109,9 +136,15 @@ public class NewController implements ActionListener, NewControllerInterface {
       case "Export All":
         String exportAll = swingFeaturesFrame
             .getText("Please enter base name for the images");
+        if (exportAll.equals("-1")) {
+          return;
+        }
         Scanner exportAllScanner = new Scanner(exportAll);
 
         String exportAll2 = swingFeaturesFrame.getText("Please enter file format");
+        if (exportAll2.equals("-1")) {
+          return;
+        }
         Scanner scannerExportAll2 = new Scanner(exportAll2);
 
         try {
@@ -128,6 +161,9 @@ public class NewController implements ActionListener, NewControllerInterface {
         break;
       case "Remove Layer":
         String remove = swingFeaturesFrame.getText("Please enter a layer index");
+        if (remove.equals("-1")) {
+          return;
+        }
         try {
           model.removeLayer(Integer.parseInt(remove));
           swingFeaturesFrame.setText("Remove layer" + remove + " successfully");
@@ -138,6 +174,9 @@ public class NewController implements ActionListener, NewControllerInterface {
         break;
       case "Visible":
         String visible = swingFeaturesFrame.getText("Please enter a layer index");
+        if (visible.equals("-1")) {
+          return;
+        }
         try {
           model.setInvisibility(Integer.parseInt(visible), true);
           swingFeaturesFrame.setImage(model.getTopmost());
@@ -149,6 +188,9 @@ public class NewController implements ActionListener, NewControllerInterface {
         break;
       case "Invisible":
         String invisible = swingFeaturesFrame.getText("Please enter a layer index");
+        if (invisible.equals("-1")) {
+          return;
+        }
         try {
           model.setInvisibility(Integer.parseInt(invisible), false);
           swingFeaturesFrame.setImage(model.getTopmost());
@@ -160,6 +202,9 @@ public class NewController implements ActionListener, NewControllerInterface {
         break;
       case "Set Current":
         String current = swingFeaturesFrame.getText("Please enter a layer index");
+        if (current.equals("-1")) {
+          return;
+        }
         try {
           model.setCurrent(Integer.parseInt(current));
           swingFeaturesFrame.setText(current + "is set to current");
@@ -170,8 +215,14 @@ public class NewController implements ActionListener, NewControllerInterface {
         break;
       case "Checker":
         String checker = swingFeaturesFrame.getText("Please enter a height");
+        if (checker.equals("-1")) {
+          return;
+        }
         Scanner checkerScanner = new Scanner(checker);
         String checker2 = swingFeaturesFrame.getText("Please enter a width");
+        if (checker2.equals("-1")) {
+          return;
+        }
         Scanner checkerScanner2 = new Scanner(checker2);
 
         try {
@@ -196,6 +247,9 @@ public class NewController implements ActionListener, NewControllerInterface {
       case "Mosaic":
         String mosaic = swingFeaturesFrame
             .getText("Please enter the number of seeds");
+        if (mosaic.equals("-1")) {
+          return;
+        }
         try {
           model.createMosaic(Integer.parseInt(mosaic));
           swingFeaturesFrame.setImage(model.getTopmost());
@@ -209,9 +263,15 @@ public class NewController implements ActionListener, NewControllerInterface {
       case "Downsize":
         String downsize = swingFeaturesFrame
             .getText("Please enter desired relative ratio of new height as doubles");
+        if (downsize.equals("-1")) {
+          return;
+        }
         Scanner downsizeScanner = new Scanner(downsize);
         String downsize2 = swingFeaturesFrame
             .getText("Please enter desired relative ratio of new width as doubles");
+        if (downsize2.equals("-1")) {
+          return;
+        }
         Scanner downsizeScanner2 = new Scanner(downsize2);
 
         try {
