@@ -4,6 +4,7 @@ package controller;
 import gui.SwingFeaturesFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.Scanner;
 import model.enums.FileFormat;
 import model.imagerepresentation.Image;
@@ -54,7 +55,6 @@ public class NewController implements ActionListener {
         Scanner loadScanner = new Scanner(load);
         try {
           model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner.next()));
-          swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Import was selected");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText("Invalid file name or layer index. Please enter again.");
@@ -65,7 +65,6 @@ public class NewController implements ActionListener {
         String importAll = swingFeaturesFrame.getText("Please enter text file name");
         try {
           model.importAll(importAll);
-          swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Import All was selected");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText("Invalid file name. Please enter again.");
@@ -78,7 +77,6 @@ public class NewController implements ActionListener {
         Scanner exportScanner = new Scanner(export);
         try {
           model.saveImages(exportScanner.next(), this.toFormat(exportScanner.next()));
-          swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Export was selected");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText("Invalid name or file format. Please enter again.");
@@ -91,10 +89,55 @@ public class NewController implements ActionListener {
         Scanner exportAllScanner = new Scanner(exportAll);
         try {
           model.exportAll(exportAllScanner.next(), this.toFormat(exportAllScanner.next()));
-          swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Export All was selected");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText("Invalid name or file format. Please enter again.");
+          this.actionPerformed(arg0);
+        }
+        break;
+      case "Add Layer":
+        model.addLayer();
+        swingFeaturesFrame.setText("Add layer was selected");
+        break;
+      case "Remove Layer":
+        String remove = swingFeaturesFrame.getText("Please enter a layer index");
+        try {
+          model.removeLayer(Integer.parseInt(remove));
+          swingFeaturesFrame.setText("Remove layer was selected");
+        } catch (IllegalArgumentException e) {
+          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
+          this.actionPerformed(arg0);
+        }
+        break;
+      case "Visible":
+        String visible = swingFeaturesFrame.getText("Please enter a layer index");
+        try {
+          model.setInvisibility(Integer.parseInt(visible), true);
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Visible was selected");
+        } catch (IllegalArgumentException e) {
+          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
+          this.actionPerformed(arg0);
+        }
+        break;
+      case "Invisible":
+        String invisible = swingFeaturesFrame.getText("Please enter a layer index");
+        try {
+          model.setInvisibility(Integer.parseInt(invisible), false);
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Invisible was selected");
+        } catch (IllegalArgumentException e) {
+          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
+          this.actionPerformed(arg0);
+        }
+        break;
+      case "Set Current":
+        String current = swingFeaturesFrame.getText("Please enter a layer index");
+        try {
+          model.setCurrent(Integer.parseInt(current));
+          swingFeaturesFrame.setText("Set current was selected");
+        } catch (IllegalArgumentException e) {
+          swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
           this.actionPerformed(arg0);
         }
         break;

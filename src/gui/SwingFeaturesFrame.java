@@ -175,10 +175,14 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     layers.setLayout(new GridLayout(10, 1, 0, 0));
     makeInvisibleButton = new JButton("Make Invisible");
     makeVisibleButton = new JButton("Make Visible");
+    makeInvisibleButton.setActionCommand("Invisible");
+    makeVisibleButton.setActionCommand("Visible");
     layers.add(makeInvisibleButton);
     layers.add(makeVisibleButton);
     addLayerButton = new JButton("Add a Layer");
+    addLayerButton.setActionCommand("Add Layer");
     removeLayerButton = new JButton("Remove a Layer");
+    removeLayerButton.setActionCommand("Remove Layer");
     layers.add(addLayerButton);
     layers.add(removeLayerButton);
 
@@ -309,6 +313,12 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     blurButton.addActionListener(controller);
     loadImagePanelButton.addActionListener(controller);
     loadAllImagesButton.addActionListener(controller);
+    createCheckerBoardButton.addActionListener(controller);
+    createDefaultCheckerBoardButton.addActionListener(controller);
+    makeVisibleButton.addActionListener(controller);
+    makeInvisibleButton.addActionListener(controller);
+    addLayerButton.addActionListener(controller);
+    removeLayerButton.addActionListener(controller);
   }
 
   public String getText(String string) {
