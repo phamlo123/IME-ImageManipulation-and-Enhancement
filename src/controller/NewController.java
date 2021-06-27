@@ -89,7 +89,6 @@ public class NewController implements ActionListener, NewControllerInterface {
           return;
         }
         Scanner loadScanner2 = new Scanner(load2);
-
         try {
           model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner2.next()));
           view.setImage(model.getTopmost());

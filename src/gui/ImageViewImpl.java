@@ -30,15 +30,12 @@ import javax.swing.event.ListSelectionListener;
 /**
  * Represents the view for the image processing program as an interactive graphical user interface.
  */
-public class ImageViewImpl extends JFrame implements ItemListener, ListSelectionListener,
-    ImageView {
+public class ImageViewImpl extends JFrame implements ImageView {
 
   private final JLabel imageLabel;
 
   private JPanel imagePanel;
 
-
-  private JLabel checkboxDisplay;
 
   private final JButton downSizePanelButton;
   private final JButton mosaicPanelButton;
@@ -369,71 +366,6 @@ public class ImageViewImpl extends JFrame implements ItemListener, ListSelection
 
 
   @Override
-  public void itemStateChanged(ItemEvent arg0) {
-    // TODO Auto-generated method stub
-    String who = ((JCheckBox) arg0.getItemSelectable()).getActionCommand();
-
-    switch (who) {
-      case "CB1":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 1 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 1 was deselected");
-        }
-        break;
-      case "CB2":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 2 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 2 was deselected");
-        }
-        break;
-      case "CB3":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 3 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 3 was deselected");
-        }
-        break;
-      case "CB4":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 4 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 4 was deselected");
-        }
-        break;
-
-      case "CB5":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 5 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 5 was deselected");
-        }
-        break;
-
-    }
-  }
-
-  @Override
-  public void valueChanged(ListSelectionEvent e) {
-    // We don't know which list called this callback, because we're using it
-    // for two lists.  In practice, you should use separate listeners
-    JOptionPane.showMessageDialog(ImageViewImpl.this,
-        "The source object is " + e.getSource(), "Source", JOptionPane.PLAIN_MESSAGE);
-    // Regardless, the event information tells us which index was selected
-    JOptionPane.showMessageDialog(ImageViewImpl.this,
-        "The changing index is " + e.getFirstIndex(), "Index", JOptionPane.PLAIN_MESSAGE);
-    // This gets us the string value that's currently selected
-    JOptionPane.showMessageDialog(ImageViewImpl.this,
-        "The current string item is " + this.listOfStrings.getSelectedValue(), "Selected string",
-        JOptionPane.PLAIN_MESSAGE);
-    // This gets us the integer value that's currently selected
-    JOptionPane.showMessageDialog(ImageViewImpl.this,
-        "The current number item is " + this.listOfIntegers.getSelectedValue(), "Selected integer",
-        JOptionPane.PLAIN_MESSAGE);
-  }
-
-  @Override
   public void setListener(NewController controller) {
 
     downSizePanelButton.addActionListener(controller);
@@ -473,20 +405,31 @@ public class ImageViewImpl extends JFrame implements ItemListener, ListSelection
     setCurrenButton2.addActionListener(controller);
   }
 
+  @Override
   public String getText(String string) {
-    return JOptionPane.showInputDialog(string);
+    String temp = JOptionPane.showInputDialog(string);
+    if (temp == null) {
+      return "-1";
+    } else if (temp.equals("")) {
+      return "-1";
+    } else {
+      return temp;
+    }
   }
 
+  @Override
   public void setText(String string) {
     JOptionPane.showMessageDialog(this, string);
   }
 
+  @Override
   public void setImage(BufferedImage image) {
     imageLabel.setIcon(new ImageIcon(image));
     imageScroll.setViewportView(imageLabel);
     imagePanel.requestFocus();
   }
 
+  @Override
   public void setCurrentDisplay(String currentDisplay, String numLayer) {
     this.currentDisplay.setText(currentDisplay);
     this.numLayerDisplay.setText(numLayer);

@@ -1,15 +1,9 @@
-import controller.ImageController;
 import controller.NewController;
-import controller.SimpleImageController;
 import gui.ImageViewImpl;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import model.imagerepresentation.Image;
 import model.imagerepresentation.multilayers.MultiLayeredImagesOperations;
 import model.imagerepresentation.multilayers.MultiLayers;
 
@@ -25,7 +19,7 @@ public class Main {
    * @param args program arg
    * @throws FileNotFoundException if file is not found.
    */
-  public static void main(String[] args) throws FileNotFoundException {
+  public static void main(String[] args) {
 
     MultiLayers images = new MultiLayeredImagesOperations();
     ImageViewImpl view = new ImageViewImpl();
