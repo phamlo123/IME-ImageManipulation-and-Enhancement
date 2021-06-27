@@ -7,40 +7,31 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 
 /**
  * This class opens the main window, that has different elements illustrated in it. It also doubles
  * up as all the listeners for simplicity. Such a design is not recommended in general.
  */
 
-public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSelectionListener {
+public class SwingFeaturesFrame extends JFrame {
 
   private final JLabel imageLabel;
 
   private JPanel imagePanel;
 
-
-  private JLabel checkboxDisplay;
 
   private final JButton downSizePanelButton;
   private final JButton mosaicPanelButton;
@@ -87,11 +78,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   final static String FILE = "File";
   final static String FILTERING = "Filtering";
   final static String GENERAL = "General";
-
-
-  private JList<String> listOfStrings;
-  private JList<Integer> listOfIntegers;
-
 
   public SwingFeaturesFrame() {
     super();
@@ -370,72 +356,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   }
 
 
-  @Override
-  public void itemStateChanged(ItemEvent arg0) {
-    // TODO Auto-generated method stub
-    String who = ((JCheckBox) arg0.getItemSelectable()).getActionCommand();
-
-    switch (who) {
-      case "CB1":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 1 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 1 was deselected");
-        }
-        break;
-      case "CB2":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 2 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 2 was deselected");
-        }
-        break;
-      case "CB3":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 3 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 3 was deselected");
-        }
-        break;
-      case "CB4":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 4 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 4 was deselected");
-        }
-        break;
-
-      case "CB5":
-        if (arg0.getStateChange() == ItemEvent.SELECTED) {
-          checkboxDisplay.setText("Check box 5 was selected");
-        } else {
-          checkboxDisplay.setText("Check box 5 was deselected");
-        }
-        break;
-
-    }
-  }
-
-  @Override
-  public void valueChanged(ListSelectionEvent e) {
-    // We don't know which list called this callback, because we're using it
-    // for two lists.  In practice, you should use separate listeners
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-        "The source object is " + e.getSource(), "Source", JOptionPane.PLAIN_MESSAGE);
-    // Regardless, the event information tells us which index was selected
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-        "The changing index is " + e.getFirstIndex(), "Index", JOptionPane.PLAIN_MESSAGE);
-    // This gets us the string value that's currently selected
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-        "The current string item is " + this.listOfStrings.getSelectedValue(), "Selected string",
-        JOptionPane.PLAIN_MESSAGE);
-    // This gets us the integer value that's currently selected
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-        "The current number item is " + this.listOfIntegers.getSelectedValue(), "Selected integer",
-        JOptionPane.PLAIN_MESSAGE);
-  }
-
-
   public void setListener(NewController controller) {
 
     downSizePanelButton.addActionListener(controller);
@@ -497,17 +417,9 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   }
 
 
-  public void saveFile() {
-    final JFileChooser fchooser = new JFileChooser(".");
-    int retvalue = fchooser.showSaveDialog(SwingFeaturesFrame.this);
-    if (retvalue == JFileChooser.APPROVE_OPTION) {
-      File f = fchooser.getSelectedFile();
-    }
-  }
-
-
   public void setCurrentDisplay(String currentDisplay, String numLayer) {
     this.currentDisplay.setText(currentDisplay);
     this.numLayerDisplay.setText(numLayer);
   }
+
 }

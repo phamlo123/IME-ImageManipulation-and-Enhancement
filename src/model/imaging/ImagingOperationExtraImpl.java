@@ -25,7 +25,11 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
 
 
   @Override
-  public List<List<Color>> downSize(double ratioWidth, double ratioHeight) {
+  public List<List<Color>> downSize(double ratioWidth, double ratioHeight)
+      throws IllegalArgumentException {
+    if (ratioHeight <= 0 || ratioWidth <= 0) {
+      throw new IllegalArgumentException("Illegal Ratios");
+    }
     List<List<Color>> image = this.imageObject.getImage();
     int newHeight = (int) Math.round(image.size() * ratioHeight);
     int newWidth = (int) Math.round(image.get(0).size() * ratioWidth);
@@ -39,6 +43,19 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
   }
 
 
+  /**
+   * This is a helper method to do the Math for create a color value of the pixel in the downsized
+   * image given the parameters.
+   *
+   * @param newHeight   is the height of the downsized image.
+   * @param newWidth    is the width of the downsized image.
+   * @param coloring    is the Type of colorings (there are 3 possible - RED, GREEN, BLUE)
+   * @param ratioHeight is the ratio of of the new height with respect to orginal height
+   * @param ratioWidth  is the ratio of of the new width with respect to orginal width
+   * @return the modified list of lists of Integers that represent the colors values of the new
+   * downsized image.
+   * @throws IllegalArgumentException if coloring value does not exist.
+   */
   private List<List<Integer>> helpMulti(int newHeight, int newWidth, Coloring coloring,
       double ratioHeight, double ratioWidth) throws IllegalArgumentException {
     List<List<Integer>> list;
@@ -74,7 +91,14 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
         double n = (d * (x - downX)) + (c * (upX - x));
 
         int color = (int) (n * (y - downY) + m * (upY - y));
-        temp.get(i).add(color);
+
+        int k;
+        if (color > 0) {
+          k = (int) Math.min(color, 255);
+        } else {
+          k = (int) Math.max(color, 0);
+        }
+        temp.get(i).add(k);
       }
     }
     return temp;
@@ -82,7 +106,10 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
 
 
   @Override
-  public List<List<Color>> createMosaic(int numSeed) {
+  public List<List<Color>> createMosaic(int numSeed) throws IllegalArgumentException {
+    if (numSeed <= 0) {
+      throw new IllegalArgumentException("Number of seeds is illegal");
+    }
     List<List<Color>> image = this.imageObject.getImage();
     int height = image.size();
     int width = image.get(0).size();
@@ -129,6 +156,14 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
   }
 
 
+  /**
+   * This is a helper method to update the color value of a given list according to the value that
+   * is present in the given map. A position of a number in the list is matched up with the Position
+   * as the key of the map.
+   *
+   * @param map         is the map containing the Positions as key and list of positions as map
+   * @param listOfColor is the list of colors that is to be updated.
+   */
   private void updateNewColor(Map<Position, List<Position>> map,
       List<List<Integer>> listOfColor) {
     for (Position key : map.keySet()) {
@@ -147,6 +182,14 @@ public class ImagingOperationExtraImpl extends ColoringOperation implements Imag
 
   }
 
+  /**
+   * This method create a list of random integers within the given range.
+   *
+   * @param numSeed is the number of random integers to be created.
+   * @param min     is the minimum for the random integer.
+   * @param max     is the maximum for the random integer.
+   * @return the list containing the given number of random integers within the specified range.
+   */
   private List<Integer> getRandom(int numSeed, int min, int max) {
     List<Integer> temp = new ArrayList<>(numSeed);
     Random random = new Random();
