@@ -79,12 +79,13 @@ public class NewController implements ActionListener {
         }
         break;
       case "Export":
-        swingFeaturesFrame.saveFile();
         String export = swingFeaturesFrame
-            .getText("Please enter name for this image and file format");
+            .getText("Please enter name for this image");
         Scanner exportScanner = new Scanner(export);
+        String export2 = swingFeaturesFrame.getText("Please enter file format");
+        Scanner scannerExport2 = new Scanner(export2);
         try {
-          model.saveImages(exportScanner.next(), this.toFormat(exportScanner.next()));
+          model.saveImages(exportScanner.next(), this.toFormat(scannerExport2.next()));
           swingFeaturesFrame.setText("Export successfully");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
@@ -93,10 +94,14 @@ public class NewController implements ActionListener {
         break;
       case "Export All":
         String exportAll = swingFeaturesFrame
-            .getText("Please enter name for this image and file format");
+            .getText("Please enter base name for the images");
         Scanner exportAllScanner = new Scanner(exportAll);
+
+        String exportAll2 = swingFeaturesFrame.getText("Please enter file format");
+        Scanner scannerExportAll2 = new Scanner(exportAll2);
+
         try {
-          model.exportAll(exportAllScanner.next(), this.toFormat(exportAllScanner.next()));
+          model.exportAll(exportAllScanner.next(), this.toFormat(scannerExportAll2.next()));
           swingFeaturesFrame.setText("Export All successfully");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
@@ -150,11 +155,14 @@ public class NewController implements ActionListener {
         }
         break;
       case "Checker":
-        String checker = swingFeaturesFrame.getText("Please enter a height and a width");
+        String checker = swingFeaturesFrame.getText("Please enter a height");
         Scanner checkerScanner = new Scanner(checker);
+        String checker2 = swingFeaturesFrame.getText("Please enter a width");
+        Scanner checkerScanner2 = new Scanner(checker2);
+
         try {
           ImageFormat image = new Image(Integer.parseInt(checkerScanner.next()),
-              Integer.parseInt(checkerScanner.next()));
+              Integer.parseInt(checkerScanner2.next()));
           model.addLayer();
           model.loadImages(image, model.getCurrentLayerIndex());
           swingFeaturesFrame.setImage(model.getTopmost());
@@ -186,11 +194,15 @@ public class NewController implements ActionListener {
         break;
       case "Downsize":
         String downsize = swingFeaturesFrame
-            .getText("Please enter desired width and height as doubles");
+            .getText("Please enter desired relative ratio of new height as doubles");
         Scanner downsizeScanner = new Scanner(downsize);
+        String downsize2 = swingFeaturesFrame
+            .getText("Please enter desired relative ratio of new width as doubles");
+        Scanner downsizeScanner2 = new Scanner(downsize2);
+
         try {
           model.downSize(Double.parseDouble(downsizeScanner.next()),
-              Double.parseDouble(downsizeScanner.next()));
+              Double.parseDouble(downsizeScanner2.next()));
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Downsizing successfully");
         } catch (IllegalArgumentException e) {
