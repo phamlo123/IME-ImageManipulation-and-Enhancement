@@ -2,7 +2,7 @@ package controller;
 
 import static java.lang.String.valueOf;
 
-import gui.SwingFeaturesFrame;
+import gui.ImageViewImpl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
@@ -17,25 +17,25 @@ import model.imagerepresentation.multilayers.MultiLayers;
  */
 public class NewController implements ActionListener, NewControllerInterface {
 
-  private final SwingFeaturesFrame swingFeaturesFrame;
+  private final ImageViewImpl imageViewImpl;
   private final MultiLayers model;
 
   /**
    * Creates a new NewController object used for processing images based on User input.
    *
    * @param model              the model used for processing the images
-   * @param swingFeaturesFrame the view used to take user input and display images
+   * @param imageViewImpl the view used to take user input and display images
    * @throws IllegalArgumentException if the parameters are null
    */
-  public NewController(MultiLayers model, SwingFeaturesFrame swingFeaturesFrame)
+  public NewController(MultiLayers model, ImageViewImpl imageViewImpl)
       throws IllegalArgumentException {
-    if (model == null || swingFeaturesFrame == null) {
+    if (model == null || imageViewImpl == null) {
       throw new IllegalArgumentException("Cannot pass null parameters");
     }
-    this.swingFeaturesFrame = swingFeaturesFrame;
+    this.imageViewImpl = imageViewImpl;
     this.model = model;
-    swingFeaturesFrame.setListener(this);
-    swingFeaturesFrame.setImage(model.getTopmost());
+    imageViewImpl.setListener(this);
+    imageViewImpl.setImage(model.getTopmost());
     setCurrentDisplay();
   }
 
@@ -49,129 +49,129 @@ public class NewController implements ActionListener, NewControllerInterface {
     switch (command) {
       case "Blur":
         model.blurringImage();
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Blur Filtering has been successfully performed");
+        imageViewImpl.setImage(model.getTopmost());
+        imageViewImpl.setText("Blur Filtering has been successfully performed");
         break;
       case "Sharpen":
         model.sharpeningImage();
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Sharpen Filtering has been successfully performed");
+        imageViewImpl.setImage(model.getTopmost());
+        imageViewImpl.setText("Sharpen Filtering has been successfully performed");
         break;
       case "Gray":
         model.createMonochrome();
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("GrayScaling has been successfully performed");
+        imageViewImpl.setImage(model.getTopmost());
+        imageViewImpl.setText("GrayScaling has been successfully performed");
         break;
       case "Sepia":
         model.createSepia();
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("Sepia Filtering has been successfully performed");
+        imageViewImpl.setImage(model.getTopmost());
+        imageViewImpl.setText("Sepia Filtering has been successfully performed");
         break;
       case "Import":
-        String load = swingFeaturesFrame.getText("Please enter image file name");
+        String load = imageViewImpl.getText("Please enter image file name");
         Scanner loadScanner = new Scanner(load);
-        String load2 = swingFeaturesFrame.getText("Please enter layer index");
+        String load2 = imageViewImpl.getText("Please enter layer index");
         Scanner loadScanner2 = new Scanner(load2);
         try {
           model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner2.next()));
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Import successful");
+          imageViewImpl.setImage(model.getTopmost());
+          imageViewImpl.setText("Import successful");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
+          imageViewImpl.setText(e.getMessage() + ". Please try again.");
           return;
         }
         break;
       case "Import All":
-        String importAll = swingFeaturesFrame.getText("Please enter text file name");
+        String importAll = imageViewImpl.getText("Please enter text file name");
         try {
           model.importAll(importAll);
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Import All successful");
+          imageViewImpl.setImage(model.getTopmost());
+          imageViewImpl.setText("Import All successful");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
       case "Export":
-        String export = swingFeaturesFrame
+        String export = imageViewImpl
             .getText("Please enter name for this image");
         Scanner exportScanner = new Scanner(export);
-        String export2 = swingFeaturesFrame.getText("Please enter file format");
+        String export2 = imageViewImpl.getText("Please enter file format");
         Scanner scannerExport2 = new Scanner(export2);
         try {
           model.saveImages(exportScanner.next(), this.toFormat(scannerExport2.next()));
-          swingFeaturesFrame.setText("Export successfully");
+          imageViewImpl.setText("Export successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
       case "Export All":
-        String exportAll = swingFeaturesFrame
+        String exportAll = imageViewImpl
             .getText("Please enter base name for the images");
         Scanner exportAllScanner = new Scanner(exportAll);
 
-        String exportAll2 = swingFeaturesFrame.getText("Please enter file format");
+        String exportAll2 = imageViewImpl.getText("Please enter file format");
         Scanner scannerExportAll2 = new Scanner(exportAll2);
 
         try {
           model.exportAll(exportAllScanner.next(), this.toFormat(scannerExportAll2.next()));
-          swingFeaturesFrame.setText("Export All successfully");
+          imageViewImpl.setText("Export All successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
       case "Add Layer":
         model.addLayer();
-        swingFeaturesFrame.setText("New layer added successfully");
+        imageViewImpl.setText("New layer added successfully");
         break;
       case "Remove Layer":
-        String remove = swingFeaturesFrame.getText("Please enter a layer index");
+        String remove = imageViewImpl.getText("Please enter a layer index");
         try {
           model.removeLayer(Integer.parseInt(remove));
-          swingFeaturesFrame.setText("Remove layer" + remove + " successfully");
+          imageViewImpl.setText("Remove layer" + remove + " successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
+          imageViewImpl.setText(e.getMessage() + ". Please try again.");
           return;
         }
         break;
       case "Visible":
-        String visible = swingFeaturesFrame.getText("Please enter a layer index");
+        String visible = imageViewImpl.getText("Please enter a layer index");
         try {
           model.setInvisibility(Integer.parseInt(visible), true);
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText(visible + "is set to visible");
+          imageViewImpl.setImage(model.getTopmost());
+          imageViewImpl.setText(visible + "is set to visible");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
+          imageViewImpl.setText(e.getMessage() + ". Please try again.");
           return;
         }
         break;
       case "Invisible":
-        String invisible = swingFeaturesFrame.getText("Please enter a layer index");
+        String invisible = imageViewImpl.getText("Please enter a layer index");
         try {
           model.setInvisibility(Integer.parseInt(invisible), false);
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText(invisible + "is set to invisible");
+          imageViewImpl.setImage(model.getTopmost());
+          imageViewImpl.setText(invisible + "is set to invisible");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
       case "Set Current":
-        String current = swingFeaturesFrame.getText("Please enter a layer index");
+        String current = imageViewImpl.getText("Please enter a layer index");
         try {
           model.setCurrent(Integer.parseInt(current));
-          swingFeaturesFrame.setText(current + "is set to current");
+          imageViewImpl.setText(current + "is set to current");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
       case "Checker":
-        String checker = swingFeaturesFrame.getText("Please enter a height");
+        String checker = imageViewImpl.getText("Please enter a height");
         Scanner checkerScanner = new Scanner(checker);
-        String checker2 = swingFeaturesFrame.getText("Please enter a width");
+        String checker2 = imageViewImpl.getText("Please enter a width");
         Scanner checkerScanner2 = new Scanner(checker2);
 
         try {
@@ -179,10 +179,10 @@ public class NewController implements ActionListener, NewControllerInterface {
               Integer.parseInt(checkerScanner2.next()));
           model.addLayer();
           model.loadImages(image, model.getCurrentLayerIndex());
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Custom CheckerBoard successfully created");
+          imageViewImpl.setImage(model.getTopmost());
+          imageViewImpl.setText("Custom CheckerBoard successfully created");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
@@ -190,37 +190,37 @@ public class NewController implements ActionListener, NewControllerInterface {
         ImageFormat image = new Image();
         model.addLayer();
         model.loadImages(image, model.getCurrentLayerIndex());
-        swingFeaturesFrame.setImage(model.getTopmost());
-        swingFeaturesFrame.setText("CheckerBoard successfully created");
+        imageViewImpl.setImage(model.getTopmost());
+        imageViewImpl.setText("CheckerBoard successfully created");
         break;
       case "Mosaic":
-        String mosaic = swingFeaturesFrame
+        String mosaic = imageViewImpl
             .getText("Please enter the number of seeds");
         try {
           model.createMosaic(Integer.parseInt(mosaic));
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Mosaic Filtering has been successfully performed with " +
+          imageViewImpl.setImage(model.getTopmost());
+          imageViewImpl.setText("Mosaic Filtering has been successfully performed with " +
               mosaic + " seeds");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
       case "Downsize":
-        String downsize = swingFeaturesFrame
+        String downsize = imageViewImpl
             .getText("Please enter desired relative ratio of new height as doubles");
         Scanner downsizeScanner = new Scanner(downsize);
-        String downsize2 = swingFeaturesFrame
+        String downsize2 = imageViewImpl
             .getText("Please enter desired relative ratio of new width as doubles");
         Scanner downsizeScanner2 = new Scanner(downsize2);
 
         try {
           model.downSize(Double.parseDouble(downsizeScanner.next()),
               Double.parseDouble(downsizeScanner2.next()));
-          swingFeaturesFrame.setImage(model.getTopmost());
-          swingFeaturesFrame.setText("Downsizing successfully");
+          imageViewImpl.setImage(model.getTopmost());
+          imageViewImpl.setText("Downsizing successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          imageViewImpl.setText(e.getMessage() + " Please try again.");
           return;
         }
         break;
@@ -233,7 +233,7 @@ public class NewController implements ActionListener, NewControllerInterface {
    * layers in the model.
    */
   private void setCurrentDisplay() {
-    swingFeaturesFrame
+    imageViewImpl
         .setCurrentDisplay(valueOf(model.getCurrentLayerIndex()), valueOf(model.getNumLayers()));
   }
 

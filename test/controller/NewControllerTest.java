@@ -2,7 +2,7 @@ package controller;
 
 import static org.junit.Assert.*;
 
-import gui.SwingFeaturesFrame;
+import gui.ImageViewImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import model.imagerepresentation.Image;
@@ -17,7 +17,7 @@ import org.junit.Test;
 public class NewControllerTest {
 
   MultiLayers images;
-  SwingFeaturesFrame view;
+  ImageViewImpl view;
   StringBuilder log;
   MultiLayers mock;
 
@@ -26,7 +26,7 @@ public class NewControllerTest {
   public void setup() {
     images = new MultiLayeredImagesOperations(new ArrayList<>(
         Arrays.asList(new Image("Koala.jpg"), new Image("Jellyfish.jpg"))));
-    view = new SwingFeaturesFrame();
+    view = new ImageViewImpl();
     log = new StringBuilder();
     mock = new MockMultiLayeredImagesOperations(log);
   }

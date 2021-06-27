@@ -23,17 +23,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
- * This class opens the main window, that has different elements illustrated in it. It also doubles
- * up as all the listeners for simplicity. Such a design is not recommended in general.
+ * Represents the view for the image processing program as an interactive graphical user interface.
  */
-
-public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSelectionListener {
+public class ImageViewImpl extends JFrame implements ItemListener, ListSelectionListener,
+    ImageView {
 
   private final JLabel imageLabel;
 
@@ -92,8 +90,11 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   private JList<String> listOfStrings;
   private JList<Integer> listOfIntegers;
 
-
-  public SwingFeaturesFrame() {
+  /**
+   * Constructs an ImageViewImpl. Creates the graphical interface for the user to interact with.
+   * Includes buttons for applying operations on images and previews of the images being worked on.
+   */
+  public ImageViewImpl() {
     super();
     setTitle("Image Processor");
     setSize(1000, 1000);
@@ -417,22 +418,22 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
   public void valueChanged(ListSelectionEvent e) {
     // We don't know which list called this callback, because we're using it
     // for two lists.  In practice, you should use separate listeners
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
+    JOptionPane.showMessageDialog(ImageViewImpl.this,
         "The source object is " + e.getSource(), "Source", JOptionPane.PLAIN_MESSAGE);
     // Regardless, the event information tells us which index was selected
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
+    JOptionPane.showMessageDialog(ImageViewImpl.this,
         "The changing index is " + e.getFirstIndex(), "Index", JOptionPane.PLAIN_MESSAGE);
     // This gets us the string value that's currently selected
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
+    JOptionPane.showMessageDialog(ImageViewImpl.this,
         "The current string item is " + this.listOfStrings.getSelectedValue(), "Selected string",
         JOptionPane.PLAIN_MESSAGE);
     // This gets us the integer value that's currently selected
-    JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
+    JOptionPane.showMessageDialog(ImageViewImpl.this,
         "The current number item is " + this.listOfIntegers.getSelectedValue(), "Selected integer",
         JOptionPane.PLAIN_MESSAGE);
   }
 
-
+  @Override
   public void setListener(NewController controller) {
 
     downSizePanelButton.addActionListener(controller);
@@ -485,16 +486,6 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     imageScroll.setViewportView(imageLabel);
     imagePanel.requestFocus();
   }
-
-
-  public void saveFile() {
-    final JFileChooser fchooser = new JFileChooser(".");
-    int retvalue = fchooser.showSaveDialog(SwingFeaturesFrame.this);
-    if (retvalue == JFileChooser.APPROVE_OPTION) {
-      File f = fchooser.getSelectedFile();
-    }
-  }
-
 
   public void setCurrentDisplay(String currentDisplay, String numLayer) {
     this.currentDisplay.setText(currentDisplay);
