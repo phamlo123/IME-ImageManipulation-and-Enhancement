@@ -63,8 +63,8 @@ public class NewController implements ActionListener {
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Import successful");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + ". Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
+          return;
         }
         break;
       case "Import All":
@@ -74,8 +74,8 @@ public class NewController implements ActionListener {
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Import All successful");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
       case "Export":
@@ -87,8 +87,8 @@ public class NewController implements ActionListener {
           model.saveImages(exportScanner.next(), this.toFormat(exportScanner.next()));
           swingFeaturesFrame.setText("Export successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
       case "Export All":
@@ -99,8 +99,8 @@ public class NewController implements ActionListener {
           model.exportAll(exportAllScanner.next(), this.toFormat(exportAllScanner.next()));
           swingFeaturesFrame.setText("Export All successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
       case "Add Layer":
@@ -113,8 +113,8 @@ public class NewController implements ActionListener {
           model.removeLayer(Integer.parseInt(remove));
           swingFeaturesFrame.setText("Remove layer" + remove + " successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + ". Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
+          return;
         }
         break;
       case "Visible":
@@ -124,8 +124,8 @@ public class NewController implements ActionListener {
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText(visible + "is set to visible");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + ". Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + ". Please try again.");
+          return;
         }
         break;
       case "Invisible":
@@ -135,8 +135,8 @@ public class NewController implements ActionListener {
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText(invisible + "is set to invisible");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
       case "Set Current":
@@ -145,8 +145,8 @@ public class NewController implements ActionListener {
           model.setCurrent(Integer.parseInt(current));
           swingFeaturesFrame.setText(current + "is set to current");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
       case "Checker":
@@ -160,8 +160,8 @@ public class NewController implements ActionListener {
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Custom CheckerBoard successfully created");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
       case "Default":
@@ -178,10 +178,10 @@ public class NewController implements ActionListener {
           model.createMosaic(Integer.parseInt(mosaic));
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Mosaic Filtering has been successfully performed with " +
-              mosaic +" seeds");
+              mosaic + " seeds");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
       case "Downsize":
@@ -194,8 +194,8 @@ public class NewController implements ActionListener {
           swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Downsizing successfully");
         } catch (IllegalArgumentException e) {
-          swingFeaturesFrame.setText(e.getMessage() + " Please enter again.");
-          this.actionPerformed(arg0);
+          swingFeaturesFrame.setText(e.getMessage() + " Please try again.");
+          return;
         }
         break;
     }
