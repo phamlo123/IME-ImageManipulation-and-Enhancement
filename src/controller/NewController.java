@@ -1,6 +1,7 @@
 package controller;
 
 import static java.lang.String.valueOf;
+
 import gui.SwingFeaturesFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +12,8 @@ import model.imagerepresentation.ImageFormat;
 import model.imagerepresentation.multilayers.MultiLayers;
 
 /**
- * Represents a controller that takes input from the graphical user interface and delegates
- * that input to the model accordingly.
+ * Represents a controller that takes input from the graphical user interface and delegates that
+ * input to the model accordingly.
  */
 public class NewController implements ActionListener, NewControllerInterface {
 
@@ -21,6 +22,7 @@ public class NewController implements ActionListener, NewControllerInterface {
 
   /**
    * Creates a new NewController object used for processing images based on User input.
+   *
    * @param model              the model used for processing the images
    * @param swingFeaturesFrame the view used to take user input and display images
    * @throws IllegalArgumentException if the parameters are null
@@ -37,21 +39,12 @@ public class NewController implements ActionListener, NewControllerInterface {
     setCurrentDisplay();
   }
 
-
-  /**
-   * Method that delegates to the model the desired functionality based on the press of a button
-   * from the view.
-   * @param arg0 the action from the view (button pressed)
-   */
+  @Override
   public void actionPerformed(ActionEvent arg0) {
     this.actionHelper(arg0.getActionCommand());
   }
 
-  /**
-   * Helper for actionPerformed that takes the String version of the ActionEvent given to
-   * actionPerformed. This method is public for easier testing.
-   * @param command the command to be executed.
-   */
+  @Override
   public void actionHelper(String command) {
     switch (command) {
       case "Blur":

@@ -84,7 +84,7 @@ public class MockMultiLayeredImagesOperations implements MultiLayers {
 
   @Override
   public BufferedImage getTopmost() throws IllegalArgumentException {
-    return new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
+    return new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
   }
 
   @Override

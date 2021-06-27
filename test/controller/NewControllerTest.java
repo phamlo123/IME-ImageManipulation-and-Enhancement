@@ -12,8 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to ensure that the NewController class and all of its methods function
- *  * correctly.
+ * Test class to ensure that the NewController class and all of its methods function * correctly.
  */
 public class NewControllerTest {
 
