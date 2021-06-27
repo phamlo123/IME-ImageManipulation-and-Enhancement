@@ -8,7 +8,9 @@ import java.awt.image.BufferedImage;
 import java.util.Scanner;
 import model.enums.FileFormat;
 import model.imagerepresentation.Image;
+import model.imagerepresentation.ImageFormat;
 import model.imagerepresentation.multilayers.MultiLayers;
+import model.util.ImageUtil;
 
 public class NewController implements ActionListener {
 
@@ -55,6 +57,7 @@ public class NewController implements ActionListener {
         Scanner loadScanner = new Scanner(load);
         try {
           model.loadImages(new Image(loadScanner.next()), Integer.parseInt(loadScanner.next()));
+          swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Import was selected");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText("Invalid file name or layer index. Please enter again.");
@@ -65,6 +68,7 @@ public class NewController implements ActionListener {
         String importAll = swingFeaturesFrame.getText("Please enter text file name");
         try {
           model.importAll(importAll);
+          swingFeaturesFrame.setImage(model.getTopmost());
           swingFeaturesFrame.setText("Import All was selected");
         } catch (IllegalArgumentException e) {
           swingFeaturesFrame.setText("Invalid file name. Please enter again.");
@@ -140,6 +144,28 @@ public class NewController implements ActionListener {
           swingFeaturesFrame.setText("Invalid layer index. Please enter again.");
           this.actionPerformed(arg0);
         }
+        break;
+      case "Checker":
+        String checker = swingFeaturesFrame.getText("Please enter a height and a width");
+        Scanner checkerScanner = new Scanner(checker);
+        try {
+          ImageFormat image = new Image(Integer.parseInt(checkerScanner.next()),
+              Integer.parseInt(checkerScanner.next()));
+          model.addLayer();
+          model.loadImages(image,model.getCurrentLayerIndex());
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Create checkerboard selected");
+        } catch (IllegalArgumentException e) {
+          swingFeaturesFrame.setText("Invalid height or width. Please enter again.");
+          this.actionPerformed(arg0);
+        }
+        break;
+      case "Default":
+          ImageFormat image = new Image();
+          model.addLayer();
+          model.loadImages(image,model.getCurrentLayerIndex());
+          swingFeaturesFrame.setImage(model.getTopmost());
+          swingFeaturesFrame.setText("Create checkerboard selected");
         break;
       case "Mosaic":
         String mosaic = swingFeaturesFrame

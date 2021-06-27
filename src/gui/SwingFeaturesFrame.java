@@ -156,8 +156,10 @@ public class SwingFeaturesFrame extends JFrame implements ItemListener, ListSele
     checkerBoard.setPreferredSize(new Dimension(200, 200));
 
     createCheckerBoardButton = new JButton("Create New Checker Board");
+    createCheckerBoardButton.setActionCommand("Checker");
     checkerBoard.add(createCheckerBoardButton);
     createDefaultCheckerBoardButton = new JButton("Create New Default Checker Board");
+    createDefaultCheckerBoardButton.setActionCommand("Default");
     checkerBoard.add(createDefaultCheckerBoardButton);
 
     //text area
